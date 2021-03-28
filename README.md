@@ -24,9 +24,9 @@
       <img src="https://img.shields.io/badge/-React-%232d2d2d?style=for-the-badge&logo=React"/>
       <img src="https://img.shields.io/badge/-Next.js-%232d2d2d?style=for-the-badge&logo=Next.js"/>
       <img src="https://img.shields.io/badge/-TypeScript-%232d2d2d?style=for-the-badge&logo=TypeScript"/>
-      <img src="https://img.shields.io/badge/-Styled-Components-%232d2d2d?style=for-the-badge&logo=styled-components"/>
+      <img src="https://img.shields.io/badge/-StyledComponents-%232d2d2d?style=for-the-badge&logo=styled-components"/>
       <img src="https://img.shields.io/badge/-Eslint-%232d2d2d?style=for-the-badge&logo=ESlins"/>
-      <img src="https://img.shields.io/badge/-GitHub-Actions-%232d2d2d?style=for-the-badge&logo=GitHub-Actions"/>
+      <img src="https://img.shields.io/badge/-GitHubActions-%232d2d2d?style=for-the-badge&logo=GitHub-Actions"/>
     </td>
   </tr>
 </table>
