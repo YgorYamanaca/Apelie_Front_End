@@ -20,7 +20,7 @@
 
 <table>
   <tr>
-    <td>
+    <td style={'border: none'}>
       <img src="https://img.shields.io/badge/-React-%232d2d2d?style=for-the-badge&logo=React"/>
       <img src="https://img.shields.io/badge/-Next.js-%232d2d2d?style=for-the-badge&logo=Next.js"/>
       <img src="https://img.shields.io/badge/-TypeScript-%232d2d2d?style=for-the-badge&logo=TypeScript"/>
