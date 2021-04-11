@@ -19,9 +19,16 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "baseUrl": "./src",
+    "baseUrl": "./source",
     "paths": {
-
+      "@/assets/*": ["assets/*"],
+      "@/components/*": ["components/*"],
+      "@/theme/*": ["hooks/*"],
+      "@/services/*": ["services/*"],
+      "@/stores/*": ["stores/*"],
+      "@/themes/*": ["themes/*"],
+      "@/types/*": ["types/*"],
+      "@/utils/*": ["utils/*"]
     }
   },
   "exclude": ["node_modules"],
