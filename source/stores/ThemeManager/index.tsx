@@ -1,13 +1,13 @@
 import React, { createContext } from 'react';
 import GlobalStyle from '@/components/GlobalStyle';
 
-export const ModeChangeContext = createContext<{}>({});
+export const AppThemeContext = createContext<{}>({});
 
-const ThemeManager: React.FC = ({ children }) => (
-  <ModeChangeContext.Provider value={{}}>
+const AppThemeManager: React.FC = ({ children }) => (
+  <AppThemeContext.Provider value={{}}>
     <GlobalStyle />
     {children}
-  </ModeChangeContext.Provider>
+  </AppThemeContext.Provider>
 );
 
-export default ThemeManager;
+export default AppThemeManager;
