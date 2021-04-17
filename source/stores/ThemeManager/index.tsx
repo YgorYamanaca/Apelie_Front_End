@@ -1,13 +1,21 @@
 import React, { createContext } from 'react';
 import GlobalStyle from '@/components/GlobalStyle';
+import { ThemeProvider } from 'styled-components';
+import ligthTheme from './modes/ligthMode';
 
 export const AppThemeContext = createContext<{}>({});
 
-const AppThemeManager: React.FC = ({ children }) => (
+const ApelieThemeProvider: React.FC = ({ children }) => (
   <AppThemeContext.Provider value={{}}>
-    <GlobalStyle />
-    {children}
+    <ThemeProvider
+      theme={{
+        ...ligthTheme,
+      }}
+    >
+      <GlobalStyle />
+      {children}
+    </ThemeProvider>
   </AppThemeContext.Provider>
 );
 
-export default AppThemeManager;
+export default ApelieThemeProvider;
