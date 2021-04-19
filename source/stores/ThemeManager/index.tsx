@@ -9,7 +9,7 @@ const ApelieThemeProvider: React.FC = ({ children }) => (
   <AppThemeContext.Provider value={{}}>
     <ThemeProvider
       theme={{
-        ...ligthTheme,
+        colors: ligthTheme,
       }}
     >
       <GlobalStyle />

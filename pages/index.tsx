@@ -1,30 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useQuery } from 'react-query';
-import { getDitto, getPokemon } from '@/services/fakeService';
 import apeliePageHOC from 'template/ApeliePageTemplate/HOC';
+import NextLink from 'next/link';
 
-const Title = styled.h1`
+const Wrapper = styled.h1`
   color: red;
-  font-size: 50px;
-  background-color: black;
+  flex: 1;
+  display: flex;
+  justify-content: space-evenly;
 `;
 
-const Home: React.FC = () => {
-  const [string, setString] = useState('pikachu');
-  const { data: ditto, isSuccess: dittoSuccess } = useQuery('teste', getDitto);
-  const { data: pikachu, isSuccess } = useQuery(['teste', string], () => getPokemon(string));
-
-  useEffect(() => {
-    if (dittoSuccess) console.log(ditto);
-  }, [ditto]);
-
-  useEffect(() => {
-    if (isSuccess) console.log(pikachu);
-  }, [pikachu]);
-
-  return <Title onClick={() => setString('charizard')}>My page</Title>;
-};
+const Home: React.FC = () => (
+  <Wrapper>
+    <NextLink href="/login">
+      Login
+    </NextLink>
+    <NextLink href="/subscribe">
+      Subscribe
+    </NextLink>
+  </Wrapper>
+);
 
 export default apeliePageHOC(Home, {
   apelieTemplateProps: {

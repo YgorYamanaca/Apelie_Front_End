@@ -28,7 +28,9 @@
       "@/stores/*": ["stores/*"],
       "@/themes/*": ["themes/*"],
       "@/types/*": ["types/*"],
-      "@/utils/*": ["utils/*"]
+      "@/utils/*": ["utils/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/screens/*": ["screens/*"]
     }
   },
   "exclude": ["node_modules"],
