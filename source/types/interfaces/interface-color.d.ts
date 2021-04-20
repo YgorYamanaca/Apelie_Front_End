@@ -1,8 +1,9 @@
 interface IColor {
-  color: string,
+  main: string,
+  light?: string,
+  dark?: string,
+  alpha: string,
   contrastText: string,
-  colorHex: string,
-  colorHexAlpha: string,
 }
 
 export default IColor;

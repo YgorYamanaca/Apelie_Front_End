@@ -26,5 +26,8 @@ export default apeliePageHOC(Home, {
     SEOProps: {
       pageTitle: 'Home',
     },
+    PAGEProps: {
+      template: 'CUSTOM',
+    },
   },
 });

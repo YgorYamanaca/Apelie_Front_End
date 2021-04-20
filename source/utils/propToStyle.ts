@@ -9,6 +9,9 @@ export type IPropToStyle = {
   {[key in keyof IBreakpoints]?: CSSProperties[cssKey]};
 }
 
+/**
+ * @todo Ver a necessidade de utilização
+*/
 export function propToStyle(propName: keyof IPropToStyle) {
   return (props: IPropToStyle): CSSProp | {[key in keyof CSSProperties]?: CSSProperties[key]} => {
     const propValue: string | number | undefined |

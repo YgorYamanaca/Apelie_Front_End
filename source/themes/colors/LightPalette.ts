@@ -13,23 +13,13 @@ const lightPalette: IColors = {
     light: 'rgba(253, 203, 51, 1)',
     contrastText: '#000',
   },
-  error: {
-    main: 'rgba(229, 115, 115, 1)',
-  },
-  warning: {
-    main: 'rgba(255, 183, 77, 1)',
-  },
-  info: {
-    main: 'rgba(100, 181, 246, 1)',
-  },
-  success: {
-    main: 'rgba(129, 199, 132, 1)',
-  },
 
-  background: {
-    default: 'rgba(250, 250, 250, 1)',
-  },
-
+  error: 'rgba(229, 115, 115, 1)',
+  warning: 'rgba(255, 183, 77, 1)',
+  info: 'rgba(100, 181, 246, 1)',
+  success: 'rgba(129, 199, 132, 1)',
+  background: 'rgba(250, 250, 250, 1)',
+  divider: 'rgba(0, 0, 0, 0.12)',
   text: {
     primary: 'rgba(255, 255, 255, 1)',
     secondary: 'rgba(255, 255, 255, 0.7)',

@@ -13,22 +13,12 @@ const darkPalette: IColors = {
     dark: 'rgba(177, 133, 0, 1)',
     contrastText: '#fff',
   },
-  error: {
-    main: 'rgba(211, 47, 47, 1)',
-  },
-  warning: {
-    main: 'rgba(245, 124, 0, 1)',
-  },
-  info: {
-    main: 'rgba(25, 118, 210, 1)',
-  },
-  success: {
-    main: 'rgba(56, 142, 60, 1)',
-  },
-
-  background: {
-    default: 'rgba(48, 48, 48, 1)',
-  },
+  error: 'rgba(229, 115, 115, 1)',
+  warning: 'rgba(255, 183, 77, 1)',
+  info: 'rgba(100, 181, 246, 1)',
+  success: 'rgba(129, 199, 132, 1)',
+  background: 'rgba(48, 48, 48, 1)',
+  divider: 'rgba(255, 255, 255, 0.12)',
 
   text: {
     primary: 'rgba(0, 0, 0, 0.87)',
