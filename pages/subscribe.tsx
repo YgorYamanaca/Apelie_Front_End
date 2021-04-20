@@ -14,7 +14,7 @@ export default apeliePageHOC(Subscribe, {
       pageTitle: 'Subscribe',
     },
     PAGEProps: {
-      template: 'COMMON',
+      template: 'DEFAULT',
     },
   },
 });

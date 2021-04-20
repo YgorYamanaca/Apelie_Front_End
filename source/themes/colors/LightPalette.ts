@@ -4,13 +4,13 @@ const lightPalette: IColors = {
   primary: {
     main: 'rgba(0, 133, 229, 1)',
     alpha: 'rgba(0, 133, 229, 0.5)',
-    light: 'rgba(51, 157, 234, 1)',
+    alternative: 'rgba(51, 157, 234, 1)',
     contrastText: '#000',
   },
   secondary: {
     main: 'rgba(253, 190, 1, 1)',
     alpha: 'rgba(253, 190, 1, 0.5)',
-    light: 'rgba(253, 203, 51, 1)',
+    alternative: 'rgba(253, 203, 51, 1)',
     contrastText: '#000',
   },
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import SEO from '@/components/commons/SEO';
 import IApeliePageTemplate from '@/types/interfaces/interface-apelie-page-template';
-import LoginAndSubscribeTemplate from 'template/LoginAndSubscribeTemplate';
+import AccessTemplate from 'template/AccessTemplate';
 import PageStyles from './styles';
 
 const ApeliePageTemplate: React.FC<IApeliePageTemplate> = ({
@@ -12,9 +12,9 @@ const ApeliePageTemplate: React.FC<IApeliePageTemplate> = ({
   <PageStyles.Container id="ApeliePage">
     <SEO {...SEOProps} />
     {PAGEProps.template === 'DEFAULT' && (
-    <LoginAndSubscribeTemplate>
+    <AccessTemplate>
       {children}
-    </LoginAndSubscribeTemplate>
+    </AccessTemplate>
     )}
 
     {PAGEProps.template === 'COMMON' && (

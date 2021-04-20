@@ -1,7 +1,6 @@
 interface IColor {
   main: string,
-  light?: string,
-  dark?: string,
+  alternative: string,
   alpha: string,
   contrastText: string,
 }

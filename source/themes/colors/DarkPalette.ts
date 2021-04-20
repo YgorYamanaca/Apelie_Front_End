@@ -4,13 +4,13 @@ const darkPalette: IColors = {
   primary: {
     main: 'rgba(0, 133, 229, 1)',
     alpha: 'rgba(0, 133, 229, 0.5)',
-    dark: 'rgba(0, 93, 160, 1)',
+    alternative: 'rgba(0, 93, 160, 1)',
     contrastText: '#fff',
   },
   secondary: {
     main: 'rgba(253, 190, 1, 1)',
     alpha: 'rgba(253, 190, 1, 0.5)',
-    dark: 'rgba(177, 133, 0, 1)',
+    alternative: 'rgba(177, 133, 0, 1)',
     contrastText: '#fff',
   },
   error: 'rgba(229, 115, 115, 1)',

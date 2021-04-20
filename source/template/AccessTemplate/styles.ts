@@ -44,12 +44,11 @@ const ImageContainer = styled.div`
       sm: css`  
           width: 600px;
           height: 600px;
-          filter: blur(50px);
         `,
     })}
     z-index: 1;
     position: absolute;
-    background-color: ${({ theme }) => theme.colors.secondary.light};
+    background-color: ${({ theme }) => theme.colors.secondary.alternative};
     border-radius: 100%;
     top: 50%;
     left: 50%;  
@@ -84,10 +83,28 @@ const ChildrenContainer = styled.div`
   })}
 `;
 
-const LoginAndSubscribeTemplateStyles = {
+const ChildrenBox = styled.div`
+  background-color: ${({ theme }) => theme.colors.background};
+  border: 1px solid ${({ theme }) => theme.colors.divider};
+  height: 450px;
+  ${breakpointsMedia({
+    md: css`
+      width: 375px;
+    `,
+    sm: css`
+      width: 300px;
+    `,
+    xs: css`
+      width: 100%;
+    `,
+  })}
+`;
+
+const AccessTemplateStyles = {
   Container,
   ImageContainer,
   ChildrenContainer,
+  ChildrenBox,
 };
 
-export default LoginAndSubscribeTemplateStyles;
+export default AccessTemplateStyles;
