@@ -1,7 +1,16 @@
-import styled from 'styled-components';
+import breakpointsMedia from '@/utils/breakpointsMedia';
+import styled, { css } from 'styled-components';
 
-const Container = styled.form`
-
+const Container = styled.div`
+  display:flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 15px 35px;
+  ${breakpointsMedia({
+    md: css`
+      padding: 15px 55px;
+    `,
+  })}
 `;
 
 const LoginBox = {

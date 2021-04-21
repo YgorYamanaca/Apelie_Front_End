@@ -22,6 +22,7 @@ const ImageContainer = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  user-select: none;
   background-size: auto;
   background-position: center;
   background-repeat: no-repeat;
@@ -41,10 +42,14 @@ const ImageContainer = styled.div`
     height: 250px;
     filter: blur(15px);
     ${breakpointsMedia({
+      md: css`  
+        width: 600px;
+        height: 600px;
+      `,
       sm: css`  
-          width: 600px;
-          height: 600px;
-        `,
+        width: 350px;
+        height: 350px;
+      `,
     })}
     z-index: 1;
     position: absolute;
@@ -59,12 +64,17 @@ const ImageContainer = styled.div`
   & > img {
     z-index: 10;
     align-self: center;
-    max-width: 700px;
-    max-height: 750px;
+    max-width: 400px;
+    max-height: 450px;
+    user-select: none;
     ${breakpointsMedia({
       md: css`
-            position: absolute;
-        `,
+        position: absolute;
+      `,
+      sm: css`
+        max-width: 700px;
+        max-height: 750px;
+      `,
     })}
   }
 `;
@@ -84,15 +94,24 @@ const ChildrenContainer = styled.div`
 `;
 
 const ChildrenBox = styled.div`
-  background-color: ${({ theme }) => theme.colors.background};
-  border: 1px solid ${({ theme }) => theme.colors.divider};
+  display: flex;
   height: 450px;
+  flex-direction: column;
+  & > div:first-of-type {
+    display: flex;
+    justify-content: center;
+    padding: 15px 35px;
+  }
+
   ${breakpointsMedia({
     md: css`
       width: 375px;
     `,
     sm: css`
-      width: 300px;
+      border: 1px solid ${({ theme }) => theme.colors.divider};
+      background-color: ${({ theme }) => theme.colors.background.default};
+      width: 285px;
+      box-shadow: ${({ theme }) => theme.shadow.nivel2}
     `,
     xs: css`
       width: 100%;
