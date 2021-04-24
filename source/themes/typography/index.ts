@@ -3,7 +3,7 @@ import ITypographyVariants from '@/types/interfaces/interface-typography-variant
 const typography: ITypographyVariants = {
   title: {
     fontSize: '28px',
-    fontWeight: '700',
+    fontWeight: '500',
     lineHeight: 1.25,
   },
   titleXS: {
@@ -22,22 +22,22 @@ const typography: ITypographyVariants = {
     lineHeight: 1.25,
   },
   paragraph1: {
-    fontSize: '20px',
-    fontWeight: '400',
+    fontSize: '18px',
+    fontWeight: '500',
     lineHeight: 1.25,
   },
   paragraph1Xs: {
-    fontSize: '18px',
-    fontWeight: '400',
+    fontSize: '16px',
+    fontWeight: '500',
     lineHeight: 1.25,
   },
   paragraph2: {
-    fontSize: '18px',
-    fontWeight: '400',
+    fontSize: '16px',
+    fontWeight: '500',
     lineHeight: 1.25,
   },
   paragraph2Xs: {
-    fontSize: '16px',
+    fontSize: '14px',
     fontWeight: '400',
     lineHeight: 1.25,
   },

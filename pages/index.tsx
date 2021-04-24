@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import apeliePageHOC from 'template/ApeliePageTemplate/HOC';
 import NextLink from 'next/link';
+import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 
 const Wrapper = styled.h1`
   color: red;
@@ -12,10 +13,10 @@ const Wrapper = styled.h1`
 
 const Home: React.FC = () => (
   <Wrapper>
-    <NextLink href="/login">
+    <NextLink href={ApeliePageAlias.Login}>
       Login
     </NextLink>
-    <NextLink href="/subscribe">
+    <NextLink href={ApeliePageAlias.Subscribe}>
       Subscribe
     </NextLink>
   </Wrapper>

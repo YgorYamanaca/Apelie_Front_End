@@ -5,13 +5,11 @@ const lightPalette: IColors = {
     main: 'rgba(0, 133, 229, 1)',
     alpha: 'rgba(0, 133, 229, 0.5)',
     alternative: 'rgba(51, 157, 234, 1)',
-    contrastText: '#fff',
   },
   secondary: {
     main: 'rgba(253, 190, 1, 1)',
     alpha: 'rgba(253, 190, 1, 0.5)',
     alternative: 'rgba(253, 203, 51, 1)',
-    contrastText: '#fff',
   },
   error: {
     main: 'rgba(244, 67, 54, 1)',
@@ -35,9 +33,10 @@ const lightPalette: IColors = {
   },
   divider: 'rgba(0, 0, 0, 0.12)',
   text: {
-    primary: 'rgba(0, 0, 0, 0.87)',
-    secondary: 'rgba(0, 0, 0, 0.54)',
-    disabled: 'rgba(0, 0, 0, 0.38)',
+    primary: 'rgba(34, 34, 34, 0.87)',
+    secondary: 'rgba(34, 34, 34, 0.54)',
+    disabled: 'rgba(34, 34, 34, 0.38)',
+    contrastText: '#fff',
   },
 };
 export default lightPalette;

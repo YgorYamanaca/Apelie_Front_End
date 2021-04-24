@@ -5,13 +5,11 @@ const darkPalette: IColors = {
     main: 'rgba(0, 133, 229, 1)',
     alpha: 'rgba(0, 133, 229, 0.5)',
     alternative: 'rgba(0, 93, 160, 1)',
-    contrastText: '#fff',
   },
   secondary: {
     main: 'rgba(253, 190, 1, 1)',
     alpha: 'rgba(253, 190, 1, 0.5)',
     alternative: 'rgba(177, 133, 0, 1)',
-    contrastText: '#fff',
   },
   error: {
     main: 'rgba(244, 67, 54, 1)',
@@ -35,9 +33,10 @@ const darkPalette: IColors = {
   },
   divider: 'rgba(255, 255, 255, 0.12)',
   text: {
-    primary: 'rgba(255, 255, 255, 1)',
+    primary: 'rgba(255, 255, 255, 0.87)',
     secondary: 'rgba(255, 255, 255, 0.7)',
     disabled: 'rgba(255, 255, 255, 0.5)',
+    contrastText: 'rgba(255, 255, 255, 1)',
   },
 };
 

@@ -5,10 +5,13 @@ const Container = styled.div`
   display:flex;
   flex: 1;
   flex-direction: column;
-  padding: 15px 35px;
+  & > form  {
+    text-align: center;
+    margin-top: 35px;
+  }
   ${breakpointsMedia({
     md: css`
-      padding: 15px 55px;
+      margin-top: 40px;
     `,
   })}
 `;

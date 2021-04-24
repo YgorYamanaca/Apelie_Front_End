@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import ApiRequester from './apiRequester';
 
-const getDitto = async () => {
+const getDitto = async (): Promise<AxiosResponse> => {
   const response = await ApiRequester.test.get('/pokemon/ditto');
   return response.data;
 };

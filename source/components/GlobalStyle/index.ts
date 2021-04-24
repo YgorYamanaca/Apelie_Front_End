@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     min-height: 100vh;
     width: 100%;
+    font-family: Roboto, sans-serif;
   }
   #__next {
     flex: 1;

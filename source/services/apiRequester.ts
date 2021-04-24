@@ -20,9 +20,18 @@ const test = axios.create({
   baseURL: 'https://pokeapi.co/api/v2/',
 });
 
+/**
+ * @description
+ * baseUrl for testing requests
+ */
+const fakeLoginLogin = axios.create({
+  baseURL: 'https://reqres.in/',
+});
+
 const ApiRequester = {
   apelie,
   test,
+  fakeLoginLogin,
 };
 
 export default ApiRequester;

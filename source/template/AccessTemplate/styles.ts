@@ -38,8 +38,8 @@ const ImageContainer = styled.div`
 
 &:before {
     content: '';
-    width: 250px;
-    height: 250px;
+    width: 230px;
+    height: 230px;
     filter: blur(15px);
     ${breakpointsMedia({
       md: css`  
@@ -64,8 +64,8 @@ const ImageContainer = styled.div`
   & > img {
     z-index: 10;
     align-self: center;
-    max-width: 400px;
-    max-height: 450px;
+    max-width: 300px;
+    max-height: 350px;
     user-select: none;
     ${breakpointsMedia({
       md: css`
@@ -95,17 +95,17 @@ const ChildrenContainer = styled.div`
 
 const ChildrenBox = styled.div`
   display: flex;
-  height: 450px;
   flex-direction: column;
+  max-width: 400px;
+  padding: 15px 35px;
   & > div:first-of-type {
     display: flex;
     justify-content: center;
-    padding: 15px 35px;
   }
-
   ${breakpointsMedia({
     md: css`
       width: 375px;
+      padding: 25px 45px;
     `,
     sm: css`
       border: 1px solid ${({ theme }) => theme.colors.divider};
