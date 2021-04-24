@@ -1,4 +1,4 @@
-import IBackGroundColor from './interface-background-color';
+import IBackgroundColor from './interface-background-color';
 import IColor from './interface-color';
 import INotificationColor from './interface-notification-color';
 import ITextColor from './interface-text-color';
@@ -10,7 +10,8 @@ interface IColors {
   warning: INotificationColor,
   info: INotificationColor,
   success: INotificationColor,
-  background: IBackGroundColor,
+  background: IBackgroundColor,
+  divider: string,
   text: ITextColor,
 }
 
