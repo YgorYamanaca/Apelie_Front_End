@@ -32,11 +32,9 @@ const LoginScreen: React.FC = () => {
   });
   const isDisabled = useMemo(() => loginInfo.email === '' || loginInfo.password === '', [loginInfo]);
   const doLoginRequest = useMutation(doLogin, {
-    onSuccess: (data: {token: string}) => {
-      console.log('Sucesso~:', data.token);
+    onSuccess: () => {
     },
-    onError: (error) => {
-      console.log('Acionar um toast', error);
+    onError: () => {
       setLoginInfo({
         ...loginInfo,
         emailError: true,
