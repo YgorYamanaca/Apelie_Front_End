@@ -74,7 +74,13 @@ const TextStyleVariantsMap: ITextStyleVariantsMap = {
     `,
   })}
 `,
-
+  smallException: css`
+    ${({ theme }) => css`
+      font-size: ${theme.typography.smallException.fontSize};
+      font-weight: ${theme.typography.smallException.fontWeight};
+      line-height: ${theme.typography.smallException.lineHeight};
+    `}
+  `,
 };
 
 export default TextStyleVariantsMap;

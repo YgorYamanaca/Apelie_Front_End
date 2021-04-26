@@ -11,11 +11,12 @@ import TextWithDivider from '@/components/commons/TextWithDivider';
 import TextBase from '@/components/commons/TextBase';
 import { useRouter } from 'next/router';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
+import { isValidateEmail } from '@/utils/validations';
 import LoginBox from './styles';
 
 interface ILoginWithError extends ILoginInfo {
-  emailError: boolean,
-  passwordError: boolean,
+  emailError: string,
+  passwordError: string,
 }
 
 /**
@@ -26,25 +27,28 @@ const LoginScreen: React.FC = () => {
   const router = useRouter();
   const [loginInfo, setLoginInfo] = useState<ILoginWithError>({
     email: '',
-    emailError: false,
+    emailError: '',
     password: '',
-    passwordError: false,
+    passwordError: '',
   });
   const isDisabled = useMemo(() => loginInfo.email === '' || loginInfo.password === '', [loginInfo]);
   const doLoginRequest = useMutation(doLogin, {
     onSuccess: () => {
     },
     onError: () => {
-      setLoginInfo({
-        ...loginInfo,
-        emailError: true,
-      });
     },
   });
 
   function onSubmited(event: FormEvent<Element>) {
     event.preventDefault();
-    doLoginRequest.mutate({ email: loginInfo.email, password: loginInfo.password });
+    if (isValidateEmail(loginInfo.email)) {
+      doLoginRequest.mutate({ email: loginInfo.email, password: loginInfo.password });
+    } else {
+      setLoginInfo({
+        ...loginInfo,
+        emailError: 'Digite no formato certo de email',
+      });
+    }
   }
 
   return (
@@ -72,7 +76,6 @@ const LoginScreen: React.FC = () => {
             </Button>
             <TextWithDivider text="OU" />
             <TextBase
-              id="TextBaseFloat"
               variant="paragraph1"
             >
               Não tem uma conta e quer se cadastrar ?

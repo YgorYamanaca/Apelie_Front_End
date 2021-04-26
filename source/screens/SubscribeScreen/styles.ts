@@ -1,12 +1,28 @@
-import styled from 'styled-components';
+import breakpointsMedia from '@/utils/breakpointsMedia';
+import styled, { css } from 'styled-components';
 
-const Title = styled.h1`
-  color: red;
-  font-size: 50px;
-  background-color: ${({ theme }) => theme.colors.background.paper};
-  width: 400px;
-  height: 500px;
-  margin: 0;
+const Container = styled.div`
+  display:flex;
+  flex: 1;
+  flex-direction: column;
+  & > :first-child {
+    text-align: center;
+  }
+
+  & > :last-child > :last-child {
+    text-align: center;
+    margin: 25px 10px 0 10px;
+    ${breakpointsMedia({
+    md: css`
+      margin: 25px 15px 0 15px;
+    `,
+  })
+}
+  }
 `;
 
-export default Title;
+const SubscribeBox = {
+  Container,
+};
+
+export default SubscribeBox;

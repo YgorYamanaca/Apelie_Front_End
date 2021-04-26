@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-shadow
 enum ApeliePageAlias {
-  Home = '/home',
+  Home = '/',
   Login = '/login',
   Subscribe = '/subscribe',
 }

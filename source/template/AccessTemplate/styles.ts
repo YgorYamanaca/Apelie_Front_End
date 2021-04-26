@@ -79,6 +79,10 @@ const ImageContainer = styled.div`
   }
 `;
 
+const Image = styled.img`
+  cursor: pointer;
+`;
+
 const ChildrenContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -111,7 +115,7 @@ const ChildrenBox = styled.div`
       border: 1px solid ${({ theme }) => theme.colors.divider};
       background-color: ${({ theme }) => theme.colors.background.default};
       width: 285px;
-      box-shadow: ${({ theme }) => theme.shadow.nivel2}
+      box-shadow: ${({ theme }) => theme.shadow.nivel2};
     `,
     xs: css`
       width: 100%;
@@ -119,11 +123,17 @@ const ChildrenBox = styled.div`
   })}
 `;
 
+const Logo = styled.img`
+  cursor: pointer;
+`;
+
 const AccessTemplateStyles = {
   Container,
   ImageContainer,
   ChildrenContainer,
   ChildrenBox,
+  Logo,
+  Image,
 };
 
 export default AccessTemplateStyles;
