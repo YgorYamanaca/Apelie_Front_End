@@ -20,7 +20,7 @@ const TextBox = styled.div`
   width: fit-content;
   background-color: ${({ theme }) => theme.colors.background.paper};
   ${breakpointsMedia({
-    md: css`
+    sm: css`
       background-color: ${({ theme }) => theme.colors.background.default};
     `,
   })}

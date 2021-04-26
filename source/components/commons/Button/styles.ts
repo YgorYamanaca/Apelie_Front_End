@@ -15,7 +15,7 @@ const Container = styled.button<IButtonStyle>`
     ghost ? 'transparent' : get(theme, `colors.${buttonColor}.alternative`)
   )};
   border-radius: ${({ theme }) => theme.borderRadius};
-  padding: 6.5px;
+  padding: 8px;
 
   ${({ disabled, ghost }) => (
     disabled ? css`

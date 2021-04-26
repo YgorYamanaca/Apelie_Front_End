@@ -13,6 +13,7 @@ interface ITypographyVariants {
   paragraph1Xs: ITypograph,
   paragraph2: ITypograph,
   paragraph2Xs: ITypograph,
+  smallException: ITypograph,
 }
 
 export default ITypographyVariants;

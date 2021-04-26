@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import TextBase from '../TextBase';
 
 const Container = styled.div`
+  position: relative;
   margin-bottom: 20px;
 `;
 
@@ -13,9 +14,26 @@ const Input = styled(TextBase)`
   border-radius: ${({ theme }) => theme.borderRadius};
   background-color: transparent;
   transition: border 0.5s ease-in-out;
-  border: 1.5px solid ${({ theme, isError }) => (isError ? theme.colors.error.alternative : theme.colors.divider)};
-  :focus {
-    border: 1.5px solid ${({ theme }) => theme.colors.primary.alternative};
+
+  ${({ theme, isError }) => (
+    isError
+      ? css`border: 1.5px solid ${theme.colors.error.alternative};`
+      : css`
+      border: 1.5px solid ${theme.colors.divider};
+      :focus {
+        border: 1.5px solid ${theme.colors.primary.alternative};
+      }
+    `
+  )} 
+`;
+
+const ErrorBox = styled.div`
+  display: flex;
+  position: relative;
+  width: 100%;
+  top: -5px;
+  & > :first-child {
+   color: ${({ theme }) => theme.colors.error.alternative};
   }
 `;
 
@@ -27,6 +45,7 @@ Input.defaultProps = {
 const InputFieldStyle = {
   Container,
   Input,
+  ErrorBox,
 };
 
 export default InputFieldStyle;
