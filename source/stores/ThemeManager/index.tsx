@@ -1,5 +1,5 @@
 import React, {
-  createContext, useState, useCallback, useLayoutEffect, useMemo,
+  createContext, useState, useCallback, useMemo, useEffect,
 } from 'react';
 import GlobalStyle from '@/components/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
@@ -16,12 +16,14 @@ const ApelieThemeProvider: React.FC = ({ children }) => {
   const [apelieTheme, setApelieTheme] = useState<ITheme>();
   const actualTheme = useMemo(() => (apelieTheme === 'Dark' ? darkPalette : lightPalette), [apelieTheme]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const theme = localStorage.getItem('ApelieTheme') as ITheme;
     if (!apelieTheme && theme) {
       setApelieTheme(theme);
+    } else {
+      setApelieTheme('Ligth');
+      localStorage.setItem('ApelieTheme', 'Ligth');
     }
-    localStorage.setItem('ApelieTheme', theme === 'Dark' ? 'Dark' : 'Ligth');
   }, []);
 
   const toggleTheme = useCallback(
