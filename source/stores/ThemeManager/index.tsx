@@ -14,7 +14,7 @@ export const AppThemeContext = createContext<Function>(() => {});
 
 const ApelieThemeProvider: React.FC = ({ children }) => {
   const [apelieTheme, setApelieTheme] = useState<ITheme>();
-  const actualTheme = useMemo(() => (apelieTheme === 'Dark' ? darkPalette : lightPalette), [apelieTheme]);
+  // const actualTheme = useMemo(() => (apelieTheme === 'Dark' ? darkPalette : lightPalette), [apelieTheme]);
 
   useEffect(() => {
     const theme = localStorage.getItem('ApelieTheme') as ITheme;
@@ -26,28 +26,28 @@ const ApelieThemeProvider: React.FC = ({ children }) => {
     }
   }, []);
 
-  const toggleTheme = useCallback(
-    () => {
-      setApelieTheme(apelieTheme === 'Dark' ? 'Ligth' : 'Dark');
-      localStorage.setItem('ApelieTheme', apelieTheme === 'Dark' ? 'Ligth' : 'Dark');
-    },
-    [apelieTheme],
-  );
+  // const toggleTheme = useCallback(
+  //   () => {
+  //     setApelieTheme(apelieTheme === 'Dark' ? 'Ligth' : 'Dark');
+  //     localStorage.setItem('ApelieTheme', apelieTheme === 'Dark' ? 'Ligth' : 'Dark');
+  //   },
+  //   [apelieTheme],
+  // );
 
   return (
-    <AppThemeContext.Provider value={toggleTheme}>
-      <ThemeProvider
-        theme={{
-          colors: actualTheme,
-          borderRadius: '4px',
-          typography,
-          shadow,
-        }}
-      >
-        <GlobalStyle />
-        {children}
-      </ThemeProvider>
-    </AppThemeContext.Provider>
+  // <AppThemeContext.Provider value={toggleTheme}>
+    <ThemeProvider
+      theme={{
+        colors: darkPalette,
+        borderRadius: '4px',
+        typography,
+        shadow,
+      }}
+    >
+      <GlobalStyle />
+      {children}
+    </ThemeProvider>
+  // </AppThemeContext.Provider>
   );
 };
 
