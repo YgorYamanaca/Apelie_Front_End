@@ -1,12 +1,12 @@
 import React, {
-  createContext, useState, useCallback, useMemo, useEffect,
+  createContext, useState, useEffect, useMemo, useCallback,
 } from 'react';
 import GlobalStyle from '@/components/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
-import lightPalette from '@/themes/colors/LightPalette';
 import shadow from '@/themes/shadow';
 import typography from '@/themes/typography';
 import darkPalette from '@/themes/colors/DarkPalette';
+import lightPalette from '@/themes/colors/LightPalette';
 
 type ITheme = 'Dark' | 'Ligth'
 
