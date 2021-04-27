@@ -45,7 +45,7 @@ const ApelieThemeProvider: React.FC = ({ children }) => {
         }}
       >
         <GlobalStyle />
-        {children}
+        {apelieTheme && children}
       </ThemeProvider>
     </AppThemeContext.Provider>
   );
