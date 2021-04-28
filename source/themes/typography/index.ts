@@ -22,22 +22,22 @@ const typography: ITypographyVariants = {
     lineHeight: 1.25,
   },
   paragraph1: {
-    fontSize: '18px',
-    fontWeight: '500',
-    lineHeight: 1.25,
-  },
-  paragraph1Xs: {
-    fontSize: '15px',
-    fontWeight: '500',
-    lineHeight: 1.25,
-  },
-  paragraph2: {
     fontSize: '16px',
     fontWeight: '500',
     lineHeight: 1.25,
   },
-  paragraph2Xs: {
+  paragraph1Xs: {
     fontSize: '14px',
+    fontWeight: '500',
+    lineHeight: 1.25,
+  },
+  paragraph2: {
+    fontSize: '14px',
+    fontWeight: '500',
+    lineHeight: 1.25,
+  },
+  paragraph2Xs: {
+    fontSize: '13px',
     fontWeight: '400',
     lineHeight: 1.25,
   },

@@ -60,27 +60,24 @@ const ImageContainer = styled.div`
     transform: translate(-50%, -50%);
     transition: size 5s ease-in-out;
   }
-  
-  & > img {
-    z-index: 10;
-    align-self: center;
-    max-width: 300px;
-    max-height: 350px;
-    user-select: none;
-    ${breakpointsMedia({
-      md: css`
-        position: absolute;
-      `,
-      sm: css`
-        max-width: 700px;
-        max-height: 750px;
-      `,
-    })}
-  }
 `;
 
 const Image = styled.img`
   cursor: pointer;
+  z-index: 10;
+  align-self: center;
+  max-width: 300px;
+  max-height: 350px;
+  user-select: none;
+  ${breakpointsMedia({
+    md: css`
+      position: absolute;
+    `,
+    sm: css`
+      max-width: 700px;
+      max-height: 750px;
+    `,
+  })}
 `;
 
 const ChildrenContainer = styled.div`

@@ -32,7 +32,9 @@ const Container = styled.button<IButtonStyle>`
       }`
       : css`
       :hover {
-        text-decoration: underline;
+        & > :only-child {
+          filter: brightness(1.1);
+        }
       }`
     }
   `)};
