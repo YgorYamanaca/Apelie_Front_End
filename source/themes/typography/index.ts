@@ -2,23 +2,23 @@ import ITypographyVariants from '@/types/interfaces/interface-typography-variant
 
 const typography: ITypographyVariants = {
   title: {
-    fontSize: '28px',
+    fontSize: '24px',
     fontWeight: '700',
     lineHeight: 1.25,
   },
   titleXS: {
-    fontSize: '26px',
-    fontWeight: '700',
-    lineHeight: 1.25,
-  },
-  subTitle: {
     fontSize: '22px',
     fontWeight: '700',
     lineHeight: 1.25,
   },
-  subTitleXs: {
+  subTitle: {
     fontSize: '20px',
-    fontWeight: '700',
+    fontWeight: '500',
+    lineHeight: 1.25,
+  },
+  subTitleXs: {
+    fontSize: '18px',
+    fontWeight: '500',
     lineHeight: 1.25,
   },
   paragraph1: {

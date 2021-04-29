@@ -17,7 +17,9 @@ const Container = styled.button<IButtonStyle>`
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 8px;
 
-  ${({ disabled, ghost }) => (
+  ${({
+    theme, disabled, ghost, buttonColor,
+  }) => (
     disabled ? css`
     cursor: not-allowed;
     filter: brightness(0.5);
@@ -31,9 +33,12 @@ const Container = styled.button<IButtonStyle>`
         filter: brightness(0.9);
       }`
       : css`
+      & > :only-child {
+        border-bottom: 2px solid ${get(theme, `colors.${buttonColor}.alternative`)};
+      }
       :hover {
         & > :only-child {
-          filter: brightness(1.1);
+          filter: brightness(1.3);
         }
       }`
     }
