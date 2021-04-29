@@ -49,15 +49,17 @@ const SubscribeScreen: React.FC = () => {
 
   function onSubmited(event: FormEvent<Element>) {
     event.preventDefault();
-    if (isValidateEmail(subscribeInfo.email) && isValidateName(subscribeInfo.name)) {
+    if (isValidateEmail(subscribeInfo.email)
+        && isValidateName(subscribeInfo.name)
+        && isSamePassword(subscribeInfo.password, subscribeInfo.confirmPassword)
+    ) {
       doSubscribeRequest.mutate({ email: subscribeInfo.email, password: subscribeInfo.password });
     } else {
       setSubInfo({
         ...subscribeInfo,
         nameError: !isValidateName(subscribeInfo.name) ? 'Seu nome contém números ou há espaço sobrando no começo ou no fim' : '',
         emailError: !isValidateEmail(subscribeInfo.email) ? 'Digite no formato certo de email' : '',
-        passwordError: isSamePassword(subscribeInfo.password, subscribeInfo.confirmPassword) ? 'As senhas não concicidem' : '',
-        confirmPasswordError: isSamePassword(subscribeInfo.password, subscribeInfo.confirmPassword) ? 'As senhas não concicidem' : '',
+        confirmPasswordError: !isSamePassword(subscribeInfo.password, subscribeInfo.confirmPassword) ? 'As senhas não concicidem' : '',
       });
     }
   }

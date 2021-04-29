@@ -16,7 +16,7 @@ const ImageBox = styled.div`
   padding: 5px;
   ${breakpointsMedia({
     md: css`
-      flex: 1.4;
+      flex: 1.25;
       padding: 20px;
     `,
   })}
@@ -62,7 +62,7 @@ const ImageBoxContent = styled.div`
     md: css`
         max-width: 350px;
         max-height: 350px;
-        align-self: flex-end;
+        align-self: center;
       `,
   })}
   }

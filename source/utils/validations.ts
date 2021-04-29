@@ -9,5 +9,6 @@ export function isValidateName(name: string): boolean {
 }
 
 export function isSamePassword(password1: string, password2: string): boolean {
+  console.log(password1, password2, password1 === password2);
   return password1 === password2;
 }
