@@ -1,12 +1,26 @@
+import React, { useState, useMemo, ReactNode } from 'react';
 import Button from '@/components/commons/Button';
+import Carousel from '@/components/commons/Carousel';
 import TextBase from '@/components/commons/TextBase';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { useRouter } from 'next/router';
-import React from 'react';
+import IStore from '@/types/interfaces/interface-store';
+import storeData from '@/utils/data-test';
 import HomeBox from './styles';
 
 const HomeScreen: React.FC = () => {
+  const [spotlightStores] = useState<IStore[]>(storeData);
   const router = useRouter();
+
+  const spotlightStoresElements: ReactNode[] = useMemo(() => spotlightStores.map((store, index) => (
+    <div
+      className="store"
+      key={`Store-${index + 1}`}
+    >
+      {store.title}
+    </div>
+  )), [spotlightStores]);
+
   return (
     <HomeBox.Container>
       <HomeBox.ImageBox>
@@ -45,7 +59,7 @@ const HomeScreen: React.FC = () => {
         </HomeBox.ImageBoxContent>
       </HomeBox.ImageBox>
       <HomeBox.StoresBox>
-        teste
+        <Carousel elementsList={spotlightStoresElements} />
       </HomeBox.StoresBox>
     </HomeBox.Container>
   );

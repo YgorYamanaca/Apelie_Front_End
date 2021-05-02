@@ -55,8 +55,8 @@ const ImageBoxContent = styled.div`
   & > img {
     position: relative;
     padding: 5px;
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 125px;
+    max-height: 125px;
     user-select: none;
     ${breakpointsMedia({
     md: css`
@@ -67,11 +67,11 @@ const ImageBoxContent = styled.div`
   })}
   }
   & > img:first-child{
-    animation: ${Animations.leftToRight} 1s ease-in-out;
+    animation: ${Animations.leftToRight} 0.3s ease-in-out;
   }
   & > img:last-child {
     justify-self: flex-end;
-    animation: ${Animations.rightToLeft} 1s ease-in-out;
+    animation: ${Animations.rightToLeft} 0.3s ease-in-out;
   }
 `;
 
@@ -85,7 +85,7 @@ const ImageBoxCenterContent = styled.div`
   order: 2;
   grid-column: span 2;
   text-align: center;
-  animation: ${Animations.fadein} 1s ease-in;
+  animation: ${Animations.fadein} 0.3s ease-in;
   ${breakpointsMedia({
     md: css`
       order: 0;

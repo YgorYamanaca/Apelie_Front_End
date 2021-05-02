@@ -1,4 +1,5 @@
 /* eslint-disable indent */
+import Animations from '@/utils/animations';
 import breakpointsMedia from '@/utils/breakpointsMedia';
 import styled, { css } from 'styled-components';
 
@@ -60,6 +61,8 @@ const ImageContainer = styled.div`
     transform: translate(-50%, -50%);
     transition: size 5s ease-in-out;
   }
+
+  animation: ${Animations.fadein} 0.3s ease-in-out;
 `;
 
 const Image = styled.img`
@@ -87,9 +90,11 @@ const ChildrenContainer = styled.div`
   padding: auto;
   flex: 3;
   z-index: 5;
+  animation: ${Animations.fadein} 0.3s ease-in-out;
   ${breakpointsMedia({
     sm: css`
       flex: 1;
+      animation: ${Animations.rightToLeft} 0.3s ease-in-out;
     `,
   })}
 `;
