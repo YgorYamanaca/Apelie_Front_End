@@ -11,3 +11,13 @@ export function isValidateName(name: string): boolean {
 export function isSamePassword(password1: string, password2: string): boolean {
   return password1 === password2;
 }
+
+export function isVisibleOnScreen(elem: HTMLElement): boolean {
+  const rect = elem.getBoundingClientRect();
+  const elemTop = rect.top;
+  const elemBottom = rect.bottom;
+
+  const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+
+  return isVisible;
+}

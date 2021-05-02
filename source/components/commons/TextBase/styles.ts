@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import TextStyleVariantsMap from '@/themes/typography/TextStyleVariantsMap';
 import { get } from 'lodash';
 import ITextColor from '@/types/interfaces/interface-text-color';
+import typography from '@/themes/typography';
 
 interface ITextBaseStyle {
   variant: keyof ITypographyVariants;
@@ -14,6 +15,9 @@ const Container = styled.span<ITextBaseStyle>`
   ${({ theme, color }) => color !== 'none' && css`color: ${get(theme, `colors.text.${color}`)}`};
   &::placeholder {
     color: ${({ theme }) => theme.colors.text.disabled};
+    ${({ variant }) => css`
+      font-size: calc(${typography[variant].fontSize} - 2px);
+    `}
     opacity: 1; /* Firefox */
   }
 `;

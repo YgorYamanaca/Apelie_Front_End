@@ -1,4 +1,5 @@
 /* eslint-disable indent */
+import Animations from '@/utils/animations';
 import breakpointsMedia from '@/utils/breakpointsMedia';
 import styled, { css } from 'styled-components';
 
@@ -60,27 +61,26 @@ const ImageContainer = styled.div`
     transform: translate(-50%, -50%);
     transition: size 5s ease-in-out;
   }
-  
-  & > img {
-    z-index: 10;
-    align-self: center;
-    max-width: 300px;
-    max-height: 350px;
-    user-select: none;
-    ${breakpointsMedia({
-      md: css`
-        position: absolute;
-      `,
-      sm: css`
-        max-width: 700px;
-        max-height: 750px;
-      `,
-    })}
-  }
+
+  animation: ${Animations.fadein} 0.3s ease-in-out;
 `;
 
 const Image = styled.img`
   cursor: pointer;
+  z-index: 10;
+  align-self: center;
+  max-width: 300px;
+  max-height: 350px;
+  user-select: none;
+  ${breakpointsMedia({
+    md: css`
+      position: absolute;
+    `,
+    sm: css`
+      max-width: 700px;
+      max-height: 750px;
+    `,
+  })}
 `;
 
 const ChildrenContainer = styled.div`
@@ -90,9 +90,11 @@ const ChildrenContainer = styled.div`
   padding: auto;
   flex: 3;
   z-index: 5;
+  animation: ${Animations.fadein} 0.3s ease-in-out;
   ${breakpointsMedia({
     sm: css`
       flex: 1;
+      animation: ${Animations.rightToLeft} 0.3s ease-in-out;
     `,
   })}
 `;

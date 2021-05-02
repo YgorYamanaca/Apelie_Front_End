@@ -14,7 +14,6 @@ const Input = styled(TextBase)`
   border-radius: ${({ theme }) => theme.borderRadius};
   background-color: transparent;
   transition: border 0.5s ease-in-out;
-
   ${({ theme, isError }) => (
     isError
       ? css`border: 1.5px solid ${theme.colors.error.alternative};`
