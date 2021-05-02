@@ -33,4 +33,4 @@ jobs:
       - name: install dependencies
         run: yarn install
       - name: Run Linter!
-        run: yarn lint
+        run: yarn run test
