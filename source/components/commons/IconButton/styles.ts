@@ -12,6 +12,7 @@ const Container = styled.div<IContainer>`
   height: 35px;
   width :35px;
   cursor: pointer;
+  user-select: none;
   &:hover{
     filter: brightness(1.5);
   };

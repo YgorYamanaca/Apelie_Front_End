@@ -25,14 +25,20 @@ const ImageBox = styled.div`
 const ImageBoxHeader = styled.div`
   display: grid;
   width: fit-content;
-  align-self: flex-end;
+  align-self: center;
   grid-template-columns: repeat(3, auto);
   justify-content: center;
   column-gap: 35px;
-  margin-right: 25px;
   & > button {
     width: fit-content;
   }
+  
+  ${breakpointsMedia({
+    md: css`
+      align-self: flex-end;
+      margin-right: 25px;
+    `,
+  })}
 `;
 
 const ImageBoxContent = styled.div`

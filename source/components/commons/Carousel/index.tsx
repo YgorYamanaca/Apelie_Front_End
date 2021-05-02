@@ -1,7 +1,9 @@
 import LeftArrow from '@/assets/icons/LeftArrow';
 import RightArrow from '@/assets/icons/RightArrow';
-import React, { useMemo, ReactNode, useState } from 'react';
-import _ from 'lodash';
+import React, {
+  useMemo, ReactNode, useState, useEffect,
+} from 'react';
+import useIsMobile from '@/theme/useIsMobile';
 import CarouselStyle from './styles';
 import IconButton from '../IconButton';
 
@@ -12,36 +14,57 @@ interface ICarousel {
 const Carousel: React.FC<ICarousel> = ({
   elementsList,
 }) => {
+  const mobile = useIsMobile('sm');
   const FIRST_INDEX = 1;
+  const LAST_INDEX = elementsList.length;
   const [selectedFlow, setSelectedFlow] = useState(FIRST_INDEX);
 
-  const CarouselItem = useMemo(() => _.chunk(elementsList, 3).map((element, index) => (
-    <CarouselStyle.CardsContainer
-      key={`CardsContainer-${index + 1}`}
-      className={`CardsContainer-${index + 1}`}
-    >
-      {element.map((itens) => (
+  const CarouselItem = useMemo(() => (
+    <CarouselStyle.CardsContainer>
+      {elementsList.map((itens, index) => (
         <CarouselStyle.Card
-          key={`Card-${index + Math.random()}`}
+          key={`Card-${index + 1}`}
+          id={`Card-${index + 1}`}
         >
           {itens}
         </CarouselStyle.Card>
       ))}
     </CarouselStyle.CardsContainer>
-  )), [elementsList]);
+  ), [elementsList]);
 
-  const LAST_INDEX = CarouselItem.length;
+  function handleArrowClick(command: 'PREV' | 'NEXT') {
+    if (command === 'PREV') {
+      const prevNumber = selectedFlow - 1;
+      if (mobile) {
+        setSelectedFlow(prevNumber < FIRST_INDEX ? LAST_INDEX : prevNumber);
+      } else {
+        setSelectedFlow(prevNumber <= FIRST_INDEX ? LAST_INDEX - 1 : prevNumber);
+      }
+    } else {
+      const nextNumber = selectedFlow + 1;
+      if (mobile) {
+        setSelectedFlow(nextNumber > LAST_INDEX ? FIRST_INDEX : nextNumber);
+      } else {
+        setSelectedFlow(nextNumber >= LAST_INDEX ? FIRST_INDEX + 1 : nextNumber);
+      }
+    }
+  }
+
+  useEffect(() => {
+    const element = document.getElementById(`Card-${selectedFlow}`);
+    element?.scrollIntoView({
+      inline: 'center',
+      behavior: 'smooth',
+    });
+  }, [selectedFlow]);
 
   return (
     <CarouselStyle.Container
       selected={selectedFlow}
     >
       <IconButton
-        disabled={selectedFlow === FIRST_INDEX}
         className="First_Arrow"
-        onClick={
-          () => setSelectedFlow(selectedFlow !== FIRST_INDEX ? selectedFlow - 1 : LAST_INDEX)
-        }
+        onClick={() => handleArrowClick('PREV')}
       >
         <LeftArrow />
       </IconButton>
@@ -49,11 +72,8 @@ const Carousel: React.FC<ICarousel> = ({
         {CarouselItem}
       </CarouselStyle.BaseContainer>
       <IconButton
-        disabled={selectedFlow === LAST_INDEX}
         className="Last_Arrow"
-        onClick={
-          () => setSelectedFlow(selectedFlow !== LAST_INDEX ? selectedFlow + 1 : FIRST_INDEX)
-        }
+        onClick={() => handleArrowClick('NEXT')}
       >
         <RightArrow />
       </IconButton>
