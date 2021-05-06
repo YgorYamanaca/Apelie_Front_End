@@ -3,7 +3,6 @@ import RightArrow from '@/assets/icons/RightArrow';
 import React, {
   useMemo, ReactNode, useState, useEffect,
 } from 'react';
-import useIsMobile from '@/theme/useIsMobile';
 import CarouselStyle from './styles';
 import IconButton from '../IconButton';
 
@@ -14,7 +13,6 @@ interface ICarousel {
 const Carousel: React.FC<ICarousel> = ({
   elementsList,
 }) => {
-  const mobile = useIsMobile('sm');
   const FIRST_INDEX = 1;
   const LAST_INDEX = elementsList.length;
   const [selectedFlow, setSelectedFlow] = useState(FIRST_INDEX);
@@ -35,25 +33,17 @@ const Carousel: React.FC<ICarousel> = ({
   function handleArrowClick(command: 'PREV' | 'NEXT') {
     if (command === 'PREV') {
       const prevNumber = selectedFlow - 1;
-      if (mobile) {
-        setSelectedFlow(prevNumber < FIRST_INDEX ? LAST_INDEX : prevNumber);
-      } else {
-        setSelectedFlow(prevNumber <= FIRST_INDEX ? LAST_INDEX - 1 : prevNumber);
-      }
+      setSelectedFlow(prevNumber < FIRST_INDEX ? LAST_INDEX : prevNumber);
     } else {
       const nextNumber = selectedFlow + 1;
-      if (mobile) {
-        setSelectedFlow(nextNumber > LAST_INDEX ? FIRST_INDEX : nextNumber);
-      } else {
-        setSelectedFlow(nextNumber >= LAST_INDEX ? FIRST_INDEX + 1 : nextNumber);
-      }
+      setSelectedFlow(nextNumber > LAST_INDEX ? FIRST_INDEX : nextNumber);
     }
   }
 
   useEffect(() => {
     const element = document.getElementById(`Card-${selectedFlow}`);
     element?.scrollIntoView({
-      inline: 'center',
+      inline: selectedFlow === LAST_INDEX || selectedFlow === FIRST_INDEX ? 'start' : 'center',
       behavior: 'smooth',
     });
   }, [selectedFlow]);

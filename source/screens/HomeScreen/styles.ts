@@ -12,6 +12,7 @@ const ImageBox = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1.35;
+  box-shadow: ${({ theme }) => theme.shadow.nivel1};
   background-color: ${({ theme }) => theme.colors.background.default};
   padding: 5px;
   ${breakpointsMedia({
