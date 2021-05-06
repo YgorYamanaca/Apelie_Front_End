@@ -1,11 +1,10 @@
 interface IStore {
-  productImageUrl: string,
-  title: string,
+  storeImageUrl: string,
+  userPhoto: string,
+  name: string,
   description: string,
-  type: string,
+  theme: string,
   score: number,
-  price: number,
-  quantity: number,
 }
 
 export default IStore;

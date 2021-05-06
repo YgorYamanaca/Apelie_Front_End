@@ -1,5 +1,5 @@
-import breakpointsMedia from '@/utils/breakpointsMedia';
-import styled, { css } from 'styled-components';
+import Animations from '@/utils/animations';
+import styled from 'styled-components';
 
 interface IContainer{
   selected: number;
@@ -31,19 +31,7 @@ const CardsContainer = styled.div`
 `;
 
 const Card = styled.div`
-  & > div {
-    margin: 0 15px;
-    background-color: yellow;
-    width: 200px;
-    height: 200px;
-    ${breakpointsMedia({
-    md: css`
-        margin: 0 35px;
-        width: 300px;
-        height: 250px;
-      `,
-  })}
-  }
+  animation: ${Animations.fadein} 0.3s ease-in-out;
 `;
 
 const CarouselStyle = {

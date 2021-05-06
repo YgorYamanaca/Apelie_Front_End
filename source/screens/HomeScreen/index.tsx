@@ -6,6 +6,7 @@ import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { useRouter } from 'next/router';
 import IStore from '@/types/interfaces/interface-store';
 import storeData from '@/utils/data-test';
+import Store from '@/components/commons/Store';
 import HomeBox from './styles';
 
 const HomeScreen: React.FC = () => {
@@ -13,12 +14,7 @@ const HomeScreen: React.FC = () => {
   const router = useRouter();
 
   const spotlightStoresElements: ReactNode[] = useMemo(() => spotlightStores.map((store, index) => (
-    <div
-      className="store"
-      key={`Store-${index + 1}`}
-    >
-      {store.title}
-    </div>
+    <Store key={`store-${index + 1}`} id={`store-${index + 1}`} store={store} />
   )), [spotlightStores]);
 
   return (
