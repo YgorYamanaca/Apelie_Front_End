@@ -12,7 +12,7 @@ const Login: React.FC = () => (
 export default apeliePageHOC(Login, {
   apelieTemplateProps: {
     SEOProps: {
-      pageTitle: 'Login',
+      pageTitle: 'Página de login Apelie',
       url: ApeliePageAlias.Login,
     },
     PAGEProps: {

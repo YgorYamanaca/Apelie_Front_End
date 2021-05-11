@@ -3,26 +3,21 @@ import NextHead from 'next/head';
 import ISEO from '@/types/interfaces/interface-search-engine-optimization';
 
 const SEO: React.FC<ISEO> = ({ pageTitle, url }) => {
-  const title = pageTitle ? `${pageTitle} | Apelie` : 'Apelie';
+  const title = pageTitle ? `${pageTitle}` : 'Apelie';
   const description = 'Venha fazer parte da maior comunidade de comércio de itens artesanais do Brasil.';
   const image = 'https://blog.lahar.com.br/wp-content/uploads/2018/08/exemplos-de-marketing-digital-650x400.png';
   const urlBase = `https://apelie-front-end.vercel.app${url}`;
 
   return (
     <NextHead>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta httpEquiv="Content-Language" content="pt-br" />
-
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
-
       <meta property="og:type" content="website" />
       <meta property="og:url" content={urlBase} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
-
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={urlBase} />
       <meta property="twitter:title" content={title} />
