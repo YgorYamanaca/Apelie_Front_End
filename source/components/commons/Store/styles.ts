@@ -6,7 +6,6 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.background.default};
   box-shadow: ${({ theme }) => theme.shadow.nivel3};
   border-radius: ${({ theme }) => theme.borderRadius};
-  margin: 0 15px;
   width: 200px;
   height: 235px;
   padding: 10px;

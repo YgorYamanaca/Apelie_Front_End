@@ -106,7 +106,7 @@ const SubscribeScreen: React.FC = () => {
         <Button type="submit" disabled={isDisabled} textColor="contrastText">
           Cadastre-se
         </Button>
-        <TextBase variant="smallException" tag="h4">
+        <TextBase variant="smallException" tag="p">
           Ao se cadastrar, você concorda com nossos Termos, Política de Dados e Política de Cookies.
         </TextBase>
       </form>

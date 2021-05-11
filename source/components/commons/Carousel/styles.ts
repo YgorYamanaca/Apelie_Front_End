@@ -18,7 +18,7 @@ const BaseContainer = styled.div`
   position: relative;
   flex: 1;
   flex-direction: row;
-  height: 100%;
+  height: 275px;
   overflow: hidden;
   justify-content: flex-start;
   align-items: center;
@@ -28,9 +28,11 @@ const CardsContainer = styled.div`
   display: flex;
   flex-direction: row;
   position: absolute;
+  height: 100%;
 `;
 
 const Card = styled.div`
+  margin: 15px;
   animation: ${Animations.fadein} 0.3s ease-in-out;
 `;
 
