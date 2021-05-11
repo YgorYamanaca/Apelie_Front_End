@@ -2,6 +2,7 @@ import React from 'react';
 import SEO from '@/components/commons/SEO';
 import IApeliePageTemplate from '@/types/interfaces/interface-apelie-page-template';
 import AccessTemplate from 'template/AccessTemplate';
+import CommonTemplate from 'template/CommonTemplate';
 import PageStyles from './styles';
 
 const ApeliePageTemplate: React.FC<IApeliePageTemplate> = ({
@@ -12,21 +13,23 @@ const ApeliePageTemplate: React.FC<IApeliePageTemplate> = ({
   <PageStyles.Container id="ApeliePage">
     <SEO {...SEOProps} />
     {PAGEProps.template === 'DEFAULT' && (
-    <AccessTemplate>
-      {children}
-    </AccessTemplate>
+      <AccessTemplate>
+        {children}
+      </AccessTemplate>
     )}
 
     {PAGEProps.template === 'COMMON' && (
-    <>
-      {children}
-    </>
+      <>
+        <CommonTemplate>
+          {children}
+        </CommonTemplate>
+      </>
     )}
 
     {PAGEProps.template === 'CUSTOM' && (
-    <>
-      {children}
-    </>
+      <>
+          {children}
+      </>
     )}
   </PageStyles.Container>
 );

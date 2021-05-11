@@ -35,10 +35,12 @@ const HomeScreen: React.FC = () => {
           <img
             src="/images/Home/Home-Animated-Image1.svg"
             alt="ApelieHomeImg1"
+            height={350}
+            width={350}
           />
           <HomeBox.ImageBoxCenterContent>
             <div>
-              <img src="https://placehold.co/200x55?text=Logo" alt="ApelieLogo" />
+              <img height={55} width={200} src="https://placehold.co/200x55?text=Logo" alt="ApelieLogo" />
             </div>
             <TextBase variant="title" tag="h1">
               Fique mais próximo do seu cliente
@@ -51,6 +53,8 @@ const HomeScreen: React.FC = () => {
           <img
             src="/images/Home/Home-Animated-Image2.svg"
             alt="ApelieHomeImg2"
+            height={350}
+            width={350}
           />
         </HomeBox.ImageBoxContent>
       </HomeBox.ImageBox>

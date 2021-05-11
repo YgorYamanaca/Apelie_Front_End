@@ -1,5 +1,5 @@
 import React from 'react';
-import Head from 'next/head';
+import NextHead from 'next/head';
 import ISEO from '@/types/interfaces/interface-search-engine-optimization';
 
 const SEO: React.FC<ISEO> = ({ pageTitle, url }) => {
@@ -9,7 +9,10 @@ const SEO: React.FC<ISEO> = ({ pageTitle, url }) => {
   const urlBase = `https://apelie-front-end.vercel.app${url}`;
 
   return (
-    <Head>
+    <NextHead>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta httpEquiv="Content-Language" content="pt-br" />
+
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
@@ -25,7 +28,7 @@ const SEO: React.FC<ISEO> = ({ pageTitle, url }) => {
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={image} />
-    </Head>
+    </NextHead>
   );
 };
 
