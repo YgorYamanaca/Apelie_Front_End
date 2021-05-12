@@ -1,24 +1,35 @@
 import Animations from '@/utils/animations';
 import styled from 'styled-components';
 
-interface IContainer{
-  selected: number;
-}
+const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
 
-const Container = styled.div<IContainer>`
+const CarouselContainer = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
-const BaseContainer = styled.div`
+const TextContainer = styled.div`
+  padding: 0 35px;
+  padding-top: 10px;
+`;
+
+interface IBaseContainer {
+  baseSize: number;
+}
+
+const BaseContainer = styled.div<IBaseContainer>`
   scroll-snap-type: x mandatory; 
   display: flex;
   position: relative;
   flex: 1;
   flex-direction: row;
-  height: 275px;
+  height: ${({ baseSize }) => baseSize}px;
   overflow: hidden;
   justify-content: flex-start;
   align-items: center;
@@ -39,8 +50,10 @@ const Card = styled.div`
 const CarouselStyle = {
   Container,
   Card,
+  CarouselContainer,
   BaseContainer,
   CardsContainer,
+  TextContainer,
 };
 
 export default CarouselStyle;

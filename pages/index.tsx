@@ -23,7 +23,7 @@ const Home: React.FC = () => {
 export default apeliePageHOC(Home, {
   apelieTemplateProps: {
     SEOProps: {
-      pageTitle: 'Bem vindo ao Apelie',
+      pageTitle: 'Seja muito bem vinde ao Apelie!',
       url: ApeliePageAlias.Home,
     },
     PAGEProps: {

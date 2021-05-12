@@ -1,6 +1,7 @@
+import IApelieTheme from '@/types/interfaces/interface-apelie-theme';
 import IStore from '@/types/interfaces/interface-store';
 
-const storeData: IStore[] = [
+export const storeData: IStore[] = [
   {
     userPhoto: 'https://i1.wp.com/terracoeconomico.com.br/wp-content/uploads/2019/01/default-user-image.png?ssl=1',
     storeImageUrl: 'https://www.encontracampinas.com/wp-content/uploads/2015/03/lojas-de-artesanato-em-campinas-1426092333.jpg',
@@ -123,4 +124,37 @@ const storeData: IStore[] = [
   },
 ];
 
-export default storeData;
+export const themeData: IApelieTheme[] = [
+  {
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
+    themeTitle: 'Theme1',
+  },
+  {
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
+    themeTitle: 'Theme2',
+  },
+  {
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
+    themeTitle: 'Theme3',
+  },
+  {
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
+    themeTitle: 'Theme4',
+  },
+  {
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
+    themeTitle: 'Theme5',
+  },
+  {
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
+    themeTitle: 'Theme6',
+  },
+  {
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
+    themeTitle: 'Theme7',
+  },
+  {
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
+    themeTitle: 'Theme8',
+  },
+];

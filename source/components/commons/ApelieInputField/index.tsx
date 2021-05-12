@@ -1,5 +1,5 @@
 import React, { ChangeEvent, InputHTMLAttributes } from 'react';
-import TextBase from '../TextBase';
+import ApelieTextBase from '../ApelieTextBase';
 import InputFieldStyle from './styles';
 
 interface IInputField {
@@ -22,9 +22,9 @@ const ApelieInputField: React.FC<IInputField> = ({
   <InputFieldStyle.Container>
     {typeof (isError) === 'string' && (
       <InputFieldStyle.ErrorBox id="ErrorBox">
-        <TextBase variant="smallException">
+        <ApelieTextBase variant="smallException">
           {isError}
-        </TextBase>
+        </ApelieTextBase>
       </InputFieldStyle.ErrorBox>
     )}
     <InputFieldStyle.Input

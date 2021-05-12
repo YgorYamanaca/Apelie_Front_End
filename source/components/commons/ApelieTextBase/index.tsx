@@ -16,7 +16,7 @@ interface ITextBase {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TextBase: React.FC<ITextBase> = ({
+const ApelieTextBase: React.FC<ITextBase> = ({
   id,
   variant = 'paragraph1',
   color = 'primary',
@@ -35,4 +35,4 @@ const TextBase: React.FC<ITextBase> = ({
   </TextBaseStyle.Container>
 );
 
-export default TextBase;
+export default ApelieTextBase;
