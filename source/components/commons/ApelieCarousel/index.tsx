@@ -4,13 +4,16 @@ import React, {
   useMemo, ReactNode, useState, useEffect,
 } from 'react';
 import CarouselStyle from './styles';
-import IconButton from '../IconButton';
+import IconButton from '../ApelieIconButton';
+import ApelieTextBase from '../ApelieTextBase';
 
 interface ICarousel {
+  carouselTitle?: string,
   elementsList: ReactNode[],
 }
 
-const Carousel: React.FC<ICarousel> = ({
+const ApelieCarousel: React.FC<ICarousel> = ({
+  carouselTitle,
   elementsList,
 }) => {
   const FIRST_INDEX = 1;
@@ -49,26 +52,33 @@ const Carousel: React.FC<ICarousel> = ({
   }, [selectedFlow]);
 
   return (
-    <CarouselStyle.Container
-      selected={selectedFlow}
-    >
-      <IconButton
-        className="First_Arrow"
-        onClick={() => handleArrowClick('PREV')}
-      >
-        <LeftArrow />
-      </IconButton>
-      <CarouselStyle.BaseContainer className="BaseContainer">
-        {CarouselItem}
-      </CarouselStyle.BaseContainer>
-      <IconButton
-        className="Last_Arrow"
-        onClick={() => handleArrowClick('NEXT')}
-      >
-        <RightArrow />
-      </IconButton>
+    <CarouselStyle.Container>
+      <CarouselStyle.TextContainer>
+        {carouselTitle && (
+          <ApelieTextBase variant="title">
+            {carouselTitle}
+          </ApelieTextBase>
+        )}
+      </CarouselStyle.TextContainer>
+      <CarouselStyle.CarouselContainer>
+        <IconButton
+          className="First_Arrow"
+          onClick={() => handleArrowClick('PREV')}
+        >
+          <LeftArrow />
+        </IconButton>
+        <CarouselStyle.BaseContainer className="BaseContainer">
+          {CarouselItem}
+        </CarouselStyle.BaseContainer>
+        <IconButton
+          className="Last_Arrow"
+          onClick={() => handleArrowClick('NEXT')}
+        >
+          <RightArrow />
+        </IconButton>
+      </CarouselStyle.CarouselContainer>
     </CarouselStyle.Container>
   );
 };
 
-export default Carousel;
+export default ApelieCarousel;

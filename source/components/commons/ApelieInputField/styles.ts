@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
-import TextBase from '../TextBase';
+import ApelieTextBase from '../ApelieTextBase';
 
 const Container = styled.div`
   position: relative;
   margin-bottom: 20px;
 `;
 
-const Input = styled(TextBase)`
+const Input = styled(ApelieTextBase)`
   width: 100%; 
   color: ${({ theme }) => theme.colors.text.primary};
   padding: 5px 10px;

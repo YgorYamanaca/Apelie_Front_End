@@ -1,14 +1,14 @@
 import React, {
   FormEvent, useState, useMemo,
 } from 'react';
-import InputField from '@/components/commons/InputField';
-import Button from '@/components/commons/Button';
+import ApelieInputField from '@/components/commons/ApelieInputField';
+import ApelieButton from '@/components/commons/ApelieButton';
 import { useMutation } from 'react-query';
 import ILoginInfo from '@/types/interfaces/interface-login-data';
 import { doLogin } from '@/services/fakeLoginService';
 import handleChange from '@/utils/formUtils';
-import TextWithDivider from '@/components/commons/TextWithDivider';
-import TextBase from '@/components/commons/TextBase';
+import ApelieTextWithDivider from '@/components/commons/ApelieTextWithDivider';
+import ApelieTextBase from '@/components/commons/ApelieTextBase';
 import { useRouter } from 'next/router';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { isValidateEmail } from '@/utils/validations';
@@ -34,8 +34,10 @@ const LoginScreen: React.FC = () => {
   const isDisabled = useMemo(() => loginInfo.email === '' || loginInfo.password === '', [loginInfo]);
   const doLoginRequest = useMutation(doLogin, {
     onSuccess: () => {
+      router.push(ApeliePageAlias.MainPage);
     },
     onError: () => {
+      router.push(ApeliePageAlias.MainPage);
     },
   });
 
@@ -56,14 +58,15 @@ const LoginScreen: React.FC = () => {
       {!doLoginRequest.isLoading
         ? (
           <form autoComplete="off" onSubmit={(event: FormEvent<Element>) => onSubmited(event)}>
-            <InputField
+            <ApelieInputField
+              type="email"
               placeholder="Email"
               name="email"
               value={loginInfo.email}
               isError={loginInfo.emailError}
               onChange={(event) => handleChange(event, setLoginInfo)}
             />
-            <InputField
+            <ApelieInputField
               type="password"
               placeholder="Senha"
               name="password"
@@ -71,18 +74,18 @@ const LoginScreen: React.FC = () => {
               isError={loginInfo.passwordError}
               onChange={(event) => handleChange(event, setLoginInfo)}
             />
-            <Button type="submit" disabled={isDisabled} textColor="contrastText">
+            <ApelieButton type="submit" disabled={isDisabled} textColor="contrastText">
               Entrar
-            </Button>
-            <TextWithDivider text="OU" />
-            <TextBase
+            </ApelieButton>
+            <ApelieTextWithDivider text="OU" />
+            <ApelieTextBase
               variant="paragraph1"
             >
               Não tem uma conta e quer se cadastrar ?
-            </TextBase>
-            <Button ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Subscribe)}>
+            </ApelieTextBase>
+            <ApelieButton ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Subscribe)}>
               Cadastre-se aqui!
-            </Button>
+            </ApelieButton>
           </form>
         ) : <div>loading</div>}
     </LoginBox.Container>

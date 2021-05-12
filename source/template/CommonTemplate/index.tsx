@@ -1,20 +1,17 @@
 import React from 'react';
+import ApelieHeader from './ApelieHeader';
 import StyleCommonTemplate from './styles';
 
-interface ICommonTemplate {
-  isSearchBarShowed?: boolean;
-}
-
-const CommonTemplate: React.FC<ICommonTemplate> = ({
-  isSearchBarShowed = false,
+const CommonTemplate: React.FC = ({
   children,
 }) => (
   <StyleCommonTemplate.Container>
-    <div>
-      header
-      {isSearchBarShowed && 'serachBar'}
-    </div>
-    {children}
+    <>
+      <ApelieHeader />
+    </>
+    <StyleCommonTemplate.ChildrenContainer>
+      {children}
+    </StyleCommonTemplate.ChildrenContainer>
     <footer />
   </StyleCommonTemplate.Container>
 );

@@ -30,7 +30,7 @@ const ImageBoxHeader = styled.div`
   grid-template-columns: repeat(3, auto);
   justify-content: center;
   column-gap: 35px;
-  & > button {
+  & > ApelieButton {
     width: fit-content;
   }
   

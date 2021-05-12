@@ -1,15 +1,22 @@
 import Animations from '@/utils/animations';
 import styled from 'styled-components';
 
-interface IContainer{
-  selected: number;
-}
+const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
 
-const Container = styled.div<IContainer>`
+const CarouselContainer = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+const TextContainer = styled.div`
+  padding: 0 35px;
+  padding-top: 10px;
 `;
 
 const BaseContainer = styled.div`
@@ -39,8 +46,10 @@ const Card = styled.div`
 const CarouselStyle = {
   Container,
   Card,
+  CarouselContainer,
   BaseContainer,
   CardsContainer,
+  TextContainer,
 };
 
 export default CarouselStyle;

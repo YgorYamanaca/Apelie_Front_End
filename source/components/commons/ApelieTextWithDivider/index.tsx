@@ -1,22 +1,22 @@
 import React from 'react';
-import TextBase from '../TextBase';
+import ApelieTextBase from '../ApelieTextBase';
 import TextWithDividerStyle from './styles';
 
 interface ITextWithDivider {
   text: string;
 }
 
-const TextWithDivider: React.FC<ITextWithDivider> = ({
+const ApelieTextWithDivider: React.FC<ITextWithDivider> = ({
   text,
 }) => (
   <TextWithDividerStyle.Container>
     <TextWithDividerStyle.TextBox>
-      <TextBase variant="subTitle">
+      <ApelieTextBase variant="subTitle">
         {text}
-      </TextBase>
+      </ApelieTextBase>
     </TextWithDividerStyle.TextBox>
     <hr />
   </TextWithDividerStyle.Container>
 );
 
-export default TextWithDivider;
+export default ApelieTextWithDivider;

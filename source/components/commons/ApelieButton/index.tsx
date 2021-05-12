@@ -1,6 +1,6 @@
 import ITextColor from '@/types/interfaces/interface-text-color';
 import React, { ButtonHTMLAttributes } from 'react';
-import TextBase from '../TextBase';
+import ApelieTextBase from '../ApelieTextBase';
 import ButtonStyle from './styles';
 
 interface IButton {
@@ -12,12 +12,12 @@ interface IButton {
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type']
 }
 
-const Button: React.FC<IButton> = ({
+const ApelieButton: React.FC<IButton> = ({
   disabled = false,
   ghost = false,
   onClick = () => {},
   buttonColor = 'primary',
-  type = 'button',
+  type = 'ApelieButton',
   textColor,
   children,
 }) => (
@@ -28,10 +28,10 @@ const Button: React.FC<IButton> = ({
     type={type}
     onClick={() => !disabled && onClick && onClick()}
   >
-    <TextBase color={ghost ? 'none' : textColor}>
+    <ApelieTextBase color={ghost ? 'none' : textColor}>
       {children}
-    </TextBase>
+    </ApelieTextBase>
   </ButtonStyle.Container>
 );
 
-export default Button;
+export default ApelieButton;

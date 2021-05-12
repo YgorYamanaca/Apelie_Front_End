@@ -1,10 +1,27 @@
-import styled from 'styled-components';
+import breakpointsMedia from '@/utils/breakpointsMedia';
+import styled, { css } from 'styled-components';
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
 
-const StyleMainPageScreen = {
+const PageSection = styled.section`
+  display: flex;
+  padding-bottom: 5px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+  ${breakpointsMedia({
+    md: css`
+        padding-bottom: 15px;
+      `,
+  })
+}
+`;
+
+const MainPageScreenStyle = {
   Container,
+  PageSection,
 };
 
-export default StyleMainPageScreen;
+export default MainPageScreenStyle;

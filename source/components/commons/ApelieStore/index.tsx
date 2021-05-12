@@ -1,6 +1,6 @@
 import IStore from '@/types/interfaces/interface-store';
 import React from 'react';
-import TextBase from '../TextBase';
+import ApelieTextBase from '../ApelieTextBase';
 import StoreStyles from './styles';
 
 interface IStoreComponent {
@@ -8,7 +8,7 @@ interface IStoreComponent {
   store: IStore,
 }
 
-const Store: React.FC<IStoreComponent> = ({
+const ApelieStore: React.FC<IStoreComponent> = ({
   id,
   store,
 }) => (
@@ -17,19 +17,19 @@ const Store: React.FC<IStoreComponent> = ({
       <StoreStyles.StorePhotoContainer imgUrl={store.storeImageUrl}>
         <StoreStyles.UserPhotoContainer imgUrl={store.userPhoto} />
       </StoreStyles.StorePhotoContainer>
-      <TextBase tag="p">
+      <ApelieTextBase tag="p">
         {`Componente de score:${store.score}`}
-      </TextBase>
+      </ApelieTextBase>
     </StoreStyles.PhotoContainer>
     <StoreStyles.TextContainer>
-      <TextBase variant="subTitle">
+      <ApelieTextBase variant="subTitle">
         {store.name}
-      </TextBase>
-      <TextBase tag="p" variant="paragraph1">
+      </ApelieTextBase>
+      <ApelieTextBase tag="p" variant="paragraph1">
         {store.description}
-      </TextBase>
+      </ApelieTextBase>
     </StoreStyles.TextContainer>
   </StoreStyles.Container>
 );
 
-export default Store;
+export default ApelieStore;

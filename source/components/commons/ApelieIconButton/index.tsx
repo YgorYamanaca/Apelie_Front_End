@@ -8,7 +8,7 @@ type IconButtonType = {
   onClick?: Function;
 }
 
-const IconButton: React.FC<IconButtonType> = ({
+const ApelieIconButton: React.FC<IconButtonType> = ({
   disabled = false,
   className,
   children,
@@ -23,4 +23,4 @@ const IconButton: React.FC<IconButtonType> = ({
   </IconButtonStyle.Container>
 );
 
-export default IconButton;
+export default ApelieIconButton;
