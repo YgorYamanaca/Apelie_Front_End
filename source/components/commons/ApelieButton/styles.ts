@@ -6,7 +6,7 @@ interface IButtonStyle {
   readonly buttonColor: 'primary' | 'secondary';
 }
 
-const Container = styled.ApelieButton<IButtonStyle>`
+const Container = styled.button<IButtonStyle>`
   width: 100%;
   outline: none;
   border: 0;

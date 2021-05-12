@@ -126,35 +126,35 @@ export const storeData: IStore[] = [
 
 export const themeData: IApelieTheme[] = [
   {
-    themeImage: 'https://image.freepik.com/fotos-gratis/modelo-de-foto-bonita_1157-7654.jpg',
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
     themeTitle: 'Theme1',
   },
   {
-    themeImage: 'https://image.freepik.com/fotos-gratis/modelo-de-foto-bonita_1157-7654.jpg',
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
     themeTitle: 'Theme2',
   },
   {
-    themeImage: 'https://image.freepik.com/fotos-gratis/modelo-de-foto-bonita_1157-7654.jpg',
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
     themeTitle: 'Theme3',
   },
   {
-    themeImage: 'https://image.freepik.com/fotos-gratis/modelo-de-foto-bonita_1157-7654.jpg',
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
     themeTitle: 'Theme4',
   },
   {
-    themeImage: 'https://image.freepik.com/fotos-gratis/modelo-de-foto-bonita_1157-7654.jpg',
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
     themeTitle: 'Theme5',
   },
   {
-    themeImage: 'https://image.freepik.com/fotos-gratis/modelo-de-foto-bonita_1157-7654.jpg',
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
     themeTitle: 'Theme6',
   },
   {
-    themeImage: 'https://image.freepik.com/fotos-gratis/modelo-de-foto-bonita_1157-7654.jpg',
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
     themeTitle: 'Theme7',
   },
   {
-    themeImage: 'https://image.freepik.com/fotos-gratis/modelo-de-foto-bonita_1157-7654.jpg',
+    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
     themeTitle: 'Theme8',
   },
 ];

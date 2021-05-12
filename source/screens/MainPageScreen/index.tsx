@@ -15,7 +15,7 @@ const MainPageScreen: React.FC = () => {
   return (
     <MainPageScreenStyle.Container>
       <MainPageScreenStyle.PageSection>
-        <Carousel carouselTitle="Temas" elementsList={themes} />
+        <Carousel carouselTitle="Temas" elementsList={themes} baseSizes={250} />
       </MainPageScreenStyle.PageSection>
     </MainPageScreenStyle.Container>
   );

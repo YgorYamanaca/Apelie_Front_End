@@ -19,13 +19,17 @@ const TextContainer = styled.div`
   padding-top: 10px;
 `;
 
-const BaseContainer = styled.div`
+interface IBaseContainer {
+  baseSize: number;
+}
+
+const BaseContainer = styled.div<IBaseContainer>`
   scroll-snap-type: x mandatory; 
   display: flex;
   position: relative;
   flex: 1;
   flex-direction: row;
-  height: 275px;
+  height: ${({ baseSize }) => baseSize}px;
   overflow: hidden;
   justify-content: flex-start;
   align-items: center;

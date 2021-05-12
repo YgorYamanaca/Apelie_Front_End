@@ -10,11 +10,13 @@ import ApelieTextBase from '../ApelieTextBase';
 interface ICarousel {
   carouselTitle?: string,
   elementsList: ReactNode[],
+  baseSizes?: number,
 }
 
 const ApelieCarousel: React.FC<ICarousel> = ({
   carouselTitle,
   elementsList,
+  baseSizes = 275,
 }) => {
   const FIRST_INDEX = 1;
   const LAST_INDEX = elementsList.length;
@@ -67,7 +69,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
         >
           <LeftArrow />
         </IconButton>
-        <CarouselStyle.BaseContainer className="BaseContainer">
+        <CarouselStyle.BaseContainer className="BaseContainer" baseSize={baseSizes}>
           {CarouselItem}
         </CarouselStyle.BaseContainer>
         <IconButton

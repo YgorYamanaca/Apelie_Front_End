@@ -17,7 +17,7 @@ const ApelieButton: React.FC<IButton> = ({
   ghost = false,
   onClick = () => {},
   buttonColor = 'primary',
-  type = 'ApelieButton',
+  type = 'button',
   textColor,
   children,
 }) => (

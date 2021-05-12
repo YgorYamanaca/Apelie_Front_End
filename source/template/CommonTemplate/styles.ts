@@ -8,7 +8,7 @@ const Container = styled.div`
 
 const ChildrenContainer = styled.div`
   display: flex;
-  padding: 15px;
+  padding: 0 15px;
 `;
 
 const StyleCommonTemplate = {
