@@ -1,5 +1,5 @@
 interface ISubscribeInfo {
-  name: string,
+  fullName: string,
   email: string,
   password: string,
   confirmPassword: string,

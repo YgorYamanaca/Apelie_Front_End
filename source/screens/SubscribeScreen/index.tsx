@@ -1,10 +1,10 @@
 import React, {
-  FormEvent, useState, useMemo,
+  FormEvent, useState, useMemo, ChangeEvent,
 } from 'react';
 import ApelieInputField from '@/components/commons/ApelieInputField';
 import ApelieButton from '@/components/commons/ApelieButton';
 import { useMutation } from 'react-query';
-import { doRegister } from '@/services/fakeLoginService';
+import { doRegister } from '@/services/user';
 import handleChange from '@/utils/formUtils';
 import ApelieTextBase from '@/components/commons/ApelieTextBase';
 import ISubscribeInfo from '@/types/interfaces/interface-subscribe-data';
@@ -12,7 +12,7 @@ import { isSamePassword, isValidateEmail, isValidateName } from '@/utils/validat
 import SubscribeBox from './styles';
 
 interface ISubscribeWithError extends ISubscribeInfo {
-  nameError: string | boolean,
+  fullNameError: string | boolean,
   emailError: string | boolean,
   passwordError: string | boolean,
   confirmPasswordError: string | boolean,
@@ -23,8 +23,8 @@ interface ISubscribeWithError extends ISubscribeInfo {
  */
 const SubscribeScreen: React.FC = () => {
   const [subscribeInfo, setSubInfo] = useState<ISubscribeWithError>({
-    name: '',
-    nameError: '',
+    fullName: '',
+    fullNameError: '',
     email: '',
     emailError: '',
     password: '',
@@ -34,7 +34,7 @@ const SubscribeScreen: React.FC = () => {
   });
 
   const isDisabled = useMemo(() => (
-    subscribeInfo.name === ''
+    subscribeInfo.fullName === ''
     || subscribeInfo.email === ''
     || subscribeInfo.password === ''
     || subscribeInfo.confirmPassword === ''
@@ -50,14 +50,18 @@ const SubscribeScreen: React.FC = () => {
   function onSubmited(event: FormEvent<Element>) {
     event.preventDefault();
     if (isValidateEmail(subscribeInfo.email)
-        && isValidateName(subscribeInfo.name)
+        && isValidateName(subscribeInfo.fullName)
         && isSamePassword(subscribeInfo.password, subscribeInfo.confirmPassword)
     ) {
-      doSubscribeRequest.mutate({ email: subscribeInfo.email, password: subscribeInfo.password });
+      doSubscribeRequest.mutate({
+        fullName: subscribeInfo.fullName,
+        email: subscribeInfo.email,
+        password: subscribeInfo.password,
+      });
     } else {
       setSubInfo({
         ...subscribeInfo,
-        nameError: !isValidateName(subscribeInfo.name) ? 'Seu nome contém números ou há espaço sobrando no começo ou no fim' : '',
+        fullNameError: !isValidateName(subscribeInfo.fullName) ? 'Seu nome contém números ou há espaço sobrando no começo ou no fim' : '',
         emailError: !isValidateEmail(subscribeInfo.email) ? 'Digite no formato certo de email' : '',
         confirmPasswordError: !isSamePassword(subscribeInfo.password, subscribeInfo.confirmPassword) ? 'As senhas não concicidem' : '',
       });
@@ -72,20 +76,20 @@ const SubscribeScreen: React.FC = () => {
       >
         Venha fazer parte dessa comunidade!
       </ApelieTextBase>
-      <form autoComplete="off" onSubmit={(event: FormEvent<Element>) => onSubmited(event)}>
+      <form onSubmit={(event: FormEvent<Element>) => onSubmited(event)}>
         <ApelieInputField
-          placeholder="Nome"
-          name="name"
-          value={subscribeInfo.name}
-          isError={subscribeInfo.nameError}
-          onChange={(event) => handleChange(event, setSubInfo)}
+          placeholder="Nome Completo"
+          name="fullName"
+          value={subscribeInfo.fullName}
+          isError={subscribeInfo.fullNameError}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setSubInfo)}
         />
         <ApelieInputField
           placeholder="Email"
           name="email"
           value={subscribeInfo.email}
           isError={subscribeInfo.emailError}
-          onChange={(event) => handleChange(event, setSubInfo)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setSubInfo)}
         />
         <ApelieInputField
           type="password"
@@ -93,7 +97,7 @@ const SubscribeScreen: React.FC = () => {
           name="password"
           value={subscribeInfo.password}
           isError={subscribeInfo.passwordError}
-          onChange={(event) => handleChange(event, setSubInfo)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setSubInfo)}
         />
         <ApelieInputField
           type="password"
@@ -101,7 +105,7 @@ const SubscribeScreen: React.FC = () => {
           name="confirmPassword"
           value={subscribeInfo.confirmPassword}
           isError={subscribeInfo.confirmPasswordError}
-          onChange={(event) => handleChange(event, setSubInfo)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setSubInfo)}
         />
         <ApelieButton type="submit" disabled={isDisabled} textColor="contrastText">
           Cadastre-se

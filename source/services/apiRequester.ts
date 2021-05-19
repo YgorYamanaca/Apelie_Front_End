@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://localhost:3000/';
+const BASE_URL = 'http://ec2-54-232-70-145.sa-east-1.compute.amazonaws.com:8080/api/';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -12,26 +12,8 @@ const apelie = axios.create({
   baseURL: BASE_URL,
 });
 
-/**
- * @description
- * baseUrl for testing requests
- */
-const test = axios.create({
-  baseURL: 'https://pokeapi.co/api/v2/',
-});
-
-/**
- * @description
- * baseUrl for testing requests
- */
-const fakeLoginLogin = axios.create({
-  baseURL: 'https://reqres.in/',
-});
-
 const ApiRequester = {
   apelie,
-  test,
-  fakeLoginLogin,
 };
 
 export default ApiRequester;

@@ -21,6 +21,9 @@ const GlobalStyle = createGlobalStyle`
     flex: 1;
     display: flex;
     flex-direction: column;
+    
+    position: relative;
+    overflow: hidden;
   }
 `;
 

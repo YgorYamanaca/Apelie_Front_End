@@ -1,11 +1,11 @@
 import React, {
-  FormEvent, useState, useMemo,
+  FormEvent, useState, useMemo, ChangeEvent,
 } from 'react';
 import ApelieInputField from '@/components/commons/ApelieInputField';
 import ApelieButton from '@/components/commons/ApelieButton';
 import { useMutation } from 'react-query';
 import ILoginInfo from '@/types/interfaces/interface-login-data';
-import { doLogin } from '@/services/fakeLoginService';
+import { doLogin } from '@/services/user';
 import handleChange from '@/utils/formUtils';
 import ApelieTextWithDivider from '@/components/commons/ApelieTextWithDivider';
 import ApelieTextBase from '@/components/commons/ApelieTextBase';
@@ -37,7 +37,6 @@ const LoginScreen: React.FC = () => {
       router.push(ApeliePageAlias.MainPage);
     },
     onError: () => {
-      router.push(ApeliePageAlias.MainPage);
     },
   });
 
@@ -64,7 +63,7 @@ const LoginScreen: React.FC = () => {
               name="email"
               value={loginInfo.email}
               isError={loginInfo.emailError}
-              onChange={(event) => handleChange(event, setLoginInfo)}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setLoginInfo)}
             />
             <ApelieInputField
               type="password"
@@ -72,7 +71,7 @@ const LoginScreen: React.FC = () => {
               name="password"
               value={loginInfo.password}
               isError={loginInfo.passwordError}
-              onChange={(event) => handleChange(event, setLoginInfo)}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setLoginInfo)}
             />
             <ApelieButton type="submit" disabled={isDisabled} textColor="contrastText">
               Entrar
