@@ -11,11 +11,13 @@ const ApelieTheme: React.FC<IApelieThemeComponent> = ({
   theme,
 }) => (
   <ApelieThemeStyle.Container urlOfBackground={theme.themeImage}>
-    <ApelieThemeStyle.TextBox>
-      <ApelieTextBase variant="subTitle">
-        {theme.themeTitle}
-      </ApelieTextBase>
-    </ApelieThemeStyle.TextBox>
+    <div>
+      <ApelieThemeStyle.TextBox>
+        <ApelieTextBase variant="subTitle">
+          {theme.themeTitle}
+        </ApelieTextBase>
+      </ApelieThemeStyle.TextBox>
+    </div>
   </ApelieThemeStyle.Container>
 );
 

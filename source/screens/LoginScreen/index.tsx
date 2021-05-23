@@ -1,5 +1,5 @@
 import React, {
-  FormEvent, useState, useMemo, ChangeEvent,
+  FormEvent, useState, useMemo, ChangeEvent, useContext,
 } from 'react';
 import ApelieInputField from '@/components/commons/ApelieInputField';
 import ApelieButton from '@/components/commons/ApelieButton';
@@ -12,6 +12,7 @@ import ApelieTextBase from '@/components/commons/ApelieTextBase';
 import { useRouter } from 'next/router';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { isValidateEmail } from '@/utils/validations';
+import { ToastContext } from '@/stores/ToastStore';
 import LoginBox from './styles';
 
 interface ILoginWithError extends ILoginInfo {
@@ -25,6 +26,7 @@ interface ILoginWithError extends ILoginInfo {
 
 const LoginScreen: React.FC = () => {
   const router = useRouter();
+  const { setToastMessage } = useContext(ToastContext);
   const [loginInfo, setLoginInfo] = useState<ILoginWithError>({
     email: '',
     emailError: '',
@@ -33,10 +35,13 @@ const LoginScreen: React.FC = () => {
   });
   const isDisabled = useMemo(() => loginInfo.email === '' || loginInfo.password === '', [loginInfo]);
   const doLoginRequest = useMutation(doLogin, {
-    onSuccess: () => {
-      router.push(ApeliePageAlias.MainPage);
+    onSuccess: (response) => {
+      if (response.status === 200) {
+        setToastMessage({ message: 'Login realizado com sucesso.', type: 'success' });
+      }
     },
     onError: () => {
+      setToastMessage({ message: 'Erro ao tentar realizar o login, confira o seus dados.', type: 'error' });
     },
   });
 
@@ -54,39 +59,36 @@ const LoginScreen: React.FC = () => {
 
   return (
     <LoginBox.Container>
-      {!doLoginRequest.isLoading
-        ? (
-          <form autoComplete="off" onSubmit={(event: FormEvent<Element>) => onSubmited(event)}>
-            <ApelieInputField
-              type="email"
-              placeholder="Email"
-              name="email"
-              value={loginInfo.email}
-              isError={loginInfo.emailError}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setLoginInfo)}
-            />
-            <ApelieInputField
-              type="password"
-              placeholder="Senha"
-              name="password"
-              value={loginInfo.password}
-              isError={loginInfo.passwordError}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setLoginInfo)}
-            />
-            <ApelieButton type="submit" disabled={isDisabled} textColor="contrastText">
-              Entrar
-            </ApelieButton>
-            <ApelieTextWithDivider text="OU" />
-            <ApelieTextBase
-              variant="paragraph1"
-            >
-              Não tem uma conta e quer se cadastrar ?
-            </ApelieTextBase>
-            <ApelieButton ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Subscribe)}>
-              Cadastre-se aqui!
-            </ApelieButton>
-          </form>
-        ) : <div>loading</div>}
+      <form autoComplete="off" onSubmit={(event: FormEvent<Element>) => onSubmited(event)}>
+        <ApelieInputField
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={loginInfo.email}
+          isError={loginInfo.emailError}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setLoginInfo)}
+        />
+        <ApelieInputField
+          type="password"
+          placeholder="Senha"
+          name="password"
+          value={loginInfo.password}
+          isError={loginInfo.passwordError}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setLoginInfo)}
+        />
+        <ApelieButton type="submit" disabled={isDisabled} textColor="contrastText">
+          Entrar
+        </ApelieButton>
+        <ApelieTextWithDivider text="OU" />
+        <ApelieTextBase
+          variant="paragraph1"
+        >
+          Não tem uma conta e quer se cadastrar ?
+        </ApelieTextBase>
+        <ApelieButton ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Subscribe)}>
+          Cadastre-se aqui!
+        </ApelieButton>
+      </form>
     </LoginBox.Container>
   );
 };

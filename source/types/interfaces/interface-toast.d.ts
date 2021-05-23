@@ -1,6 +1,8 @@
+export type ToastType = 'error' | 'success' | 'info' | 'warning';
 interface IToastObject {
   message: string,
-  type: 'error' | 'success' | 'info' | 'warning',
+  type: ToastType,
+  closeFunction?: Function;
 }
 
 export default IToastObject;

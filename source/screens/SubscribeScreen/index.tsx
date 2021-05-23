@@ -1,5 +1,5 @@
 import React, {
-  FormEvent, useState, useMemo, ChangeEvent,
+  FormEvent, useState, useMemo, ChangeEvent, useContext,
 } from 'react';
 import ApelieInputField from '@/components/commons/ApelieInputField';
 import ApelieButton from '@/components/commons/ApelieButton';
@@ -7,14 +7,23 @@ import { useMutation } from 'react-query';
 import { doRegister } from '@/services/user';
 import handleChange from '@/utils/formUtils';
 import ApelieTextBase from '@/components/commons/ApelieTextBase';
-import ISubscribeInfo from '@/types/interfaces/interface-subscribe-data';
-import { isSamePassword, isValidateEmail, isValidateName } from '@/utils/validations';
+import {
+  isSamePassword, isValidateEmail, isValidateName,
+} from '@/utils/validations';
+import { ToastContext } from '@/stores/ToastStore';
+import ISubscribeRequest from '@/types/interfaces/interface-subscribe-request';
+import { useRouter } from 'next/router';
+import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
+import toISOSimpleDate from '@/utils/date';
 import SubscribeBox from './styles';
 
-interface ISubscribeWithError extends ISubscribeInfo {
+interface ISubscribeWithError extends ISubscribeRequest {
   fullNameError: string | boolean,
   emailError: string | boolean,
+  birthDateError: string | boolean,
+  genderError: string | boolean,
   passwordError: string | boolean,
+  confirmPassword: string,
   confirmPasswordError: string | boolean,
 }
 
@@ -22,11 +31,17 @@ interface ISubscribeWithError extends ISubscribeInfo {
  * @description Content of Subscribe Screen
  */
 const SubscribeScreen: React.FC = () => {
+  const router = useRouter();
+  const { setToastMessage } = useContext(ToastContext);
   const [subscribeInfo, setSubInfo] = useState<ISubscribeWithError>({
     fullName: '',
     fullNameError: '',
     email: '',
     emailError: '',
+    birthDate: '',
+    birthDateError: '',
+    gender: '',
+    genderError: '',
     password: '',
     passwordError: '',
     confirmPassword: '',
@@ -38,12 +53,21 @@ const SubscribeScreen: React.FC = () => {
     || subscribeInfo.email === ''
     || subscribeInfo.password === ''
     || subscribeInfo.confirmPassword === ''
+    || subscribeInfo.birthDate === ''
+    || subscribeInfo.gender === ''
   ), [subscribeInfo]);
 
+  const memorizedMaxDate = useMemo(() => toISOSimpleDate(new Date()), []);
+
   const doSubscribeRequest = useMutation(doRegister, {
-    onSuccess: () => {
+    onSuccess: (response) => {
+      if (response.status === 201) {
+        setToastMessage({ message: 'Cadastro realizado com sucesso.', type: 'success' });
+        router.push(ApeliePageAlias.Login);
+      }
     },
     onError: () => {
+      setToastMessage({ message: 'Erro ao tentar realizar o cadastro.', type: 'error' });
     },
   });
 
@@ -56,6 +80,8 @@ const SubscribeScreen: React.FC = () => {
       doSubscribeRequest.mutate({
         fullName: subscribeInfo.fullName,
         email: subscribeInfo.email,
+        birthDate: subscribeInfo.birthDate,
+        gender: subscribeInfo.gender,
         password: subscribeInfo.password,
       });
     } else {
@@ -82,6 +108,22 @@ const SubscribeScreen: React.FC = () => {
           name="fullName"
           value={subscribeInfo.fullName}
           isError={subscribeInfo.fullNameError}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setSubInfo)}
+        />
+        <ApelieInputField
+          placeholder="Digite a sua data de nascimento"
+          name="birthDate"
+          type="date"
+          max={memorizedMaxDate}
+          value={subscribeInfo.birthDate}
+          isError={subscribeInfo.birthDateError}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setSubInfo)}
+        />
+        <ApelieInputField
+          placeholder="Digite o seu gênero"
+          name="gender"
+          value={subscribeInfo.gender}
+          isError={subscribeInfo.genderError}
           onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setSubInfo)}
         />
         <ApelieInputField

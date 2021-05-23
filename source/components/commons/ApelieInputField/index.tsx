@@ -3,6 +3,8 @@ import ApelieTextBase from '../ApelieTextBase';
 import InputFieldStyle from './styles';
 
 interface IInputField {
+  min?: InputHTMLAttributes<HTMLInputElement>['min'],
+  max?: InputHTMLAttributes<HTMLInputElement>['max'],
   type?: InputHTMLAttributes<HTMLInputElement>['type'],
   isError?: boolean | string,
   placeholder: string,
@@ -17,6 +19,8 @@ const ApelieInputField: React.FC<IInputField> = ({
   isError,
   name,
   value,
+  max,
+  min,
   onChange,
 }) => (
   <InputFieldStyle.Container>
@@ -34,6 +38,8 @@ const ApelieInputField: React.FC<IInputField> = ({
       name={name}
       value={value}
       onChange={onChange}
+      max={max}
+      min={min}
     />
   </InputFieldStyle.Container>
 );

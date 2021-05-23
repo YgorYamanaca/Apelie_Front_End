@@ -1,5 +1,6 @@
 import Animations from '@/utils/animations';
-import styled from 'styled-components';
+import breakpointsMedia from '@/utils/breakpointsMedia';
+import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   flex: 1;
@@ -12,6 +13,16 @@ const CarouselContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  & > div:first-child, & > div:last-child {
+    display: none;
+    ${breakpointsMedia({
+    sm: css`
+        display: flex;
+      `,
+  })}
+  }
+
 `;
 
 const TextContainer = styled.div`
@@ -29,10 +40,17 @@ const BaseContainer = styled.div<IBaseContainer>`
   position: relative;
   flex: 1;
   flex-direction: row;
-  height: ${({ baseSize }) => baseSize}px;
-  overflow: hidden;
+  height: ${({ baseSize }) => baseSize - 15}px;
   justify-content: flex-start;
   align-items: center;
+  overflow-x: scroll;
+  ${({ baseSize }) => breakpointsMedia({
+    sm: css`
+          height: ${baseSize}px;
+          overflow: hidden;
+        `,
+  })
+}
 `;
 
 const CardsContainer = styled.div`

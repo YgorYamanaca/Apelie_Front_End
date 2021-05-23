@@ -21,3 +21,10 @@ export function isVisibleOnScreen(elem: HTMLElement): boolean {
 
   return isVisible;
 }
+
+export function isValidateSubscribeDate(date: string): boolean {
+  const testDate = new Date(date);
+  const toDay = new Date();
+  const sixteenYearsAgo = new Date(toDay.getFullYear() - 16);
+  return testDate < toDay && testDate < sixteenYearsAgo;
+}
