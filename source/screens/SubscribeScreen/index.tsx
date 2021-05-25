@@ -64,10 +64,12 @@ const SubscribeScreen: React.FC = () => {
       if (response.status === 201) {
         setToastMessage({ message: 'Cadastro realizado com sucesso.', type: 'success' });
         router.push(ApeliePageAlias.Login);
+      } else {
+        const { message } = response.data;
+        if (message === 'This e-mail already exists') {
+          setToastMessage({ message: 'Esse e-mail já está cadastrado.', type: 'error' });
+        }
       }
-    },
-    onError: () => {
-      setToastMessage({ message: 'Erro ao tentar realizar o cadastro.', type: 'error' });
     },
   });
 

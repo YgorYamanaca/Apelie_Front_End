@@ -1,17 +1,17 @@
 import { AxiosResponse } from 'axios';
 import ApiRequester from './apiRequester';
 
-const getDitto = async (): Promise<AxiosResponse> => {
-  const response = await ApiRequester.apelie.get('/pokemon/ditto');
-  return response.data;
+const getStore = async (): Promise<AxiosResponse> => {
+  const response = await ApiRequester.apelie.get('/store').catch((err) => err.response);
+  return response;
 };
 
-const getPokemon = async (pokemonName: string): Promise<AxiosResponse> => {
-  const response = await ApiRequester.apelie.get(`/pokemon/${pokemonName}`);
-  return response.data;
+const getStoreById = async (id: string | number): Promise<AxiosResponse> => {
+  const response = await ApiRequester.apelie.get(`/store/${id}`).catch((err) => err.response);
+  return response;
 };
 
 export {
-  getDitto,
-  getPokemon,
+  getStore,
+  getStoreById,
 };

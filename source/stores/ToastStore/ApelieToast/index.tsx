@@ -24,7 +24,7 @@ const ApelieToastComponent: React.FC<IToastObject> = ({
         <StyleApelieToast.ToastIcon>
           {ToastIcons[type]}
         </StyleApelieToast.ToastIcon>
-        <ApelieTextBase variant="subTitle">
+        <ApelieTextBase variant="paragraph1">
           {message}
         </ApelieTextBase>
       </StyleApelieToast.TextBox>

@@ -7,6 +7,7 @@ import AccessTemplateStyles from './styles';
 const AccessTemplate: React.FC = ({ children }) => {
   const router = useRouter();
   const { toggleTheme } = useContext(AppThemeContext);
+
   return (
     <AccessTemplateStyles.Container>
       <AccessTemplateStyles.ImageContainer>

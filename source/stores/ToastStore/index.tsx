@@ -1,6 +1,6 @@
 import IToastObject from '@/types/interfaces/interface-toast';
 import React, {
-  createContext, useEffect, useState, useCallback,
+  createContext, useState, useCallback,
 } from 'react';
 import ApelieToastComponent from './ApelieToast';
 
@@ -19,12 +19,6 @@ const ApelieToastProvider: React.FC = ({ children }) => {
     },
     [TostMessageObject],
   );
-
-  useEffect(() => {
-    setTimeout(() => {
-      setToastMessage(undefined);
-    }, 7500);
-  }, [TostMessageObject]);
 
   return (
     <ToastContext.Provider value={{ setToastMessage }}>

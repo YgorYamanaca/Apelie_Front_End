@@ -38,10 +38,11 @@ const LoginScreen: React.FC = () => {
     onSuccess: (response) => {
       if (response.status === 200) {
         setToastMessage({ message: 'Login realizado com sucesso.', type: 'success' });
+        localStorage.setItem('userAuth', response.headers.authorization);
+        router.push(ApeliePageAlias.MainPage);
+      } else {
+        setToastMessage({ message: 'Erro ao tentar realizar o login, confira o seus dados.', type: 'error' });
       }
-    },
-    onError: () => {
-      setToastMessage({ message: 'Erro ao tentar realizar o login, confira o seus dados.', type: 'error' });
     },
   });
 
@@ -59,7 +60,7 @@ const LoginScreen: React.FC = () => {
 
   return (
     <LoginBox.Container>
-      <form autoComplete="off" onSubmit={(event: FormEvent<Element>) => onSubmited(event)}>
+      <form onSubmit={(event: FormEvent<Element>) => onSubmited(event)}>
         <ApelieInputField
           type="email"
           placeholder="Email"

@@ -1,10 +1,26 @@
+import IOwner from './interface-owner';
+
 interface IStore {
-  storeImageUrl: string,
-  userPhoto: string,
-  name: string,
-  description: string,
+  storeId: number,
+  owner: IOwner,
+  twitterLink: string,
+  category: string,
+  paymentMethods: Array,
+  instagramLink: string,
+  state: string,
+  facebookLink: string,
+  youtubeLink: string,
+  bannerUrl: string,
   theme: string,
-  score: number,
+  street: string,
+  city: string,
+  cep: string,
+  name: string,
+  email: string,
+  phone: string,
+  addressNumber: string,
+  neighbourhood: string,
+  rating: number,
 }
 
 export default IStore;

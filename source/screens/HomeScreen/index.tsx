@@ -1,21 +1,27 @@
-import React, { useState, useMemo, ReactNode } from 'react';
+import React, {
+  useMemo, ReactNode,
+} from 'react';
 import ApelieButton from '@/components/commons/ApelieButton';
 import ApelieCarousel from '@/components/commons/ApelieCarousel';
 import ApelieTextBase from '@/components/commons/ApelieTextBase';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { useRouter } from 'next/router';
 import IStore from '@/types/interfaces/interface-store';
-import { storeData } from '@/utils/data-test';
 import ApelieStore from '@/components/commons/ApelieStore';
 import HomeBox from './styles';
 
-const HomeScreen: React.FC = () => {
-  const [spotlightStores] = useState<IStore[]>(storeData);
+interface IHomeScreen {
+  stores: IStore[]
+}
+
+const HomeScreen: React.FC<IHomeScreen> = ({
+  stores,
+}) => {
   const router = useRouter();
 
-  const spotlightStoresElements: ReactNode[] = useMemo(() => spotlightStores.map((store, index) => (
-    <ApelieStore key={`store-${index + 1}`} id={`store-${index + 1}`} store={store} />
-  )), [spotlightStores]);
+  const spotlightStoresElements: ReactNode[] = useMemo(() => stores.map((store, index) => (
+    <ApelieStore key={`store-${index + 1}`} store={store} />
+  )), [stores]);
 
   return (
     <HomeBox.Container>
