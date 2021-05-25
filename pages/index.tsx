@@ -1,24 +1,33 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import apeliePageHOC from 'template/ApeliePageTemplate/HOC';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import HomeScreen from '@/screens/HomeScreen';
-import { useRouter } from 'next/router';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import IStore from '@/types/interfaces/interface-store';
+import ApiRequester from '@/services/apiRequester';
 
-const Home: React.FC = () => {
-  const route = useRouter();
-  useLayoutEffect(() => {
-    const userIsLogged = false;
-    if (userIsLogged) {
-      route.push(ApeliePageAlias.Login);
-    }
-  }, []);
-
-  return (
-    <>
-      <HomeScreen />
-    </>
-  );
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await ApiRequester.apelie.get('/store')
+    .then((serverResponse) => serverResponse.data)
+    .catch(() => []);
+  return {
+    props: {
+      stores: response,
+    },
+  };
 };
+
+interface IHome {
+  stores: IStore[],
+}
+
+const Home:React.FC<IHome> = ({
+  stores,
+}: InferGetStaticPropsType<typeof getStaticProps>) => (
+  <>
+    <HomeScreen stores={stores} />
+  </>
+);
 
 export default apeliePageHOC(Home, {
   apelieTemplateProps: {

@@ -8,11 +8,9 @@ interface IContainer {
 const Container = styled.div<IContainer>`
   display: flex;
   position: relative;
-  background-image: url(${({ urlOfBackground }) => urlOfBackground});
-  background-position: center;
-  background-size: cover;
   box-shadow: ${({ theme }) => theme.shadow.nivel3};
   border-radius: ${({ theme }) => theme.borderRadius};
+  background-color: ${({ theme }) => theme.colors.background.default};
   width: 180px;
   height: 175px;
   padding: 10px;
@@ -21,7 +19,7 @@ const Container = styled.div<IContainer>`
   align-items: center;
   transition: filter 0.2s ease-in-out;
   justify-content: center;
-  border: 1px solid ${({ theme }) => theme.colors.primary.alternative};
+  padding: 10px;
   :hover {
     filter: brightness(0.85);
   }
@@ -35,6 +33,15 @@ const Container = styled.div<IContainer>`
       height: 225px;
     `,
   })}
+
+  & > div {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-image: url(${({ urlOfBackground }) => urlOfBackground});
+    background-position: center;
+    background-size: cover;
+  }
 `;
 
 const TextBox = styled.div`

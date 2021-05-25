@@ -35,7 +35,7 @@ const ImageBoxHeader = styled.div`
   }
   
   ${breakpointsMedia({
-    md: css`
+    sm: css`
       align-self: flex-end;
       margin-right: 25px;
     `,

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, InputHTMLAttributes } from 'react';
 import ITypographyVariants from '@/types/interfaces/interface-typography-variants';
 import ITextColor from '@/types/interfaces/interface-text-color';
 import TextBaseStyle from './styles';
@@ -13,6 +13,9 @@ interface ITextBase {
   isError?: boolean;
   name?: string;
   value?: string;
+  className?: string;
+  min?: InputHTMLAttributes<HTMLInputElement>['min'],
+  max?: InputHTMLAttributes<HTMLInputElement>['max'],
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -22,9 +25,11 @@ const ApelieTextBase: React.FC<ITextBase> = ({
   color = 'primary',
   tag = 'span',
   children,
+  className,
   ...props
 }) => (
   <TextBaseStyle.Container
+    className={className}
     id={id}
     as={tag}
     variant={variant}

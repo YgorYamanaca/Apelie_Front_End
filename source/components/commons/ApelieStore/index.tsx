@@ -4,21 +4,19 @@ import ApelieTextBase from '../ApelieTextBase';
 import StoreStyles from './styles';
 
 interface IStoreComponent {
-  id: string,
   store: IStore,
 }
 
 const ApelieStore: React.FC<IStoreComponent> = ({
-  id,
   store,
 }) => (
-  <StoreStyles.Container id={`StoreStyles-Container-${id}`}>
+  <StoreStyles.Container id={`StoreStyles-Container-${store.storeId}`}>
     <StoreStyles.PhotoContainer>
-      <StoreStyles.StorePhotoContainer imgUrl={store.storeImageUrl}>
-        <StoreStyles.UserPhotoContainer imgUrl={store.userPhoto} />
+      <StoreStyles.StorePhotoContainer imgUrl={store.bannerUrl}>
+        <StoreStyles.UserPhotoContainer imgUrl={store.owner?.photoUrl} />
       </StoreStyles.StorePhotoContainer>
       <ApelieTextBase tag="p">
-        {`Componente de score:${store.score}`}
+        {`Componente de score:${store.rating}`}
       </ApelieTextBase>
     </StoreStyles.PhotoContainer>
     <StoreStyles.TextContainer>
@@ -26,7 +24,9 @@ const ApelieStore: React.FC<IStoreComponent> = ({
         {store.name}
       </ApelieTextBase>
       <ApelieTextBase tag="p" variant="paragraph1">
-        {store.description}
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Erat velit scelerisque in dictum.
       </ApelieTextBase>
     </StoreStyles.TextContainer>
   </StoreStyles.Container>

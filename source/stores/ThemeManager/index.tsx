@@ -10,7 +10,11 @@ import lightPalette from '@/themes/colors/LightPalette';
 
 type ITheme = 'Dark' | 'Ligth'
 
-export const AppThemeContext = createContext<Function>(() => {});
+interface IToastContext {
+  toggleTheme: () => void
+}
+
+export const AppThemeContext = createContext<IToastContext>({ toggleTheme: () => {} });
 
 const ApelieThemeProvider: React.FC = ({ children }) => {
   const [apelieTheme, setApelieTheme] = useState<ITheme>();
@@ -35,7 +39,7 @@ const ApelieThemeProvider: React.FC = ({ children }) => {
   );
 
   return (
-    <AppThemeContext.Provider value={toggleTheme}>
+    <AppThemeContext.Provider value={{ toggleTheme }}>
       <ThemeProvider
         theme={{
           colors: actualTheme,

@@ -7,7 +7,7 @@ interface IApeliePageHOC {
   apelieTemplateProps: IApeliePageTemplate
 }
 
-const apeliePageHOC = (PageComponent: React.FC, {
+const apeliePageHOC = (PageComponent: any, {
   apelieTemplateProps,
 }: IApeliePageHOC) => (props: any) => (
   <ApelieGlobalProvider>

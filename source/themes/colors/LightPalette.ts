@@ -36,7 +36,7 @@ const lightPalette: IColors = {
     primary: 'rgba(34, 34, 34, 0.87)',
     secondary: 'rgba(34, 34, 34, 0.54)',
     disabled: 'rgba(34, 34, 34, 0.38)',
-    contrastText: '#fff',
+    contrastText: 'rgba(255, 255, 255, 1)',
   },
 };
 export default lightPalette;
