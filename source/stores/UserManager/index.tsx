@@ -7,6 +7,7 @@ import { doGetUser } from '@/services/user';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
+import ApiRequester from '@/services/apiRequester';
 import { ToastContext } from '../ToastStore';
 
 interface IUserContext {
@@ -54,6 +55,13 @@ const ApelieUserProvider: React.FC = ({ children }) => {
       router.push(ApeliePageAlias.MainPage);
     }
   }, [loggedUser]);
+
+  useLayoutEffect(() => {
+    const userAuth = localStorage.getItem('userAuth');
+    if (userAuth) {
+      ApiRequester.apelie.defaults.headers.common.Authorization = userAuth;
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={{ loggedUser }}>
