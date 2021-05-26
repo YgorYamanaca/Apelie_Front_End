@@ -21,6 +21,8 @@ interface IStore {
   addressNumber: string,
   neighbourhood: string,
   rating: number,
+  description: string,
+  logoUrl: string,
 }
 
 export default IStore;

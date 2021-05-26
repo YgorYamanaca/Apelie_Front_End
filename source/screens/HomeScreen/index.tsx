@@ -28,9 +28,6 @@ const HomeScreen: React.FC<IHomeScreen> = ({
       <HomeBox.ImageBox>
         <HomeBox.ImageBoxHeader>
           <ApelieButton ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Subscribe)}>
-            Sobre
-          </ApelieButton>
-          <ApelieButton ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Subscribe)}>
             Crie a sua conta
           </ApelieButton>
           <ApelieButton ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Login)}>
