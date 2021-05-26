@@ -62,14 +62,14 @@ const ApelieCarousel: React.FC<ICarousel> = ({
           </ApelieTextBase>
         )}
       </CarouselStyle.TextContainer>
-      <CarouselStyle.CarouselContainer>
+      <CarouselStyle.CarouselContainer length={elementsList.length}>
         <IconButton
           className="First_Arrow"
           onClick={() => handleArrowClick('PREV')}
         >
           <LeftArrow />
         </IconButton>
-        <CarouselStyle.BaseContainer className="BaseContainer" baseSize={baseSizes}>
+        <CarouselStyle.BaseContainer className="BaseContainer" baseSize={baseSizes} length={elementsList.length}>
           {CarouselItem}
         </CarouselStyle.BaseContainer>
         <IconButton

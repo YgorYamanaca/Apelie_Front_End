@@ -8,21 +8,23 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const CarouselContainer = styled.div`
+interface ICarouselContainer {
+  length: number;
+}
+
+const CarouselContainer = styled.div<ICarouselContainer>`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   & > div:first-child, & > div:last-child {
     display: none;
-    ${breakpointsMedia({
+    ${({ length }) => breakpointsMedia({
     sm: css`
-        display: flex;
-      `,
+          display: ${(length > 2 ? 'flex' : 'none')};
+        `,
   })}
   }
-
 `;
 
 const TextContainer = styled.div`
@@ -32,10 +34,10 @@ const TextContainer = styled.div`
 
 interface IBaseContainer {
   baseSize: number;
+  length: number;
 }
 
 const BaseContainer = styled.div<IBaseContainer>`
-  scroll-snap-type: x mandatory; 
   display: flex;
   position: relative;
   flex: 1;
@@ -44,10 +46,11 @@ const BaseContainer = styled.div<IBaseContainer>`
   justify-content: flex-start;
   align-items: center;
   overflow-x: scroll;
-  ${({ baseSize }) => breakpointsMedia({
+  ${({ baseSize, length }) => breakpointsMedia({
     sm: css`
           height: ${baseSize}px;
           overflow: hidden;
+          justify-content: ${length > 2 ? 'flex-start' : 'center'};
         `,
   })
 }

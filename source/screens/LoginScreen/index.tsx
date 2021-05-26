@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { isValidateEmail } from '@/utils/validations';
 import { ToastContext } from '@/stores/ToastStore';
+import ApiRequester from '@/services/apiRequester';
 import LoginBox from './styles';
 
 interface ILoginWithError extends ILoginInfo {
@@ -39,6 +40,7 @@ const LoginScreen: React.FC = () => {
       if (response.status === 200) {
         setToastMessage({ message: 'Login realizado com sucesso.', type: 'success' });
         localStorage.setItem('userAuth', response.headers.authorization);
+        ApiRequester.apelie.defaults.headers.common.Authorization = response.headers.authorization;
         router.push(ApeliePageAlias.MainPage);
       } else {
         setToastMessage({ message: 'Erro ao tentar realizar o login, confira o seus dados.', type: 'error' });

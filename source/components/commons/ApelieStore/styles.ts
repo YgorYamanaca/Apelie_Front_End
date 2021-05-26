@@ -8,7 +8,7 @@ const Container = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 200px;
   height: 235px;
-  padding: 10px;
+  padding: 15px 10px;
   flex-direction: column;
   cursor: pointer;
   align-items: center;
@@ -67,6 +67,7 @@ const PhotoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
   & > :first-child {
     margin-bottom: 10px;
   }
@@ -92,8 +93,9 @@ const TextContainer = styled.div`
   }
   ${breakpointsMedia({
     md: css`
-      padding: 10px;
+      padding: 15px 10px;
       display: flex;
+      height: 100%;
       & > :last-child {
         display: flex;
       }

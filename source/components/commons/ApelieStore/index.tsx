@@ -1,5 +1,6 @@
 import IStore from '@/types/interfaces/interface-store';
 import React from 'react';
+import ApelieRating from '../ApelieRating';
 import ApelieTextBase from '../ApelieTextBase';
 import StoreStyles from './styles';
 
@@ -12,21 +13,17 @@ const ApelieStore: React.FC<IStoreComponent> = ({
 }) => (
   <StoreStyles.Container id={`StoreStyles-Container-${store.storeId}`}>
     <StoreStyles.PhotoContainer>
-      <StoreStyles.StorePhotoContainer imgUrl={store.bannerUrl}>
-        <StoreStyles.UserPhotoContainer imgUrl={store.owner?.photoUrl} />
+      <StoreStyles.StorePhotoContainer imgUrl={store.logoUrl}>
+        <StoreStyles.UserPhotoContainer imgUrl={store.owner?.photoUrl || '/images/User/default-user-image.png'} />
       </StoreStyles.StorePhotoContainer>
-      <ApelieTextBase tag="p">
-        {`Componente de score:${store.rating}`}
-      </ApelieTextBase>
+      <ApelieRating rating={store.rating} />
     </StoreStyles.PhotoContainer>
     <StoreStyles.TextContainer>
       <ApelieTextBase variant="subTitle">
         {store.name}
       </ApelieTextBase>
       <ApelieTextBase tag="p" variant="paragraph1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Erat velit scelerisque in dictum.
+        {store.description}
       </ApelieTextBase>
     </StoreStyles.TextContainer>
   </StoreStyles.Container>
