@@ -2,6 +2,7 @@ import IStore from '@/types/interfaces/interface-store';
 import React from 'react';
 import ApelieRating from '../ApelieRating';
 import ApelieTextBase from '../ApelieTextBase';
+import ApelieUserPhotoComponent from '../ApelieUserPhotoComponent';
 import StoreStyles from './styles';
 
 interface IStoreComponent {
@@ -14,7 +15,9 @@ const ApelieStore: React.FC<IStoreComponent> = ({
   <StoreStyles.Container id={`StoreStyles-Container-${store.storeId}`}>
     <StoreStyles.PhotoContainer>
       <StoreStyles.StorePhotoContainer imgUrl={store.logoUrl}>
-        <StoreStyles.UserPhotoContainer imgUrl={store.owner?.photoUrl || '/images/User/default-user-image.png'} />
+        <StoreStyles.UserPhotoContainer>
+          <ApelieUserPhotoComponent userPhotoUrl={store.owner?.photoUrl || '/images/User/default-user-image.png'} size={55} />
+        </StoreStyles.UserPhotoContainer>
       </StoreStyles.StorePhotoContainer>
       <ApelieRating rating={store.rating} />
     </StoreStyles.PhotoContainer>

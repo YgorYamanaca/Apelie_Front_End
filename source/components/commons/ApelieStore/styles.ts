@@ -52,17 +52,12 @@ const StorePhotoContainer = styled.div<IPhotoContainer>`
   })}
 `;
 
-const UserPhotoContainer = styled.div<IPhotoContainer>`
-  position: absolute;
-  width: 55px;
-  height: 55px;
-  background-image: url(${({ imgUrl }) => imgUrl});
-  background-position: center;
-  background-size: cover;
-  border-radius: 50%;
-  border: 3px solid ${({ theme }) => theme.colors.secondary.main};
-  bottom: 0;
-  right: 0;
+const UserPhotoContainer = styled.div`
+  & > div {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 `;
 
 const PhotoContainer = styled.div`

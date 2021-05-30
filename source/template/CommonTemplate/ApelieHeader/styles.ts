@@ -72,17 +72,16 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
   display: flex;
   position: absolute;
   background-color: ${({ theme }) => theme.colors.background.paper};
-  box-shadow: 0px 8px 10px -9px rgb(0 0 0 / 12%);
+  box-shadow: ${({ theme }) => theme.shadow.nivel1};
   z-index: 500;
   flex-direction: column;
   width: 100%;
   height: 0;
   justify-content: flex-start;
   top: 60px;
-  transition: height 0.3s ease-in-out;
   & > button {
-    height: ${({ headerState }) => headerState && 'auto'};
     width: fit-content;
+    align-items: center;
     color: ${({ theme }) => theme.colors.text.primary};
     margin-bottom: 15px;
     & > svg {
@@ -93,21 +92,30 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
     }
   }
   ${({ headerState }) => css`
-    padding: ${headerState && '25px 15px'};
-    height: ${headerState && '500px'};
+    padding: ${headerState && '25px 15px 5px 15px'};
+    height: ${headerState && 'auto'};
     order: ${headerState && 2};
     & > * {
       display: ${!headerState && 'none'};
     }
   `};
+  & > button:hover {
+    transition: color 0.3s ease-in-out;
+    color: ${({ theme }) => theme.colors.primary.main};
+      & > svg {
+        fill: ${({ theme }) => theme.colors.primary.main};
+        transition: fill 0.3s ease-in-out;
+    }
+  }
   ${breakpointsMedia({
     sm: css`
       padding: 0;
       display: grid;
       height: auto;
+      align-items: center;
       justify-content: center;
       background-color: transparent;
-      grid-template-columns: repeat(3, auto);
+      grid-template-columns: repeat(4, auto);
       column-gap: 15px;
       justify-content: flex-end;
       position: static;
@@ -116,6 +124,7 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
       box-shadow: none;
       & > button {
         margin-bottom: 0px;
+        height: fit-content;
       }
       & > * {
         display: flex;
@@ -131,6 +140,34 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
           margin-right: 8px;
         }
       }
+      & > button#header-change-theme-button, button#header-config-button {
+        display: none;
+      }
+    `,
+  })}
+`;
+
+const UserContainer = styled.div<IApelieHeader>`
+  display: ${({ headerState }) => (headerState ? 'flex' : 'none')};
+  align-items: center;
+  margin-top: auto;
+  column-gap: 25px;
+  padding: 15px 20px;
+  border-top: 2px solid ${({ theme }) => theme.colors.divider};
+  & > button {
+    width: fit-content;
+  }
+  & > :last-child {
+    display: flex;
+    margin-left: auto;
+  }
+  ${breakpointsMedia({
+    sm: css`
+      display: flex;
+      border: 0;
+      & > #header-user-name {
+        display: none;
+      }
     `,
   })}
 `;
@@ -141,6 +178,7 @@ const ApelieHeaderStyle = {
   LogoContainer,
   HeaderContentBox,
   HeaderExpansiveBox,
+  UserContainer,
 };
 
 export default ApelieHeaderStyle;

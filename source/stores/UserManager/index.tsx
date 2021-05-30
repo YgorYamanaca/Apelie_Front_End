@@ -1,5 +1,5 @@
 import React, {
-  createContext, useState, useLayoutEffect, useEffect, useContext,
+  createContext, useState, useLayoutEffect, useEffect, useContext, useCallback,
 } from 'react';
 import ILoggedUser from '@/types/interfaces/interface-logged-user';
 import { useMutation } from 'react-query';
@@ -12,10 +12,12 @@ import { ToastContext } from '../ToastStore';
 
 interface IUserContext {
   loggedUser: ILoggedUser | undefined,
+  doLogout: () => void,
 }
 
 export const UserContext = createContext<IUserContext>({
   loggedUser: undefined,
+  doLogout: () => {},
 });
 
 const ApelieUserProvider: React.FC = ({ children }) => {
@@ -39,6 +41,14 @@ const ApelieUserProvider: React.FC = ({ children }) => {
       }
     },
   });
+
+  const doLogout = useCallback(
+    () => {
+      setLoggedUser(undefined);
+      localStorage.removeItem('userAuth');
+    },
+    [],
+  );
 
   useLayoutEffect(() => {
     if (localStorage.getItem('userAuth')) {
@@ -64,7 +74,7 @@ const ApelieUserProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedUser }}>
+    <UserContext.Provider value={{ loggedUser, doLogout }}>
       {children}
     </UserContext.Provider>
   );

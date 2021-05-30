@@ -5,6 +5,7 @@ import ApelieTextBase from '../ApelieTextBase';
 import ButtonStyle from './styles';
 
 interface IButton {
+  id?: string,
   disabled?: boolean,
   ghost?: boolean,
   onClick?: Function,
@@ -16,6 +17,7 @@ interface IButton {
 }
 
 const ApelieButton: React.FC<IButton> = ({
+  id,
   disabled = false,
   ghost = false,
   onClick = () => {},
@@ -27,6 +29,7 @@ const ApelieButton: React.FC<IButton> = ({
   icon,
 }) => (
   <ButtonStyle.Container
+    id={id}
     disabled={disabled}
     ghost={ghost}
     buttonColor={buttonColor}
