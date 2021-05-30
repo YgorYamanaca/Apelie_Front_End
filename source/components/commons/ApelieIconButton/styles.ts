@@ -18,8 +18,6 @@ const Container = styled.div<IContainer>`
   };
   
   & > svg {
-    width: 25px;
-    height: 25px;
     fill: ${({ theme }) => theme.colors.primary.alternative};
     transition: filter 0.3s ease-in-out;
   };

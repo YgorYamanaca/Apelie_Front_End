@@ -28,8 +28,8 @@ const lightPalette: IColors = {
     alternative: 'rgba(129, 199, 132, 1)',
   },
   background: {
-    default: 'rgba(250, 250, 250, 1)',
-    paper: 'rgba(255, 255, 255, 1)',
+    default: 'rgba(255, 255, 255, 1)',
+    paper: 'rgba(250, 250, 250, 1)',
   },
   divider: 'rgba(0, 0, 0, 0.12)',
   text: {

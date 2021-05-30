@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
-import { AppThemeContext } from '@/stores/ThemeManager';
 import AccessTemplateStyles from './styles';
 
 const AccessTemplate: React.FC = ({ children }) => {
   const router = useRouter();
-  const { toggleTheme } = useContext(AppThemeContext);
 
   return (
     <AccessTemplateStyles.Container>
@@ -14,7 +12,6 @@ const AccessTemplate: React.FC = ({ children }) => {
         <AccessTemplateStyles.Image
           src="/images/Access/Access-Animated-Image.svg"
           alt="ApelieAccesseImg"
-          onClick={() => toggleTheme()}
         />
       </AccessTemplateStyles.ImageContainer>
       <AccessTemplateStyles.ChildrenContainer>

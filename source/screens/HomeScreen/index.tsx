@@ -27,10 +27,10 @@ const HomeScreen: React.FC<IHomeScreen> = ({
     <HomeBox.Container>
       <HomeBox.ImageBox>
         <HomeBox.ImageBoxHeader>
-          <ApelieButton ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Subscribe)}>
+          <ApelieButton textVariant="subTitle" ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Subscribe)}>
             Crie a sua conta
           </ApelieButton>
-          <ApelieButton ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Login)}>
+          <ApelieButton textVariant="subTitle" ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Login)}>
             Entrar
           </ApelieButton>
         </HomeBox.ImageBoxHeader>
@@ -48,7 +48,7 @@ const HomeScreen: React.FC<IHomeScreen> = ({
             <ApelieTextBase variant="title" tag="h1">
               Fique mais próximo do seu cliente
             </ApelieTextBase>
-            <ApelieTextBase variant="paragraph1">
+            <ApelieTextBase variant="paragraph1" tag="h2">
               No Apelie oferecemos um ambiente onde você encontra os mais variados tipos de produtos
               artesanais. Aqui você pode vender, comprar e conhcer novos produtos de qualidade.
             </ApelieTextBase>
@@ -62,7 +62,7 @@ const HomeScreen: React.FC<IHomeScreen> = ({
         </HomeBox.ImageBoxContent>
       </HomeBox.ImageBox>
       <HomeBox.StoresBox>
-        <ApelieCarousel elementsList={spotlightStoresElements} />
+        <ApelieCarousel id="Spot-Home-Page" elementsList={spotlightStoresElements} />
       </HomeBox.StoresBox>
     </HomeBox.Container>
   );

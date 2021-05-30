@@ -10,7 +10,7 @@ const Container = styled.div`
 const PageSection = styled.section`
   display: flex;
   padding-bottom: 5px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.divider};
   margin-top: 20px;
   ${breakpointsMedia({
     md: css`

@@ -8,7 +8,7 @@ interface IContainer {
 const Container = styled.div<IContainer>`
   display: flex;
   position: relative;
-  box-shadow: ${({ theme }) => theme.shadow.nivel3};
+  box-shadow: ${({ theme }) => theme.shadow.nivel1};
   border-radius: ${({ theme }) => theme.borderRadius};
   background-color: ${({ theme }) => theme.colors.background.default};
   width: 180px;
@@ -17,11 +17,12 @@ const Container = styled.div<IContainer>`
   flex-direction: column;
   cursor: pointer;
   align-items: center;
-  transition: filter 0.2s ease-in-out;
   justify-content: center;
   padding: 10px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   :hover {
-    filter: brightness(0.85);
+    transform: scale(1.03);
+    box-shadow: ${({ theme }) => theme.shadow.nivel3};
   }
 
   ${breakpointsMedia({
@@ -53,6 +54,10 @@ const TextBox = styled.div`
   background-color: ${({ theme }) => theme.colors.primary.alternative};
   padding: 2px 5px;
   border: 1px solid ${({ theme }) => theme.colors.secondary.main};
+  user-select: none;
+  & > :first-child {
+    color: ${({ theme }) => theme.colors.text.contrastText};
+  }
 `;
 
 const ApelieThemeStyle = {

@@ -1,10 +1,20 @@
 import React from 'react';
 
-const RightArrow: React.FC = () => (
+interface IIcon {
+  width?: string,
+  height?: string,
+}
+
+const RightArrowIcon: React.FC<IIcon> = ({
+  width = '35',
+  height = '35',
+}) => (
   <svg
     version="1.1"
     id="Layer_1"
     xmlns="http://www.w3.org/2000/svg"
+    width={`${width}px`}
+    height={`${height}px`}
     x="0px"
     y="0px"
     viewBox="0 0 492.004 492.004"
@@ -22,4 +32,4 @@ const RightArrow: React.FC = () => (
   </svg>
 );
 
-export default RightArrow;
+export default RightArrowIcon;

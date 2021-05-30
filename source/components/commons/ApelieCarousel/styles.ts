@@ -28,10 +28,15 @@ const CarouselContainer = styled.div<ICarouselContainer>`
 `;
 
 const TextContainer = styled.div`
-  padding: 0 35px;
-  padding-top: 10px;
+  padding: 0 5px;
+  ${breakpointsMedia({
+    md: css`
+        padding-top: 10px;
+        padding: 0 35px;
+      `,
+  })
+}
 `;
-
 interface IBaseContainer {
   baseSize: number;
   length: number;

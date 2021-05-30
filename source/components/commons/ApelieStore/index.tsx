@@ -19,7 +19,7 @@ const ApelieStore: React.FC<IStoreComponent> = ({
       <ApelieRating rating={store.rating} />
     </StoreStyles.PhotoContainer>
     <StoreStyles.TextContainer>
-      <ApelieTextBase variant="subTitle">
+      <ApelieTextBase tag="h1" variant="subTitle">
         {store.name}
       </ApelieTextBase>
       <ApelieTextBase tag="p" variant="paragraph1">

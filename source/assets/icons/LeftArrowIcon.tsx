@@ -1,12 +1,22 @@
 import React from 'react';
 
-const LeftArrow: React.FC = () => (
+interface IIcon {
+  width?: string,
+  height?: string,
+}
+
+const LeftArrowIcon: React.FC<IIcon> = ({
+  width = '35',
+  height = '35',
+}) => (
   <svg
     version="1.1"
     id="Layer_1"
     xmlns="http://www.w3.org/2000/svg"
     x="0px"
     y="0px"
+    width={`${width}px`}
+    height={`${height}px`}
     viewBox="0 0 492 492"
     xmlSpace="preserve"
   >
@@ -22,4 +32,4 @@ const LeftArrow: React.FC = () => (
   </svg>
 );
 
-export default LeftArrow;
+export default LeftArrowIcon;

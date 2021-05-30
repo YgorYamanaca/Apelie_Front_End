@@ -1,6 +1,6 @@
 import StarEmptyIcon from '@/assets/icons/StarEmptyIcon';
 import StarFillIcon from '@/assets/icons/StarFillIcon';
-import React, { useMemo } from 'react';
+import React, { useMemo, memo } from 'react';
 import ApelieTextBase from '../ApelieTextBase';
 import StyleApelieRating from './styles';
 
@@ -33,4 +33,4 @@ const ApelieRating: React.FunctionComponent<IApelieRating> = ({
   );
 };
 
-export default ApelieRating;
+export default memo(ApelieRating);

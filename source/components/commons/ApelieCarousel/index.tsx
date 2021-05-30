@@ -1,19 +1,21 @@
-import LeftArrow from '@/assets/icons/LeftArrow';
-import RightArrow from '@/assets/icons/RightArrow';
+import LeftArrowIcon from '@/assets/icons/LeftArrowIcon';
+import RightArrowIcon from '@/assets/icons/RightArrowIcon';
 import React, {
-  useMemo, ReactNode, useState, useEffect,
+  useMemo, ReactNode, useState, useLayoutEffect,
 } from 'react';
 import CarouselStyle from './styles';
 import IconButton from '../ApelieIconButton';
 import ApelieTextBase from '../ApelieTextBase';
 
 interface ICarousel {
+  id: string,
   carouselTitle?: string,
   elementsList: ReactNode[],
   baseSizes?: number,
 }
 
 const ApelieCarousel: React.FC<ICarousel> = ({
+  id,
   carouselTitle,
   elementsList,
   baseSizes = 275,
@@ -26,8 +28,8 @@ const ApelieCarousel: React.FC<ICarousel> = ({
     <CarouselStyle.CardsContainer>
       {elementsList.map((itens, index) => (
         <CarouselStyle.Card
-          key={`Card-${index + 1}`}
-          id={`Card-${index + 1}`}
+          key={`Carousel-Card-${index + 1}`}
+          id={`${id}-Card-${index + 1}`}
         >
           {itens}
         </CarouselStyle.Card>
@@ -45,19 +47,22 @@ const ApelieCarousel: React.FC<ICarousel> = ({
     }
   }
 
-  useEffect(() => {
-    const element = document.getElementById(`Card-${selectedFlow}`);
-    element?.scrollIntoView({
-      inline: selectedFlow === LAST_INDEX || selectedFlow === FIRST_INDEX ? 'start' : 'center',
-      behavior: 'smooth',
-    });
+  useLayoutEffect(() => {
+    const element = document.getElementById(`${id}-Card-${selectedFlow}`);
+    if (element) {
+      element.scrollIntoView({
+        block: 'center',
+        inline: selectedFlow === LAST_INDEX || selectedFlow === FIRST_INDEX ? 'start' : 'center',
+        behavior: 'smooth',
+      });
+    }
   }, [selectedFlow]);
 
   return (
-    <CarouselStyle.Container>
+    <CarouselStyle.Container id={`${id}-Carousel`}>
       <CarouselStyle.TextContainer>
         {carouselTitle && (
-          <ApelieTextBase variant="title">
+          <ApelieTextBase variant="title" tag="h1">
             {carouselTitle}
           </ApelieTextBase>
         )}
@@ -67,7 +72,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
           className="First_Arrow"
           onClick={() => handleArrowClick('PREV')}
         >
-          <LeftArrow />
+          <LeftArrowIcon />
         </IconButton>
         <CarouselStyle.BaseContainer className="BaseContainer" baseSize={baseSizes} length={elementsList.length}>
           {CarouselItem}
@@ -76,7 +81,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
           className="Last_Arrow"
           onClick={() => handleArrowClick('NEXT')}
         >
-          <RightArrow />
+          <RightArrowIcon />
         </IconButton>
       </CarouselStyle.CarouselContainer>
     </CarouselStyle.Container>
