@@ -16,7 +16,10 @@ const ApelieStore: React.FC<IStoreComponent> = ({
     <StoreStyles.PhotoContainer>
       <StoreStyles.StorePhotoContainer imgUrl={store.logoUrl}>
         <StoreStyles.UserPhotoContainer>
-          <ApelieUserPhotoComponent userPhotoUrl={store.owner?.photoUrl || '/images/User/default-user-image.png'} size={55} />
+          <ApelieUserPhotoComponent
+            userPhotoUrl={store.owner?.photoUrl || '/images/User/default-user-image.png'}
+            size={65}
+          />
         </StoreStyles.UserPhotoContainer>
       </StoreStyles.StorePhotoContainer>
       <ApelieRating rating={store.rating} />

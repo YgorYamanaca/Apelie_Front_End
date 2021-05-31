@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 
 interface IApelieHeader {
   headerState: boolean,
-  menuLength?: number,
 }
 
 const Container = styled.header<IApelieHeader>`
@@ -110,13 +109,11 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
   ${breakpointsMedia({
     sm: css`
       padding: 0;
-      display: grid;
+      display: flex;
       height: auto;
       align-items: center;
       justify-content: center;
       background-color: transparent;
-      grid-template-columns: repeat(4, auto);
-      column-gap: 15px;
       justify-content: flex-end;
       position: static;
       order: 1;
@@ -140,7 +137,7 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
           margin-right: 8px;
         }
       }
-      & > button#header-change-theme-button, button#header-config-button {
+      & > button#header-change-theme-button, button#header-config-button,  button#header-logout-button{
         display: none;
       }
     `,
@@ -150,9 +147,9 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
 const UserContainer = styled.div<IApelieHeader>`
   display: ${({ headerState }) => (headerState ? 'flex' : 'none')};
   align-items: center;
+  padding: 15px 20px;
   margin-top: auto;
   column-gap: 25px;
-  padding: 15px 20px;
   border-top: 2px solid ${({ theme }) => theme.colors.divider};
   & > button {
     width: fit-content;
@@ -161,15 +158,46 @@ const UserContainer = styled.div<IApelieHeader>`
     display: flex;
     margin-left: auto;
   }
+  & > :first-child {
+    display: flex;
+    position: relative;
+  }
   ${breakpointsMedia({
     sm: css`
       display: flex;
       border: 0;
-      & > #header-user-name {
+      column-gap: 25px;
+      & > #header-user-name, #verify-login-user-button {
         display: none;
       }
     `,
   })}
+`;
+
+const ExpansiveMenu = styled.div`
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.background.default};
+  flex-direction: column;
+  border: 1px solid ${({ theme }) => theme.colors.divider};
+  box-shadow: ${({ theme }) => theme.shadow.nivel1};
+  padding: 5px;
+  top: 45px;
+  right: 0;
+  width: 175px;
+  align-items: flex-start;
+  & > button#header-change-theme-button, button#header-config-button,  button#header-logout-button{
+    display: flex;
+    color: ${({ theme }) => theme.colors.text.primary};
+  }
+  & > button {
+    width: fit-content;
+    margin: 10px 5px;
+  }
+  & > button > svg {
+    margin-right: 10px;
+  }
 `;
 
 const ApelieHeaderStyle = {
@@ -179,6 +207,7 @@ const ApelieHeaderStyle = {
   HeaderContentBox,
   HeaderExpansiveBox,
   UserContainer,
+  ExpansiveMenu,
 };
 
 export default ApelieHeaderStyle;

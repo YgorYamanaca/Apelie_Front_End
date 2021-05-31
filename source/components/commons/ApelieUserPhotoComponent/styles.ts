@@ -13,6 +13,7 @@ const Container = styled.div<IStyleApelieUserPhoto>`
   background-size: cover;
   border-radius: 50%;
   border: 3px solid ${({ theme }) => theme.colors.secondary.main};
+  cursor: pointer;
 `;
 
 const StyleApelieUserPhoto = {

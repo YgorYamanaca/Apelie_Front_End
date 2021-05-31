@@ -15,17 +15,19 @@ import { AppThemeContext } from '@/stores/ThemeManager';
 import { UserContext } from '@/stores/UserManager';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyledProps, withTheme } from 'styled-components';
 import ApelieHeaderStyle from './styles';
 
 const ApelieHeader: React.FC<StyledProps<{}>> = ({
   theme,
 }) => {
-  const [isMenuClose, setMenuState] = useState(false);
+  const [isMenuClose, setIsMenuClose] = useState(false);
   const { actualTheme, toggleTheme } = useContext(AppThemeContext);
   const { loggedUser, doLogout } = useContext(UserContext);
   const router = useRouter();
+  const [isUserPhotoMenuOpen, setIsUserPhotoMenuOpen] = useState(true);
+
   const HeaderContent = [
     <ApelieButton
       id="header-carry-bag-button"
@@ -85,7 +87,7 @@ const ApelieHeader: React.FC<StyledProps<{}>> = ({
           <img id="mobile-logo" src="https://placehold.co/150x45?text=Logo" alt="apelieLogo" />
           <img id="desktop-logo" src="https://placehold.co/200x55?text=Logo" alt="apelieLogo" />
         </ApelieHeaderStyle.LogoContainer>
-        <ApelieHeaderStyle.HeaderIcon onClick={() => setMenuState(!isMenuClose)}>
+        <ApelieHeaderStyle.HeaderIcon onClick={() => setIsMenuClose(!isMenuClose)}>
           {isMenuClose
             ? <CloseIcon id="close-icon" fill={theme.colors.text.primary} />
             : <MenuButtonIcon id="menu-icon" />}
@@ -93,11 +95,22 @@ const ApelieHeader: React.FC<StyledProps<{}>> = ({
       </ApelieHeaderStyle.HeaderContentBox>
       <ApelieHeaderStyle.HeaderExpansiveBox
         headerState={isMenuClose}
-        menuLength={HeaderContent.length}
       >
         {HeaderContent.map((headerContent) => headerContent)}
         <ApelieHeaderStyle.UserContainer headerState={isMenuClose}>
-          <ApelieUserPhotoComponent userPhotoUrl={loggedUser?.photoUrl || '/images/User/default-user-image.png'} size={55} />
+          <ApelieUserPhotoComponent
+            userPhotoUrl={loggedUser?.photoUrl || '/images/User/default-user-image.png'}
+            size={45}
+            onMouseOnclickAction={() => setIsUserPhotoMenuOpen(!isUserPhotoMenuOpen)}
+          >
+            {isUserPhotoMenuOpen && (
+              <ApelieHeaderStyle.ExpansiveMenu>
+                {HeaderContent.slice(HeaderContent.length - 3, HeaderContent.length).map(
+                  (headerContent) => headerContent,
+                )}
+              </ApelieHeaderStyle.ExpansiveMenu>
+            )}
+          </ApelieUserPhotoComponent>
           {loggedUser?.fullName && (
             <ApelieTextBase id="header-user-name" variant="paragraph1">
               {loggedUser?.fullName}
@@ -110,7 +123,7 @@ const ApelieHeader: React.FC<StyledProps<{}>> = ({
               </ApelieButton>
             )}
           <ApelieIconButton color={theme.colors.text.primary}>
-            <ShoppingCart id="header-shopping-card" width="35" height="35" />
+            <ShoppingCart id="header-shopping-card" width="30" height="30" />
           </ApelieIconButton>
         </ApelieHeaderStyle.UserContainer>
       </ApelieHeaderStyle.HeaderExpansiveBox>
