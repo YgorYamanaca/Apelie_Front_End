@@ -2,7 +2,7 @@ import React from 'react';
 import { withTheme, StyledProps } from 'styled-components';
 
 interface IIcon {
-  id: string,
+  id?: string,
   width?: string,
   height?: string,
   fill?: string,
