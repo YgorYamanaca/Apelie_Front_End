@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 interface IContainer {
-  disabled: boolean
+  disabled: boolean,
+  color?: string,
 }
 
 const Container = styled.div<IContainer>`
@@ -18,9 +19,7 @@ const Container = styled.div<IContainer>`
   };
   
   & > svg {
-    width: 25px;
-    height: 25px;
-    fill: ${({ theme }) => theme.colors.primary.alternative};
+    fill: ${({ theme, color }) => (color || theme.colors.primary.alternative)};
     transition: filter 0.3s ease-in-out;
   };
 

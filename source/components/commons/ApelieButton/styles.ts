@@ -7,6 +7,8 @@ interface IButtonStyle {
 }
 
 const Container = styled.button<IButtonStyle>`
+  display: flex;
+  justify-content: center;
   width: 100%;
   outline: none;
   border: 0;

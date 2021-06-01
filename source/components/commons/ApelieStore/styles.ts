@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 const Container = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.colors.background.default};
-  box-shadow: ${({ theme }) => theme.shadow.nivel3};
+  box-shadow: ${({ theme }) => theme.shadow.nivel1};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 200px;
   height: 235px;
@@ -12,9 +12,11 @@ const Container = styled.div`
   flex-direction: column;
   cursor: pointer;
   align-items: center;
-  transition: filter 0.2s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  user-select: none;
   :hover {
-    filter: brightness(0.90);
+    transform: scale(1.03);
+    box-shadow: ${({ theme }) => theme.shadow.nivel3};
   }
 
   ${breakpointsMedia({
@@ -50,17 +52,12 @@ const StorePhotoContainer = styled.div<IPhotoContainer>`
   })}
 `;
 
-const UserPhotoContainer = styled.div<IPhotoContainer>`
-  position: absolute;
-  width: 55px;
-  height: 55px;
-  background-image: url(${({ imgUrl }) => imgUrl});
-  background-position: center;
-  background-size: cover;
-  border-radius: 50%;
-  border: 3px solid ${({ theme }) => theme.colors.secondary.main};
-  bottom: 0;
-  right: 0;
+const UserPhotoContainer = styled.div`
+  & > div {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 `;
 
 const PhotoContainer = styled.div`
@@ -85,6 +82,7 @@ const TextContainer = styled.div`
   flex: 1.1;
   flex-direction: column;
   & > :first-child {
+    margin: 15px 0;
     text-align: center;
   }
   & > :last-child {

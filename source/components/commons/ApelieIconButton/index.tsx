@@ -3,6 +3,7 @@ import IconButtonStyle from './styles';
 
 type IconButtonType = {
   disabled?: boolean;
+  color?: string;
   className?: string;
   children: ReactNode;
   onClick?: Function;
@@ -10,6 +11,7 @@ type IconButtonType = {
 
 const ApelieIconButton: React.FC<IconButtonType> = ({
   disabled = false,
+  color,
   className,
   children,
   onClick,
@@ -17,6 +19,7 @@ const ApelieIconButton: React.FC<IconButtonType> = ({
   <IconButtonStyle.Container
     disabled={disabled}
     className={className}
+    color={color}
     onClick={() => onClick && onClick()}
   >
     {children}

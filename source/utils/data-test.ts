@@ -3,35 +3,27 @@ import IApelieTheme from '@/types/interfaces/interface-apelie-theme';
 const themeData: IApelieTheme[] = [
   {
     themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
-    themeTitle: 'Theme1',
+    themeTitle: 'Comida',
   },
   {
     themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
-    themeTitle: 'Theme2',
+    themeTitle: 'Decoração',
   },
   {
     themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
-    themeTitle: 'Theme3',
+    themeTitle: 'Cerâmica',
   },
   {
     themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
-    themeTitle: 'Theme4',
+    themeTitle: 'Téxtil',
   },
   {
     themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
-    themeTitle: 'Theme5',
+    themeTitle: 'Renda',
   },
   {
     themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
-    themeTitle: 'Theme6',
-  },
-  {
-    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
-    themeTitle: 'Theme7',
-  },
-  {
-    themeImage: 'https://aberturasimples.com.br/wp-content/uploads/2018/02/loja-de-artesanato.jpg',
-    themeTitle: 'Theme8',
+    themeTitle: 'Cestaria',
   },
 ];
 

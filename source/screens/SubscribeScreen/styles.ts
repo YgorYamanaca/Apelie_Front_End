@@ -7,6 +7,7 @@ const Container = styled.div`
   flex-direction: column;
   & > :first-child {
     text-align: center;
+    margin: 15px 0;
   }
 
   & > :last-child > :last-child {

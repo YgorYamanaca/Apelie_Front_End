@@ -11,6 +11,7 @@ import lightPalette from '@/themes/colors/LightPalette';
 type ITheme = 'Dark' | 'Ligth'
 
 interface IToastContext {
+  actualTheme?: ITheme,
   toggleTheme: () => void
 }
 
@@ -39,7 +40,7 @@ const ApelieThemeProvider: React.FC = ({ children }) => {
   );
 
   return (
-    <AppThemeContext.Provider value={{ toggleTheme }}>
+    <AppThemeContext.Provider value={{ actualTheme: apelieTheme, toggleTheme }}>
       <ThemeProvider
         theme={{
           colors: actualTheme,

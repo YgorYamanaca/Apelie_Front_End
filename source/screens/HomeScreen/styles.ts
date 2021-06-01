@@ -24,16 +24,15 @@ const ImageBox = styled.div`
 `;
 
 const ImageBoxHeader = styled.div`
-  display: grid;
+  display: flex;
   width: fit-content;
   align-self: center;
-  grid-template-columns: repeat(3, auto);
   justify-content: center;
   column-gap: 35px;
-  & > ApelieButton {
+  & > button {
     width: fit-content;
   }
-  
+
   ${breakpointsMedia({
     sm: css`
       align-self: flex-end;
@@ -93,11 +92,23 @@ const ImageBoxCenterContent = styled.div`
   grid-column: span 2;
   text-align: center;
   animation: ${Animations.fadein} 0.3s ease-in;
+  & > h1 {
+    margin: 15px 0;
+  }
+  & > h2 {
+    margin: 5px 0;
+  }
   ${breakpointsMedia({
     md: css`
       order: 0;
       grid-column: span 1;
       padding: 0 65px;
+      & > h1 {
+        margin: 25px 0;
+      }
+      & > h2 {
+        margin: 25px;
+      }
     `,
   })}
 `;
