@@ -101,7 +101,11 @@ const ApelieHeader: React.FC<StyledProps<{}>> = ({
           <ApelieUserPhotoComponent
             userPhotoUrl={loggedUser?.photoUrl || '/images/User/default-user-image.png'}
             size={45}
-            onMouseOnclickAction={() => setIsUserPhotoMenuOpen(!isUserPhotoMenuOpen)}
+            onMouseOnclickAction={
+              () => (loggedUser
+                ? !isMenuClose && setIsUserPhotoMenuOpen(!isUserPhotoMenuOpen)
+                : router.push(ApeliePageAlias.Login))
+            }
           >
             {isUserPhotoMenuOpen && (
               <ApelieHeaderStyle.ExpansiveMenu>
