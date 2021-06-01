@@ -197,6 +197,17 @@ const ExpansiveMenu = styled.div`
   }
   & > button > svg {
     margin-right: 10px;
+    fill: ${({ theme }) => theme.colors.text.primary};
+  }
+  & > button:hover {
+    & > span {
+      color: ${({ theme }) => theme.colors.primary.main};
+      transition: color 0.3s ease-in-out;
+    }
+      & > svg {
+        fill: ${({ theme }) => theme.colors.primary.main};
+        transition: fill 0.3s ease-in-out;
+    }
   }
 `;
 
