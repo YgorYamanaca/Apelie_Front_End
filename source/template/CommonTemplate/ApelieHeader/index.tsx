@@ -26,7 +26,7 @@ const ApelieHeader: React.FC<StyledProps<{}>> = ({
   const { actualTheme, toggleTheme } = useContext(AppThemeContext);
   const { loggedUser, doLogout } = useContext(UserContext);
   const router = useRouter();
-  const [isUserPhotoMenuOpen, setIsUserPhotoMenuOpen] = useState(true);
+  const [isUserPhotoMenuOpen, setIsUserPhotoMenuOpen] = useState(false);
 
   const HeaderContent = [
     <ApelieButton
