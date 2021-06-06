@@ -15,7 +15,7 @@ import { AppThemeContext } from '@/stores/ThemeManager';
 import { UserContext } from '@/stores/UserManager';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { useRouter } from 'next/router';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyledProps, withTheme } from 'styled-components';
 import Image from 'next/image';
 import ApelieHeaderStyle from './styles';
