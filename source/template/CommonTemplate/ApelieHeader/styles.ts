@@ -28,19 +28,19 @@ const Container = styled.header<IApelieHeader>`
 
 const LogoContainer = styled.div`
   display: flex;
-  & > img#mobile-logo {
+  & > div#mobile-logo {
     display: flex;
   }
-  & > img#desktop-logo {
+  & > div#desktop-logo {
     display: none;
   }
 
   ${breakpointsMedia({
     sm: css`
-      & > img#mobile-logo {
+      & > div#mobile-logo {
         display: none;
       }
-      & > img#desktop-logo {
+      & > div#desktop-logo {
         display: flex;
       }
     `,

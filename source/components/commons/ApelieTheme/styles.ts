@@ -11,7 +11,7 @@ const Container = styled.div<IContainer>`
   box-shadow: ${({ theme }) => theme.shadow.nivel1};
   border-radius: ${({ theme }) => theme.borderRadius};
   background-color: ${({ theme }) => theme.colors.background.default};
-  width: 180px;
+  width: 225px;
   height: 175px;
   padding: 10px;
   flex-direction: column;
@@ -30,8 +30,7 @@ const Container = styled.div<IContainer>`
       align-content: center;
       flex-direction: row;
       margin: 0 35px;
-      width: 375px;
-      height: 225px;
+      width: 295px;
     `,
   })}
 

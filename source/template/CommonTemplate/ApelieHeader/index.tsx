@@ -15,7 +15,7 @@ import { AppThemeContext } from '@/stores/ThemeManager';
 import { UserContext } from '@/stores/UserManager';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyledProps, withTheme } from 'styled-components';
 import Image from 'next/image';
 import ApelieHeaderStyle from './styles';
@@ -85,8 +85,12 @@ const ApelieHeader: React.FC<StyledProps<{}>> = ({
     <ApelieHeaderStyle.Container headerState={isMenuClose}>
       <ApelieHeaderStyle.HeaderContentBox>
         <ApelieHeaderStyle.LogoContainer>
-          <Image id="mobile-logo" src="/images/Apelie/logo.png" alt="apelieLogo" width={100} height={50} />
-          <Image id="desktop-logo" src="/images/Apelie/logo.png" alt="apelieLogo" width={125} height={65} />
+          <div id="mobile-logo">
+            <Image src="/images/Apelie/logo.png" alt="apelieMobileLogo" width={100} height={50} />
+          </div>
+          <div id="desktop-logo">
+            <Image src="/images/Apelie/logo.png" alt="apelieDesktopLogo" width={125} height={65} />
+          </div>
         </ApelieHeaderStyle.LogoContainer>
         <ApelieHeaderStyle.HeaderIcon onClick={() => setIsMenuClose(!isMenuClose)}>
           {isMenuClose

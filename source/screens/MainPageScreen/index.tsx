@@ -26,7 +26,7 @@ const MainPageScreen: React.FC = () => {
   return (
     <MainPageScreenStyle.Container>
       <MainPageScreenStyle.PageSection>
-        <ApelieCarousel id="Category" carouselTitle="Categorias" elementsList={themes} baseSizes={250} />
+        <ApelieCarousel id="Category" carouselTitle="Categorias" elementsList={themes} baseSizes={215} />
       </MainPageScreenStyle.PageSection>
       <MainPageScreenStyle.PageSection>
         <ApelieFlexBox flexBoxTitle="Lojas">
