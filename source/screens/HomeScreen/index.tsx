@@ -8,6 +8,7 @@ import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { useRouter } from 'next/router';
 import IStore from '@/types/interfaces/interface-store';
 import ApelieStore from '@/components/commons/ApelieStore';
+import Image from 'next/image';
 import HomeBox from './styles';
 
 interface IHomeScreen {
@@ -35,7 +36,7 @@ const HomeScreen: React.FC<IHomeScreen> = ({
           </ApelieButton>
         </HomeBox.ImageBoxHeader>
         <HomeBox.ImageBoxContent>
-          <img
+          <Image
             src="/images/Home/Home-Animated-Image1.svg"
             alt="ApelieHomeImg1"
             height={350}
@@ -43,7 +44,7 @@ const HomeScreen: React.FC<IHomeScreen> = ({
           />
           <HomeBox.ImageBoxCenterContent>
             <div>
-              <img height={55} width={200} src="https://placehold.co/200x55?text=Logo" alt="ApelieLogo" />
+              <Image height={100} width={200} src="/images/Apelie/logo.png" alt="ApelieLogo" />
             </div>
             <ApelieTextBase variant="title" tag="h1">
               Fique mais próximo do seu cliente
@@ -53,7 +54,7 @@ const HomeScreen: React.FC<IHomeScreen> = ({
               artesanais. Aqui você pode vender, comprar e conhcer novos produtos de qualidade.
             </ApelieTextBase>
           </HomeBox.ImageBoxCenterContent>
-          <img
+          <Image
             src="/images/Home/Home-Animated-Image2.svg"
             alt="ApelieHomeImg2"
             height={350}

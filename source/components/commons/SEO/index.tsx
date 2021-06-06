@@ -11,6 +11,7 @@ const SEO: React.FC<ISEO> = ({ pageTitle, url }) => {
   return (
     <NextHead>
       <title>{title}</title>
+      <link rel="Apelie Icon" href="/images/Apelie/icone.png" />
       <meta name="title" content={title} />
       <meta name="description" content={description} />
       <meta property="og:type" content="website" />

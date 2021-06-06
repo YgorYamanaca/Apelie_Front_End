@@ -43,7 +43,7 @@ const LoginScreen: React.FC = () => {
         ApiRequester.apelie.defaults.headers.common.Authorization = response.headers.authorization;
         router.push(ApeliePageAlias.MainPage);
       } else {
-        setToastMessage({ message: 'Erro ao tentar realizar o login, confira o seus dados.', type: 'error' });
+        setToastMessage({ message: 'Erro ao tentar realizar o login, confira os seus dados.', type: 'error' });
       }
     },
   });

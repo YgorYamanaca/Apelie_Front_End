@@ -127,6 +127,8 @@ const ChildrenBox = styled.div`
 
 const Logo = styled.img`
   cursor: pointer;
+  width: 200px;
+  height: 100px;
 `;
 
 const AccessTemplateStyles = {

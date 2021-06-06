@@ -7,7 +7,6 @@ const Container = styled.div`
   box-shadow: ${({ theme }) => theme.shadow.nivel1};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 200px;
-  height: 235px;
   padding: 15px 10px;
   flex-direction: column;
   cursor: pointer;
@@ -25,7 +24,6 @@ const Container = styled.div`
       flex-direction: row;
       margin: 0 35px;
       width: 450px;
-      height: 250px;
     `,
   })}
 `;

@@ -17,6 +17,7 @@ import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
 import { StyledProps, withTheme } from 'styled-components';
+import Image from 'next/image';
 import ApelieHeaderStyle from './styles';
 
 const ApelieHeader: React.FC<StyledProps<{}>> = ({
@@ -84,8 +85,8 @@ const ApelieHeader: React.FC<StyledProps<{}>> = ({
     <ApelieHeaderStyle.Container headerState={isMenuClose}>
       <ApelieHeaderStyle.HeaderContentBox>
         <ApelieHeaderStyle.LogoContainer>
-          <img id="mobile-logo" src="https://placehold.co/150x45?text=Logo" alt="apelieLogo" />
-          <img id="desktop-logo" src="https://placehold.co/200x55?text=Logo" alt="apelieLogo" />
+          <Image id="mobile-logo" src="/images/Apelie/logo.png" alt="apelieLogo" width={100} height={50} />
+          <Image id="desktop-logo" src="/images/Apelie/logo.png" alt="apelieLogo" width={125} height={65} />
         </ApelieHeaderStyle.LogoContainer>
         <ApelieHeaderStyle.HeaderIcon onClick={() => setIsMenuClose(!isMenuClose)}>
           {isMenuClose

@@ -18,7 +18,7 @@ const AccessTemplate: React.FC = ({ children }) => {
         <AccessTemplateStyles.ChildrenBox>
           <div>
             <AccessTemplateStyles.Logo
-              src="https://placehold.co/200x55?text=Logo"
+              src="/images/Apelie/logo.png"
               alt="ApelieLogo"
               onClick={() => router.push(ApeliePageAlias.Home)}
             />

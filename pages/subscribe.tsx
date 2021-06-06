@@ -12,7 +12,7 @@ const Subscribe: React.FC = () => (
 export default apeliePageHOC(Subscribe, {
   apelieTemplateProps: {
     SEOProps: {
-      pageTitle: 'Página de inscrição Apelie',
+      pageTitle: 'Página de inscrição - Apelie',
       url: ApeliePageAlias.Subscribe,
     },
     PAGEProps: {
