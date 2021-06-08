@@ -80,7 +80,7 @@ const TextContainer = styled.div`
   flex: 1.1;
   flex-direction: column;
   & > :first-child {
-    margin: 15px 0;
+    margin: 10px 0;
     text-align: center;
   }
   & > :last-child {

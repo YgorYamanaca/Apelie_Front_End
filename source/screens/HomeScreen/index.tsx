@@ -63,7 +63,7 @@ const HomeScreen: React.FC<IHomeScreen> = ({
         </HomeBox.ImageBoxContent>
       </HomeBox.ImageBox>
       <HomeBox.StoresBox>
-        <ApelieCarousel id="Spot-Home-Page" elementsList={spotlightStoresElements} />
+        <ApelieCarousel id="Spot-Home-Page" elementsList={spotlightStoresElements} baseSizes={300} />
       </HomeBox.StoresBox>
     </HomeBox.Container>
   );

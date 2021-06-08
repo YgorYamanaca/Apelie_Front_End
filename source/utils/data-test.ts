@@ -18,7 +18,7 @@ const themeData: IApelieTheme[] = [
     themeTitle: 'Téxtil',
   },
   {
-    themeImage: 'https://blog.maximustecidos.com.br/wp-content/uploads/2020/07/O-que-e-renda-artesanal-2.jpg',
+    themeImage: 'https://cearacultural.com.br/artesanato/imagens/Artesanato-renda.png',
     themeTitle: 'Renda',
   },
   {
