@@ -64,12 +64,12 @@ const ImageBoxContent = styled.div`
     max-height: 125px;
     user-select: none;
     ${breakpointsMedia({
-      md: css`
+    md: css`
         max-width: 350px;
         max-height: 350px;
         align-self: center;
       `,
-    })}
+  })}
   }
   & > img:first-child {
     animation: ${Animations.leftToRight} 0.3s ease-in-out;

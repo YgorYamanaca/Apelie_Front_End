@@ -13,9 +13,8 @@ interface ITextBaseStyle {
 const Container = styled.span<ITextBaseStyle>`
   margin: 0;
   ${({ variant }) => TextStyleVariantsMap[variant]};
-  ${({ theme, color }) =>
-    color !== 'none' &&
-    css`
+  ${({ theme, color }) => color !== 'none'
+    && css`
       color: ${get(theme, `colors.text.${color}`)};
     `};
   &::placeholder {

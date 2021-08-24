@@ -20,12 +20,11 @@ const CarouselContainer = styled.div<ICarouselContainer>`
   & > div:first-child,
   & > div:last-child {
     display: none;
-    ${({ length }) =>
-      breakpointsMedia({
-        sm: css`
+    ${({ length }) => breakpointsMedia({
+    sm: css`
           display: ${length > 2 ? 'flex' : 'none'};
         `,
-      })}
+  })}
   }
 `;
 
@@ -52,14 +51,13 @@ const BaseContainer = styled.div<IBaseContainer>`
   justify-content: flex-start;
   align-items: center;
   overflow-x: scroll;
-  ${({ baseSize, length }) =>
-    breakpointsMedia({
-      sm: css`
+  ${({ baseSize, length }) => breakpointsMedia({
+    sm: css`
         height: ${baseSize}px;
         overflow: hidden;
         justify-content: ${length > 2 ? 'flex-start' : 'center'};
       `,
-    })}
+  })}
 `;
 
 const CardsContainer = styled.div`

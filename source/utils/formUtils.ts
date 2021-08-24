@@ -6,7 +6,7 @@ import { ChangeEvent } from 'react';
  */
 export default function handleChange(
   event: ChangeEvent<HTMLInputElement>,
-  setState: Function
+  setState: any,
 ) {
   const fieldName = event.target.getAttribute('name')?.toString();
   setState((prevState: any) => ({

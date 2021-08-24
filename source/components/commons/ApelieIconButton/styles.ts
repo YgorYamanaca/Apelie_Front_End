@@ -27,9 +27,8 @@ const Container = styled.div<IContainer>`
     transform: scale(0.97, 0.97);
   }
 
-  ${({ disabled }) =>
-    disabled &&
-    css`
+  ${({ disabled }) => disabled
+    && css`
       filter: brightness(0.5);
       pointer-events: none;
     `}
