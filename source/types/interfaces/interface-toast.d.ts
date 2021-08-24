@@ -1,7 +1,7 @@
 export type ToastType = 'error' | 'success' | 'info' | 'warning';
 interface IToastObject {
-  message: string,
-  type: ToastType,
+  message: string;
+  type: ToastType;
   closeFunction?: VoidFunction;
 }
 

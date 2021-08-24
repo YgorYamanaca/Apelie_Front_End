@@ -1,5 +1,9 @@
 import React, {
-  FormEvent, useState, useMemo, ChangeEvent, useContext,
+  FormEvent,
+  useState,
+  useMemo,
+  ChangeEvent,
+  useContext,
 } from 'react';
 import ApelieInputField from '@/components/commons/ApelieInputField';
 import ApelieButton from '@/components/commons/ApelieButton';
@@ -17,8 +21,8 @@ import ApiRequester from '@/services/apiRequester';
 import LoginBox from './styles';
 
 interface ILoginWithError extends ILoginInfo {
-  emailError: string,
-  passwordError: string,
+  emailError: string;
+  passwordError: string;
 }
 
 /**
@@ -34,16 +38,25 @@ const LoginScreen: React.FC = () => {
     password: '',
     passwordError: '',
   });
-  const isDisabled = useMemo(() => loginInfo.email === '' || loginInfo.password === '', [loginInfo]);
+  const isDisabled = useMemo(
+    () => loginInfo.email === '' || loginInfo.password === '',
+    [loginInfo],
+  );
   const doLoginRequest = useMutation(doLogin, {
     onSuccess: (response) => {
       if (response.status === 200) {
-        setToastMessage({ message: 'Login realizado com sucesso.', type: 'success' });
+        setToastMessage({
+          message: 'Login realizado com sucesso.',
+          type: 'success',
+        });
         localStorage.setItem('userAuth', response.headers.authorization);
         ApiRequester.apelie.defaults.headers.common.Authorization = response.headers.authorization;
         router.push(ApeliePageAlias.MainPage);
       } else {
-        setToastMessage({ message: 'Erro ao tentar realizar o login, confira os seus dados.', type: 'error' });
+        setToastMessage({
+          message: 'Erro ao tentar realizar o login, confira os seus dados.',
+          type: 'error',
+        });
       }
     },
   });
@@ -51,7 +64,10 @@ const LoginScreen: React.FC = () => {
   function onSubmited(event: FormEvent<Element>) {
     event.preventDefault();
     if (isValidateEmail(loginInfo.email)) {
-      doLoginRequest.mutate({ email: loginInfo.email, password: loginInfo.password });
+      doLoginRequest.mutate({
+        email: loginInfo.email,
+        password: loginInfo.password,
+      });
     } else {
       setLoginInfo({
         ...loginInfo,
@@ -79,16 +95,22 @@ const LoginScreen: React.FC = () => {
           isError={loginInfo.passwordError}
           onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setLoginInfo)}
         />
-        <ApelieButton type="submit" disabled={isDisabled} textColor="contrastText">
+        <ApelieButton
+          type="submit"
+          disabled={isDisabled}
+          textColor="contrastText"
+        >
           Entrar
         </ApelieButton>
         <ApelieTextWithDivider text="OU" />
-        <ApelieTextBase
-          variant="paragraph1"
-        >
+        <ApelieTextBase variant="paragraph1">
           Não tem uma conta e quer se cadastrar ?
         </ApelieTextBase>
-        <ApelieButton ghost buttonColor="primary" onClick={() => router.push(ApeliePageAlias.Subscribe)}>
+        <ApelieButton
+          ghost
+          buttonColor="primary"
+          onClick={() => router.push(ApeliePageAlias.Subscribe)}
+        >
           Cadastre-se aqui!
         </ApelieButton>
       </form>

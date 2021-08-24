@@ -5,7 +5,8 @@ const Container = styled.div`
   position: relative;
   flex: 1;
   align-items: center;
-  & > svg:not(:first-child), svg:not(:last-child) {
+  & > svg:not(:first-child),
+  svg:not(:last-child) {
     margin: 0 2.5px;
   }
 
@@ -23,7 +24,7 @@ const Container = styled.div`
     user-select: none;
     white-space: nowrap;
   }
-  
+
   :hover {
     & > div :first-child {
       opacity: 0;

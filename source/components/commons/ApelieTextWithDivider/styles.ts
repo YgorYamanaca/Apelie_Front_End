@@ -2,7 +2,7 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 import styled, { css } from 'styled-components';
 
 const Container = styled.div`
-  display:flex;
+  display: flex;
   width: 100%;
   position: relative;
   justify-content: center;

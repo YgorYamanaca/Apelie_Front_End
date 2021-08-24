@@ -1,5 +1,10 @@
 import React, {
-  createContext, useState, useLayoutEffect, useEffect, useContext, useCallback,
+  createContext,
+  useState,
+  useLayoutEffect,
+  useEffect,
+  useContext,
+  useCallback,
 } from 'react';
 import ILoggedUser from '@/types/interfaces/interface-logged-user';
 import { useMutation } from 'react-query';
@@ -11,13 +16,13 @@ import ApiRequester from '@/services/apiRequester';
 import { ToastContext } from '../ToastStore';
 
 interface IUserContext {
-  loggedUser: ILoggedUser | undefined,
-  doLogout: () => void,
+  loggedUser: ILoggedUser | undefined;
+  doLogout: () => void;
 }
 
 export const UserContext = createContext<IUserContext>({
   loggedUser: undefined,
-  doLogout: () => {},
+  doLogout: () => '',
 });
 
 const ApelieUserProvider: React.FC = ({ children }) => {
@@ -37,18 +42,18 @@ const ApelieUserProvider: React.FC = ({ children }) => {
       if (response.status === 200) {
         setLoggedUser(getUserType(response.data));
       } else {
-        setToastMessage({ message: 'Não foi possível obter os dados do usuário.', type: 'error' });
+        setToastMessage({
+          message: 'Não foi possível obter os dados do usuário.',
+          type: 'error',
+        });
       }
     },
   });
 
-  const doLogout = useCallback(
-    () => {
-      setLoggedUser(undefined);
-      localStorage.removeItem('userAuth');
-    },
-    [],
-  );
+  const doLogout = useCallback(() => {
+    setLoggedUser(undefined);
+    localStorage.removeItem('userAuth');
+  }, []);
 
   useLayoutEffect(() => {
     if (localStorage.getItem('userAuth')) {
@@ -57,14 +62,15 @@ const ApelieUserProvider: React.FC = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (loggedUser
+    if (
+      loggedUser
       && (router.pathname === ApeliePageAlias.Home
-      || router.pathname === ApeliePageAlias.Login
-      || router.pathname === ApeliePageAlias.Subscribe
-      )) {
+        || router.pathname === ApeliePageAlias.Login
+        || router.pathname === ApeliePageAlias.Subscribe)
+    ) {
       router.push(ApeliePageAlias.MainPage);
     }
-  }, [loggedUser]);
+  }, [loggedUser, router]);
 
   useLayoutEffect(() => {
     const userAuth = localStorage.getItem('userAuth');

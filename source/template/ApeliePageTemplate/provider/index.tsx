@@ -6,13 +6,11 @@ import ApelieUserProvider from '@/stores/UserManager';
 
 const queryClient = new QueryClient();
 
-const ApelieGlobalProvider:React.FC = ({ children }) => (
+const ApelieGlobalProvider: React.FC = ({ children }) => (
   <QueryClientProvider client={queryClient}>
     <ApelieThemeProvider>
       <ApelieToastProvider>
-        <ApelieUserProvider>
-          {children}
-        </ApelieUserProvider>
+        <ApelieUserProvider>{children}</ApelieUserProvider>
       </ApelieToastProvider>
     </ApelieThemeProvider>
   </QueryClientProvider>

@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
 interface IContainer {
-  disabled: boolean,
-  color?: string,
+  disabled: boolean;
+  color?: string;
 }
 
 const Container = styled.div<IContainer>`
@@ -11,26 +11,28 @@ const Container = styled.div<IContainer>`
   align-items: center;
   border-radius: 50%;
   height: 35px;
-  width :35px;
+  width: 35px;
   cursor: pointer;
   user-select: none;
-  &:hover{
+  &:hover {
     filter: brightness(1.5);
-  };
-  
-  & > svg {
-    fill: ${({ theme, color }) => (color || theme.colors.primary.alternative)};
-    transition: filter 0.3s ease-in-out;
-  };
-
-  &:active{
-    transform: scale(0.97,0.97);
   }
 
-  ${({ disabled }) => disabled && css`
-    filter: brightness(0.5);
-    pointer-events: none;
-  `}
+  & > svg {
+    fill: ${({ theme, color }) => color || theme.colors.primary.alternative};
+    transition: filter 0.3s ease-in-out;
+  }
+
+  &:active {
+    transform: scale(0.97, 0.97);
+  }
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      filter: brightness(0.5);
+      pointer-events: none;
+    `}
 `;
 
 const IconButtonStyle = {

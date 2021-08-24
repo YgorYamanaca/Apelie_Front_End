@@ -29,7 +29,7 @@ const Container = styled.div`
 `;
 
 interface IPhotoContainer {
-  imgUrl: string
+  imgUrl: string;
 }
 
 const StorePhotoContainer = styled.div<IPhotoContainer>`
@@ -44,9 +44,9 @@ const StorePhotoContainer = styled.div<IPhotoContainer>`
 
   ${breakpointsMedia({
     md: css`
-        width: 145px;
-        height: 145px;
-      `,
+      width: 145px;
+      height: 145px;
+    `,
   })}
 `;
 

@@ -20,9 +20,7 @@ import { StyledProps, withTheme } from 'styled-components';
 import Image from 'next/image';
 import ApelieHeaderStyle from './styles';
 
-const ApelieHeader: React.FC<StyledProps<{}>> = ({
-  theme,
-}) => {
+const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
   const [isMenuClose, setIsMenuClose] = useState(false);
   const { actualTheme, toggleTheme } = useContext(AppThemeContext);
   const { loggedUser, doLogout } = useContext(UserContext);
@@ -68,16 +66,16 @@ const ApelieHeader: React.FC<StyledProps<{}>> = ({
       Configurações
     </ApelieButton>,
     loggedUser && (
-    <ApelieButton
-      key="header-logout-button"
-      id="header-logout-button"
-      textVariant="paragraph1"
-      icon={<LogoutIcon />}
-      onClick={() => doLogout()}
-      ghost
-    >
-      Sair
-    </ApelieButton>
+      <ApelieButton
+        key="header-logout-button"
+        id="header-logout-button"
+        textVariant="paragraph1"
+        icon={<LogoutIcon />}
+        onClick={() => doLogout()}
+        ghost
+      >
+        Sair
+      </ApelieButton>
     ),
   ];
 
@@ -86,37 +84,50 @@ const ApelieHeader: React.FC<StyledProps<{}>> = ({
       <ApelieHeaderStyle.HeaderContentBox>
         <ApelieHeaderStyle.LogoContainer>
           <div id="mobile-logo">
-            <Image src="/images/Apelie/logo.png" alt="apelieMobileLogo" width={100} height={50} />
+            <Image
+              src="/images/Apelie/logo.png"
+              alt="apelieMobileLogo"
+              width={100}
+              height={50}
+            />
           </div>
           <div id="desktop-logo">
-            <Image src="/images/Apelie/logo.png" alt="apelieDesktopLogo" width={125} height={65} />
+            <Image
+              src="/images/Apelie/logo.png"
+              alt="apelieDesktopLogo"
+              width={125}
+              height={65}
+            />
           </div>
         </ApelieHeaderStyle.LogoContainer>
-        <ApelieHeaderStyle.HeaderIcon onClick={() => setIsMenuClose(!isMenuClose)}>
-          {isMenuClose
-            ? <CloseIcon id="close-icon" fill={theme.colors.text.primary} />
-            : <MenuButtonIcon id="menu-icon" />}
+        <ApelieHeaderStyle.HeaderIcon
+          onClick={() => setIsMenuClose(!isMenuClose)}
+        >
+          {isMenuClose ? (
+            <CloseIcon id="close-icon" fill={theme.colors.text.primary} />
+          ) : (
+            <MenuButtonIcon id="menu-icon" />
+          )}
         </ApelieHeaderStyle.HeaderIcon>
       </ApelieHeaderStyle.HeaderContentBox>
-      <ApelieHeaderStyle.HeaderExpansiveBox
-        headerState={isMenuClose}
-      >
+      <ApelieHeaderStyle.HeaderExpansiveBox headerState={isMenuClose}>
         {HeaderContent.map((headerContent) => headerContent)}
         <ApelieHeaderStyle.UserContainer headerState={isMenuClose}>
           <ApelieUserPhotoComponent
-            userPhotoUrl={loggedUser?.photoUrl || '/images/User/default-user-image.png'}
-            size={45}
-            onMouseOnclickAction={
-              () => (loggedUser
-                ? !isMenuClose && setIsUserPhotoMenuOpen(!isUserPhotoMenuOpen)
-                : router.push(ApeliePageAlias.Login))
+            userPhotoUrl={
+              loggedUser?.photoUrl || '/images/User/default-user-image.png'
             }
+            size={45}
+            onMouseOnclickAction={() => (loggedUser
+              ? !isMenuClose && setIsUserPhotoMenuOpen(!isUserPhotoMenuOpen)
+              : router.push(ApeliePageAlias.Login))}
           >
             {isUserPhotoMenuOpen && (
               <ApelieHeaderStyle.ExpansiveMenu>
-                {HeaderContent.slice(HeaderContent.length - 3, HeaderContent.length).map(
-                  (headerContent) => headerContent,
-                )}
+                {HeaderContent.slice(
+                  HeaderContent.length - 3,
+                  HeaderContent.length,
+                ).map((headerContent) => headerContent)}
               </ApelieHeaderStyle.ExpansiveMenu>
             )}
           </ApelieUserPhotoComponent>
@@ -125,12 +136,16 @@ const ApelieHeader: React.FC<StyledProps<{}>> = ({
               {loggedUser?.fullName}
             </ApelieTextBase>
           )}
-          {!loggedUser
-            && (
-              <ApelieButton id="verify-login-user-button" textVariant="subTitle" ghost onClick={() => router.push(ApeliePageAlias.Login)}>
-                Entrar
-              </ApelieButton>
-            )}
+          {!loggedUser && (
+            <ApelieButton
+              id="verify-login-user-button"
+              textVariant="subTitle"
+              ghost
+              onClick={() => router.push(ApeliePageAlias.Login)}
+            >
+              Entrar
+            </ApelieButton>
+          )}
           <ApelieIconButton color={theme.colors.text.primary}>
             <ShoppingCart id="header-shopping-card" width="30" height="30" />
           </ApelieIconButton>

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 interface IStyleApelieUserPhoto {
-  imgUrl: string,
-  size: number
+  imgUrl: string;
+  size: number;
 }
 
 const Container = styled.div<IStyleApelieUserPhoto>`

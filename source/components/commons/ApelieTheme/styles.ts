@@ -2,7 +2,7 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 import styled, { css } from 'styled-components';
 
 interface IContainer {
-  urlOfBackground: string,
+  urlOfBackground: string;
 }
 
 const Container = styled.div<IContainer>`

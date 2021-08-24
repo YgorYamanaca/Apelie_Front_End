@@ -5,9 +5,9 @@ import ITypographyVariants from './interface-typography-variants';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    readonly colors: IColors,
-    readonly shadow: IShadow,
-    readonly borderRadius: string,
-    readonly typography: ITypographyVariants,
+    readonly colors: IColors;
+    readonly shadow: IShadow;
+    readonly borderRadius: string;
+    readonly typography: ITypographyVariants;
   }
 }

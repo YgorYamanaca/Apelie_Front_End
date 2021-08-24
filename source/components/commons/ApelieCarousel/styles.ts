@@ -17,13 +17,15 @@ const CarouselContainer = styled.div<ICarouselContainer>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  & > div:first-child, & > div:last-child {
+  & > div:first-child,
+  & > div:last-child {
     display: none;
-    ${({ length }) => breakpointsMedia({
-    sm: css`
-          display: ${(length > 2 ? 'flex' : 'none')};
+    ${({ length }) =>
+      breakpointsMedia({
+        sm: css`
+          display: ${length > 2 ? 'flex' : 'none'};
         `,
-  })}
+      })}
   }
 `;
 
@@ -31,11 +33,10 @@ const TextContainer = styled.div`
   padding: 0 5px;
   ${breakpointsMedia({
     md: css`
-        padding-top: 10px;
-        padding: 0 35px;
-      `,
-  })
-}
+      padding-top: 10px;
+      padding: 0 35px;
+    `,
+  })}
 `;
 interface IBaseContainer {
   baseSize: number;
@@ -51,14 +52,14 @@ const BaseContainer = styled.div<IBaseContainer>`
   justify-content: flex-start;
   align-items: center;
   overflow-x: scroll;
-  ${({ baseSize, length }) => breakpointsMedia({
-    sm: css`
-          height: ${baseSize}px;
-          overflow: hidden;
-          justify-content: ${length > 2 ? 'flex-start' : 'center'};
-        `,
-  })
-}
+  ${({ baseSize, length }) =>
+    breakpointsMedia({
+      sm: css`
+        height: ${baseSize}px;
+        overflow: hidden;
+        justify-content: ${length > 2 ? 'flex-start' : 'center'};
+      `,
+    })}
 `;
 
 const CardsContainer = styled.div`

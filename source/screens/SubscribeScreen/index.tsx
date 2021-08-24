@@ -1,5 +1,9 @@
 import React, {
-  FormEvent, useState, useMemo, ChangeEvent, useContext,
+  FormEvent,
+  useState,
+  useMemo,
+  ChangeEvent,
+  useContext,
 } from 'react';
 import ApelieInputField from '@/components/commons/ApelieInputField';
 import ApelieButton from '@/components/commons/ApelieButton';
@@ -8,7 +12,9 @@ import { doRegister } from '@/services/user';
 import handleChange from '@/utils/formUtils';
 import ApelieTextBase from '@/components/commons/ApelieTextBase';
 import {
-  isSamePassword, isValidateEmail, isValidateName,
+  isSamePassword,
+  isValidateEmail,
+  isValidateName,
 } from '@/utils/validations';
 import { ToastContext } from '@/stores/ToastStore';
 import ISubscribeRequest from '@/types/interfaces/interface-subscribe-request';
@@ -18,13 +24,13 @@ import toISOSimpleDate from '@/utils/date';
 import SubscribeBox from './styles';
 
 interface ISubscribeWithError extends ISubscribeRequest {
-  fullNameError: string | boolean,
-  emailError: string | boolean,
-  birthDateError: string | boolean,
-  genderError: string | boolean,
-  passwordError: string | boolean,
-  confirmPassword: string,
-  confirmPasswordError: string | boolean,
+  fullNameError: string | boolean;
+  emailError: string | boolean;
+  birthDateError: string | boolean;
+  genderError: string | boolean;
+  passwordError: string | boolean;
+  confirmPassword: string;
+  confirmPasswordError: string | boolean;
 }
 
 /**
@@ -48,33 +54,41 @@ const SubscribeScreen: React.FC = () => {
     confirmPasswordError: '',
   });
 
-  const isDisabled = useMemo(() => (
-    subscribeInfo.fullName === ''
-    || subscribeInfo.email === ''
-    || subscribeInfo.password === ''
-    || subscribeInfo.confirmPassword === ''
-    || subscribeInfo.birthDate === ''
-    || subscribeInfo.gender === ''
-  ), [subscribeInfo]);
+  const isDisabled = useMemo(
+    () => subscribeInfo.fullName === ''
+      || subscribeInfo.email === ''
+      || subscribeInfo.password === ''
+      || subscribeInfo.confirmPassword === ''
+      || subscribeInfo.birthDate === ''
+      || subscribeInfo.gender === '',
+    [subscribeInfo],
+  );
 
   const memorizedMaxDate = useMemo(() => toISOSimpleDate(new Date()), []);
 
   const doSubscribeRequest = useMutation(doRegister, {
     onSuccess: (response) => {
       if (response.status === 201) {
-        setToastMessage({ message: 'Cadastro realizado com sucesso.', type: 'success' });
+        setToastMessage({
+          message: 'Cadastro realizado com sucesso.',
+          type: 'success',
+        });
         router.push(ApeliePageAlias.Login);
       } else if (response.status === 409) {
-        setToastMessage({ message: 'Esse e-mail já está cadastrado.', type: 'error' });
+        setToastMessage({
+          message: 'Esse e-mail já está cadastrado.',
+          type: 'error',
+        });
       }
     },
   });
 
   function onSubmited(event: FormEvent<Element>) {
     event.preventDefault();
-    if (isValidateEmail(subscribeInfo.email)
-        && isValidateName(subscribeInfo.fullName)
-        && isSamePassword(subscribeInfo.password, subscribeInfo.confirmPassword)
+    if (
+      isValidateEmail(subscribeInfo.email)
+      && isValidateName(subscribeInfo.fullName)
+      && isSamePassword(subscribeInfo.password, subscribeInfo.confirmPassword)
     ) {
       doSubscribeRequest.mutate({
         fullName: subscribeInfo.fullName,
@@ -86,19 +100,25 @@ const SubscribeScreen: React.FC = () => {
     } else {
       setSubInfo({
         ...subscribeInfo,
-        fullNameError: !isValidateName(subscribeInfo.fullName) ? 'Seu nome contém números ou há espaço sobrando no começo ou no fim' : '',
-        emailError: !isValidateEmail(subscribeInfo.email) ? 'Digite no formato certo de email' : '',
-        confirmPasswordError: !isSamePassword(subscribeInfo.password, subscribeInfo.confirmPassword) ? 'As senhas não concicidem' : '',
+        fullNameError: !isValidateName(subscribeInfo.fullName)
+          ? 'Seu nome contém números ou há espaço sobrando no começo ou no fim'
+          : '',
+        emailError: !isValidateEmail(subscribeInfo.email)
+          ? 'Digite no formato certo de email'
+          : '',
+        confirmPasswordError: !isSamePassword(
+          subscribeInfo.password,
+          subscribeInfo.confirmPassword,
+        )
+          ? 'As senhas não concicidem'
+          : '',
       });
     }
   }
 
   return (
     <SubscribeBox.Container>
-      <ApelieTextBase
-        tag="h1"
-        variant="subTitle"
-      >
+      <ApelieTextBase tag="h1" variant="subTitle">
         Venha fazer parte dessa comunidade!
       </ApelieTextBase>
       <form onSubmit={(event: FormEvent<Element>) => onSubmited(event)}>
@@ -148,11 +168,16 @@ const SubscribeScreen: React.FC = () => {
           isError={subscribeInfo.confirmPasswordError}
           onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setSubInfo)}
         />
-        <ApelieButton type="submit" disabled={isDisabled} textColor="contrastText">
+        <ApelieButton
+          type="submit"
+          disabled={isDisabled}
+          textColor="contrastText"
+        >
           Cadastre-se
         </ApelieButton>
         <ApelieTextBase variant="smallException" tag="p">
-          Ao se cadastrar, você concorda com nossos Termos, Política de Dados e Política de Cookies.
+          Ao se cadastrar, você concorda com nossos Termos, Política de Dados e
+          Política de Cookies.
         </ApelieTextBase>
       </form>
     </SubscribeBox.Container>

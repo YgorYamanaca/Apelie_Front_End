@@ -15,18 +15,28 @@ const MainPageScreen: React.FC = () => {
   const [apelieThemes] = useState<IApelieTheme[]>(themeData);
 
   const mainPageStores = useMemo(
-    () => (data && data.data.map((store: IStore, index: number) => <ApelieStore key={`ApelieStore-${index + 1}`} store={store} />)) || [],
+    () => (data
+        && data.data.map((store: IStore, index: number) => (
+          <ApelieStore key={`ApelieStore-${index + 1}`} store={store} />
+        )))
+      || [],
     [data],
   );
 
-  const themes = useMemo(() => apelieThemes.map((apelieTheme) => (
-    <ApelieTheme theme={apelieTheme} />
-  )), [apelieThemes]);
+  const themes = useMemo(
+    () => apelieThemes.map((apelieTheme) => <ApelieTheme theme={apelieTheme} />),
+    [apelieThemes],
+  );
 
   return (
     <MainPageScreenStyle.Container>
       <MainPageScreenStyle.PageSection>
-        <ApelieCarousel id="Category" carouselTitle="Categorias" elementsList={themes} baseSizes={215} />
+        <ApelieCarousel
+          id="Category"
+          carouselTitle="Categorias"
+          elementsList={themes}
+          baseSizes={215}
+        />
       </MainPageScreenStyle.PageSection>
       <MainPageScreenStyle.PageSection>
         <ApelieFlexBox flexBoxTitle="Lojas">

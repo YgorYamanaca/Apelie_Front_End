@@ -2,9 +2,9 @@ import React from 'react';
 import { withTheme, StyledProps } from 'styled-components';
 
 interface IIcon {
-  id: string,
-  width?: string,
-  height?: string,
+  id: string;
+  width?: string;
+  height?: string;
 }
 
 const MenuButtonIcon: React.FC<StyledProps<IIcon>> = ({

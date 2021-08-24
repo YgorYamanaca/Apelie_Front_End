@@ -2,8 +2,8 @@ import React from 'react';
 import { withTheme, StyledProps } from 'styled-components';
 
 interface IIcon {
-  width?: string,
-  height?: string,
+  width?: string;
+  height?: string;
 }
 
 const CheckIcon: React.FC<StyledProps<IIcon>> = ({

@@ -2,7 +2,7 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 import styled, { css } from 'styled-components';
 
 interface IApelieHeader {
-  headerState: boolean,
+  headerState: boolean;
 }
 
 const Container = styled.header<IApelieHeader>`
@@ -101,9 +101,9 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
   & > button:hover {
     transition: color 0.3s ease-in-out;
     color: ${({ theme }) => theme.colors.primary.main};
-      & > svg {
-        fill: ${({ theme }) => theme.colors.primary.main};
-        transition: fill 0.3s ease-in-out;
+    & > svg {
+      fill: ${({ theme }) => theme.colors.primary.main};
+      transition: fill 0.3s ease-in-out;
     }
   }
   ${breakpointsMedia({
@@ -137,7 +137,9 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
           margin-right: 8px;
         }
       }
-      & > button#header-change-theme-button, button#header-config-button,  button#header-logout-button{
+      & > button#header-change-theme-button,
+      button#header-config-button,
+      button#header-logout-button {
         display: none;
       }
     `,
@@ -167,7 +169,8 @@ const UserContainer = styled.div<IApelieHeader>`
       display: flex;
       border: 0;
       column-gap: 25px;
-      & > #header-user-name, #verify-login-user-button {
+      & > #header-user-name,
+      #verify-login-user-button {
         display: none;
       }
     `,
@@ -187,7 +190,9 @@ const ExpansiveMenu = styled.div`
   right: 0;
   width: 175px;
   align-items: flex-start;
-  & > button#header-change-theme-button, button#header-config-button,  button#header-logout-button{
+  & > button#header-change-theme-button,
+  button#header-config-button,
+  button#header-logout-button {
     display: flex;
     color: ${({ theme }) => theme.colors.text.primary};
   }
@@ -204,9 +209,9 @@ const ExpansiveMenu = styled.div`
       color: ${({ theme }) => theme.colors.primary.main};
       transition: color 0.3s ease-in-out;
     }
-      & > svg {
-        fill: ${({ theme }) => theme.colors.primary.main};
-        transition: fill 0.3s ease-in-out;
+    & > svg {
+      fill: ${({ theme }) => theme.colors.primary.main};
+      transition: fill 0.3s ease-in-out;
     }
   }
 `;

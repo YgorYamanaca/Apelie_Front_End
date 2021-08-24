@@ -2,7 +2,7 @@ import breakpoints from '@/themes/breakpoints';
 import IBreakpoints from '@/types/interfaces/interface-breakpoints';
 import { useEffect, useState } from 'react';
 
-const useIsMobile = (breakpoint: keyof IBreakpoints):boolean => {
+const useIsMobile = (breakpoint: keyof IBreakpoints): boolean => {
   const [width, setWidth] = useState(0);
   useEffect(() => {
     const handleResize = (): void => setWidth(window.innerWidth);

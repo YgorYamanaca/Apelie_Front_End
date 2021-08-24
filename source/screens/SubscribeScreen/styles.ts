@@ -2,7 +2,7 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 import styled, { css } from 'styled-components';
 
 const Container = styled.div`
-  display:flex;
+  display: flex;
   flex: 1;
   flex-direction: column;
   & > :first-child {
@@ -17,8 +17,7 @@ const Container = styled.div`
     md: css`
       margin: 25px 15px 0 15px;
     `,
-  })
-}
+  })}
   }
 `;
 

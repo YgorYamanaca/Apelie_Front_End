@@ -5,17 +5,23 @@ import { CSSProp } from 'styled-components';
 import breakpointsMedia from './breakpointsMedia';
 
 export type IPropToStyle = {
-  [cssKey in keyof CSSProperties]?: CSSProperties[cssKey] |
-  {[key in keyof IBreakpoints]?: CSSProperties[cssKey]};
-}
+  [cssKey in keyof CSSProperties]?:
+    | CSSProperties[cssKey]
+    | { [key in keyof IBreakpoints]?: CSSProperties[cssKey] };
+};
 
 /**
  * @todo Ver a necessidade de utilização
-*/
+ */
 export function propToStyle(propName: keyof IPropToStyle) {
-  return (props: IPropToStyle): CSSProp | {[key in keyof CSSProperties]?: CSSProperties[key]} => {
-    const propValue: string | number | undefined |
-    {[key in keyof IBreakpoints]?: CSSProperties[keyof CSSProperties]} = props[propName];
+  return (
+    props: IPropToStyle,
+  ): CSSProp | { [key in keyof CSSProperties]?: CSSProperties[key] } => {
+    const propValue:
+      | string
+      | number
+      | undefined
+      | { [key in keyof IBreakpoints]?: CSSProperties[keyof CSSProperties] } = props[propName];
     if (typeof propValue === 'object') {
       return breakpointsMedia({
         xs: {

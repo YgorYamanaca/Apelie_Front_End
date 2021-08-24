@@ -8,10 +8,10 @@ import IconButton from '../ApelieIconButton';
 import ApelieTextBase from '../ApelieTextBase';
 
 interface ICarousel {
-  id: string,
-  carouselTitle?: string,
-  elementsList: ReactNode[],
-  baseSizes?: number,
+  id: string;
+  carouselTitle?: string;
+  elementsList: ReactNode[];
+  baseSizes?: number;
 }
 
 const ApelieCarousel: React.FC<ICarousel> = ({
@@ -24,18 +24,21 @@ const ApelieCarousel: React.FC<ICarousel> = ({
   const LAST_INDEX = elementsList.length;
   const [selectedFlow, setSelectedFlow] = useState(FIRST_INDEX);
 
-  const CarouselItem = useMemo(() => (
-    <CarouselStyle.CardsContainer>
-      {elementsList.map((itens, index) => (
-        <CarouselStyle.Card
-          key={`Carousel-Card-${index + 1}`}
-          id={`${id}-Card-${index + 1}`}
-        >
-          {itens}
-        </CarouselStyle.Card>
-      ))}
-    </CarouselStyle.CardsContainer>
-  ), [elementsList]);
+  const CarouselItem = useMemo(
+    () => (
+      <CarouselStyle.CardsContainer>
+        {elementsList.map((itens, index) => (
+          <CarouselStyle.Card
+            key={`Carousel-Card-${index + 1}`}
+            id={`${id}-Card-${index + 1}`}
+          >
+            {itens}
+          </CarouselStyle.Card>
+        ))}
+      </CarouselStyle.CardsContainer>
+    ),
+    [elementsList, id],
+  );
 
   function handleArrowClick(command: 'PREV' | 'NEXT') {
     if (command === 'PREV') {
@@ -52,11 +55,14 @@ const ApelieCarousel: React.FC<ICarousel> = ({
     if (element) {
       element.scrollIntoView({
         block: 'center',
-        inline: selectedFlow === LAST_INDEX || selectedFlow === FIRST_INDEX ? 'start' : 'center',
+        inline:
+          selectedFlow === LAST_INDEX || selectedFlow === FIRST_INDEX
+            ? 'start'
+            : 'center',
         behavior: 'smooth',
       });
     }
-  }, [selectedFlow]);
+  }, [selectedFlow, id, LAST_INDEX]);
 
   return (
     <CarouselStyle.Container id={`${id}-Carousel`}>
@@ -74,7 +80,11 @@ const ApelieCarousel: React.FC<ICarousel> = ({
         >
           <LeftArrowIcon />
         </IconButton>
-        <CarouselStyle.BaseContainer className="BaseContainer" baseSize={baseSizes} length={elementsList.length}>
+        <CarouselStyle.BaseContainer
+          className="BaseContainer"
+          baseSize={baseSizes}
+          length={elementsList.length}
+        >
           {CarouselItem}
         </CarouselStyle.BaseContainer>
         <IconButton

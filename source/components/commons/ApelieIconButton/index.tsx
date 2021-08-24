@@ -6,8 +6,8 @@ type IconButtonType = {
   color?: string;
   className?: string;
   children: ReactNode;
-  onClick?: Function;
-}
+  onClick?: () => void;
+};
 
 const ApelieIconButton: React.FC<IconButtonType> = ({
   disabled = false,

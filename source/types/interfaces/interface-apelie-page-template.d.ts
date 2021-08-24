@@ -1,10 +1,10 @@
 import ISEO from './interface-search-engine-optimization';
 
 interface IApeliePageTemplate {
-  SEOProps: ISEO
+  SEOProps: ISEO;
   PAGEProps: {
-    template: 'DEFAULT' | 'COMMON' | 'CUSTOM'
-  }
+    template: 'DEFAULT' | 'COMMON' | 'CUSTOM';
+  };
 }
 
 export default IApeliePageTemplate;

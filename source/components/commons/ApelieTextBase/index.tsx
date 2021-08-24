@@ -14,8 +14,8 @@ interface ITextBase {
   name?: string;
   value?: string;
   className?: string;
-  min?: InputHTMLAttributes<HTMLInputElement>['min'],
-  max?: InputHTMLAttributes<HTMLInputElement>['max'],
+  min?: InputHTMLAttributes<HTMLInputElement>['min'];
+  max?: InputHTMLAttributes<HTMLInputElement>['max'];
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 

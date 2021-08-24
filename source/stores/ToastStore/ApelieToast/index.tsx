@@ -18,7 +18,7 @@ const ApelieToastComponent: React.FC<IToastObject> = ({
 }) => {
   const [queue, setQueue] = useState<IMessage[]>([]);
   const delayTime = 1000;
-  const ToastIcons: {[key in ToastType]: React.ReactNode} = {
+  const ToastIcons: { [key in ToastType]: React.ReactNode } = {
     warning: <WarningIcon />,
     info: <WarningIcon />,
     error: <WarningIcon />,
@@ -52,9 +52,7 @@ const ApelieToastComponent: React.FC<IToastObject> = ({
         <StyleApelieToast.ToastIcon>
           {ToastIcons[type]}
         </StyleApelieToast.ToastIcon>
-        <ApelieTextBase variant="paragraph1">
-          {message}
-        </ApelieTextBase>
+        <ApelieTextBase variant="paragraph1">{message}</ApelieTextBase>
       </StyleApelieToast.TextBox>
       <StyleApelieToast.CloseIconBox
         onClick={() => closeFunction && closeFunction()}

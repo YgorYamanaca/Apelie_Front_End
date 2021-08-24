@@ -6,14 +6,10 @@ interface ITextWithDivider {
   text: string;
 }
 
-const ApelieTextWithDivider: React.FC<ITextWithDivider> = ({
-  text,
-}) => (
+const ApelieTextWithDivider: React.FC<ITextWithDivider> = ({ text }) => (
   <TextWithDividerStyle.Container>
     <TextWithDividerStyle.TextBox>
-      <ApelieTextBase variant="subTitle">
-        {text}
-      </ApelieTextBase>
+      <ApelieTextBase variant="subTitle">{text}</ApelieTextBase>
     </TextWithDividerStyle.TextBox>
     <hr />
   </TextWithDividerStyle.Container>

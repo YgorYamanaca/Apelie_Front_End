@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import styled, { css } from 'styled-components';
 
 interface IContainer {
-  type: 'error' | 'success' | 'warning' | 'info',
+  type: 'error' | 'success' | 'warning' | 'info';
 }
 
 const Container = styled.div<IContainer>`
@@ -23,12 +23,11 @@ const Container = styled.div<IContainer>`
   z-index: 500;
   ${breakpointsMedia({
     sm: css`
-        top: 25px;
-        right: 25px;
-        width: auto;
-      `,
-  })
-}
+      top: 25px;
+      right: 25px;
+      width: auto;
+    `,
+  })}
 `;
 
 const TextBox = styled.div`

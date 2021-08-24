@@ -17,7 +17,7 @@ export function isVisibleOnScreen(elem: HTMLElement): boolean {
   const elemTop = rect.top;
   const elemBottom = rect.bottom;
 
-  const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+  const isVisible = elemTop >= 0 && elemBottom <= window.innerHeight;
 
   return isVisible;
 }

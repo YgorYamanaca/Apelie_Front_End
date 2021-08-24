@@ -4,17 +4,17 @@ import ApeliePageTemplate from '../index';
 import ApelieGlobalProvider from '../provider/index';
 
 interface IApeliePageHOC {
-  apelieTemplateProps: IApeliePageTemplate
+  apelieTemplateProps: IApeliePageTemplate;
 }
 
-const apeliePageHOC = (PageComponent: any, {
-  apelieTemplateProps,
-}: IApeliePageHOC) => (props: any) => (
-  <ApelieGlobalProvider>
-    <ApeliePageTemplate {...apelieTemplateProps}>
-      <PageComponent {...props} />
-    </ApeliePageTemplate>
-  </ApelieGlobalProvider>
+const apeliePageHOC = (
+  (PageComponent: any, { apelieTemplateProps }: IApeliePageHOC) => (props: any) => (
+    <ApelieGlobalProvider>
+      <ApeliePageTemplate {...apelieTemplateProps}>
+        <PageComponent {...props} />
+      </ApeliePageTemplate>
+    </ApelieGlobalProvider>
+  )
 );
 
 export default apeliePageHOC;

@@ -3,7 +3,7 @@ import ApelieTextBase from '../ApelieTextBase';
 import ApelieFlexBoxStyle from './styles';
 
 interface IApelieFlexBox {
-  flexBoxTitle?: string
+  flexBoxTitle?: string;
 }
 
 const ApelieFlexBox: React.FC<IApelieFlexBox> = ({
@@ -13,9 +13,7 @@ const ApelieFlexBox: React.FC<IApelieFlexBox> = ({
   <ApelieFlexBoxStyle.Container>
     <ApelieFlexBoxStyle.TextContainer>
       {flexBoxTitle && (
-      <ApelieTextBase variant="title">
-        {flexBoxTitle}
-      </ApelieTextBase>
+        <ApelieTextBase variant="title">{flexBoxTitle}</ApelieTextBase>
       )}
     </ApelieFlexBoxStyle.TextContainer>
     <ApelieFlexBoxStyle.ChildrenContainer>

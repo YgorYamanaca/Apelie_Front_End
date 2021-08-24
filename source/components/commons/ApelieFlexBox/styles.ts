@@ -11,16 +11,15 @@ const TextContainer = styled.div`
   padding: 0 5px;
   ${breakpointsMedia({
     md: css`
-        padding-top: 10px;
-        padding: 0 35px;
-      `,
-  })
-}
+      padding-top: 10px;
+      padding: 0 35px;
+    `,
+  })}
 `;
 
 const ChildrenContainer = styled.div`
   display: flex;
-  
+
   flex-wrap: wrap;
   justify-content: center;
   & > div {
@@ -33,8 +32,7 @@ const ChildrenContainer = styled.div`
         margin: 25px 15px;
       }
     `,
-  })
-}
+  })}
 `;
 
 const ApelieFlexBoxStyle = {

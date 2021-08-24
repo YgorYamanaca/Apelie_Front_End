@@ -13,24 +13,16 @@ const ApeliePageTemplate: React.FC<IApeliePageTemplate> = ({
   <PageStyles.Container id="ApeliePage">
     <SEO {...SEOProps} />
     {PAGEProps.template === 'DEFAULT' && (
-      <AccessTemplate>
-        {children}
-      </AccessTemplate>
+      <AccessTemplate>{children}</AccessTemplate>
     )}
 
     {PAGEProps.template === 'COMMON' && (
       <>
-        <CommonTemplate>
-          {children}
-        </CommonTemplate>
+        <CommonTemplate>{children}</CommonTemplate>
       </>
     )}
 
-    {PAGEProps.template === 'CUSTOM' && (
-      <>
-          {children}
-      </>
-    )}
+    {PAGEProps.template === 'CUSTOM' && <>{children}</>}
   </PageStyles.Container>
 );
 

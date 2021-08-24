@@ -7,7 +7,8 @@ import IStore from '@/types/interfaces/interface-store';
 import ApiRequester from '@/services/apiRequester';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await ApiRequester.apelie.get('/store')
+  const response = await ApiRequester.apelie
+    .get('/store')
     .then((serverResponse) => serverResponse.data)
     .catch(() => []);
   return {
@@ -18,10 +19,10 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 interface IHome {
-  stores: IStore[],
+  stores: IStore[];
 }
 
-const Home:React.FC<IHome> = ({
+const Home: React.FC<IHome> = ({
   stores,
 }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <>

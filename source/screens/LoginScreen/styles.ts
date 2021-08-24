@@ -2,10 +2,10 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 import styled, { css } from 'styled-components';
 
 const Container = styled.div`
-  display:flex;
+  display: flex;
   flex: 1;
   flex-direction: column;
-  & > form  {
+  & > form {
     text-align: center;
     margin-top: 35px;
   }

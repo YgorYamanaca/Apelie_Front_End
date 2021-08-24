@@ -14,10 +14,9 @@ const PageSection = styled.section`
   margin-top: 20px;
   ${breakpointsMedia({
     md: css`
-        padding-bottom: 15px;
-      `,
-  })
-}
+      padding-bottom: 15px;
+    `,
+  })}
 `;
 
 const MainPageScreenStyle = {

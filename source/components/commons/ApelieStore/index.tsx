@@ -6,18 +6,18 @@ import ApelieUserPhotoComponent from '../ApelieUserPhotoComponent';
 import StoreStyles from './styles';
 
 interface IStoreComponent {
-  store: IStore,
+  store: IStore;
 }
 
-const ApelieStore: React.FC<IStoreComponent> = ({
-  store,
-}) => (
+const ApelieStore: React.FC<IStoreComponent> = ({ store }) => (
   <StoreStyles.Container id={`StoreStyles-Container-${store.storeId}`}>
     <StoreStyles.PhotoContainer>
       <StoreStyles.StorePhotoContainer imgUrl={store.logoUrl}>
         <StoreStyles.UserPhotoContainer>
           <ApelieUserPhotoComponent
-            userPhotoUrl={store.owner?.photoUrl || '/images/User/default-user-image.png'}
+            userPhotoUrl={
+              store.owner?.photoUrl || '/images/User/default-user-image.png'
+            }
             size={65}
           />
         </StoreStyles.UserPhotoContainer>

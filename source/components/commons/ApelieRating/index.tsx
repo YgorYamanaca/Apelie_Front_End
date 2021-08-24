@@ -8,9 +8,7 @@ interface IApelieRating {
   rating: number;
 }
 
-const ApelieRating: React.FunctionComponent<IApelieRating> = ({
-  rating,
-}) => {
+const ApelieRating: React.FunctionComponent<IApelieRating> = ({ rating }) => {
   const FIVE_STARS = 5;
   const wholeNumber = Math.round(rating);
 
@@ -23,12 +21,14 @@ const ApelieRating: React.FunctionComponent<IApelieRating> = ({
       retArray.push(<StarEmptyIcon key={`empety-star-${i}`} />);
     }
     return retArray;
-  }, [rating]);
+  }, [wholeNumber]);
 
   return (
     <StyleApelieRating.Container>
       <div>{RatingStarts.map((element) => element)}</div>
-      <div><ApelieTextBase variant="subTitle">{`Nota: ${rating}`}</ApelieTextBase></div>
+      <div>
+        <ApelieTextBase variant="subTitle">{`Nota: ${rating}`}</ApelieTextBase>
+      </div>
     </StyleApelieRating.Container>
   );
 };
