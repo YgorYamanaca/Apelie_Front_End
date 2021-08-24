@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://ec2-54-232-70-145.sa-east-1.compute.amazonaws.com:8080/api/';
+const BASE_URL = 'https://shrouded-springs-20631.herokuapp.com/api/';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 

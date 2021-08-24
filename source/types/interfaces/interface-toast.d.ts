@@ -2,7 +2,7 @@ export type ToastType = 'error' | 'success' | 'info' | 'warning';
 interface IToastObject {
   message: string,
   type: ToastType,
-  closeFunction?: Function;
+  closeFunction?: VoidFunction;
 }
 
 export default IToastObject;
