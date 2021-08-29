@@ -15,7 +15,6 @@ interface IHomeScreen {
 
 const HomeScreen: React.FC<IHomeScreen> = ({ stores }) => {
   const router = useRouter();
-
   const spotlightStoresElements: ReactNode[] = useMemo(
     () => stores.map((store, index) => (
       <ApelieStore key={`store-${index + 1}`} store={store} />

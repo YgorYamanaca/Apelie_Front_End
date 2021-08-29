@@ -20,14 +20,11 @@ import { ToastContext } from '@/stores/ToastStore';
 import ISubscribeRequest from '@/types/interfaces/interface-subscribe-request';
 import { useRouter } from 'next/router';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
-import toISOSimpleDate from '@/utils/date';
 import SubscribeBox from './styles';
 
 interface ISubscribeWithError extends ISubscribeRequest {
   fullNameError: string | boolean;
   emailError: string | boolean;
-  birthDateError: string | boolean;
-  genderError: string | boolean;
   passwordError: string | boolean;
   confirmPassword: string;
   confirmPasswordError: string | boolean;
@@ -44,10 +41,6 @@ const SubscribeScreen: React.FC = () => {
     fullNameError: '',
     email: '',
     emailError: '',
-    birthDate: '',
-    birthDateError: '',
-    gender: '',
-    genderError: '',
     password: '',
     passwordError: '',
     confirmPassword: '',
@@ -58,13 +51,9 @@ const SubscribeScreen: React.FC = () => {
     () => subscribeInfo.fullName === ''
       || subscribeInfo.email === ''
       || subscribeInfo.password === ''
-      || subscribeInfo.confirmPassword === ''
-      || subscribeInfo.birthDate === ''
-      || subscribeInfo.gender === '',
+      || subscribeInfo.confirmPassword === '',
     [subscribeInfo],
   );
-
-  const memorizedMaxDate = useMemo(() => toISOSimpleDate(new Date()), []);
 
   const doSubscribeRequest = useMutation(doRegister, {
     onSuccess: (response) => {
@@ -77,6 +66,11 @@ const SubscribeScreen: React.FC = () => {
       } else if (response.status === 409) {
         setToastMessage({
           message: 'Esse e-mail já está cadastrado.',
+          type: 'error',
+        });
+      } else if (response.status === 400) {
+        setToastMessage({
+          message: 'Não foi possível realizar o cadastro',
           type: 'error',
         });
       }
@@ -93,8 +87,6 @@ const SubscribeScreen: React.FC = () => {
       doSubscribeRequest.mutate({
         fullName: subscribeInfo.fullName,
         email: subscribeInfo.email,
-        birthDate: subscribeInfo.birthDate,
-        gender: subscribeInfo.gender,
         password: subscribeInfo.password,
       });
     } else {
@@ -127,22 +119,6 @@ const SubscribeScreen: React.FC = () => {
           name="fullName"
           value={subscribeInfo.fullName}
           isError={subscribeInfo.fullNameError}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setSubInfo)}
-        />
-        <ApelieInputField
-          placeholder="Digite a sua data de nascimento"
-          name="birthDate"
-          type="date"
-          max={memorizedMaxDate}
-          value={subscribeInfo.birthDate}
-          isError={subscribeInfo.birthDateError}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setSubInfo)}
-        />
-        <ApelieInputField
-          placeholder="Digite o seu gênero"
-          name="gender"
-          value={subscribeInfo.gender}
-          isError={subscribeInfo.genderError}
           onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setSubInfo)}
         />
         <ApelieInputField

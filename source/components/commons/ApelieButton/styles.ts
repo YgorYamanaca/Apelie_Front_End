@@ -13,7 +13,9 @@ const Container = styled.button<IButtonStyle>`
   outline: none;
   border: 0;
   user-select: none;
-  background-color: ${({ theme, buttonColor, ghost }) => (ghost ? 'transparent' : get(theme, `colors.${buttonColor}.alternative`))};
+  background-color: ${({ theme, buttonColor, ghost }) => (
+    ghost ? 'transparent' : get(theme, `colors.${buttonColor}.alternative`)
+  )};
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 8px;
 
@@ -50,7 +52,7 @@ const Container = styled.button<IButtonStyle>`
 
   color: ${({ theme, ghost, buttonColor }) => ghost && get(theme, `colors.${buttonColor}.alternative`)};
 
-  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: filter 0.3s ease-in-out;
 `;
 
 const ButtonStyle = {

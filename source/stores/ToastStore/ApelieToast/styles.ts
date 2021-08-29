@@ -3,12 +3,29 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 import get from 'lodash/get';
 import styled, { css } from 'styled-components';
 
+const ToastQueueContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 500;
+  ${breakpointsMedia({
+    sm: css`
+      top: 25px;
+      right: 25px;
+      width: auto;
+    `,
+  })}
+
+  & > div:not(:first-child) {
+    margin-top: 5px;
+  }
+`;
+
 interface IContainer {
   type: 'error' | 'success' | 'warning' | 'info';
 }
 
 const Container = styled.div<IContainer>`
-  position: absolute;
   display: flex;
   height: auto;
   width: 100%;
@@ -20,14 +37,6 @@ const Container = styled.div<IContainer>`
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 20px 15px;
   cursor: default;
-  z-index: 500;
-  ${breakpointsMedia({
-    sm: css`
-      top: 25px;
-      right: 25px;
-      width: auto;
-    `,
-  })}
 `;
 
 const TextBox = styled.div`
@@ -59,6 +68,7 @@ const CloseIconBox = styled.div`
 `;
 
 const StyleApelieToast = {
+  ToastQueueContainer,
   Container,
   ToastIcon,
   CloseIconBox,
