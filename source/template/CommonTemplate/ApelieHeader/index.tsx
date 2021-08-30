@@ -1,3 +1,7 @@
+import { useRouter } from 'next/router';
+import React, { useContext, useState } from 'react';
+import { StyledProps, withTheme } from 'styled-components';
+import Image from 'next/image';
 import CarryBagIcon from '@/assets/icons/CarryBagIcon';
 import ChatIcon from '@/assets/icons/ChatIcon';
 import CloseIcon from '@/assets/icons/CloseIcon';
@@ -14,10 +18,6 @@ import ApelieUserPhotoComponent from '@/components/commons/ApelieUserPhotoCompon
 import { AppThemeContext } from '@/stores/ThemeManager';
 import { UserContext } from '@/stores/UserManager';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
-import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react';
-import { StyledProps, withTheme } from 'styled-components';
-import Image from 'next/image';
 import ApelieHeaderStyle from './styles';
 
 const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {

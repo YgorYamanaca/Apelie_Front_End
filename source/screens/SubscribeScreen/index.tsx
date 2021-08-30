@@ -5,9 +5,10 @@ import React, {
   ChangeEvent,
   useContext,
 } from 'react';
+import { useMutation } from 'react-query';
+import { useRouter } from 'next/router';
 import ApelieInputField from '@/components/commons/ApelieInputField';
 import ApelieButton from '@/components/commons/ApelieButton';
-import { useMutation } from 'react-query';
 import { doRegister } from '@/services/user';
 import handleChange from '@/utils/formUtils';
 import ApelieTextBase from '@/components/commons/ApelieTextBase';
@@ -18,7 +19,6 @@ import {
 } from '@/utils/validations';
 import { ToastContext } from '@/stores/ToastStore';
 import ISubscribeRequest from '@/types/interfaces/interface-subscribe-request';
-import { useRouter } from 'next/router';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import SubscribeBox from './styles';
 

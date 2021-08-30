@@ -1,5 +1,5 @@
-import IApelieTheme from '@/types/interfaces/interface-apelie-theme';
 import React from 'react';
+import IApelieTheme from '@/types/interfaces/interface-apelie-theme';
 import ApelieTextBase from '../ApelieTextBase';
 import ApelieThemeStyle from './styles';
 

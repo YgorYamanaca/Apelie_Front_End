@@ -1,6 +1,6 @@
+import React, { useMemo, memo } from 'react';
 import StarEmptyIcon from '@/assets/icons/StarEmptyIcon';
 import StarFillIcon from '@/assets/icons/StarFillIcon';
-import React, { useMemo, memo } from 'react';
 import ApelieTextBase from '../ApelieTextBase';
 import StyleApelieRating from './styles';
 

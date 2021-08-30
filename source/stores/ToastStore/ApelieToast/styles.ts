@@ -1,7 +1,7 @@
-import Animations from '@/utils/animations';
-import breakpointsMedia from '@/utils/breakpointsMedia';
 import get from 'lodash/get';
 import styled, { css } from 'styled-components';
+import Animations from '@/utils/animations';
+import breakpointsMedia from '@/utils/breakpointsMedia';
 
 const ToastQueueContainer = styled.div`
   display: flex;

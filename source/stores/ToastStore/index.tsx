@@ -1,7 +1,7 @@
-import IToastObject from '@/types/interfaces/interface-toast';
 import React, {
   createContext, useState,
 } from 'react';
+import IToastObject from '@/types/interfaces/interface-toast';
 import ApelieToastComponent from './ApelieToast';
 
 interface IToastContext {

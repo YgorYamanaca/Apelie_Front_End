@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import IBreakpoints from '@/types/interfaces/interface-breakpoints';
 import { CSSProperties } from 'react';
 import { CSSProp } from 'styled-components';
+import IBreakpoints from '@/types/interfaces/interface-breakpoints';
 import breakpointsMedia from './breakpointsMedia';
 
 export type IPropToStyle = {

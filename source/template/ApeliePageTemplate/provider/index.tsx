@@ -1,6 +1,6 @@
 import React from 'react';
-import ApelieThemeProvider from '@/stores/ThemeManager';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import ApelieThemeProvider from '@/stores/ThemeManager';
 import ApelieToastProvider from '@/stores/ToastStore';
 import ApelieUserProvider from '@/stores/UserManager';
 

@@ -5,8 +5,8 @@ import React, {
   useMemo,
   useCallback,
 } from 'react';
-import GlobalStyle from '@/components/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
+import GlobalStyle from '@/components/GlobalStyle';
 import shadow from '@/themes/shadow';
 import typography from '@/themes/typography';
 import darkPalette from '@/themes/colors/DarkPalette';

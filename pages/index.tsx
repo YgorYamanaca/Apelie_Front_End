@@ -1,8 +1,8 @@
 import React from 'react';
 import apeliePageHOC from 'template/ApeliePageTemplate/HOC';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import HomeScreen from '@/screens/HomeScreen';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import IStore from '@/types/interfaces/interface-store';
 import ApiRequester from '@/services/apiRequester';
 

@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
+import { useQuery } from 'react-query';
 import themeData from '@/utils/data-test';
 import IApelieTheme from '@/types/interfaces/interface-apelie-theme';
 import ApelieTheme from '@/components/commons/ApelieTheme';
-import { useQuery } from 'react-query';
 import { getStore } from '@/services/store';
 import ApelieStore from '@/components/commons/ApelieStore';
 import IStore from '@/types/interfaces/interface-store';

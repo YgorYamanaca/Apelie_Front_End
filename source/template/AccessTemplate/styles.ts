@@ -1,7 +1,7 @@
 /* eslint-disable indent */
+import styled, { css } from 'styled-components';
 import Animations from '@/utils/animations';
 import breakpointsMedia from '@/utils/breakpointsMedia';
-import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   display: flex;

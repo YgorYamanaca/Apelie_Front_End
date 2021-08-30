@@ -1,8 +1,8 @@
-import LeftArrowIcon from '@/assets/icons/LeftArrowIcon';
-import RightArrowIcon from '@/assets/icons/RightArrowIcon';
 import React, {
   useMemo, ReactNode, useState, useLayoutEffect,
 } from 'react';
+import LeftArrowIcon from '@/assets/icons/LeftArrowIcon';
+import RightArrowIcon from '@/assets/icons/RightArrowIcon';
 import CarouselStyle from './styles';
 import IconButton from '../ApelieIconButton';
 import ApelieTextBase from '../ApelieTextBase';
@@ -38,6 +38,15 @@ const ApelieCarousel: React.FC<ICarousel> = ({
       </CarouselStyle.CardsContainer>
     ),
     [elementsList, id],
+  );
+
+  const EmpetyItems = useMemo(
+    () => (
+      <ApelieTextBase variant="title">
+        Não foi encontrado nenhum item
+      </ApelieTextBase>
+    ),
+    [],
   );
 
   function handleArrowClick(command: 'PREV' | 'NEXT') {
@@ -85,7 +94,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
           baseSize={baseSizes}
           length={elementsList.length}
         >
-          {CarouselItem}
+          {elementsList.length > 0 ? CarouselItem : EmpetyItems}
         </CarouselStyle.BaseContainer>
         <IconButton
           className="Last_Arrow"

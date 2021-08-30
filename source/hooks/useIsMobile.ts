@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react';
 import breakpoints from '@/themes/breakpoints';
 import IBreakpoints from '@/types/interfaces/interface-breakpoints';
-import { useEffect, useState } from 'react';
 
 const useIsMobile = (breakpoint: keyof IBreakpoints): boolean => {
   const [width, setWidth] = useState(0);

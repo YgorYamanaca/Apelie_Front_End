@@ -1,12 +1,12 @@
 import React, { useMemo, ReactNode } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 import ApelieButton from '@/components/commons/ApelieButton';
 import ApelieCarousel from '@/components/commons/ApelieCarousel';
 import ApelieTextBase from '@/components/commons/ApelieTextBase';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
-import { useRouter } from 'next/router';
 import IStore from '@/types/interfaces/interface-store';
 import ApelieStore from '@/components/commons/ApelieStore';
-import Image from 'next/image';
 import HomeBox from './styles';
 
 interface IHomeScreen {

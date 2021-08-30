@@ -1,8 +1,8 @@
 import React from 'react';
-import SEO from '@/components/commons/SEO';
-import IApeliePageTemplate from '@/types/interfaces/interface-apelie-page-template';
 import AccessTemplate from 'template/AccessTemplate';
 import CommonTemplate from 'template/CommonTemplate';
+import SEO from '@/components/commons/SEO';
+import IApeliePageTemplate from '@/types/interfaces/interface-apelie-page-template';
 import PageStyles from './styles';
 
 const ApeliePageTemplate: React.FC<IApeliePageTemplate> = ({

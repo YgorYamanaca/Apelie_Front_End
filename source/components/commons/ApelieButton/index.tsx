@@ -1,6 +1,6 @@
+import React, { ButtonHTMLAttributes } from 'react';
 import ITextColor from '@/types/interfaces/interface-text-color';
 import ITypographyVariants from '@/types/interfaces/interface-typography-variants';
-import React, { ButtonHTMLAttributes } from 'react';
 import ApelieTextBase from '../ApelieTextBase';
 import ButtonStyle from './styles';
 

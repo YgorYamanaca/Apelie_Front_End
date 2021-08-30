@@ -5,15 +5,15 @@ import React, {
   ChangeEvent,
   useContext,
 } from 'react';
+import { useMutation } from 'react-query';
+import { useRouter } from 'next/router';
 import ApelieInputField from '@/components/commons/ApelieInputField';
 import ApelieButton from '@/components/commons/ApelieButton';
-import { useMutation } from 'react-query';
 import ILoginInfo from '@/types/interfaces/interface-login-data';
 import { doLogin } from '@/services/user';
 import handleChange from '@/utils/formUtils';
 import ApelieTextWithDivider from '@/components/commons/ApelieTextWithDivider';
 import ApelieTextBase from '@/components/commons/ApelieTextBase';
-import { useRouter } from 'next/router';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import { isValidateEmail } from '@/utils/validations';
 import { ToastContext } from '@/stores/ToastStore';

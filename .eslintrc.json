@@ -25,25 +25,19 @@
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/no-use-before-define": ["error"],
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
+    "import/extensions": 0,
     "no-shadow": "off",
     "max-len": ["warn", { "code": 100 }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "import/prefer-default-export": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/require-default-props": "off"
   },
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".d.ts", ".tsx"]
+        "extensions": [".ts", ".d.ts", ".tsx"]
       }
     }
   }

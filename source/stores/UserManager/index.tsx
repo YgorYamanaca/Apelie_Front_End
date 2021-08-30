@@ -6,11 +6,11 @@ import React, {
   useContext,
   useCallback,
 } from 'react';
-import ILoggedUser from '@/types/interfaces/interface-logged-user';
 import { useMutation } from 'react-query';
-import { doGetUser } from '@/services/user';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
+import { doGetUser } from '@/services/user';
+import ILoggedUser from '@/types/interfaces/interface-logged-user';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import ApiRequester from '@/services/apiRequester';
 import { ToastContext } from '../ToastStore';

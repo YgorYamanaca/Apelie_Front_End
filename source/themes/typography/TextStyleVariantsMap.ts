@@ -1,6 +1,6 @@
+import { css, CSSProp } from 'styled-components';
 import ITypographyVariants from '@/types/interfaces/interface-typography-variants';
 import breakpointsMedia from '@/utils/breakpointsMedia';
-import { css, CSSProp } from 'styled-components';
 
 type ITextStyleVariantsMap = {
   // eslint-disable-next-line no-unused-vars

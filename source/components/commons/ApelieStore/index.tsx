@@ -1,5 +1,5 @@
-import IStore from '@/types/interfaces/interface-store';
 import React from 'react';
+import IStore from '@/types/interfaces/interface-store';
 import ApelieRating from '../ApelieRating';
 import ApelieTextBase from '../ApelieTextBase';
 import ApelieUserPhotoComponent from '../ApelieUserPhotoComponent';

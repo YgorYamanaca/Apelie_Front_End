@@ -1,6 +1,6 @@
+import { AxiosResponse } from 'axios';
 import ILoginInfo from '@/types/interfaces/interface-login-data';
 import ISubscribeRequest from '@/types/interfaces/interface-subscribe-request';
-import { AxiosResponse } from 'axios';
 import ApiRequester from './apiRequester';
 
 const doLogin = async (LoginInfo: ILoginInfo): Promise<AxiosResponse> => {

@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from 'react';
 import CheckIcon from '@/assets/icons/CheckIcon';
 import CloseIcon from '@/assets/icons/CloseIcon';
 import WarningIcon from '@/assets/icons/WarningIcon';
 import ApelieTextBase from '@/components/commons/ApelieTextBase';
 import IToastObject, { ToastType } from '@/types/interfaces/interface-toast';
-import React, { useCallback, useEffect, useState } from 'react';
 import StyleApelieToast from './styles';
 
 interface IApelieToastComponent {
@@ -28,9 +28,9 @@ const ApelieToastComponent: React.FC<IApelieToastComponent> = ({
     success: <CheckIcon />,
   };
 
-  const close = useCallback((indexOfToast: number) => {
+  function close(indexOfToast: number) {
     setQueue(queue.filter((toastObject) => toastObject.id !== indexOfToast));
-  }, [queue]);
+  }
 
   useEffect(() => {
     if (messageObject && queue.length <= 1) {
