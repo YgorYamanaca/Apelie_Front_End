@@ -9,11 +9,9 @@ interface IApeliePageHOC {
 
 const apeliePageHOC = (
   (PageComponent: any, { apelieTemplateProps }: IApeliePageHOC) => (props: any) => (
-    <ApelieGlobalProvider>
-      <ApeliePageTemplate {...apelieTemplateProps}>
-        <PageComponent {...props} />
-      </ApeliePageTemplate>
-    </ApelieGlobalProvider>
+    <ApeliePageTemplate {...apelieTemplateProps}>
+      <PageComponent {...props} />
+    </ApeliePageTemplate>
   )
 );
 

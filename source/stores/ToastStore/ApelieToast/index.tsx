@@ -44,9 +44,9 @@ const ApelieToastComponent: React.FC<IApelieToastComponent> = ({
       setTimeout(() => {
         const FIRST_OF_ARRAY = 1;
         setQueue(queue.filter((_toastObject, index) => index + 1 !== FIRST_OF_ARRAY));
-      }, 5 * 1000 + delayTime);
+      }, 100000 * 1000 + delayTime);
     }
-  }, [queue]);
+  }, []);
 
   return (
     <StyleApelieToast.ToastQueueContainer id={`${id}-toast-messages-id`}>

@@ -7,7 +7,7 @@ const ToastQueueContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  z-index: 500;
+  z-index: 1500;
   ${breakpointsMedia({
     sm: css`
       top: 25px;
