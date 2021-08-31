@@ -38,7 +38,7 @@ const ApelieThemeProvider: React.FC = ({ children }) => {
       setApelieTheme('Ligth');
       localStorage.setItem('ApelieTheme', 'Ligth');
     }
-  }, [apelieTheme]);
+  }, []);
 
   const toggleTheme = useCallback(() => {
     setApelieTheme(apelieTheme === 'Dark' ? 'Ligth' : 'Dark');

@@ -14,6 +14,7 @@ const Container = styled.div<IContainer>`
   width: 35px;
   cursor: pointer;
   user-select: none;
+  align-self: center;
   &:hover {
     filter: brightness(1.5);
   }

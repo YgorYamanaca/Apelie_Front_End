@@ -26,7 +26,7 @@ const Home: React.FC<IHome> = ({
   stores,
 }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <>
-    <HomeScreen stores={stores} />
+    <HomeScreen stores={[...stores, ...stores, ...stores, ...stores, ...stores]} />
   </>
 );
 

@@ -35,7 +35,6 @@ const MainPageScreen: React.FC = () => {
           id="Category"
           carouselTitle="Categorias"
           elementsList={themes}
-          baseSizes={215}
         />
       </MainPageScreenStyle.PageSection>
       <MainPageScreenStyle.PageSection>

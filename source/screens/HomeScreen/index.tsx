@@ -80,7 +80,6 @@ const HomeScreen: React.FC<IHomeScreen> = ({ stores }) => {
         <ApelieCarousel
           id="Spot-Home-Page"
           elementsList={spotlightStoresElements}
-          baseSizes={300}
         />
       </HomeBox.StoresBox>
     </HomeBox.Container>

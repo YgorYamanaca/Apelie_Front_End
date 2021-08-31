@@ -8,24 +8,11 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-interface ICarouselContainer {
-  length: number;
-}
-
-const CarouselContainer = styled.div<ICarouselContainer>`
+const CarouselContainer = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  & > div:first-child,
-  & > div:last-child {
-    display: none;
-    ${({ length }) => breakpointsMedia({
-    sm: css`
-          display: ${length > 2 ? 'flex' : 'none'};
-        `,
-  })}
-  }
 `;
 
 const TextContainer = styled.div`
