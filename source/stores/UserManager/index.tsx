@@ -70,7 +70,7 @@ const ApelieUserProvider: React.FC = ({ children }) => {
     ) {
       router.push(ApeliePageAlias.MainPage);
     }
-  }, [loggedUser, router]);
+  }, [loggedUser]);
 
   useLayoutEffect(() => {
     const userAuth = localStorage.getItem('userAuth');

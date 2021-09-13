@@ -20,7 +20,6 @@ const ApelieToastComponent: React.FC<IApelieToastComponent> = ({
   messageObject,
 }) => {
   const [queue, setQueue] = useState<IToastWithId[]>([]);
-  const delayTime = 1000;
   const ToastIcons: { [key in ToastType]: React.ReactNode } = {
     warning: <WarningIcon />,
     info: <WarningIcon />,
@@ -33,20 +32,20 @@ const ApelieToastComponent: React.FC<IApelieToastComponent> = ({
   }
 
   useEffect(() => {
-    if (messageObject && queue.length <= 1) {
+    if (messageObject) {
       queue.push({ ...messageObject, id: queue.length + 1 });
       setQueue([...queue]);
     }
   }, [messageObject]);
 
   useEffect(() => {
-    if (queue.length > 0) {
+    if (queue.length === 1) {
       setTimeout(() => {
         const FIRST_OF_ARRAY = 1;
         setQueue(queue.filter((_toastObject, index) => index + 1 !== FIRST_OF_ARRAY));
-      }, 100000 * 1000 + delayTime);
+      }, 5 * 1000);
     }
-  }, []);
+  }, [queue]);
 
   return (
     <StyleApelieToast.ToastQueueContainer id={`${id}-toast-messages-id`}>
