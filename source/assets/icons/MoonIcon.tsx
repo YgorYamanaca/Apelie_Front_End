@@ -1,12 +1,8 @@
 import React from 'react';
 import { withTheme, StyledProps } from 'styled-components';
+import { ISimpleIcon } from '@/types/interfaces/interface-apelie-simple-icon';
 
-interface IIcon {
-  width?: string;
-  height?: string;
-}
-
-const MoonIcon: React.FC<StyledProps<IIcon>> = ({
+const MoonIcon: React.FC<StyledProps<ISimpleIcon>> = ({
   width = '18',
   height = '18',
   theme,

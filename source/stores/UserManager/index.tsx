@@ -18,15 +18,18 @@ import { ToastContext } from '../ToastStore';
 interface IUserContext {
   loggedUser: ILoggedUser | undefined;
   doLogout: () => void;
+  updateUserToken: (token: string) => void;
 }
 
 export const UserContext = createContext<IUserContext>({
   loggedUser: undefined,
   doLogout: () => '',
+  updateUserToken: () => '',
 });
 
 const ApelieUserProvider: React.FC = ({ children }) => {
   const [loggedUser, setLoggedUser] = useState<ILoggedUser>();
+  const [userToken, setUserToken] = useState(localStorage.getItem('userAuth') || '');
   const { setToastMessage } = useContext(ToastContext);
   const router = useRouter();
 
@@ -55,11 +58,17 @@ const ApelieUserProvider: React.FC = ({ children }) => {
     localStorage.removeItem('userAuth');
   }, []);
 
+  const updateUserToken = useCallback((token: string) => {
+    localStorage.setItem('userAuth', token);
+    setUserToken(token);
+  }, []);
+
   useLayoutEffect(() => {
-    if (localStorage.getItem('userAuth')) {
+    if (userToken) {
+      ApiRequester.apelie.defaults.headers.common.Authorization = userToken;
       getLoggedUser.mutate();
     }
-  }, []);
+  }, [userToken]);
 
   useEffect(() => {
     if (
@@ -72,15 +81,8 @@ const ApelieUserProvider: React.FC = ({ children }) => {
     }
   }, [loggedUser]);
 
-  useLayoutEffect(() => {
-    const userAuth = localStorage.getItem('userAuth');
-    if (userAuth) {
-      ApiRequester.apelie.defaults.headers.common.Authorization = userAuth;
-    }
-  }, []);
-
   return (
-    <UserContext.Provider value={{ loggedUser, doLogout }}>
+    <UserContext.Provider value={{ loggedUser, updateUserToken, doLogout }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,11 +1,7 @@
 import React from 'react';
+import { ISimpleIcon } from '@/types/interfaces/interface-apelie-simple-icon';
 
-interface IIcon {
-  width?: string;
-  height?: string;
-}
-
-const RightArrowIcon: React.FC<IIcon> = ({ width = '35', height = '35' }) => (
+const RightArrowIcon: React.FC<ISimpleIcon> = ({ width = '35', height = '35' }) => (
   <svg
     version="1.1"
     id="Layer_1"

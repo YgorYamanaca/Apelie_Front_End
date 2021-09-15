@@ -1,11 +1,6 @@
 import React from 'react';
 import { withTheme, StyledProps } from 'styled-components';
-
-interface IIcon {
-  id: string;
-  width?: string;
-  height?: string;
-}
+import { IIcon } from '@/types/interfaces/interface-apelie-icon';
 
 const MenuButtonIcon: React.FC<StyledProps<IIcon>> = ({
   id,

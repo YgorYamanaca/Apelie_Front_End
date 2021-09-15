@@ -19,6 +19,7 @@ import { isValidateEmail } from '@/utils/validations';
 import { ToastContext } from '@/stores/ToastStore';
 import ApiRequester from '@/services/apiRequester';
 import LoginBox from './styles';
+import { UserContext } from '@/stores/UserManager';
 
 interface ILoginWithError extends ILoginInfo {
   emailError: string;
@@ -31,6 +32,7 @@ interface ILoginWithError extends ILoginInfo {
 
 const LoginScreen: React.FC = () => {
   const router = useRouter();
+  const { updateUserToken } = useContext(UserContext);
   const { setToastMessage } = useContext(ToastContext);
   const [loginInfo, setLoginInfo] = useState<ILoginWithError>({
     email: '',
@@ -49,7 +51,7 @@ const LoginScreen: React.FC = () => {
           message: 'Login realizado com sucesso.',
           type: 'success',
         });
-        localStorage.setItem('userAuth', response.headers.authorization);
+        updateUserToken(response.headers.authorization);
         ApiRequester.apelie.defaults.headers.common.Authorization = response.headers.authorization;
         router.push(ApeliePageAlias.MainPage);
       } else {

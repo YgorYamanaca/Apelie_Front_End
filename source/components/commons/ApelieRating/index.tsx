@@ -9,26 +9,12 @@ interface IApelieRating {
 }
 
 const ApelieRating: React.FunctionComponent<IApelieRating> = ({ rating }) => {
-  const FIVE_STARS = 5;
   const wholeNumber = Math.round(rating);
-
-  const RatingStarts = useMemo(() => {
-    const retArray = [];
-    for (let i = 0; i < wholeNumber; i += 1) {
-      retArray.push(<StarFillIcon key={`fill-star-${i}`} />);
-    }
-    for (let i = 0; i < Math.round(FIVE_STARS - wholeNumber); i += 1) {
-      retArray.push(<StarEmptyIcon key={`empety-star-${i}`} />);
-    }
-    return retArray;
-  }, [wholeNumber]);
 
   return (
     <StyleApelieRating.Container>
-      <div>{RatingStarts.map((element) => element)}</div>
-      <div>
-        <ApelieTextBase variant="subTitle">{`Nota: ${rating}`}</ApelieTextBase>
-      </div>
+      <StarFillIcon key="fill-star" width="16px" height="16px" />
+      <ApelieTextBase variant="paragraph1" value={wholeNumber.toString()} />
     </StyleApelieRating.Container>
   );
 };

@@ -3,13 +3,13 @@ import IOwner from './interface-owner';
 interface IStore {
   storeId: number;
   owner: IOwner;
-  twitterLink: string;
+  twitterAccount: string;
   category: string;
   paymentMethods: Array;
-  instagramLink: string;
+  instagramAccount: string;
   state: string;
-  facebookLink: string;
-  youtubeLink: string;
+  facebookAccount: string;
+  youtubeAccount: string;
   bannerUrl: string;
   theme: string;
   street: string;
