@@ -33,15 +33,22 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => (
         </StoreStyles.StorePhotoContainer>
       </div>
     </StoreStyles.StoreOverflowContainer>
-    <StoreStyles.TextContainer>
-      <ApelieTextBase variant="paragraph1">
-        {store.name}
-      </ApelieTextBase>
-      <ApelieTextBase variant="smallException">
-        {`${store.city}, ${store.state}`}
-      </ApelieTextBase>
-    </StoreStyles.TextContainer>
-    <ApelieRating rating={store.rating} />
+    <StoreStyles.StoreAndScoreContainer>
+      <StoreStyles.TextContainer>
+        <ApelieTextBase id="apelie-name" variant="paragraph1">
+          {store.name}
+        </ApelieTextBase>
+        <ApelieTextBase id="apelie-category" variant="smallException">
+          {`${store.category}`}
+        </ApelieTextBase>
+        <ApelieTextBase id="apelie-address" variant="smallException">
+          {`${store.city}, ${store.state}`}
+        </ApelieTextBase>
+      </StoreStyles.TextContainer>
+      <div id={`Apelie-store-rating-${store.storeId}`}>
+        <ApelieRating rating={store.rating ? store.rating : 0} />
+      </div>
+    </StoreStyles.StoreAndScoreContainer>
   </StoreStyles.Container>
 );
 

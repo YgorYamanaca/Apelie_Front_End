@@ -3,8 +3,10 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   position: relative;
-  flex: 1;
   align-items: center;
+  & > :last-child {
+    color: ${({ theme }) => theme.colors.text.primary}
+  }
 `;
 
 const StyleApelieRating = {

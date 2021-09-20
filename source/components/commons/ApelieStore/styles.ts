@@ -85,10 +85,28 @@ const StoreOverflowContainer = styled.div`
   })}
 `;
 
+const StoreAndScoreContainer = styled.div`
+  display: flex;
+  margin-top: 50px;
+
+  & > div :last-child {
+    margin-left: auto;
+  }
+
+  ${breakpointsMedia({
+    md: css`
+      padding: 5px 10px;
+      display: flex;
+      height: 100%;
+      margin-left: 125px;
+      margin-top: 0px;
+    `,
+  })}
+`;
+
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
   & > :first-child {
     text-align: center;
     font-size: 20px;
@@ -99,11 +117,6 @@ const TextContainer = styled.div`
   }
   ${breakpointsMedia({
     md: css`
-      padding: 5px 10px;
-      display: flex;
-      height: 100%;
-      margin-left: 125px;
-      margin-top: 0px;
       & > :first-child {
         display: flex;
         font-size: 16px;
@@ -121,6 +134,7 @@ const StoreStyles = {
   StorePhotoContainer,
   UserPhotoContainer,
   StoreOverflowContainer,
+  StoreAndScoreContainer,
   TextContainer,
 };
 

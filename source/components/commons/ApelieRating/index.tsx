@@ -8,15 +8,11 @@ interface IApelieRating {
   rating: number;
 }
 
-const ApelieRating: React.FunctionComponent<IApelieRating> = ({ rating }) => {
-  const wholeNumber = Math.round(rating);
-
-  return (
-    <StyleApelieRating.Container>
-      <StarFillIcon key="fill-star" width="16px" height="16px" />
-      <ApelieTextBase variant="paragraph1" value={wholeNumber.toString()} />
-    </StyleApelieRating.Container>
-  );
-};
+const ApelieRating: React.FunctionComponent<IApelieRating> = ({ rating }) => (
+  <StyleApelieRating.Container>
+    <StarFillIcon key="fill-star" width="16px" height="16px" />
+    <ApelieTextBase tag="h1" variant="paragraph1" value={`${rating}`} />
+  </StyleApelieRating.Container>
+);
 
 export default memo(ApelieRating);
