@@ -1,62 +1,71 @@
+import React, {
+  useMemo, ReactNode,
+} from 'react';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import Carousel, { consts, RenderArrowProps } from 'react-elastic-carousel';
 import LeftArrowIcon from '@/assets/icons/LeftArrowIcon';
 import RightArrowIcon from '@/assets/icons/RightArrowIcon';
-import React, {
-  useMemo, ReactNode, useState, useLayoutEffect,
-} from 'react';
 import CarouselStyle from './styles';
 import IconButton from '../ApelieIconButton';
 import ApelieTextBase from '../ApelieTextBase';
 
 interface ICarousel {
-  id: string,
-  carouselTitle?: string,
-  elementsList: ReactNode[],
-  baseSizes?: number,
+  id: string;
+  carouselTitle?: string;
+  elementsList: ReactNode[];
+}
+
+interface IBreakpoints {
+  width: number,
+  itemsToShow: number,
+  itemsToScroll?: number
 }
 
 const ApelieCarousel: React.FC<ICarousel> = ({
   id,
   carouselTitle,
   elementsList,
-  baseSizes = 275,
 }) => {
-  const FIRST_INDEX = 1;
-  const LAST_INDEX = elementsList.length;
-  const [selectedFlow, setSelectedFlow] = useState(FIRST_INDEX);
+  const breakPointsArray: IBreakpoints[] = [
+    { width: 0, itemsToShow: 1 },
+    { width: 450, itemsToShow: 2 },
+    { width: 960, itemsToShow: 3 },
+    { width: 1280, itemsToShow: 3 },
+    { width: 1920, itemsToShow: 3 },
+  ];
 
-  const CarouselItem = useMemo(() => (
-    <CarouselStyle.CardsContainer>
-      {elementsList.map((itens, index) => (
-        <CarouselStyle.Card
-          key={`Carousel-Card-${index + 1}`}
-          id={`${id}-Card-${index + 1}`}
-        >
-          {itens}
-        </CarouselStyle.Card>
-      ))}
-    </CarouselStyle.CardsContainer>
-  ), [elementsList]);
+  const CarouselItem = useMemo(
+    () => (
+      elementsList.map((storeComponent, index) => (
+        <React.Fragment key={`StoreComponent-${index + 1}`}>
+          {storeComponent}
+        </React.Fragment>
+      ))
+    ),
+    [elementsList],
+  );
 
-  function handleArrowClick(command: 'PREV' | 'NEXT') {
-    if (command === 'PREV') {
-      const prevNumber = selectedFlow - 1;
-      setSelectedFlow(prevNumber < FIRST_INDEX ? LAST_INDEX : prevNumber);
-    } else {
-      const nextNumber = selectedFlow + 1;
-      setSelectedFlow(nextNumber > LAST_INDEX ? FIRST_INDEX : nextNumber);
-    }
-  }
+  const EmpetyItems = useMemo(
+    () => (
+      <ApelieTextBase variant="title">
+        Não foi encontrado nenhum item
+      </ApelieTextBase>
+    ),
+    [],
+  );
 
-  useLayoutEffect(() => {
-    const element = document.getElementById(`${id}-Card-${selectedFlow}`);
-    if (element) {
-      element.scrollIntoView({
-        block: 'center',
-        inline: selectedFlow === LAST_INDEX || selectedFlow === FIRST_INDEX ? 'start' : 'center',
-        behavior: 'smooth',
-      });
-    }
-  }, [selectedFlow]);
+  const CustomArrows = ({
+    type, onClick, isEdge,
+  }: RenderArrowProps) => {
+    const pointer = type === consts.PREV ? <LeftArrowIcon /> : <RightArrowIcon />;
+
+    return (
+      <IconButton onClick={onClick} disabled={isEdge}>
+        {pointer}
+      </IconButton>
+    );
+  };
 
   return (
     <CarouselStyle.Container id={`${id}-Carousel`}>
@@ -67,23 +76,24 @@ const ApelieCarousel: React.FC<ICarousel> = ({
           </ApelieTextBase>
         )}
       </CarouselStyle.TextContainer>
-      <CarouselStyle.CarouselContainer length={elementsList.length}>
-        <IconButton
-          className="First_Arrow"
-          onClick={() => handleArrowClick('PREV')}
-        >
-          <LeftArrowIcon />
-        </IconButton>
-        <CarouselStyle.BaseContainer className="BaseContainer" baseSize={baseSizes} length={elementsList.length}>
-          {CarouselItem}
-        </CarouselStyle.BaseContainer>
-        <IconButton
-          className="Last_Arrow"
-          onClick={() => handleArrowClick('NEXT')}
-        >
-          <RightArrowIcon />
-        </IconButton>
-      </CarouselStyle.CarouselContainer>
+      {elementsList.length > 0
+        ? (
+          <CarouselStyle.CarouselContainer>
+            <Carousel
+              easing="ease"
+              transitionMs={500}
+              pagination={false}
+              itemsToShow={3}
+              isRTL={false}
+              renderArrow={CustomArrows}
+              itemPadding={[10, 20]}
+              breakPoints={breakPointsArray}
+            >
+              {CarouselItem}
+            </Carousel>
+          </CarouselStyle.CarouselContainer>
+        )
+        : EmpetyItems}
     </CarouselStyle.Container>
   );
 };

@@ -1,6 +1,6 @@
+import styled, { css } from 'styled-components';
 import Animations from '@/utils/animations';
 import breakpointsMedia from '@/utils/breakpointsMedia';
-import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -46,15 +46,14 @@ const ImageBoxContent = styled.div`
   grid-template-columns: repeat(2, 1fr);
   overflow-x: hidden;
   grid-template-areas:
-  "AAAA BBBB"
-  "CCCC CCCC";
+    'AAAA BBBB'
+    'CCCC CCCC';
 
   ${breakpointsMedia({
     md: css`
       flex: 1;
       grid-template-columns: 1fr 1.5fr 1fr;
-      grid-template-areas:
-      "AAAA BBBB CCCC";
+      grid-template-areas: 'AAAA BBBB CCCC';
     `,
   })}
 
@@ -72,7 +71,7 @@ const ImageBoxContent = styled.div`
       `,
   })}
   }
-  & > img:first-child{
+  & > img:first-child {
     animation: ${Animations.leftToRight} 0.3s ease-in-out;
   }
   & > img:last-child {

@@ -1,27 +1,35 @@
 import React, {
-  createContext, useState, useLayoutEffect, useEffect, useContext, useCallback,
+  createContext,
+  useState,
+  useLayoutEffect,
+  useEffect,
+  useContext,
+  useCallback,
 } from 'react';
-import ILoggedUser from '@/types/interfaces/interface-logged-user';
 import { useMutation } from 'react-query';
-import { doGetUser } from '@/services/user';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
+import { doGetUser } from '@/services/user';
+import ILoggedUser from '@/types/interfaces/interface-logged-user';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import ApiRequester from '@/services/apiRequester';
 import { ToastContext } from '../ToastStore';
 
 interface IUserContext {
-  loggedUser: ILoggedUser | undefined,
-  doLogout: () => void,
+  loggedUser: ILoggedUser | undefined;
+  doLogout: () => void;
+  updateUserToken: (token: string) => void;
 }
 
 export const UserContext = createContext<IUserContext>({
   loggedUser: undefined,
-  doLogout: () => {},
+  doLogout: () => '',
+  updateUserToken: () => '',
 });
 
 const ApelieUserProvider: React.FC = ({ children }) => {
   const [loggedUser, setLoggedUser] = useState<ILoggedUser>();
+  const [userToken, setUserToken] = useState(localStorage.getItem('userAuth') || '');
   const { setToastMessage } = useContext(ToastContext);
   const router = useRouter();
 
@@ -37,45 +45,47 @@ const ApelieUserProvider: React.FC = ({ children }) => {
       if (response.status === 200) {
         setLoggedUser(getUserType(response.data));
       } else {
-        setToastMessage({ message: 'Não foi possível obter os dados do usuário.', type: 'error' });
+        setToastMessage({
+          message: 'Não foi possível obter os dados do usuário.',
+          type: 'error',
+        });
       }
     },
   });
 
-  const doLogout = useCallback(
-    () => {
-      setLoggedUser(undefined);
-      localStorage.removeItem('userAuth');
-    },
-    [],
-  );
-
-  useLayoutEffect(() => {
-    if (localStorage.getItem('userAuth')) {
-      getLoggedUser.mutate();
-    }
+  const doLogout = useCallback(() => {
+    setLoggedUser(undefined);
+    localStorage.removeItem('userAuth');
   }, []);
 
+  const updateUserToken = useCallback((token: string) => {
+    localStorage.setItem('userAuth', token);
+    setUserToken(token);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (userToken) {
+      ApiRequester.apelie.defaults.headers.common.Authorization = userToken;
+      getLoggedUser.mutate();
+    }
+  }, [userToken]);
+
   useEffect(() => {
-    if (loggedUser
+    if (
+      loggedUser
       && (router.pathname === ApeliePageAlias.Home
-      || router.pathname === ApeliePageAlias.Login
-      || router.pathname === ApeliePageAlias.Subscribe
-      )) {
+        || router.pathname === ApeliePageAlias.Login
+        || router.pathname === ApeliePageAlias.Subscribe)
+    ) {
       router.push(ApeliePageAlias.MainPage);
     }
   }, [loggedUser]);
 
-  useLayoutEffect(() => {
-    const userAuth = localStorage.getItem('userAuth');
-    if (userAuth) {
-      ApiRequester.apelie.defaults.headers.common.Authorization = userAuth;
-    }
-  }, []);
-
   return (
-    <UserContext.Provider value={{ loggedUser, doLogout }}>
-      {children}
+    <UserContext.Provider value={{ loggedUser, updateUserToken, doLogout }}>
+      <>
+        {!getLoggedUser.isIdle && children}
+      </>
     </UserContext.Provider>
   );
 };

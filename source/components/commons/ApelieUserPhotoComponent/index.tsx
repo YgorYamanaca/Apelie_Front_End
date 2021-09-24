@@ -2,16 +2,13 @@ import React from 'react';
 import StyleApelieUserPhoto from './styles';
 
 interface IApelieUserPhotoComponent {
-  userPhotoUrl: string,
-  size: number,
-  onMouseOnclickAction?: Function,
+  userPhotoUrl: string;
+  size: number;
+  onMouseOnclickAction?: VoidFunction;
 }
 
 const ApelieUserPhotoComponent: React.FunctionComponent<IApelieUserPhotoComponent> = ({
-  userPhotoUrl,
-  size,
-  onMouseOnclickAction,
-  children,
+  userPhotoUrl, size, onMouseOnclickAction, children,
 }) => (
   <StyleApelieUserPhoto.Container
     imgUrl={userPhotoUrl}

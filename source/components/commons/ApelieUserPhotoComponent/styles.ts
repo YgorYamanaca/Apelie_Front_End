@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 interface IStyleApelieUserPhoto {
-  imgUrl: string,
-  size: number
+  imgUrl: string;
+  size: number;
 }
 
 const Container = styled.div<IStyleApelieUserPhoto>`
@@ -12,8 +12,7 @@ const Container = styled.div<IStyleApelieUserPhoto>`
   background-position: center;
   background-size: cover;
   border-radius: 50%;
-  border: 3px solid ${({ theme }) => theme.colors.secondary.main};
-  cursor: pointer;
+  cursor: ${({ imgUrl }) => (imgUrl ? 'pointer' : 'default')};
 `;
 
 const StyleApelieUserPhoto = {

@@ -2,13 +2,9 @@ import React from 'react';
 import ApelieHeader from './ApelieHeader';
 import StyleCommonTemplate from './styles';
 
-const CommonTemplate: React.FC = ({
-  children,
-}) => (
+const CommonTemplate: React.FC = ({ children }) => (
   <StyleCommonTemplate.Container>
-    <>
-      <ApelieHeader />
-    </>
+    <ApelieHeader />
     <StyleCommonTemplate.ChildrenContainer>
       {children}
     </StyleCommonTemplate.ChildrenContainer>

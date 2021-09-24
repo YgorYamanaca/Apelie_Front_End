@@ -1,12 +1,8 @@
 import React from 'react';
 import { withTheme, StyledProps } from 'styled-components';
+import { ISimpleIcon } from '@/types/interfaces/interface-apelie-simple-icon';
 
-interface IIcon {
-  width?: string,
-  height?: string,
-}
-
-const SearchIcon: React.FC<StyledProps<IIcon>> = ({
+const SearchIcon: React.FC<StyledProps<ISimpleIcon>> = ({
   width = '24',
   height = '24',
   theme,

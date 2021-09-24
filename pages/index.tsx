@@ -1,13 +1,14 @@
 import React from 'react';
 import apeliePageHOC from 'template/ApeliePageTemplate/HOC';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import HomeScreen from '@/screens/HomeScreen';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import IStore from '@/types/interfaces/interface-store';
 import ApiRequester from '@/services/apiRequester';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await ApiRequester.apelie.get('/store')
+  const response = await ApiRequester.apelie
+    .get('/stores')
     .then((serverResponse) => serverResponse.data)
     .catch(() => []);
   return {
@@ -18,14 +19,14 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 interface IHome {
-  stores: IStore[],
+  stores: IStore[];
 }
 
-const Home:React.FC<IHome> = ({
+const Home: React.FC<IHome> = ({
   stores,
 }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <>
-    <HomeScreen stores={stores} />
+    <HomeScreen stores={[...stores, ...stores, ...stores, ...stores, ...stores]} />
   </>
 );
 

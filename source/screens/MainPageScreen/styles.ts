@@ -1,5 +1,5 @@
-import breakpointsMedia from '@/utils/breakpointsMedia';
 import styled, { css } from 'styled-components';
+import breakpointsMedia from '@/utils/breakpointsMedia';
 
 const Container = styled.div`
   display: flex;
@@ -14,10 +14,9 @@ const PageSection = styled.section`
   margin-top: 20px;
   ${breakpointsMedia({
     md: css`
-        padding-bottom: 15px;
-      `,
-  })
-}
+      padding-bottom: 15px;
+    `,
+  })}
 `;
 
 const MainPageScreenStyle = {

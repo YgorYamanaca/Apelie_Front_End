@@ -1,35 +1,25 @@
-import IToastObject from '@/types/interfaces/interface-toast';
 import React, {
-  createContext, useState, useCallback,
+  createContext, useState,
 } from 'react';
+import IToastObject from '@/types/interfaces/interface-toast';
 import ApelieToastComponent from './ApelieToast';
 
 interface IToastContext {
-  setToastMessage: React.Dispatch<React.SetStateAction<IToastObject | undefined>>
+  setToastMessage: React.Dispatch<
+    React.SetStateAction<IToastObject | undefined>
+  >;
 }
 
-export const ToastContext = createContext<IToastContext>({ setToastMessage: () => {} });
+export const ToastContext = createContext<IToastContext>({
+  setToastMessage: () => '',
+});
 
 const ApelieToastProvider: React.FC = ({ children }) => {
-  const [TostMessageObject, setToastMessage] = useState<IToastObject>();
-
-  const closeToast = useCallback(
-    () => {
-      setToastMessage(undefined);
-    },
-    [TostMessageObject],
-  );
+  const [tostMessageObject, setToastMessage] = useState<IToastObject>();
 
   return (
     <ToastContext.Provider value={{ setToastMessage }}>
-      {TostMessageObject
-        && (
-          <ApelieToastComponent
-            message={TostMessageObject.message}
-            type={TostMessageObject.type}
-            closeFunction={closeToast}
-          />
-        )}
+      <ApelieToastComponent id="apelie-toast" messageObject={tostMessageObject} />
       {children}
     </ToastContext.Provider>
   );

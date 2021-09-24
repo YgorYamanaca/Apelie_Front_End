@@ -1,16 +1,17 @@
-import breakpointsMedia from '@/utils/breakpointsMedia';
 import styled, { css } from 'styled-components';
+import breakpointsMedia from '@/utils/breakpointsMedia';
 
 const Container = styled.div`
   display: flex;
+  position: relative;
   background-color: ${({ theme }) => theme.colors.background.default};
   box-shadow: ${({ theme }) => theme.shadow.nivel1};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 200px;
-  padding: 15px 10px;
+  height: 250px;
+  padding: 10px 5px;
   flex-direction: column;
   cursor: pointer;
-  align-items: center;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   user-select: none;
   :hover {
@@ -21,78 +22,108 @@ const Container = styled.div`
   ${breakpointsMedia({
     md: css`
       align-content: center;
-      flex-direction: row;
       margin: 0 35px;
-      width: 450px;
+      padding: 5px;
+      width: 425px;
+      height: 215px;
     `,
   })}
 `;
 
 interface IPhotoContainer {
-  imgUrl: string
+  imgUrl: string;
 }
 
 const StorePhotoContainer = styled.div<IPhotoContainer>`
   position: relative;
+  margin-top: 25%;
   width: 125px;
   height: 125px;
   background-image: url(${({ imgUrl }) => imgUrl});
   background-position: center;
   background-size: cover;
   border-radius: 50%;
-  border: 3px solid ${({ theme }) => theme.colors.primary.alternative};
+  border: 3px solid ${({ theme }) => theme.colors.background.paper};
 
   ${breakpointsMedia({
     md: css`
-        width: 145px;
-        height: 145px;
-      `,
+      border-radius: 0%;
+      width: 100px;
+      height: 100px;
+      margin-top: 0;
+      margin-left: 10px;
+    `,
   })}
 `;
 
 const UserPhotoContainer = styled.div`
   & > div {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: -10px;
+    right: -15px;
+    ${breakpointsMedia({
+    md: css`
+        bottom: -10px;
+        right: -20px;
+      `,
+  })}
   }
 `;
 
-const PhotoContainer = styled.div`
+const StoreOverflowContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  & > :first-child {
-    margin-bottom: 10px;
-  }
+  position: absolute;
+  justify-content: center;
+  width: 100%;
   ${breakpointsMedia({
     md: css`
-      padding: 10px;
+      height: 100%;
+      width: auto;
+      justify-content: flex-start;
+      align-items: center;
       display: flex;
-      flex: 1;
+    `,
+  })}
+`;
+
+const StoreAndScoreContainer = styled.div`
+  display: flex;
+  margin-top: 50px;
+  flex-direction: column;
+
+  & > div :last-child {
+    margin-left: auto;
+  }
+
+  ${breakpointsMedia({
+    md: css`
+      flex-direction: row;
+      padding: 5px 10px;
+      display: flex;
+      height: 100%;
+      margin-left: 125px;
+      margin-top: 0px;
     `,
   })}
 `;
 
 const TextContainer = styled.div`
   display: flex;
-  flex: 1.1;
   flex-direction: column;
   & > :first-child {
-    margin: 10px 0;
-    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
   }
-  & > :last-child {
-    display: none;
+  & > span {
     text-align: center;
   }
   ${breakpointsMedia({
     md: css`
-      padding: 15px 10px;
-      display: flex;
-      height: 100%;
-      & > :last-child {
+      & > :first-child {
+        font-size: 16px;
+        font-weight: bold;
+      }
+      & > span {
         display: flex;
       }
     `,
@@ -103,7 +134,8 @@ const StoreStyles = {
   Container,
   StorePhotoContainer,
   UserPhotoContainer,
-  PhotoContainer,
+  StoreOverflowContainer,
+  StoreAndScoreContainer,
   TextContainer,
 };
 

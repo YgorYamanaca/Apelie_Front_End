@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import styled, { css } from 'styled-components';
 
 interface IButtonStyle {
-  readonly ghost: boolean,
+  readonly ghost: boolean;
   readonly buttonColor: 'primary' | 'secondary';
 }
 
@@ -21,36 +21,38 @@ const Container = styled.button<IButtonStyle>`
 
   ${({
     theme, disabled, ghost, buttonColor,
-  }) => (
-    disabled ? css`
-    cursor: not-allowed;
-    filter: brightness(0.5);
-  ` : css`
-    cursor: pointer;
-    :active {
-      transform: scale(0.98, 0.98);
-    }
-    ${!ghost ? css`
-      :hover {
-        filter: brightness(0.9);
-      }`
+  }) => (disabled
+    ? css`
+          cursor: not-allowed;
+          filter: brightness(0.5);
+        `
+    : css`
+          cursor: pointer;
+          :active {
+            transform: scale(0.98, 0.98);
+          }
+          ${!ghost
+      ? css`
+                :hover {
+                  filter: brightness(0.9);
+                }
+              `
       : css`
-      & > :only-child {
-        border-bottom: 2px solid ${get(theme, `colors.${buttonColor}.alternative`)};
-      }
-      :hover {
-        & > :only-child {
-          filter: brightness(1.3);
-        }
-      }`
-    }
-  `)};
-  
-  color: ${({ theme, ghost, buttonColor }) => (ghost
-    && get(theme, `colors.${buttonColor}.alternative`)
-  )};
+                & > :only-child {
+                  border-bottom: 2px solid
+                    ${get(theme, `colors.${buttonColor}.alternative`)};
+                }
+                :hover {
+                  & > :only-child {
+                    filter: brightness(1.3);
+                  }
+                }
+              `}
+        `)};
 
-  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+  color: ${({ theme, ghost, buttonColor }) => ghost && get(theme, `colors.${buttonColor}.alternative`)};
+
+  transition: filter 0.3s ease-in-out;
 `;
 
 const ButtonStyle = {

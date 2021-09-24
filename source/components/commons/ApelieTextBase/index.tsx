@@ -5,8 +5,10 @@ import TextBaseStyle from './styles';
 
 interface ITextBase {
   id?: string;
+  text?: string;
+  href?: string;
   variant?: keyof ITypographyVariants;
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'li' | 'a' | 'span' | 'input';
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'li' | 'a' | 'span' | 'input' | 'div';
   type?: string;
   color?: keyof ITextColor | 'none';
   placeholder?: string;
@@ -14,13 +16,14 @@ interface ITextBase {
   name?: string;
   value?: string;
   className?: string;
-  min?: InputHTMLAttributes<HTMLInputElement>['min'],
-  max?: InputHTMLAttributes<HTMLInputElement>['max'],
+  min?: InputHTMLAttributes<HTMLInputElement>['min'];
+  max?: InputHTMLAttributes<HTMLInputElement>['max'];
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const ApelieTextBase: React.FC<ITextBase> = ({
   id,
+  text,
   variant = 'paragraph1',
   color = 'primary',
   tag = 'span',
@@ -36,7 +39,7 @@ const ApelieTextBase: React.FC<ITextBase> = ({
     color={color}
     {...props}
   >
-    {children}
+    {children || text}
   </TextBaseStyle.Container>
 );
 

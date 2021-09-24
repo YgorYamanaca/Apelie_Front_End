@@ -1,6 +1,6 @@
+import styled, { css } from 'styled-components';
 import Animations from '@/utils/animations';
 import breakpointsMedia from '@/utils/breakpointsMedia';
-import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   flex: 1;
@@ -8,34 +8,21 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-interface ICarouselContainer {
-  length: number;
-}
-
-const CarouselContainer = styled.div<ICarouselContainer>`
+const CarouselContainer = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  & > div:first-child, & > div:last-child {
-    display: none;
-    ${({ length }) => breakpointsMedia({
-    sm: css`
-          display: ${(length > 2 ? 'flex' : 'none')};
-        `,
-  })}
-  }
 `;
 
 const TextContainer = styled.div`
   padding: 0 5px;
   ${breakpointsMedia({
     md: css`
-        padding-top: 10px;
-        padding: 0 35px;
-      `,
-  })
-}
+      padding-top: 10px;
+      padding: 0 35px;
+    `,
+  })}
 `;
 interface IBaseContainer {
   baseSize: number;
@@ -53,12 +40,11 @@ const BaseContainer = styled.div<IBaseContainer>`
   overflow-x: scroll;
   ${({ baseSize, length }) => breakpointsMedia({
     sm: css`
-          height: ${baseSize}px;
-          overflow: hidden;
-          justify-content: ${length > 2 ? 'flex-start' : 'center'};
-        `,
-  })
-}
+        height: ${baseSize}px;
+        overflow: hidden;
+        justify-content: ${length > 2 ? 'flex-start' : 'center'};
+      `,
+  })}
 `;
 
 const CardsContainer = styled.div`

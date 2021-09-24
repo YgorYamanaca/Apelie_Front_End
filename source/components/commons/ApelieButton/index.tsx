@@ -1,14 +1,14 @@
+import React, { ButtonHTMLAttributes } from 'react';
 import ITextColor from '@/types/interfaces/interface-text-color';
 import ITypographyVariants from '@/types/interfaces/interface-typography-variants';
-import React, { ButtonHTMLAttributes } from 'react';
 import ApelieTextBase from '../ApelieTextBase';
 import ButtonStyle from './styles';
 
 interface IButton {
-  id?: string,
-  disabled?: boolean,
-  ghost?: boolean,
-  onClick?: Function,
+  id?: string;
+  disabled?: boolean;
+  ghost?: boolean;
+  onClick?: VoidFunction;
   buttonColor?: 'primary' | 'secondary';
   textColor?: keyof ITextColor | 'none';
   textVariant?: keyof ITypographyVariants;
@@ -20,7 +20,7 @@ const ApelieButton: React.FC<IButton> = ({
   id,
   disabled = false,
   ghost = false,
-  onClick = () => {},
+  onClick = () => '',
   buttonColor = 'primary',
   type = 'button',
   textVariant,

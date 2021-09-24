@@ -1,7 +1,7 @@
 /* eslint-disable indent */
+import styled, { css } from 'styled-components';
 import Animations from '@/utils/animations';
 import breakpointsMedia from '@/utils/breakpointsMedia';
-import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -37,17 +37,17 @@ const ImageContainer = styled.div`
     `,
   })}
 
-&:before {
+  &:before {
     content: '';
     width: 230px;
     height: 230px;
     filter: blur(15px);
     ${breakpointsMedia({
-      md: css`  
+      md: css`
         width: 600px;
         height: 600px;
       `,
-      sm: css`  
+      sm: css`
         width: 350px;
         height: 350px;
       `,
@@ -57,7 +57,7 @@ const ImageContainer = styled.div`
     background-color: ${({ theme }) => theme.colors.secondary.alternative};
     border-radius: 100%;
     top: 50%;
-    left: 50%;  
+    left: 50%;
     transform: translate(-50%, -50%);
     transition: size 5s ease-in-out;
   }
