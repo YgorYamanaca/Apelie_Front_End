@@ -16,7 +16,12 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => (
     <ApelieStoreBackGround
       bannerUrl={store.bannerUrl}
       storeMediaSocialArray={
-        _.keys(_.pick(store, ['facebookAccount', 'youtubeAccount', 'twitterAccount', 'instagramAccount']))
+        _.keys(_.pick(store, [
+          'facebookAccount',
+          'youtubeAccount',
+          'twitterAccount',
+          'instagramAccount',
+        ]))
       }
     />
     <StoreStyles.StoreOverflowContainer>

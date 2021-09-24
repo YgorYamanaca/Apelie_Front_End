@@ -7,6 +7,8 @@ interface IApelieHeader {
 
 const Container = styled.header<IApelieHeader>`
   display: flex;
+  position: absolute;
+  z-index: 1000;
   flex-direction: column;
   width: 100%;
   padding: 10px 20px;
@@ -69,15 +71,11 @@ const HeaderContentBox = styled.div`
 
 const HeaderExpansiveBox = styled.div<IApelieHeader>`
   display: flex;
-  position: absolute;
   background-color: ${({ theme }) => theme.colors.background.paper};
-  box-shadow: ${({ theme }) => theme.shadow.nivel1};
-  z-index: 500;
   flex-direction: column;
   width: 100%;
   height: 0;
   justify-content: flex-start;
-  top: 60px;
   & > button {
     width: fit-content;
     align-items: center;
@@ -85,13 +83,11 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
     margin-bottom: 15px;
     & > svg {
       fill: ${({ theme }) => theme.colors.text.primary};
-      width: 18px;
-      height: 18px;
       margin-right: 10px;
     }
   }
   ${({ headerState }) => css`
-    padding: ${headerState && '25px 15px 5px 15px'};
+    padding: ${headerState && '25px 0px 5px 0px'};
     height: ${headerState && 'auto'};
     order: ${headerState && 2};
     & > * {
@@ -132,8 +128,6 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
         color: ${({ theme }) => theme.colors.text.primary};
         & > svg {
           fill: ${({ theme }) => theme.colors.text.primary};
-          width: 20px;
-          height: 20px;
           margin-right: 8px;
         }
       }
@@ -149,7 +143,7 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
 const UserContainer = styled.div<IApelieHeader>`
   display: ${({ headerState }) => (headerState ? 'flex' : 'none')};
   align-items: center;
-  padding: 15px 20px;
+  padding: 15px 5px;
   margin-top: auto;
   column-gap: 25px;
   border-top: 2px solid ${({ theme }) => theme.colors.divider};
@@ -158,7 +152,6 @@ const UserContainer = styled.div<IApelieHeader>`
   }
   & > :last-child {
     display: flex;
-    margin-left: auto;
   }
   & > :first-child {
     display: flex;
@@ -178,16 +171,17 @@ const UserContainer = styled.div<IApelieHeader>`
 `;
 
 const ExpansiveMenu = styled.div`
-  display: flex;
+  display: none;
   position: absolute;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.background.default};
   flex-direction: column;
   border: 1px solid ${({ theme }) => theme.colors.divider};
   box-shadow: ${({ theme }) => theme.shadow.nivel1};
-  padding: 5px;
-  top: 45px;
-  right: 0;
+  padding: 10px 5px;
+  top: 70px;
+  right: 45px;
+  z-index: 500;
   width: 175px;
   align-items: flex-start;
   & > button#header-change-theme-button,
@@ -195,10 +189,10 @@ const ExpansiveMenu = styled.div`
   button#header-logout-button {
     display: flex;
     color: ${({ theme }) => theme.colors.text.primary};
+    align-items: center;
   }
   & > button {
     width: fit-content;
-    margin: 10px 5px;
   }
   & > button > svg {
     margin-right: 10px;
@@ -214,6 +208,27 @@ const ExpansiveMenu = styled.div`
       transition: fill 0.3s ease-in-out;
     }
   }
+
+  ${breakpointsMedia({
+    sm: css`
+      display: flex;
+    `,
+  })}
+`;
+
+const LoginAndSubscribeTextBox = styled.span`
+  display: flex;
+  width: 130px;
+  & > span > a {
+    color: ${({ theme }) => theme.colors.primary.main};
+  }
+  order: 1;
+
+  ${breakpointsMedia({
+    sm: css`
+      order: 0;
+    `,
+  })}
 `;
 
 const ApelieHeaderStyle = {
@@ -224,6 +239,7 @@ const ApelieHeaderStyle = {
   HeaderExpansiveBox,
   UserContainer,
   ExpansiveMenu,
+  LoginAndSubscribeTextBox,
 };
 
 export default ApelieHeaderStyle;

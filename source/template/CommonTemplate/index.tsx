@@ -4,9 +4,7 @@ import StyleCommonTemplate from './styles';
 
 const CommonTemplate: React.FC = ({ children }) => (
   <StyleCommonTemplate.Container>
-    <>
-      <ApelieHeader />
-    </>
+    <ApelieHeader />
     <StyleCommonTemplate.ChildrenContainer>
       {children}
     </StyleCommonTemplate.ChildrenContainer>

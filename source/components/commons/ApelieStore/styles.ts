@@ -9,7 +9,7 @@ const Container = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 200px;
   height: 250px;
-  padding: 5px;
+  padding: 10px 5px;
   flex-direction: column;
   cursor: pointer;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -23,6 +23,7 @@ const Container = styled.div`
     md: css`
       align-content: center;
       margin: 0 35px;
+      padding: 5px;
       width: 425px;
       height: 215px;
     `,
@@ -88,6 +89,7 @@ const StoreOverflowContainer = styled.div`
 const StoreAndScoreContainer = styled.div`
   display: flex;
   margin-top: 50px;
+  flex-direction: column;
 
   & > div :last-child {
     margin-left: auto;
@@ -95,6 +97,7 @@ const StoreAndScoreContainer = styled.div`
 
   ${breakpointsMedia({
     md: css`
+      flex-direction: row;
       padding: 5px 10px;
       display: flex;
       height: 100%;
@@ -108,21 +111,19 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   & > :first-child {
-    text-align: center;
     font-size: 20px;
     font-weight: bold;
   }
-  & > :last-child {
+  & > span {
     text-align: center;
   }
   ${breakpointsMedia({
     md: css`
       & > :first-child {
-        display: flex;
         font-size: 16px;
         font-weight: bold;
       }
-      & > :last-child {
+      & > span {
         display: flex;
       }
     `,

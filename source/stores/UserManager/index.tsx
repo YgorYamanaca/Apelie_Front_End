@@ -83,7 +83,9 @@ const ApelieUserProvider: React.FC = ({ children }) => {
 
   return (
     <UserContext.Provider value={{ loggedUser, updateUserToken, doLogout }}>
-      {children}
+      <>
+        {!getLoggedUser.isIdle && children}
+      </>
     </UserContext.Provider>
   );
 };

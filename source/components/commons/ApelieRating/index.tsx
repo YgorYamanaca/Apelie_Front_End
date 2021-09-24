@@ -1,5 +1,5 @@
-import React, { useMemo, memo } from 'react';
-import StarEmptyIcon from '@/assets/icons/StarEmptyIcon';
+import React, { memo } from 'react';
+import _ from 'lodash';
 import StarFillIcon from '@/assets/icons/StarFillIcon';
 import ApelieTextBase from '../ApelieTextBase';
 import StyleApelieRating from './styles';
@@ -10,8 +10,10 @@ interface IApelieRating {
 
 const ApelieRating: React.FunctionComponent<IApelieRating> = ({ rating }) => (
   <StyleApelieRating.Container>
-    <StarFillIcon key="fill-star" width="16px" height="16px" />
-    <ApelieTextBase tag="h1" variant="paragraph1" value={`${rating}`} />
+    <StarFillIcon width="16px" height="16px" />
+    <ApelieTextBase tag="span" variant="paragraph1">
+      { _.isInteger(rating) ? `${rating}.0` : rating }
+    </ApelieTextBase>
   </StyleApelieRating.Container>
 );
 

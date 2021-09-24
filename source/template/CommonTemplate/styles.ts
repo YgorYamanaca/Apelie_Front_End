@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import breakpointsMedia from '@/utils/breakpointsMedia';
 
 const Container = styled.div`
   display: flex;
@@ -9,6 +10,12 @@ const Container = styled.div`
 const ChildrenContainer = styled.div`
   display: flex;
   padding: 0 15px;
+  margin-top: 70px;
+  ${breakpointsMedia({
+    sm: css`
+      margin-top: 95px;
+    `,
+  })}
 `;
 
 const StyleCommonTemplate = {

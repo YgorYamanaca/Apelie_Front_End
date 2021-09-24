@@ -12,7 +12,7 @@ const Container = styled.div<IStyleApelieUserPhoto>`
   background-position: center;
   background-size: cover;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: ${({ imgUrl }) => (imgUrl ? 'pointer' : 'default')};
 `;
 
 const StyleApelieUserPhoto = {

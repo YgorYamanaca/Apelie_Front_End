@@ -8,7 +8,7 @@ import ApiRequester from '@/services/apiRequester';
 
 export const getStaticProps: GetStaticProps = async () => {
   const response = await ApiRequester.apelie
-    .get('/store')
+    .get('/stores')
     .then((serverResponse) => serverResponse.data)
     .catch(() => []);
   return {

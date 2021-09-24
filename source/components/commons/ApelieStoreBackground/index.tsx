@@ -16,10 +16,10 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
   storeMediaSocialArray,
 }) => {
   const socialMediaIcons = {
-    facebookAccount: <FacebookIcon />,
-    youtubeAccount: <YoutubeIcon />,
-    twitterAccount: <TwitterIcon />,
-    instagramAccount: <InstagramIcon />,
+    facebookAccount: <FacebookIcon key="facebook" />,
+    youtubeAccount: <YoutubeIcon key="youtube" />,
+    twitterAccount: <TwitterIcon key="twitter" />,
+    instagramAccount: <InstagramIcon key="instagram" />,
   };
 
   return (

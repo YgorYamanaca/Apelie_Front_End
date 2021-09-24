@@ -22,6 +22,9 @@ const ChildrenContainer = styled.div`
 
   flex-wrap: wrap;
   justify-content: center;
+  & > div {
+    margin: 25px 15px;
+  }
   ${breakpointsMedia({
     sm: css`
       padding: 20px 75px;

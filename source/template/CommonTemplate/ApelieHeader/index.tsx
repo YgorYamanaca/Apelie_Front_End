@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
 import { StyledProps, withTheme } from 'styled-components';
 import Image from 'next/image';
@@ -12,19 +11,18 @@ import MoonIcon from '@/assets/icons/MoonIcon';
 import ShoppingCart from '@/assets/icons/ShoppingCart';
 import SunIcon from '@/assets/icons/SunIcon';
 import ApelieButton from '@/components/commons/ApelieButton';
-import ApelieIconButton from '@/components/commons/ApelieIconButton';
 import ApelieTextBase from '@/components/commons/ApelieTextBase';
 import ApelieUserPhotoComponent from '@/components/commons/ApelieUserPhotoComponent';
 import { AppThemeContext } from '@/stores/ThemeManager';
 import { UserContext } from '@/stores/UserManager';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import ApelieHeaderStyle from './styles';
+import StoreIcon from '@/assets/icons/StoreIcon';
 
 const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
   const [isMenuClose, setIsMenuClose] = useState(false);
   const { actualTheme, toggleTheme } = useContext(AppThemeContext);
   const { loggedUser, doLogout } = useContext(UserContext);
-  const router = useRouter();
   const [isUserPhotoMenuOpen, setIsUserPhotoMenuOpen] = useState(false);
 
   const HeaderContent = [
@@ -32,7 +30,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       id="header-carry-bag-button"
       key="header-carry-bag-button"
       textVariant="paragraph1"
-      icon={<CarryBagIcon />}
+      icon={<CarryBagIcon height="16" width="16" />}
       ghost
     >
       Pedidos
@@ -41,42 +39,60 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       id="header-chat-button"
       key="header-chat-button"
       textVariant="paragraph1"
-      icon={<ChatIcon />}
+      icon={<ChatIcon height="16" width="16" />}
       ghost
     >
       Chat
     </ApelieButton>,
     <ApelieButton
+      key="header-cart-button"
+      id="header-cart-button"
+      textVariant="paragraph1"
+      icon={<ShoppingCart height="16" width="16" />}
+      ghost
+    >
+      Carrinho
+    </ApelieButton>,
+    <ApelieButton
+      key="header-config-button"
+      id="header-config-button"
+      textVariant="paragraph1"
+      icon={<GearIcon height="16" width="16" />}
+      ghost
+    >
+      Configurações
+    </ApelieButton>,
+    <ApelieButton
+      key="header-store-button"
+      id="header-store-button"
+      textVariant="paragraph1"
+      icon={<StoreIcon height="16" width="16" />}
+      ghost
+    >
+      Cadastrar Loja
+    </ApelieButton>,
+    <ApelieButton
       key="header-change-theme-button"
       id="header-change-theme-button"
       textVariant="paragraph1"
-      icon={!(actualTheme === 'Dark') ? <MoonIcon /> : <SunIcon />}
+      icon={!(actualTheme === 'Dark')
+        ? <MoonIcon height="16" width="16" />
+        : <SunIcon height="16" width="16" />}
       ghost
       onClick={() => toggleTheme()}
     >
       Trocar de tema
     </ApelieButton>,
     <ApelieButton
-      key="header-config-button"
-      id="header-config-button"
+      key="header-logout-button"
+      id="header-logout-button"
       textVariant="paragraph1"
-      icon={<GearIcon />}
+      icon={<LogoutIcon height="16" width="16" />}
+      onClick={() => doLogout()}
       ghost
     >
-      Configurações
+      Sair
     </ApelieButton>,
-    loggedUser && (
-      <ApelieButton
-        key="header-logout-button"
-        id="header-logout-button"
-        textVariant="paragraph1"
-        icon={<LogoutIcon />}
-        onClick={() => doLogout()}
-        ghost
-      >
-        Sair
-      </ApelieButton>
-    ),
   ];
 
   return (
@@ -111,44 +127,49 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
         </ApelieHeaderStyle.HeaderIcon>
       </ApelieHeaderStyle.HeaderContentBox>
       <ApelieHeaderStyle.HeaderExpansiveBox headerState={isMenuClose}>
-        {HeaderContent.map((headerContent) => headerContent)}
+        {loggedUser
+          && HeaderContent.map((headerContent) => headerContent)}
         <ApelieHeaderStyle.UserContainer headerState={isMenuClose}>
+          {!loggedUser && (
+            <ApelieHeaderStyle.LoginAndSubscribeTextBox>
+              <ApelieTextBase variant="paragraph1">
+                Faça&nbsp;
+                <ApelieTextBase
+                  tag="a"
+                  href={ApeliePageAlias.Login}
+                  variant="paragraph1"
+                  text="Login"
+                />
+                  &nbsp;ou crie seu&nbsp;
+                <ApelieTextBase
+                  tag="a"
+                  href={ApeliePageAlias.Subscribe}
+                  variant="paragraph1"
+                  text="Cadastro"
+                />
+              </ApelieTextBase>
+            </ApelieHeaderStyle.LoginAndSubscribeTextBox>
+          )}
           <ApelieUserPhotoComponent
             userPhotoUrl={
               loggedUser?.photoUrl || '/images/User/default-user-image.png'
             }
             size={45}
-            onMouseOnclickAction={() => (loggedUser
-              ? !isMenuClose && setIsUserPhotoMenuOpen(!isUserPhotoMenuOpen)
-              : router.push(ApeliePageAlias.Login))}
-          >
-            {isUserPhotoMenuOpen && (
-              <ApelieHeaderStyle.ExpansiveMenu>
-                {HeaderContent.slice(
-                  HeaderContent.length - 3,
-                  HeaderContent.length,
-                ).map((headerContent) => headerContent)}
-              </ApelieHeaderStyle.ExpansiveMenu>
-            )}
-          </ApelieUserPhotoComponent>
+            onMouseOnclickAction={() => loggedUser && setIsUserPhotoMenuOpen(!isUserPhotoMenuOpen)}
+          />
+          {isUserPhotoMenuOpen && loggedUser && (
+            <ApelieHeaderStyle.ExpansiveMenu>
+              {HeaderContent.slice(
+                HeaderContent.length - 3,
+                HeaderContent.length,
+              ).map((headerContent) => headerContent)}
+            </ApelieHeaderStyle.ExpansiveMenu>
+          )}
           {loggedUser?.fullName && (
             <ApelieTextBase id="header-user-name" variant="paragraph1">
               {loggedUser?.fullName}
             </ApelieTextBase>
           )}
-          {!loggedUser && (
-            <ApelieButton
-              id="verify-login-user-button"
-              textVariant="subTitle"
-              ghost
-              onClick={() => router.push(ApeliePageAlias.Login)}
-            >
-              Entrar
-            </ApelieButton>
-          )}
-          <ApelieIconButton color={theme.colors.text.primary}>
-            <ShoppingCart id="header-shopping-card" width="30" height="30" />
-          </ApelieIconButton>
         </ApelieHeaderStyle.UserContainer>
       </ApelieHeaderStyle.HeaderExpansiveBox>
     </ApelieHeaderStyle.Container>
