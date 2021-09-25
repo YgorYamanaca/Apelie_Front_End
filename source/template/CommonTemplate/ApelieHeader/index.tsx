@@ -160,7 +160,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
           {isUserPhotoMenuOpen && loggedUser && (
             <ApelieHeaderStyle.ExpansiveMenu>
               {HeaderContent.slice(
-                HeaderContent.length - 3,
+                HeaderContent.length - 4,
                 HeaderContent.length,
               ).map((headerContent) => headerContent)}
             </ApelieHeaderStyle.ExpansiveMenu>

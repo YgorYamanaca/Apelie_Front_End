@@ -133,7 +133,8 @@ const HeaderExpansiveBox = styled.div<IApelieHeader>`
       }
       & > button#header-change-theme-button,
       button#header-config-button,
-      button#header-logout-button {
+      button#header-logout-button,
+      button#header-store-button {
         display: none;
       }
     `,
@@ -186,7 +187,8 @@ const ExpansiveMenu = styled.div`
   align-items: flex-start;
   & > button#header-change-theme-button,
   button#header-config-button,
-  button#header-logout-button {
+  button#header-logout-button,
+  button#header-store-button {
     display: flex;
     color: ${({ theme }) => theme.colors.text.primary};
     align-items: center;

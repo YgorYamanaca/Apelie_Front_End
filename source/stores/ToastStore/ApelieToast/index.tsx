@@ -48,32 +48,34 @@ const ApelieToastComponent: React.FC<IApelieToastComponent> = ({
   }, [queue]);
 
   return (
-    <StyleApelieToast.ToastQueueContainer id={`${id}-toast-messages-id`}>
-      {
-        queue.length > 0 && (
-          queue?.map((message, index) => (
-            <StyleApelieToast.Container
-              id={`${id}-message-${index + 1}-id`}
-              key={`${id}-message-${index + 1}-key`}
-              type={message.type}
-              className="messageClass"
-            >
-              <StyleApelieToast.TextBox>
-                <StyleApelieToast.ToastIcon>
-                  {ToastIcons[message.type]}
-                </StyleApelieToast.ToastIcon>
-                <ApelieTextBase variant="paragraph1">{message.message}</ApelieTextBase>
-              </StyleApelieToast.TextBox>
-              <StyleApelieToast.CloseIconBox
-                onClick={() => close(message.id)}
+    queue.length > 0 ? (
+      <StyleApelieToast.ToastQueueContainer id={`${id}-toast-messages-id`}>
+        {
+          queue.length > 0 && (
+            queue?.map((message, index) => (
+              <StyleApelieToast.Container
+                id={`${id}-message-${index + 1}-id`}
+                key={`${id}-message-${index + 1}-key`}
+                type={message.type}
+                className="messageClass"
               >
-                <CloseIcon />
-              </StyleApelieToast.CloseIconBox>
-            </StyleApelieToast.Container>
-          ))
-        )
-      }
-    </StyleApelieToast.ToastQueueContainer>
+                <StyleApelieToast.TextBox>
+                  <StyleApelieToast.ToastIcon>
+                    {ToastIcons[message.type]}
+                  </StyleApelieToast.ToastIcon>
+                  <ApelieTextBase variant="paragraph1">{message.message}</ApelieTextBase>
+                </StyleApelieToast.TextBox>
+                <StyleApelieToast.CloseIconBox
+                  onClick={() => close(message.id)}
+                >
+                  <CloseIcon />
+                </StyleApelieToast.CloseIconBox>
+              </StyleApelieToast.Container>
+            ))
+          )
+        }
+      </StyleApelieToast.ToastQueueContainer>
+    ) : <></>
   );
 };
 

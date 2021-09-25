@@ -3,17 +3,17 @@ import apeliePageHOC from 'template/ApeliePageTemplate/HOC';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import MainPageScreen from '@/screens/MainPageScreen';
 
-const MainPage: React.FC = () => (
+const RegisterStorePage: React.FC = () => (
   <>
     <MainPageScreen />
   </>
 );
 
-export default apeliePageHOC(MainPage, {
+export default apeliePageHOC(RegisterStorePage, {
   apelieTemplateProps: {
     SEOProps: {
-      pageTitle: 'Página Principal - Apelie',
-      url: ApeliePageAlias.MainPage,
+      pageTitle: 'Cadastro de Loja - Apelie',
+      url: ApeliePageAlias.RegisterStorePage,
     },
     PAGEProps: {
       template: 'COMMON',

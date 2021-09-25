@@ -6,6 +6,8 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 const ToastQueueContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  padding: 5px;
   position: absolute;
   z-index: 1500;
   ${breakpointsMedia({
@@ -13,6 +15,7 @@ const ToastQueueContainer = styled.div`
       top: 25px;
       right: 25px;
       width: auto;
+      padding: 0px;
     `,
   })}
 

@@ -9,8 +9,10 @@
     "test": "eslint --ignore-path .gitignore . --ext .tsx,.ts"
   },
   "dependencies": {
+    "@types/js-cookie": "^2.2.7",
     "axios": "^0.21.1",
     "formik": "^2.2.9",
+    "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
     "next": "^11.1.0",
     "pinst": "^2.1.6",

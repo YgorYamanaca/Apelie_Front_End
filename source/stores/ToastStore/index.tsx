@@ -1,5 +1,5 @@
 import React, {
-  createContext, useState,
+  createContext, useEffect, useState,
 } from 'react';
 import IToastObject from '@/types/interfaces/interface-toast';
 import ApelieToastComponent from './ApelieToast';
@@ -19,7 +19,7 @@ const ApelieToastProvider: React.FC = ({ children }) => {
 
   return (
     <ToastContext.Provider value={{ setToastMessage }}>
-      {tostMessageObject && <ApelieToastComponent id="apelie-toast" messageObject={tostMessageObject} />}
+      <ApelieToastComponent id="apelie-toast" messageObject={tostMessageObject} />
       {children}
     </ToastContext.Provider>
   );
