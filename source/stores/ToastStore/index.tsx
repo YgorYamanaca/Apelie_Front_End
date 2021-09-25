@@ -19,7 +19,7 @@ const ApelieToastProvider: React.FC = ({ children }) => {
 
   return (
     <ToastContext.Provider value={{ setToastMessage }}>
-      <ApelieToastComponent id="apelie-toast" messageObject={tostMessageObject} />
+      {tostMessageObject && <ApelieToastComponent id="apelie-toast" messageObject={tostMessageObject} />}
       {children}
     </ToastContext.Provider>
   );
