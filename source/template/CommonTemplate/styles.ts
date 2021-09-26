@@ -9,6 +9,7 @@ const Container = styled.div`
 
 const ChildrenContainer = styled.div`
   display: flex;
+  flex: 1;
   padding: 0 15px;
   margin-top: 70px;
   ${breakpointsMedia({

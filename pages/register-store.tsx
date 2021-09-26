@@ -1,11 +1,11 @@
 import React from 'react';
 import apeliePageHOC from 'template/ApeliePageTemplate/HOC';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
-import MainPageScreen from '@/screens/MainPageScreen';
+import RegisterStoreScreen from '@/screens/RegisterStoreScreen';
 
 const RegisterStorePage: React.FC = () => (
   <>
-    <MainPageScreen />
+    <RegisterStoreScreen />
   </>
 );
 

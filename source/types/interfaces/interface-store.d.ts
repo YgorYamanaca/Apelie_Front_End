@@ -4,7 +4,7 @@ interface IStore {
   storeId: number;
   owner: IOwner;
   twitterAccount: string;
-  category: string;
+  category: string[];
   paymentMethods: Array;
   instagramAccount: string;
   state: string;
@@ -25,4 +25,26 @@ interface IStore {
   logoUrl: string;
 }
 
-export default IStore;
+interface IStoreRequest {
+  twitterAccount: string,
+  categories: string[],
+  instagramAccount: string,
+  state: string,
+  facebookAccount: string,
+  youtubeAccount: string,
+  bannerImage: string,
+  logoImage: string,
+  primaryColor: string,
+  secondaryColor: string,
+  street: string,
+  city: string,
+  cep: string,
+  name: string,
+  email: string,
+  phone: string,
+  addressNumber: string,
+  neighbourhood: string,
+  description: string
+}
+
+export default { IStore, IStoreRequest };

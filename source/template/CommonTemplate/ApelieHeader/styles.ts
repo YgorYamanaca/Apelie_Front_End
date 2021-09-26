@@ -30,6 +30,9 @@ const Container = styled.header<IApelieHeader>`
 
 const LogoContainer = styled.div`
   display: flex;
+  & > div {
+    cursor: pointer;
+  }
   & > div#mobile-logo {
     display: flex;
   }

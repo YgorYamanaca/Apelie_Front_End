@@ -17,7 +17,7 @@ const ApelieCookiesNotification: React.VoidFunctionComponent = () => {
 
   const acceptCookies = () => {
     setAcceptedCookies(true);
-    Cookies.set(COOKIE_NAME, 'accepted', { expires: 365 });
+    Cookies.set(COOKIE_NAME, 'accepted', { expires: 30 });
   };
 
   return (

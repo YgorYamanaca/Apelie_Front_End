@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { StyledProps, withTheme } from 'styled-components';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import CarryBagIcon from '@/assets/icons/CarryBagIcon';
 import ChatIcon from '@/assets/icons/ChatIcon';
 import CloseIcon from '@/assets/icons/CloseIcon';
@@ -24,6 +25,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
   const { actualTheme, toggleTheme } = useContext(AppThemeContext);
   const { loggedUser, doLogout } = useContext(UserContext);
   const [isUserPhotoMenuOpen, setIsUserPhotoMenuOpen] = useState(false);
+  const router = useRouter();
 
   const HeaderContent = [
     <ApelieButton
@@ -68,6 +70,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       textVariant="paragraph1"
       icon={<StoreIcon height="16" width="16" />}
       ghost
+      onClick={() => router.push(ApeliePageAlias.RegisterStorePage)}
     >
       Cadastrar Loja
     </ApelieButton>,
@@ -98,7 +101,9 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
   return (
     <ApelieHeaderStyle.Container headerState={isMenuClose}>
       <ApelieHeaderStyle.HeaderContentBox>
-        <ApelieHeaderStyle.LogoContainer>
+        <ApelieHeaderStyle.LogoContainer
+          onClick={() => router.push(ApeliePageAlias.MainPage)}
+        >
           <div id="mobile-logo">
             <Image
               src="/images/Apelie/logo.png"
@@ -128,7 +133,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       </ApelieHeaderStyle.HeaderContentBox>
       <ApelieHeaderStyle.HeaderExpansiveBox headerState={isMenuClose}>
         {loggedUser
-          && HeaderContent.map((headerContent) => headerContent)}
+          && HeaderContent.slice(0, 3).map((headerContent) => headerContent)}
         <ApelieHeaderStyle.UserContainer headerState={isMenuClose}>
           {!loggedUser && (
             <ApelieHeaderStyle.LoginAndSubscribeTextBox>

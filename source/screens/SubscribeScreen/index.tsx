@@ -147,7 +147,6 @@ const SubscribeScreen: React.FC = () => {
         <ApelieButton
           type="submit"
           disabled={isDisabled}
-          textColor="contrastText"
         >
           Cadastre-se
         </ApelieButton>

@@ -100,7 +100,6 @@ const LoginScreen: React.FC = () => {
         <ApelieButton
           type="submit"
           disabled={isDisabled}
-          textColor="contrastText"
         >
           Entrar
         </ApelieButton>

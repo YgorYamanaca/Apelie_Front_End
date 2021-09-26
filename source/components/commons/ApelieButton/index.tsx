@@ -10,6 +10,7 @@ interface IButton {
   ghost?: boolean;
   onClick?: VoidFunction;
   buttonColor?: 'primary' | 'secondary';
+  buttonType?: 'primary' | 'secondary';
   textColor?: keyof ITextColor | 'none';
   textVariant?: keyof ITypographyVariants;
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
@@ -22,9 +23,10 @@ const ApelieButton: React.FC<IButton> = ({
   ghost = false,
   onClick = () => '',
   buttonColor = 'primary',
+  buttonType = 'primary',
   type = 'button',
   textVariant,
-  textColor,
+  textColor = 'contrastText',
   children,
   icon,
 }) => (
@@ -33,6 +35,7 @@ const ApelieButton: React.FC<IButton> = ({
     disabled={disabled}
     ghost={ghost}
     buttonColor={buttonColor}
+    buttonType={buttonType}
     type={type}
     onClick={() => !disabled && onClick && onClick()}
   >

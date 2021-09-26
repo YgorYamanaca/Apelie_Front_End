@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 interface IButtonStyle {
   readonly ghost: boolean;
   readonly buttonColor: 'primary' | 'secondary';
+  readonly buttonType: 'primary' | 'secondary';
 }
 
 const Container = styled.button<IButtonStyle>`
@@ -11,10 +12,14 @@ const Container = styled.button<IButtonStyle>`
   justify-content: center;
   width: 100%;
   outline: none;
-  border: 0;
   user-select: none;
-  background-color: ${({ theme, buttonColor, ghost }) => (
-    ghost ? 'transparent' : get(theme, `colors.${buttonColor}.alternative`)
+  background-color: ${({
+    theme, buttonColor, ghost, buttonType,
+  }) => (
+    ghost || buttonType === 'secondary' ? 'transparent' : get(theme, `colors.${buttonColor}.alternative`)
+  )};
+  border: ${({ theme, buttonType, buttonColor }) => (
+    buttonType === 'primary' ? '0' : `1px solid ${get(theme, `colors.${buttonColor}.alternative`)}`
   )};
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 8px;

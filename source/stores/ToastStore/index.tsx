@@ -1,5 +1,5 @@
 import React, {
-  createContext, useEffect, useState,
+  createContext, useState,
 } from 'react';
 import IToastObject from '@/types/interfaces/interface-toast';
 import ApelieToastComponent from './ApelieToast';
