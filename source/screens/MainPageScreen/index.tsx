@@ -5,7 +5,7 @@ import IApelieTheme from '@/types/interfaces/interface-apelie-theme';
 import ApelieTheme from '@/components/commons/ApelieTheme';
 import { getStore } from '@/services/store';
 import ApelieStore from '@/components/commons/ApelieStore';
-import IStore from '@/types/interfaces/interface-store';
+import { IStore } from '@/types/interfaces/interface-store';
 import ApelieFlexBox from '@/components/commons/ApelieFlexBox';
 import ApelieCarousel from '@/components/commons/ApelieCarousel';
 import MainPageScreenStyle from './styles';

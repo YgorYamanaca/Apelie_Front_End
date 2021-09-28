@@ -28,3 +28,12 @@ export function isValidateSubscribeDate(date: string): boolean {
   const sixteenYearsAgo = new Date(toDay.getFullYear() - 16);
   return testDate < toDay && testDate < sixteenYearsAgo;
 }
+
+export function isImageExist(file: string): boolean {
+  const img = new Image();
+  img.src = file;
+  if (img.height > 0) {
+    return true;
+  }
+  return false;
+}

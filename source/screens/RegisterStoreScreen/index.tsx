@@ -1,13 +1,20 @@
-import React, { ReactElement, useCallback, useState } from 'react';
+import React, {
+  ChangeEvent, ReactElement, useCallback, useState,
+} from 'react';
 import ApeliePageTitle from '@/components/commons/ApeliePageTitle';
 import RegisterStoreScreenStyle from './styles';
 import ApelieButton from '@/components/commons/ApelieButton';
+import ApelieUploadPhoto from '@/components/commons/ApelieUploadPhoto';
+import { IStoreRequest } from '@/types/interfaces/interface-store';
+import ApelieInputField from '@/components/commons/ApelieInputField';
+import handleChange from '@/utils/formUtils';
 
 interface IRegister {
   title: string;
   content: ReactElement;
   backButtonAction?: VoidFunction;
   nextButtonAction: VoidFunction;
+  disabledCondition: boolean;
 }
 
 interface IRegisterStoreSteps {
@@ -17,25 +24,90 @@ interface IRegisterStoreSteps {
   addressStep: IRegister;
 }
 
+const INITIAL_REQUEST: IStoreRequest = {
+  twitterAccount: '',
+  categories: [],
+  instagramAccount: '',
+  state: '',
+  facebookAccount: '',
+  youtubeAccount: '',
+  bannerImage: '',
+  logoImage: '',
+  primaryColor: '',
+  secondaryColor: '',
+  street: '',
+  city: '',
+  cep: '',
+  name: '',
+  email: '',
+  phone: '',
+  addressNumber: '',
+  neighbourhood: '',
+  description: '',
+};
+
 const RegisterStoreScreen: React.FC = () => {
   const [step, setStep] = useState<keyof IRegisterStoreSteps>('firstStep');
-  const [registerStoreRequest, setRegisterStoreRequest] = useState();
+  const [registerStoreRequest, setRegisterStoreRequest] = useState<IStoreRequest>(INITIAL_REQUEST);
+
+  const handleUploadStoreImage = useCallback(
+    (logoImage: string) => {
+      setRegisterStoreRequest({
+        ...registerStoreRequest,
+        logoImage,
+      });
+    },
+    [registerStoreRequest],
+  );
 
   const validStep = useCallback(
     (stepToBeValidated: keyof IRegisterStoreSteps) => {
-      console.log(stepToBeValidated, registerStoreRequest);
-
       setStep(stepToBeValidated);
     },
     [step, registerStoreRequest],
   );
 
+  const firstStepContent = (
+    <RegisterStoreScreenStyle.FirstStepContainer>
+      <div id="store-logo-image-content">
+        <ApelieUploadPhoto
+          onImageSelect={handleUploadStoreImage}
+          textOfUploadDragArea="Faça o upload do logo da loja"
+        />
+      </div>
+      <div id="store-detail-content">
+        <ApelieInputField
+          maxLength={35}
+          placeholder="Nome da Loja"
+          name="name"
+          value={registerStoreRequest.name}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest)}
+        />
+
+        <ApelieInputField
+          maxLength={35}
+          placeholder="Nome da Loja"
+          name="name"
+          value={registerStoreRequest.name}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest)}
+        />
+
+        <ApelieInputField
+          maxLength={35}
+          placeholder="Nome da Loja"
+          name="name"
+          value={registerStoreRequest.name}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest)}
+        />
+      </div>
+    </RegisterStoreScreenStyle.FirstStepContainer>
+  );
+
   const firstStep: IRegister = {
     title: 'Cadastro Inicial da Loja',
-    content: (
-      <div>teste1</div>
-    ),
+    content: firstStepContent,
     nextButtonAction: () => validStep('designStep'),
+    disabledCondition: !registerStoreRequest?.logoImage || !registerStoreRequest.name,
   };
 
   const designStep: IRegister = {
@@ -45,6 +117,7 @@ const RegisterStoreScreen: React.FC = () => {
     ),
     backButtonAction: () => setStep('firstStep'),
     nextButtonAction: () => validStep('socialMediaStep'),
+    disabledCondition: true,
   };
 
   const socialMediaStep: IRegister = {
@@ -54,6 +127,7 @@ const RegisterStoreScreen: React.FC = () => {
     ),
     backButtonAction: () => setStep('designStep'),
     nextButtonAction: () => validStep('addressStep'),
+    disabledCondition: true,
   };
 
   const addressStep: IRegister = {
@@ -63,6 +137,7 @@ const RegisterStoreScreen: React.FC = () => {
     ),
     backButtonAction: () => setStep('socialMediaStep'),
     nextButtonAction: () => console.log('Disparar ação'),
+    disabledCondition: true,
   };
 
   const registerStoreSteps: IRegisterStoreSteps = {
@@ -105,6 +180,7 @@ const RegisterStoreScreen: React.FC = () => {
             id={`${step}-next-button`}
             textVariant="paragraph1"
             onClick={() => registerStoreSteps[step]?.nextButtonAction()}
+            disabled={registerStoreSteps[step]?.disabledCondition}
           >
             Proximo
           </ApelieButton>

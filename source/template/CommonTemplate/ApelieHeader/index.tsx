@@ -133,7 +133,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       </ApelieHeaderStyle.HeaderContentBox>
       <ApelieHeaderStyle.HeaderExpansiveBox headerState={isMenuClose}>
         {loggedUser
-          && HeaderContent.slice(0, 3).map((headerContent) => headerContent)}
+          && HeaderContent.map((headerContent) => headerContent)}
         <ApelieHeaderStyle.UserContainer headerState={isMenuClose}>
           {!loggedUser && (
             <ApelieHeaderStyle.LoginAndSubscribeTextBox>

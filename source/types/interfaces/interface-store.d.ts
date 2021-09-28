@@ -1,6 +1,6 @@
 import IOwner from './interface-owner';
 
-interface IStore {
+export interface IStore {
   storeId: number;
   owner: IOwner;
   twitterAccount: string;
@@ -25,7 +25,7 @@ interface IStore {
   logoUrl: string;
 }
 
-interface IStoreRequest {
+export interface IStoreRequest {
   twitterAccount: string,
   categories: string[],
   instagramAccount: string,
@@ -46,5 +46,3 @@ interface IStoreRequest {
   neighbourhood: string,
   description: string
 }
-
-export default { IStore, IStoreRequest };

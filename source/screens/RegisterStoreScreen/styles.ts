@@ -26,7 +26,7 @@ const RegisterStoreContainer = styled.div`
   box-shadow: ${({ theme }) => theme.shadow.nivel1};
   ${breakpointsMedia({
     md: css`
-      width: 1250px;
+      width: 75%;
       padding: 25px;
     `,
   })}
@@ -38,12 +38,13 @@ const RegisterStoreContainerHeader = styled.div`
 `;
 
 const RegisterStoreContainerContent = styled.div`
+  display: flex;
 `;
 
 const RegisterStoreContainerFooter = styled.div`
   display: flex;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 35px;
   align-self: center;
   gap: 10px;
 
@@ -54,8 +55,38 @@ const RegisterStoreContainerFooter = styled.div`
 
   ${breakpointsMedia({
     md: css`
+      margin-top: 25px;
       align-self: flex-end;
       width: 50%;
+    `,
+  })}
+`;
+
+const FirstStepContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+
+  ${breakpointsMedia({
+    md: css`
+      gap: 35px;
+      flex-direction: row;
+      justify-content: center;
+      & > div#store-logo-image-content {
+        display: flex;
+        width: auto;
+      }
+
+      & > div#store-detail-content {
+        display: flex;
+        min-width: 300px;
+        justify-content: flex-start;
+        flex-direction: column;
+        gap: 15px;
+      } 
     `,
   })}
 `;
@@ -66,6 +97,7 @@ const RegisterStoreScreenStyle = {
   RegisterStoreContainerHeader,
   RegisterStoreContainerContent,
   RegisterStoreContainerFooter,
+  FirstStepContainer,
 };
 
 export default RegisterStoreScreenStyle;

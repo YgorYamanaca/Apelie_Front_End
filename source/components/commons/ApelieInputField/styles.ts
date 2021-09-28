@@ -4,6 +4,7 @@ import ApelieTextBase from '../ApelieTextBase';
 const Container = styled.div`
   position: relative;
   margin-bottom: 20px;
+  width: 100%;
 `;
 
 const Input = styled(ApelieTextBase)`

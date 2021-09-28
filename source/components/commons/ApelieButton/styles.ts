@@ -16,7 +16,7 @@ const Container = styled.button<IButtonStyle>`
   background-color: ${({
     theme, buttonColor, ghost, buttonType,
   }) => (
-    ghost || buttonType === 'secondary' ? 'transparent' : get(theme, `colors.${buttonColor}.alternative`)
+    ghost || buttonType === 'secondary' ? theme.colors.background.default : get(theme, `colors.${buttonColor}.alternative`)
   )};
   border: ${({ theme, buttonType, buttonColor }) => (
     buttonType === 'primary' ? '0' : `1px solid ${get(theme, `colors.${buttonColor}.alternative`)}`
