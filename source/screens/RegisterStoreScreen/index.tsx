@@ -62,6 +62,7 @@ const RegisterStoreScreen: React.FC = () => {
 
   const validStep = useCallback(
     (stepToBeValidated: keyof IRegisterStoreSteps) => {
+      console.log(registerStoreRequest);
       setStep(stepToBeValidated);
     },
     [step, registerStoreRequest],
@@ -93,11 +94,12 @@ const RegisterStoreScreen: React.FC = () => {
         />
 
         <ApelieInputField
-          maxLength={35}
-          placeholder="Nome da Loja"
-          name="name"
-          value={registerStoreRequest.name}
+          type="textarea"
+          placeholder="Descrição da Loja"
+          name="description"
+          value={registerStoreRequest.description}
           onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest)}
+          maxLength={275}
         />
       </div>
     </RegisterStoreScreenStyle.FirstStepContainer>

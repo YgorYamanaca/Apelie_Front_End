@@ -5,6 +5,11 @@ const Container = styled.div`
   position: relative;
   margin-bottom: 20px;
   width: 100%;
+
+  & > textarea {
+    resize: none;
+    height: 200px;
+  }
 `;
 
 const Input = styled(ApelieTextBase)`

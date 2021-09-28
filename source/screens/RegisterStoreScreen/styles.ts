@@ -22,8 +22,8 @@ const RegisterStoreContainer = styled.div`
   height: auto;
   margin: 25px;
   padding: 15px;
-  border: 1px solid ${({ theme }) => theme.colors.divider};
-  box-shadow: ${({ theme }) => theme.shadow.nivel1};
+  border: 2px solid ${({ theme }) => theme.colors.divider};
+  box-shadow: ${({ theme }) => theme.shadow.nivel3};
   ${breakpointsMedia({
     md: css`
       width: 75%;
@@ -69,7 +69,6 @@ const FirstStepContainer = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 15px;
-
   ${breakpointsMedia({
     md: css`
       gap: 35px;
@@ -85,7 +84,6 @@ const FirstStepContainer = styled.div`
         min-width: 300px;
         justify-content: flex-start;
         flex-direction: column;
-        gap: 15px;
       } 
     `,
   })}

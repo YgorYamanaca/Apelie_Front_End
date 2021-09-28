@@ -34,6 +34,7 @@ const ApelieInputField: React.FC<IInputField> = ({
     <InputFieldStyle.Input
       isError={!!isError}
       type={type}
+      tag={type === 'textarea' ? 'textarea' : 'input'}
       placeholder={placeholder}
       name={name}
       value={value}
@@ -42,6 +43,7 @@ const ApelieInputField: React.FC<IInputField> = ({
       min={min}
       maxLength={maxLength}
     />
+
   </InputFieldStyle.Container>
 );
 
