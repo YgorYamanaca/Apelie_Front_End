@@ -3,14 +3,23 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 
 const Container = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   flex: 1;
   justify-content: flex-start;
   align-items: center;
   padding: 25px 10px;
+  
   ${breakpointsMedia({
     md: css`
       padding: 35px 10px;
+      & > div#image-container {
+        display: flex;
+        position: absolute;
+        justify-content: space-between;
+        width: 100%;
+        bottom: 0;
+      };
     `,
   })}
 `;
@@ -24,10 +33,12 @@ const RegisterStoreContainer = styled.div`
   padding: 15px;
   border: 1px solid ${({ theme }) => theme.colors.divider};
   box-shadow: ${({ theme }) => theme.shadow.nivel3};
+  background-color: ${({ theme }) => theme.colors.background.paper};
+  z-index: 300;
   ${breakpointsMedia({
     md: css`
       width: fit-content;
-      padding: 35px 55px;
+      padding: 20px 55px;
     `,
   })}
 `;
@@ -61,68 +72,85 @@ const RegisterStoreContainerFooter = styled.div`
 
 const FirstStepContainer = styled.div`
   display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
-  gap: 15px;
-  
-  & > div#store-detail-content {
+  width: 100%;
+  & > div#content {
     display: flex;
-    min-width: 90%;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
     flex-direction: column;
-    & > div > input {
-      height: 38px;
-    }
-
-    & > div:last-child {
-      margin: 0;
-    }
-  }
-
-  ${breakpointsMedia({
-    md: css`
-      gap: 35px;
-      flex-direction: row;
-      justify-content: center;
-      & > div#store-logo-image-content {
-        display: flex;
-        width: auto;
+    gap: 15px;
+    
+    & > div > div#store-detail-content {
+      display: flex;
+      min-width: 90%;
+      flex-direction: column;
+      & > div > input {
+        height: 38px;
       }
 
-      & > div#store-detail-content {
-        display: flex;
-        min-width: 300px;
-        justify-content: flex-start;
-        flex-direction: column;
-      } 
-    `,
+      & > div:last-child {
+        margin: 0;
+      }
+    }
+
+    ${breakpointsMedia({
+    md: css`
+        gap: 35px;
+        flex-direction: row;
+        justify-content: center;
+        & > div > div#store-logo-image-content {
+          display: flex;
+          width: auto;
+        }
+
+        & > div > div#store-detail-content {
+          display: flex;
+          min-width: 300px;
+          justify-content: flex-start;
+          flex-direction: column;
+        } 
+      `,
   })}
+  }
 `;
 
 const DesignStepContainer = styled.div`
   display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
-  gap: 15px;
-  
-  & > div#store-banner-image-content {
+  width: 100%;
+  & > div#content {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
     
-  }
+    & > div > div#store-banner-image-content {
+      
+    }
 
-  & > div#store-color-select-content {
-    
-  }
+    & > div > div#store-color-select-content {
+      
+    }
 
-  ${breakpointsMedia({
+    ${breakpointsMedia({
     md: css`
-      gap: 25px;
-      flex-direction: row;
-      justify-content: center;
-    `,
+        gap: 25px;
+        flex-direction: row;
+        justify-content: center;
+      `,
   })}
+  }
+`;
+
+const SocialMediaStepContent = styled.div`
+  display: flex;
+  width: 450px;
+  justify-content: flex-start;
+  flex-direction: column;
 `;
 
 const RegisterStoreScreenStyle = {
@@ -132,6 +160,7 @@ const RegisterStoreScreenStyle = {
   RegisterStoreContainerFooter,
   FirstStepContainer,
   DesignStepContainer,
+  SocialMediaStepContent,
 };
 
 export default RegisterStoreScreenStyle;

@@ -2,7 +2,7 @@ import React, { ChangeEvent, InputHTMLAttributes } from 'react';
 import ApelieTextBase from '../ApelieTextBase';
 import InputFieldStyle from './styles';
 
-interface IInputField {
+export interface IInputField {
   maxLength?: InputHTMLAttributes<HTMLInputElement>['maxLength'];
   min?: InputHTMLAttributes<HTMLInputElement>['min'];
   max?: InputHTMLAttributes<HTMLInputElement>['max'];
