@@ -1,0 +1,44 @@
+{
+	"Create styled-components file": {
+		"scope": "javascript, typescript",
+		"prefix": "styled-components",
+		"body": [
+			"import styled from 'styled-components';",
+			"",
+			"const Container = styled.div`",
+			"`;",
+			"",
+			"const $1 = {",
+			"\tContainer,",
+			"};",
+			"",
+			"export default $2;",
+			"",
+		],
+		"description": "Create struct of styled-components"
+	},
+
+	"Create React-component file": {
+		"scope": "typescriptreact",
+		"prefix": "fc",
+		"body": [
+			"import React from 'react';",
+			"",
+			"interface $1 {",
+			"}",
+			"",			
+			"const $3: React.FC<$2> = ({",
+			"}) => {",
+			"",
+				"\treturn (",
+					"\t\t<div>",
+					"",
+					"\t\t</div>",
+				"\t)",
+			"}",
+			"",
+			"export default $4;",
+		],
+		"description": "Create struct of component"
+	}
+}

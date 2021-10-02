@@ -3,7 +3,7 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 
 const Container = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   align-items: center;
   flex-direction: column;
   z-index: 500;

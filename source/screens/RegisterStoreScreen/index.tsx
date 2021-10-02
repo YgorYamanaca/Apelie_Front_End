@@ -8,6 +8,7 @@ import ApelieUploadPhoto from '@/components/commons/ApelieUploadPhoto';
 import { IStoreRequest } from '@/types/interfaces/interface-store';
 import ApelieInputField from '@/components/commons/ApelieInputField';
 import handleChange from '@/utils/formUtils';
+import ApelieSelectBox from '@/components/commons/ApelieSelectBox';
 
 interface IRegister {
   title: string;
@@ -47,7 +48,7 @@ const INITIAL_REQUEST: IStoreRequest = {
 };
 
 const RegisterStoreScreen: React.FC = () => {
-  const [step, setStep] = useState<keyof IRegisterStoreSteps>('firstStep');
+  const [step, setStep] = useState<keyof IRegisterStoreSteps>('designStep');
   const [registerStoreRequest, setRegisterStoreRequest] = useState<IStoreRequest>(INITIAL_REQUEST);
 
   const handleUploadStoreImage = useCallback(
@@ -60,18 +61,28 @@ const RegisterStoreScreen: React.FC = () => {
     [registerStoreRequest],
   );
 
+  const handleUploadStoreBannerImage = useCallback(
+    (bannerImage: string) => {
+      setRegisterStoreRequest({
+        ...registerStoreRequest,
+        bannerImage,
+      });
+    },
+    [registerStoreRequest],
+  );
+
   const validStep = useCallback(
     (stepToBeValidated: keyof IRegisterStoreSteps) => {
-      console.log(registerStoreRequest);
       setStep(stepToBeValidated);
     },
     [step, registerStoreRequest],
   );
 
-  const firstStepContent = (
+  const FirstStepContent = (
     <RegisterStoreScreenStyle.FirstStepContainer>
       <div id="store-logo-image-content">
         <ApelieUploadPhoto
+          selectedPhotoKey="logoImage"
           onImageSelect={handleUploadStoreImage}
           textOfUploadDragArea="Faça o upload do logo da loja"
         />
@@ -85,12 +96,19 @@ const RegisterStoreScreen: React.FC = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest)}
         />
 
-        <ApelieInputField
-          maxLength={35}
-          placeholder="Nome da Loja"
-          name="name"
-          value={registerStoreRequest.name}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest)}
+        <ApelieSelectBox
+          placeholder="Escolha a categoria da loja..."
+          type="MULTI"
+          width="100%"
+          onChange={(selectedValues) => setRegisterStoreRequest({
+            ...registerStoreRequest,
+            categories: [...selectedValues],
+          })}
+          options={[
+            { value: 'FOOD', label: 'Comida' },
+            { value: 'ART', label: 'Arte' },
+            { value: 'CUP', label: 'Copo' },
+          ]}
         />
 
         <ApelieInputField
@@ -105,18 +123,57 @@ const RegisterStoreScreen: React.FC = () => {
     </RegisterStoreScreenStyle.FirstStepContainer>
   );
 
+  const DesignStepContent = (
+    <RegisterStoreScreenStyle.DesignStepContainer>
+      <div id="store-banner-image-content">
+        <ApelieUploadPhoto
+          selectedPhotoKey="bannerImage"
+          onImageSelect={handleUploadStoreBannerImage}
+          textOfUploadDragArea="Faça o upload do banner da loja"
+        />
+      </div>
+      <div id="store-color-select-content">
+        <ApelieSelectBox
+          placeholder="Cor primária de sua loja..."
+          type="SINGLE"
+          onChange={(selectedValues) => setRegisterStoreRequest({
+            ...registerStoreRequest,
+            primaryColor: selectedValues[0],
+          })}
+          options={[
+            { value: 'Cor-1', label: 'Vermelho' },
+            { value: 'Cor-2', label: 'Roxo' },
+            { value: 'Cor-3', label: 'Azul' },
+          ]}
+        />
+
+        <ApelieSelectBox
+          placeholder="Cor secundária de sua loja..."
+          type="SINGLE"
+          onChange={(selectedValues) => setRegisterStoreRequest({
+            ...registerStoreRequest,
+            secondaryColor: selectedValues[0],
+          })}
+          options={[
+            { value: 'Cor-1', label: 'Vermelho' },
+            { value: 'Cor-2', label: 'Roxo' },
+            { value: 'Cor-3', label: 'Azul' },
+          ]}
+        />
+      </div>
+    </RegisterStoreScreenStyle.DesignStepContainer>
+  );
+
   const firstStep: IRegister = {
     title: 'Cadastro Inicial da Loja',
-    content: firstStepContent,
+    content: FirstStepContent,
     nextButtonAction: () => validStep('designStep'),
     disabledCondition: !registerStoreRequest?.logoImage || !registerStoreRequest.name,
   };
 
   const designStep: IRegister = {
     title: 'Cadastro de Design da loja',
-    content: (
-      <div>teste2</div>
-    ),
+    content: DesignStepContent,
     backButtonAction: () => setStep('firstStep'),
     nextButtonAction: () => validStep('socialMediaStep'),
     disabledCondition: true,
@@ -152,14 +209,9 @@ const RegisterStoreScreen: React.FC = () => {
   return (
     <RegisterStoreScreenStyle.Container>
       <ApeliePageTitle>
-        Cadastro de Loja
+        {registerStoreSteps[step].title}
       </ApeliePageTitle>
       <RegisterStoreScreenStyle.RegisterStoreContainer>
-        <RegisterStoreScreenStyle.RegisterStoreContainerHeader>
-          <ApeliePageTitle>
-            {registerStoreSteps[step].title}
-          </ApeliePageTitle>
-        </RegisterStoreScreenStyle.RegisterStoreContainerHeader>
         <RegisterStoreScreenStyle.RegisterStoreContainerContent>
           {registerStoreSteps[step].content}
         </RegisterStoreScreenStyle.RegisterStoreContainerContent>

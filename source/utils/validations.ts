@@ -29,11 +29,11 @@ export function isValidateSubscribeDate(date: string): boolean {
   return testDate < toDay && testDate < sixteenYearsAgo;
 }
 
-export function isImageExist(file: string): boolean {
-  const img = new Image();
-  img.src = file;
-  if (img.height > 0) {
-    return true;
-  }
-  return false;
+export function isImageExist(url: string) {
+  const request = new XMLHttpRequest();
+
+  request.open('HEAD', url, false);
+  request.send();
+
+  return request.status !== 404;
 }

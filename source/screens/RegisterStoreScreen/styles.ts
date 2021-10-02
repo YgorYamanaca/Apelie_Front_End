@@ -22,23 +22,20 @@ const RegisterStoreContainer = styled.div`
   height: auto;
   margin: 25px;
   padding: 15px;
-  border: 2px solid ${({ theme }) => theme.colors.divider};
+  border: 1px solid ${({ theme }) => theme.colors.divider};
   box-shadow: ${({ theme }) => theme.shadow.nivel3};
   ${breakpointsMedia({
     md: css`
-      width: 75%;
-      padding: 25px;
+      width: fit-content;
+      padding: 35px 55px;
     `,
   })}
 `;
 
-const RegisterStoreContainerHeader = styled.div`
-  display: flex;
-  margin-bottom: 25px;
-`;
-
 const RegisterStoreContainerContent = styled.div`
   display: flex;
+  align-content: center;
+  justify-content: center;
 `;
 
 const RegisterStoreContainerFooter = styled.div`
@@ -69,6 +66,20 @@ const FirstStepContainer = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 15px;
+  
+  & > div#store-detail-content {
+    display: flex;
+    min-width: 90%;
+    flex-direction: column;
+    & > div > input {
+      height: 38px;
+    }
+
+    & > div:last-child {
+      margin: 0;
+    }
+  }
+
   ${breakpointsMedia({
     md: css`
       gap: 35px;
@@ -89,13 +100,38 @@ const FirstStepContainer = styled.div`
   })}
 `;
 
+const DesignStepContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  
+  & > div#store-banner-image-content {
+    
+  }
+
+  & > div#store-color-select-content {
+    
+  }
+
+  ${breakpointsMedia({
+    md: css`
+      gap: 25px;
+      flex-direction: row;
+      justify-content: center;
+    `,
+  })}
+`;
+
 const RegisterStoreScreenStyle = {
   Container,
   RegisterStoreContainer,
-  RegisterStoreContainerHeader,
   RegisterStoreContainerContent,
   RegisterStoreContainerFooter,
   FirstStepContainer,
+  DesignStepContainer,
 };
 
 export default RegisterStoreScreenStyle;

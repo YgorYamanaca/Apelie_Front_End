@@ -10,11 +10,13 @@ import ApelieButton from '../ApelieButton';
 interface IApelieUploadPhoto {
     onImageSelect: (imageURl: string) => void;
     textOfUploadDragArea: string;
+    selectedPhotoKey: string;
 }
 
 const ApelieUploadPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
   onImageSelect,
   textOfUploadDragArea,
+  selectedPhotoKey,
   theme,
 }) => {
   const [images, setImages] = React.useState<ImageListType>([]);
@@ -34,7 +36,7 @@ const ApelieUploadPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
         onError={() => onImageSelect('')}
         maxNumber={MAX_NUMBER}
         maxFileSize={MAX_SIZE}
-        dataURLKey="logoImage"
+        dataURLKey={selectedPhotoKey}
         acceptType={['jpg', 'jpeg']}
         multiple={false}
       >
@@ -71,7 +73,7 @@ const ApelieUploadPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
                   <img
                     key={`uplodedImage-${index + 1}`}
                     id="uplodedImage"
-                    src={image?.logoImage}
+                    src={image?.[selectedPhotoKey]}
                     alt="uplodedImageAlt"
                   />
                 </>

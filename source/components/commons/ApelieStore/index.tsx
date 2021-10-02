@@ -17,15 +17,15 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
   const DEFAULT_STORE_PHOTO = '/images/Store/default-placeholder.png';
 
   const userPhoto = useMemo(() => (
-    store && isImageExist(store.owner?.photoUrl) ? store.owner?.photoUrl : DEFAULT_USER_PHOTO
+    store?.owner?.photoUrl && isImageExist(store.owner.photoUrl) ? store.owner.photoUrl : DEFAULT_USER_PHOTO
   ), [store]);
 
   const bannerPhoto = useMemo(() => (
-    store && isImageExist(store?.bannerUrl) ? store?.bannerUrl : DEFAULT_STORE_PHOTO
+    store?.bannerUrl && isImageExist(store.bannerUrl) ? store.bannerUrl : DEFAULT_STORE_PHOTO
   ), [store]);
 
   const logoPhoto = useMemo(() => (
-    store && isImageExist(store?.logoUrl) ? store?.logoUrl : DEFAULT_STORE_PHOTO
+    store?.logoUrl && isImageExist(store.logoUrl) ? store.logoUrl : DEFAULT_STORE_PHOTO
   ), [store]);
 
   return (

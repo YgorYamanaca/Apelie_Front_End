@@ -3,6 +3,7 @@ import ITextColor from '@/types/interfaces/interface-text-color';
 import ITypographyVariants from '@/types/interfaces/interface-typography-variants';
 import ApelieTextBase from '../ApelieTextBase';
 import ButtonStyle from './styles';
+import ApelieLoadingSpinner from '../ApelieLoadingSpinner';
 
 interface IButton {
   id?: string;
@@ -15,6 +16,8 @@ interface IButton {
   textVariant?: keyof ITypographyVariants;
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   icon?: React.ReactNode;
+  isLoading?: boolean;
+  height?: string;
 }
 
 const ApelieButton: React.FC<IButton> = ({
@@ -29,20 +32,28 @@ const ApelieButton: React.FC<IButton> = ({
   textColor = 'contrastText',
   children,
   icon,
+  height = '35px',
+  isLoading,
 }) => (
   <ButtonStyle.Container
     id={id}
-    disabled={disabled}
+    disabled={disabled || isLoading}
     ghost={ghost}
     buttonColor={buttonColor}
     buttonType={buttonType}
     type={type}
-    onClick={() => !disabled && onClick && onClick()}
+    height={height}
+    onClick={() => (!disabled && !isLoading && onClick) && onClick()}
   >
-    {icon}
-    <ApelieTextBase variant={textVariant} color={ghost ? 'none' : textColor}>
-      {children}
-    </ApelieTextBase>
+    {isLoading ? <ApelieLoadingSpinner />
+      : (
+        <>
+          {icon}
+          <ApelieTextBase variant={textVariant} color={ghost ? 'none' : textColor}>
+            {children}
+          </ApelieTextBase>
+        </>
+      )}
   </ButtonStyle.Container>
 );
 

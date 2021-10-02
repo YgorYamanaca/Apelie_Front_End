@@ -18,7 +18,7 @@ const Input = styled(ApelieTextBase)`
   padding: 5px 10px;
   outline: 0;
   border-radius: ${({ theme }) => theme.borderRadius};
-  background-color: transparent;
+  background-color: ${({ theme }) => theme.colors.background.default};
   transition: border 0.5s ease-in-out;
   ${({ theme, isError }) => (isError
     ? css`

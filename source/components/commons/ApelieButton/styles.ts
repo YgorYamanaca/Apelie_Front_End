@@ -5,22 +5,23 @@ interface IButtonStyle {
   readonly ghost: boolean;
   readonly buttonColor: 'primary' | 'secondary';
   readonly buttonType: 'primary' | 'secondary';
+  readonly height: string;
 }
 
 const Container = styled.button<IButtonStyle>`
   display: flex;
   justify-content: center;
   width: 100%;
+  height: ${({ height }) => height};
   outline: none;
   user-select: none;
   background-color: ${({
-    theme, buttonColor, ghost, buttonType,
+    theme, buttonColor, ghost,
   }) => (
-    ghost || buttonType === 'secondary' ? theme.colors.background.default : get(theme, `colors.${buttonColor}.alternative`)
+    ghost ? 'transparent' : get(theme, `colors.${buttonColor}.alternative`)
   )};
-  border: ${({ theme, buttonType, buttonColor }) => (
-    buttonType === 'primary' ? '0' : `1px solid ${get(theme, `colors.${buttonColor}.alternative`)}`
-  )};
+  border: 0;
+  background-color: ${({ buttonType, theme }) => buttonType === 'secondary' && theme.colors.background.default};
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 8px;
 

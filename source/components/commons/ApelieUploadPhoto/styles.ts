@@ -27,7 +27,7 @@ const UploadImageContainer = styled.div<IUploadImageContainer>`
   width: 100%;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.background.default};
-  border: 3px solid ${({ theme, isDragging }) => (isDragging ? theme.colors.success.main : theme.colors.divider)};
+  border: 2px solid ${({ theme, isDragging }) => (isDragging ? theme.colors.success.main : theme.colors.divider)};
   border-color: ${({ theme, hasErrors }) => hasErrors && theme.colors.error.main};
   justify-content: center;
   align-items: center;
@@ -46,9 +46,9 @@ const UploadImageContainer = styled.div<IUploadImageContainer>`
 
   ${breakpointsMedia({
     md: css`
-      padding: 15px;
+      padding: 15px 45px;
       height: 350px;
-      width: 500px;
+      max-width: 500px;
       & > img {
         max-width: 90%;
         height: 320px;
