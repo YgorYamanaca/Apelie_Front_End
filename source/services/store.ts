@@ -15,4 +15,11 @@ const getStoreById = async (id: string | number): Promise<AxiosResponse> => {
   return response;
 };
 
-export { getStore, getStoreById };
+const getStoreCategorys = async (): Promise<AxiosResponse> => {
+  const response = await ApiRequester.apelie
+    .get('/stores/categories')
+    .catch((err) => err.response);
+  return response;
+};
+
+export { getStore, getStoreById, getStoreCategorys };

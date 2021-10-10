@@ -24,7 +24,7 @@ const ApelieUploadPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
   const MAX_SIZE = 3000000;
 
   const onChange = (imageList: ImageListType) => {
-    onImageSelect(imageList[0]?.logoImage || '');
+    onImageSelect(imageList[0][selectedPhotoKey] || '');
     setImages(imageList);
   };
 

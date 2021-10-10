@@ -7,6 +7,7 @@ const Container = styled.header`
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+  text-align: center;
   & > hr {
     margin-top: 5px;
     color: ${({ theme }) => theme.colors.divider};

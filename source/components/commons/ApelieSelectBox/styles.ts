@@ -6,6 +6,8 @@ interface IContainer {
 
 const Container = styled.div<IContainer>`
   width: ${({ boxWidth }) => boxWidth};
+  max-width: 275px;
+  min-width: 275px;
   margin-bottom: 15px;
 `;
 

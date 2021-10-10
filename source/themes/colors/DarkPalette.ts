@@ -37,6 +37,8 @@ const darkPalette: IColors = {
     secondary: 'rgba(255, 255, 255, 0.7)',
     disabled: 'rgba(255, 255, 255, 0.5)',
     contrastText: 'rgba(255, 255, 255, 1)',
+    appPrimary: 'rgba(0, 133, 229, 1)',
+    appSecondary: 'rgba(253, 190, 1, 1)',
   },
 };
 

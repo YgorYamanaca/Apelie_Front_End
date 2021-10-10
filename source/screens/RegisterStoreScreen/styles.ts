@@ -9,6 +9,9 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding: 25px 10px;
+  & > div#image-container {
+    display: none;
+  }
   
   ${breakpointsMedia({
     md: css`
@@ -29,7 +32,6 @@ const RegisterStoreContainer = styled.div`
   flex-direction: column;
   width: 98%;
   height: auto;
-  margin: 25px;
   padding: 15px;
   border: 1px solid ${({ theme }) => theme.colors.divider};
   box-shadow: ${({ theme }) => theme.shadow.nivel3};
@@ -148,9 +150,55 @@ const DesignStepContainer = styled.div`
 
 const SocialMediaStepContent = styled.div`
   display: flex;
-  width: 450px;
+  width: 100%;
   justify-content: flex-start;
   flex-direction: column;
+  ${breakpointsMedia({
+    md: css`
+      width: 450px;
+      `,
+  })}
+`;
+
+const AdressStepContent = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  & > div#adress-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  & > div#cpf-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  ${breakpointsMedia({
+    sm: css`
+    & > div#adress-content {
+      gap: 15px;
+      & > div {
+        width: 350px;
+      }
+    }
+    & > div#cpf-content {
+      & > div {
+        width: 350px;
+      }
+    `,
+    md: css`
+        & > div#adress-content {
+          display: flex;
+          width: 100%;
+        }
+    `,
+  })}
 `;
 
 const RegisterStoreScreenStyle = {
@@ -161,6 +209,7 @@ const RegisterStoreScreenStyle = {
   FirstStepContainer,
   DesignStepContainer,
   SocialMediaStepContent,
+  AdressStepContent,
 };
 
 export default RegisterStoreScreenStyle;

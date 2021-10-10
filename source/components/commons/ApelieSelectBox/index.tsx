@@ -1,10 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
-import Select, { SingleValue, MultiValue } from 'react-select';
+import Select, {
+  SingleValue, MultiValue,
+} from 'react-select';
 import { StyledProps, withTheme } from 'styled-components';
 import ApelieSelectBoxStyle from './styles';
 
-interface IOptions {
+export interface IOptions {
     value: string,
     label: string,
 }
@@ -13,6 +15,8 @@ interface IApelieRating {
     type: 'SINGLE' | 'MULTI';
     options?: IOptions[];
     placeholder: string;
+    isLoading?: boolean;
+    isDisabled?: boolean;
     onChange: (option: string[]) => void;
     width?: string;
 }
@@ -21,6 +25,8 @@ const ApelieSelectBox: React.FC<StyledProps<IApelieRating>> = ({
   type,
   width = '275px',
   options,
+  isLoading,
+  isDisabled,
   placeholder,
   onChange,
   theme,
@@ -36,11 +42,15 @@ const ApelieSelectBox: React.FC<StyledProps<IApelieRating>> = ({
   return (
     <ApelieSelectBoxStyle.Container boxWidth={width}>
       <Select
+        hideSelectedOptions
         closeMenuOnSelect={type === 'SINGLE'}
         onChange={(selectedValues) => handleOnChange(selectedValues)}
         isMulti={type === 'MULTI'}
         options={options}
+        isDisabled={isDisabled}
+        isLoading={isLoading}
         placeholder={placeholder}
+        isSearchable={options && options?.length > 10}
         theme={(themeComponent) => ({
           ...themeComponent,
           colors: {
@@ -50,8 +60,7 @@ const ApelieSelectBox: React.FC<StyledProps<IApelieRating>> = ({
             primary25: `${theme.colors.primary.alpha}`,
             primary: `${theme.colors.info.main}`,
             neutral0: `${theme.colors.background.default}`,
-            neutral5: `${theme.colors.error.main}`,
-            neutral10: `${theme.colors.primary.main}`,
+            neutral10: `${theme.colors.divider}`,
             neutral20: `${theme.colors.divider}`,
             neutral70: `${theme.colors.error.main}`,
             neutral80: `${theme.colors.text.primary}`,

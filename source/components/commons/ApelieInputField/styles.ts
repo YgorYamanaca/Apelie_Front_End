@@ -14,6 +14,7 @@ const Container = styled.div`
 
 const Input = styled(ApelieTextBase)`
   width: 100%;
+  height: 35px;
   color: ${({ theme }) => theme.colors.text.primary};
   padding: 5px 10px;
   outline: 0;

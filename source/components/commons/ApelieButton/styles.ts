@@ -20,8 +20,12 @@ const Container = styled.button<IButtonStyle>`
   }) => (
     ghost ? 'transparent' : get(theme, `colors.${buttonColor}.alternative`)
   )};
-  border: 0;
-  background-color: ${({ buttonType, theme }) => buttonType === 'secondary' && theme.colors.background.default};
+  border: 1px solid ${({
+    theme, buttonColor, buttonType,
+  }) => (
+    buttonType === 'secondary' ? get(theme, `colors.${buttonColor}.alternative`) : 'transparent'
+  )};
+  background-color: ${({ buttonType }) => buttonType === 'secondary' && 'transparent'};
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 8px;
 
@@ -56,7 +60,9 @@ const Container = styled.button<IButtonStyle>`
               `}
         `)};
 
-  color: ${({ theme, ghost, buttonColor }) => ghost && get(theme, `colors.${buttonColor}.alternative`)};
+  color: ${({
+    theme, ghost, buttonColor,
+  }) => ghost && get(theme, `colors.${buttonColor}.alternative`)};
 
   transition: filter 0.3s ease-in-out;
 `;

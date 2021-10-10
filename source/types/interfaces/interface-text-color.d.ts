@@ -3,6 +3,8 @@ interface ITextColor {
   secondary: string;
   disabled: string;
   contrastText: string;
+  appPrimary: string;
+  appSecondary: string;
 }
 
 export default ITextColor;
