@@ -37,3 +37,13 @@ export function isImageExist(url: string) {
 
   return request.status !== 404;
 }
+
+export function isValidateCepFormat(cepToBeTest: string) {
+  const regexTest = /[0-9]{5}-[\d]{3}/g;
+  return regexTest.test(cepToBeTest);
+}
+
+export function isValidateTelFormat(telToBeTest: string) {
+  const regexTest = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})-?(\d{4}))$/g;
+  return regexTest.test(telToBeTest);
+}

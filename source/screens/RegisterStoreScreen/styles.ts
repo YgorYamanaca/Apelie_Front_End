@@ -129,14 +129,6 @@ const DesignStepContainer = styled.div`
     align-items: center;
     flex-direction: column;
     gap: 15px;
-    
-    & > div > div#store-banner-image-content {
-      
-    }
-
-    & > div > div#store-color-select-content {
-      
-    }
 
     ${breakpointsMedia({
     md: css`
@@ -193,6 +185,7 @@ const AdressStepContent = styled.div`
       }
     `,
     md: css`
+      width: 750px;
         & > div#adress-content {
           display: flex;
           width: 100%;

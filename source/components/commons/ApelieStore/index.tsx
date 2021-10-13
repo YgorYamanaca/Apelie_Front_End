@@ -6,7 +6,6 @@ import ApelieTextBase from '../ApelieTextBase';
 import ApelieUserPhotoComponent from '../ApelieUserPhotoComponent';
 import StoreStyles from './styles';
 import ApelieStoreBackGround from '../ApelieStoreBackground';
-import { isImageExist } from '@/utils/validations';
 
 interface IStoreComponent {
   store: IStore;
@@ -17,15 +16,15 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
   const DEFAULT_STORE_PHOTO = '/images/Store/default-placeholder.png';
 
   const userPhoto = useMemo(() => (
-    store?.owner?.photoUrl && isImageExist(store.owner.photoUrl) ? store.owner.photoUrl : DEFAULT_USER_PHOTO
+    store?.owner?.photoUrl ? store.owner.photoUrl : DEFAULT_USER_PHOTO
   ), [store]);
 
   const bannerPhoto = useMemo(() => (
-    store?.bannerUrl && isImageExist(store.bannerUrl) ? store.bannerUrl : DEFAULT_STORE_PHOTO
+    store?.bannerUrl ? store.bannerUrl : DEFAULT_STORE_PHOTO
   ), [store]);
 
   const logoPhoto = useMemo(() => (
-    store?.logoUrl && isImageExist(store.logoUrl) ? store.logoUrl : DEFAULT_STORE_PHOTO
+    store?.logoUrl ? store.logoUrl : DEFAULT_STORE_PHOTO
   ), [store]);
 
   return (
@@ -33,12 +32,12 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
       <ApelieStoreBackGround
         bannerUrl={bannerPhoto}
         storeMediaSocialArray={
-          _.keys(_.pick(store, [
+          _.keys(_.omitBy(_.pick(store, [
             'facebookAccount',
             'youtubeAccount',
             'twitterAccount',
             'instagramAccount',
-          ]))
+          ]), _.isEmpty))
         }
       />
       <StoreStyles.StoreOverflowContainer>

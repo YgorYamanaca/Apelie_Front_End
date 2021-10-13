@@ -19,6 +19,7 @@ interface IApelieRating {
     isDisabled?: boolean;
     onChange: (option: string[]) => void;
     width?: string;
+    component?: React.ReactNode;
 }
 
 const ApelieSelectBox: React.FC<StyledProps<IApelieRating>> = ({

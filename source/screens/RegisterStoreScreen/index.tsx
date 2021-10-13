@@ -1,8 +1,9 @@
 import React, {
-  ChangeEvent, ReactElement, useCallback, useEffect, useMemo, useState,
+  ChangeEvent, ReactElement, useCallback, useContext, useEffect, useState, VoidFunctionComponent,
 } from 'react';
-import { DefaultTheme, StyledProps, withTheme } from 'styled-components';
+import { StyledProps, withTheme } from 'styled-components';
 import { useMutation, useQuery } from 'react-query';
+import _ from 'lodash';
 import ApeliePageTitle from '@/components/commons/ApeliePageTitle';
 import RegisterStoreScreenStyle from './styles';
 import ApelieButton from '@/components/commons/ApelieButton';
@@ -16,10 +17,13 @@ import ApelieIconWithInput from '@/components/commons/ApelieIconWithInput';
 import InstagramIcon from '@/assets/icons/InstagramIcon';
 import TwitterIcon from '@/assets/icons/TwitterIcon';
 import YoutubeIcon from '@/assets/icons/YoutubeIcon';
-import { getStoreCategorys } from '@/services/store';
+import { getStoreCategorys, postStore } from '@/services/store';
 import { getCity, getStates } from '@/services/locality';
 import { IState, ICity } from '@/types/interfaces/interface-apelie-locality-request';
 import colorPallets from '@/utils/colorsPallet';
+import { adressNumberMask, cepNumberMask, phoneMask } from '@/utils/mask';
+import { ToastContext } from '@/stores/ToastStore';
+import { isValidateCepFormat, isValidateTelFormat } from '@/utils/validations';
 
 interface IRegister {
   content: ReactElement;
@@ -57,13 +61,20 @@ const INITIAL_REQUEST: IStoreRequest = {
   description: '',
 };
 
-const RegisterStoreScreen: React.FC<StyledProps<DefaultTheme>> = ({
+interface IStoreRequestWithErrors extends IStoreRequest {
+  cepError?: string,
+  addressNumberError?: string,
+  phoneError?: string,
+}
+
+const RegisterStoreScreen: React.VoidFunctionComponent<StyledProps<VoidFunctionComponent>> = ({
   theme,
 }) => {
-  const [step, setStep] = useState<keyof IRegisterStoreSteps>('addressStep');
-  const [updateCPFRequest, setUpdateCPF] = useState<string>('');
-  const [registerStoreRequest, setRegisterStoreRequest] = useState<IStoreRequest>(INITIAL_REQUEST);
+  const [step, setStep] = useState<keyof IRegisterStoreSteps>('designStep');
+  const { setToastMessage } = useContext(ToastContext);
+  const [registerStoreRequest, setRegisterStoreRequest] = useState<IStoreRequestWithErrors>(INITIAL_REQUEST);
   const [cityResults, setCityResults] = useState<IOptions[]>([]);
+
   const categoryResult = useQuery(
     'getStoreCategorys',
     getStoreCategorys,
@@ -93,6 +104,22 @@ const RegisterStoreScreen: React.FC<StyledProps<DefaultTheme>> = ({
           (state) => ({ label: state.nome, value: state.nome }),
         );
         setCityResults(cityTransformed);
+      }
+    },
+  });
+
+  const doPostStoreRequest = useMutation(postStore, {
+    onSuccess: (response) => {
+      if (response.status === 200) {
+        const cityTransformed = (response.data as ICity[])?.map(
+          (state) => ({ label: state.nome, value: state.nome }),
+        );
+        setCityResults(cityTransformed);
+      } else {
+        setToastMessage({
+          message: 'Erro ao tentar cadastrar a loja.',
+          type: 'error',
+        });
       }
     },
   });
@@ -132,6 +159,46 @@ const RegisterStoreScreen: React.FC<StyledProps<DefaultTheme>> = ({
     }
   }
 
+  function handleRegisterStoreSubmit() {
+    if (isValidateCepFormat(registerStoreRequest.cep)
+      && isValidateTelFormat(registerStoreRequest.phone)
+      && registerStoreRequest.addressNumber.length === 3
+      && _.has(registerStoreRequest, [
+        'categories',
+        'state',
+        'bannerImage',
+        'logoImage',
+        'primaryColor',
+        'secondaryColor',
+        'street',
+        'city',
+        'cep',
+        'name',
+        'email',
+        'phone',
+        'addressNumber',
+        'neighbourhood',
+        'description',
+      ])
+    ) {
+      doPostStoreRequest.mutate(
+        registerStoreRequest,
+      );
+    } else if (!isValidateCepFormat(registerStoreRequest.cep) || !isValidateTelFormat(registerStoreRequest.phone) || registerStoreRequest.addressNumber.length !== 3) {
+      setRegisterStoreRequest({
+        ...registerStoreRequest,
+        addressNumberError: registerStoreRequest.addressNumber.length !== 3 ? 'Você precisa completar o número do endereço' : '',
+        phoneError: !isValidateTelFormat(registerStoreRequest.phone) ? 'O seu telefone não é válido' : '',
+        cepError: !isValidateCepFormat(registerStoreRequest.cep) ? 'Está faltando número no CEP' : '',
+      });
+    } else {
+      setToastMessage({
+        message: 'Não foi possível cadastrar a sua loja, alguma informação não foi preechida.',
+        type: 'error',
+      });
+    }
+  }
+
   const validStep = useCallback(
     (stepToBeValidated: keyof IRegisterStoreSteps) => {
       if (step === 'socialMediaStep') {
@@ -146,11 +213,12 @@ const RegisterStoreScreen: React.FC<StyledProps<DefaultTheme>> = ({
     },
     [step, registerStoreRequest],
   );
+
   useEffect(() => {
     if (registerStoreRequest.state) {
       doGetCityRequest.mutate(registerStoreRequest.state);
     }
-  }, [registerStoreRequest]);
+  }, [registerStoreRequest.state]);
 
   const FirstStepContent = (
     <RegisterStoreScreenStyle.FirstStepContainer>
@@ -299,17 +367,18 @@ const RegisterStoreScreen: React.FC<StyledProps<DefaultTheme>> = ({
         </ApeliePageTitle>
 
         <ApelieInputField
-          maxLength={35}
-          placeholder="CEP (xxxxx-xxx)"
+          maxLength={9}
+          placeholder="Insira o cep ..."
           name="cep"
+          isError={registerStoreRequest.cepError}
           value={registerStoreRequest.cep}
           onChange={
-            (event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest)
+            (event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest, cepNumberMask)
           }
         />
 
         <ApelieSelectBox
-          placeholder="Estado"
+          placeholder="Selecione o estado ..."
           type="SINGLE"
           isLoading={stateResult.isLoading}
           isDisabled={stateResult.isLoading || !stateResult.isSuccess}
@@ -324,7 +393,7 @@ const RegisterStoreScreen: React.FC<StyledProps<DefaultTheme>> = ({
         />
 
         <ApelieSelectBox
-          placeholder="Cidade"
+          placeholder="Selecione a cidade ..."
           type="SINGLE"
           isDisabled={
             !registerStoreRequest.state
@@ -340,8 +409,8 @@ const RegisterStoreScreen: React.FC<StyledProps<DefaultTheme>> = ({
         />
 
         <ApelieInputField
-          maxLength={35}
-          placeholder="Nome da Rua"
+          maxLength={50}
+          placeholder="Insira o nome da rua ..."
           name="street"
           value={registerStoreRequest.street}
           onChange={
@@ -350,8 +419,8 @@ const RegisterStoreScreen: React.FC<StyledProps<DefaultTheme>> = ({
         />
 
         <ApelieInputField
-          maxLength={35}
-          placeholder="Nome do Bairro"
+          maxLength={50}
+          placeholder="Insira o bairro ..."
           name="neighbourhood"
           value={registerStoreRequest.neighbourhood}
           onChange={
@@ -360,25 +429,26 @@ const RegisterStoreScreen: React.FC<StyledProps<DefaultTheme>> = ({
         />
 
         <ApelieInputField
-          maxLength={35}
-          placeholder="Número"
+          maxLength={3}
+          placeholder="Insira o número ..."
           name="addressNumber"
+          isError={registerStoreRequest.addressNumberError}
           value={registerStoreRequest.addressNumber}
           onChange={
-            (event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest)
+            (event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest, adressNumberMask)
           }
         />
-      </div>
-      <div id="cpf-content">
-        <ApeliePageTitle>
-          Cadastro de CPF
-        </ApeliePageTitle>
+
         <ApelieInputField
-          maxLength={35}
-          placeholder="CPF"
-          name="name"
-          value={updateCPFRequest}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event, setUpdateCPF)}
+          maxLength={15}
+          type="tel"
+          placeholder="Insira o telefone para contato ..."
+          name="phone"
+          isError={registerStoreRequest.phoneError}
+          value={registerStoreRequest.phone}
+          onChange={
+            (event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest, phoneMask)
+          }
         />
       </div>
     </RegisterStoreScreenStyle.AdressStepContent>
@@ -414,8 +484,14 @@ const RegisterStoreScreen: React.FC<StyledProps<DefaultTheme>> = ({
   const addressStep: IRegister = {
     content: AdressStepComponent,
     backButtonAction: () => setStep('socialMediaStep'),
-    nextButtonAction: () => console.log('Disparar ação'),
-    disabledCondition: true,
+    nextButtonAction: () => handleRegisterStoreSubmit(),
+    disabledCondition:
+    !registerStoreRequest.cep
+    || !registerStoreRequest.state
+    || !registerStoreRequest.city
+    || !registerStoreRequest.neighbourhood
+    || !registerStoreRequest.street
+    || !registerStoreRequest.addressNumber,
   };
 
   const registerStoreSteps: IRegisterStoreSteps = {

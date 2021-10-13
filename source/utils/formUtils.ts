@@ -7,11 +7,12 @@ import { ChangeEvent } from 'react';
 export default function handleChange(
   event: ChangeEvent<HTMLInputElement>,
   setState: any,
+  mask?: (text: string) => string,
 ) {
   const fieldName = event.target.getAttribute('name')?.toString();
   setState((prevState: any) => ({
     ...prevState,
-    [fieldName || 'inputKey']: event.target.value,
+    [fieldName || 'inputKey']: mask ? mask(event.target.value) : event.target.value,
     [`${fieldName}Error` || 'inputKeyError']: false,
   }));
 }
