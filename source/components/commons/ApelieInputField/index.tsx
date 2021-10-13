@@ -2,7 +2,8 @@ import React, { ChangeEvent, InputHTMLAttributes } from 'react';
 import ApelieTextBase from '../ApelieTextBase';
 import InputFieldStyle from './styles';
 
-interface IInputField {
+export interface IInputField {
+  maxLength?: InputHTMLAttributes<HTMLInputElement>['maxLength'];
   min?: InputHTMLAttributes<HTMLInputElement>['min'];
   max?: InputHTMLAttributes<HTMLInputElement>['max'];
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
@@ -14,6 +15,7 @@ interface IInputField {
 }
 
 const ApelieInputField: React.FC<IInputField> = ({
+  maxLength,
   type = 'text',
   placeholder = 'Digite o seu texto...',
   isError,
@@ -32,13 +34,16 @@ const ApelieInputField: React.FC<IInputField> = ({
     <InputFieldStyle.Input
       isError={!!isError}
       type={type}
+      tag={type === 'textarea' ? 'textarea' : 'input'}
       placeholder={placeholder}
       name={name}
       value={value}
       onChange={onChange}
       max={max}
       min={min}
+      maxLength={maxLength}
     />
+
   </InputFieldStyle.Container>
 );
 

@@ -147,6 +147,7 @@ const SubscribeScreen: React.FC = () => {
         <ApelieButton
           type="submit"
           disabled={isDisabled}
+          isLoading={doSubscribeRequest.isLoading}
         >
           Cadastre-se
         </ApelieButton>

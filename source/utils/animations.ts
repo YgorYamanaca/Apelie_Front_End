@@ -79,12 +79,23 @@ const rotate360 = keyframes`
   }
 `;
 
+const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
 const Animations = {
   fadein,
   fadeOut,
   leftToRight,
   rightToLeft,
   rotate360,
+  spin,
   outOfScreenRight,
   outOfScreenLeft,
 };

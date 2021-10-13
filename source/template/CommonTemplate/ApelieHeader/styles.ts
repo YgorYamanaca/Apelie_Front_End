@@ -149,15 +149,21 @@ const UserContainer = styled.div<IApelieHeader>`
   align-items: center;
   padding: 15px 5px;
   margin-top: auto;
-  column-gap: 25px;
   border-top: 2px solid ${({ theme }) => theme.colors.divider};
-  & > button {
+
+  & > div#ref-div {
+    display: flex;
+    align-items: center;
+    column-gap: 25px;
+  }
+
+  & > div#ref-div > button {
     width: fit-content;
   }
-  & > :last-child {
+  & > div#ref-div > :last-child {
     display: flex;
   }
-  & > :first-child {
+  & > div#ref-div > :first-child {
     display: flex;
     position: relative;
   }
@@ -166,7 +172,7 @@ const UserContainer = styled.div<IApelieHeader>`
       display: flex;
       border: 0;
       column-gap: 25px;
-      & > #header-user-name,
+      & > div#ref-div > #header-user-name,
       #verify-login-user-button {
         display: none;
       }

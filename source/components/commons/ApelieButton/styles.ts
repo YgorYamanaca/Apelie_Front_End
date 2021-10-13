@@ -5,22 +5,27 @@ interface IButtonStyle {
   readonly ghost: boolean;
   readonly buttonColor: 'primary' | 'secondary';
   readonly buttonType: 'primary' | 'secondary';
+  readonly height: string;
 }
 
 const Container = styled.button<IButtonStyle>`
   display: flex;
   justify-content: center;
   width: 100%;
+  height: ${({ height }) => height};
   outline: none;
   user-select: none;
   background-color: ${({
-    theme, buttonColor, ghost, buttonType,
+    theme, buttonColor, ghost,
   }) => (
-    ghost || buttonType === 'secondary' ? 'transparent' : get(theme, `colors.${buttonColor}.alternative`)
+    ghost ? 'transparent' : get(theme, `colors.${buttonColor}.alternative`)
   )};
-  border: ${({ theme, buttonType, buttonColor }) => (
-    buttonType === 'primary' ? '0' : `1px solid ${get(theme, `colors.${buttonColor}.alternative`)}`
+  border: 1px solid ${({
+    theme, buttonColor, buttonType,
+  }) => (
+    buttonType === 'secondary' ? get(theme, `colors.${buttonColor}.alternative`) : 'transparent'
   )};
+  background-color: ${({ buttonType }) => buttonType === 'secondary' && 'transparent'};
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 8px;
 
@@ -55,7 +60,9 @@ const Container = styled.button<IButtonStyle>`
               `}
         `)};
 
-  color: ${({ theme, ghost, buttonColor }) => ghost && get(theme, `colors.${buttonColor}.alternative`)};
+  color: ${({
+    theme, ghost, buttonColor,
+  }) => ghost && get(theme, `colors.${buttonColor}.alternative`)};
 
   transition: filter 0.3s ease-in-out;
 `;

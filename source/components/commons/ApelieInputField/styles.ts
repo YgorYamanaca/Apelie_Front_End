@@ -4,15 +4,22 @@ import ApelieTextBase from '../ApelieTextBase';
 const Container = styled.div`
   position: relative;
   margin-bottom: 20px;
+  width: 100%;
+
+  & > textarea {
+    resize: none;
+    height: 200px;
+  }
 `;
 
 const Input = styled(ApelieTextBase)`
   width: 100%;
+  height: 35px;
   color: ${({ theme }) => theme.colors.text.primary};
   padding: 5px 10px;
   outline: 0;
   border-radius: ${({ theme }) => theme.borderRadius};
-  background-color: transparent;
+  background-color: ${({ theme }) => theme.colors.background.default};
   transition: border 0.5s ease-in-out;
   ${({ theme, isError }) => (isError
     ? css`

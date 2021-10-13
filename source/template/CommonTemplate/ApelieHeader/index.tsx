@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { StyledProps, withTheme } from 'styled-components';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -19,12 +19,14 @@ import { UserContext } from '@/stores/UserManager';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 import ApelieHeaderStyle from './styles';
 import StoreIcon from '@/assets/icons/StoreIcon';
+import useOnClickOutside from '@/theme/useOutSideClick';
 
 const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
   const [isMenuClose, setIsMenuClose] = useState(false);
   const { actualTheme, toggleTheme } = useContext(AppThemeContext);
   const { loggedUser, doLogout } = useContext(UserContext);
   const [isUserPhotoMenuOpen, setIsUserPhotoMenuOpen] = useState(false);
+  const expansiveRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const HeaderContent = [
@@ -98,6 +100,8 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
     </ApelieButton>,
   ];
 
+  useOnClickOutside(expansiveRef, () => setIsUserPhotoMenuOpen(false));
+
   return (
     <ApelieHeaderStyle.Container headerState={isMenuClose}>
       <ApelieHeaderStyle.HeaderContentBox>
@@ -133,7 +137,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       </ApelieHeaderStyle.HeaderContentBox>
       <ApelieHeaderStyle.HeaderExpansiveBox headerState={isMenuClose}>
         {loggedUser
-          && HeaderContent.slice(0, 3).map((headerContent) => headerContent)}
+          && HeaderContent.map((headerContent) => headerContent)}
         <ApelieHeaderStyle.UserContainer headerState={isMenuClose}>
           {!loggedUser && (
             <ApelieHeaderStyle.LoginAndSubscribeTextBox>
@@ -155,26 +159,28 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
               </ApelieTextBase>
             </ApelieHeaderStyle.LoginAndSubscribeTextBox>
           )}
-          <ApelieUserPhotoComponent
-            userPhotoUrl={
+          <div id="ref-div" ref={expansiveRef}>
+            <ApelieUserPhotoComponent
+              userPhotoUrl={
               loggedUser?.photoUrl || '/images/User/default-user-image.png'
             }
-            size={45}
-            onMouseOnclickAction={() => loggedUser && setIsUserPhotoMenuOpen(!isUserPhotoMenuOpen)}
-          />
-          {isUserPhotoMenuOpen && loggedUser && (
+              size={45}
+              onMouseOnclickAction={() => loggedUser && setIsUserPhotoMenuOpen(!isUserPhotoMenuOpen)}
+            />
+            {isUserPhotoMenuOpen && loggedUser && (
             <ApelieHeaderStyle.ExpansiveMenu>
               {HeaderContent.slice(
                 HeaderContent.length - 4,
                 HeaderContent.length,
               ).map((headerContent) => headerContent)}
             </ApelieHeaderStyle.ExpansiveMenu>
-          )}
-          {loggedUser?.fullName && (
+            )}
+            {loggedUser?.fullName && (
             <ApelieTextBase id="header-user-name" variant="paragraph1">
               {loggedUser?.fullName}
             </ApelieTextBase>
-          )}
+            )}
+          </div>
         </ApelieHeaderStyle.UserContainer>
       </ApelieHeaderStyle.HeaderExpansiveBox>
     </ApelieHeaderStyle.Container>

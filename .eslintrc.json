@@ -27,7 +27,7 @@
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
     "import/extensions": 0,
     "no-shadow": "off",
-    "max-len": ["warn", { "code": 100 }],
+    "max-len": ["warn", { "code": 250 }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "import/prefer-default-export": "off",

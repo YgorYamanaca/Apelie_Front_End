@@ -8,7 +8,7 @@ interface ITextBase {
   text?: string;
   href?: string;
   variant?: keyof ITypographyVariants;
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'li' | 'a' | 'span' | 'input' | 'div';
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'li' | 'a' | 'span' | 'input' | 'div' | 'textarea';
   type?: string;
   color?: keyof ITextColor | 'none';
   placeholder?: string;
@@ -16,6 +16,7 @@ interface ITextBase {
   name?: string;
   value?: string;
   className?: string;
+  maxLength?: InputHTMLAttributes<HTMLInputElement>['maxLength'];
   min?: InputHTMLAttributes<HTMLInputElement>['min'];
   max?: InputHTMLAttributes<HTMLInputElement>['max'];
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;

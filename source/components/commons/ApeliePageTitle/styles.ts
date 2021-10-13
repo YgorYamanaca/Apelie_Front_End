@@ -6,6 +6,8 @@ const Container = styled.header`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
+  text-align: center;
   & > hr {
     margin-top: 5px;
     color: ${({ theme }) => theme.colors.divider};

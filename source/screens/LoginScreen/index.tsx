@@ -100,6 +100,7 @@ const LoginScreen: React.FC = () => {
         <ApelieButton
           type="submit"
           disabled={isDisabled}
+          isLoading={doLoginRequest.isLoading}
         >
           Entrar
         </ApelieButton>
