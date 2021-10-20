@@ -23,6 +23,17 @@ const getStoreById = async (id: string | number): Promise<AxiosResponse> => {
   return response;
 };
 
+const getMyStoreById = async (ownerId: string): Promise<AxiosResponse> => {
+  const response = await ApiRequester.apelie
+    .get('/stores', {
+      params: {
+        ownerId,
+      },
+    })
+    .catch((err) => err.response);
+  return response;
+};
+
 const getStoreCategorys = async (): Promise<AxiosResponse> => {
   const response = await ApiRequester.apelie
     .get('/stores/categories')
@@ -31,5 +42,5 @@ const getStoreCategorys = async (): Promise<AxiosResponse> => {
 };
 
 export {
-  getStore, getStoreById, getStoreCategorys, postStore,
+  getStore, getStoreById, getStoreCategorys, postStore, getMyStoreById,
 };

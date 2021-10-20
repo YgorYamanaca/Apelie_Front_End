@@ -1,17 +1,20 @@
 import React, { useMemo } from 'react';
 import _ from 'lodash';
+import { useRouter } from 'next/router';
 import { IStore } from '@/types/interfaces/interface-store';
 import ApelieRating from '../ApelieRating';
 import ApelieTextBase from '../ApelieTextBase';
 import ApelieUserPhotoComponent from '../ApelieUserPhotoComponent';
 import StoreStyles from './styles';
 import ApelieStoreBackGround from '../ApelieStoreBackground';
+import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 
 interface IStoreComponent {
   store: IStore;
 }
 
 const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
+  const router = useRouter();
   const DEFAULT_USER_PHOTO = '/images/User/default-user-image.png';
   const DEFAULT_STORE_PHOTO = '/images/Store/default-placeholder.png';
 
@@ -28,7 +31,7 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
   ), [store]);
 
   return (
-    <StoreStyles.Container id={`StoreStyles-Container-${store.storeId}`}>
+    <StoreStyles.Container id={`StoreStyles-Container-${store.storeId}`} onClick={() => router.push(`${ApeliePageAlias.Store}/${store.storeId}`)}>
       <ApelieStoreBackGround
         bannerUrl={bannerPhoto}
         storeMediaSocialArray={

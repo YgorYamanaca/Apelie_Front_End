@@ -1,9 +1,9 @@
 interface ILoggedUser {
-  userId: number;
+  userId: number | string;
   fullName: string;
   email: string;
-  cpf: string;
   photoUrl: string;
+  hasStore: boolean;
 }
 
 export default ILoggedUser;

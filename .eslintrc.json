@@ -32,7 +32,8 @@
     "react-hooks/exhaustive-deps": "warn",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "no-unused-expressions": ["error", { "allowShortCircuit": true }]
   },
   "settings": {
     "import/resolver": {

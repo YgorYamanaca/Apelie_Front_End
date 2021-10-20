@@ -5,6 +5,8 @@ enum ApeliePageAlias {
   Subscribe = '/subscribe',
   MainPage = '/home-page',
   RegisterStorePage = '/register-store',
+  Store = '/store',
+  MyStore = '/store/me'
 }
 
 export default ApeliePageAlias;

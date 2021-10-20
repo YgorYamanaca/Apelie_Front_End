@@ -52,7 +52,7 @@ const INITIAL_REQUEST: IStoreRequest = {
   secondaryColor: '',
   street: '',
   city: '',
-  cep: '',
+  zipCode: '',
   name: '',
   email: '',
   phone: '',
@@ -70,7 +70,7 @@ interface IStoreRequestWithErrors extends IStoreRequest {
 const RegisterStoreScreen: React.VoidFunctionComponent<StyledProps<VoidFunctionComponent>> = ({
   theme,
 }) => {
-  const [step, setStep] = useState<keyof IRegisterStoreSteps>('designStep');
+  const [step, setStep] = useState<keyof IRegisterStoreSteps>('firstStep');
   const { setToastMessage } = useContext(ToastContext);
   const [registerStoreRequest, setRegisterStoreRequest] = useState<IStoreRequestWithErrors>(INITIAL_REQUEST);
   const [cityResults, setCityResults] = useState<IOptions[]>([]);
@@ -160,7 +160,7 @@ const RegisterStoreScreen: React.VoidFunctionComponent<StyledProps<VoidFunctionC
   }
 
   function handleRegisterStoreSubmit() {
-    if (isValidateCepFormat(registerStoreRequest.cep)
+    if (isValidateCepFormat(registerStoreRequest.zipCode)
       && isValidateTelFormat(registerStoreRequest.phone)
       && registerStoreRequest.addressNumber.length === 3
       && _.has(registerStoreRequest, [
@@ -172,7 +172,7 @@ const RegisterStoreScreen: React.VoidFunctionComponent<StyledProps<VoidFunctionC
         'secondaryColor',
         'street',
         'city',
-        'cep',
+        'zipCode',
         'name',
         'email',
         'phone',
@@ -184,12 +184,12 @@ const RegisterStoreScreen: React.VoidFunctionComponent<StyledProps<VoidFunctionC
       doPostStoreRequest.mutate(
         registerStoreRequest,
       );
-    } else if (!isValidateCepFormat(registerStoreRequest.cep) || !isValidateTelFormat(registerStoreRequest.phone) || registerStoreRequest.addressNumber.length !== 3) {
+    } else if (!isValidateCepFormat(registerStoreRequest.zipCode) || !isValidateTelFormat(registerStoreRequest.phone) || registerStoreRequest.addressNumber.length !== 3) {
       setRegisterStoreRequest({
         ...registerStoreRequest,
         addressNumberError: registerStoreRequest.addressNumber.length !== 3 ? 'Você precisa completar o número do endereço' : '',
         phoneError: !isValidateTelFormat(registerStoreRequest.phone) ? 'O seu telefone não é válido' : '',
-        cepError: !isValidateCepFormat(registerStoreRequest.cep) ? 'Está faltando número no CEP' : '',
+        cepError: !isValidateCepFormat(registerStoreRequest.zipCode) ? 'Está faltando número no zipCode' : '',
       });
     } else {
       setToastMessage({
@@ -368,10 +368,10 @@ const RegisterStoreScreen: React.VoidFunctionComponent<StyledProps<VoidFunctionC
 
         <ApelieInputField
           maxLength={9}
-          placeholder="Insira o cep ..."
-          name="cep"
+          placeholder="Insira o zipCode ..."
+          name="zipCode"
           isError={registerStoreRequest.cepError}
-          value={registerStoreRequest.cep}
+          value={registerStoreRequest.zipCode}
           onChange={
             (event: ChangeEvent<HTMLInputElement>) => handleChange(event, setRegisterStoreRequest, cepNumberMask)
           }
@@ -486,7 +486,7 @@ const RegisterStoreScreen: React.VoidFunctionComponent<StyledProps<VoidFunctionC
     backButtonAction: () => setStep('socialMediaStep'),
     nextButtonAction: () => handleRegisterStoreSubmit(),
     disabledCondition:
-    !registerStoreRequest.cep
+    !registerStoreRequest.zipCode
     || !registerStoreRequest.state
     || !registerStoreRequest.city
     || !registerStoreRequest.neighbourhood

@@ -72,9 +72,9 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       textVariant="paragraph1"
       icon={<StoreIcon height="16" width="16" />}
       ghost
-      onClick={() => router.push(ApeliePageAlias.RegisterStorePage)}
+      onClick={() => (loggedUser?.hasStore ? router.push(ApeliePageAlias.MyStore) : router.push(ApeliePageAlias.RegisterStorePage))}
     >
-      Cadastrar Loja
+      {loggedUser?.hasStore ? 'Minha Loja' : 'Cadastrar Loja'}
     </ApelieButton>,
     <ApelieButton
       key="header-change-theme-button"

@@ -14,7 +14,7 @@ export interface IStore {
   theme: string;
   street: string;
   city: string;
-  cep: string;
+  zipCode: string;
   name: string;
   email: string;
   phone: string;
@@ -38,7 +38,7 @@ export interface IStoreRequest {
   secondaryColor: string,
   street: string,
   city: string,
-  cep: string,
+  zipCode: string,
   name: string,
   email: string,
   phone: string,

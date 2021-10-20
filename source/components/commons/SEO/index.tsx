@@ -1,13 +1,14 @@
 import React from 'react';
 import NextHead from 'next/head';
+import { useRouter } from 'next/router';
 import ISEO from '@/types/interfaces/interface-search-engine-optimization';
 
-const SEO: React.FC<ISEO> = ({ pageTitle, url }) => {
+const SEO: React.FC<ISEO> = ({ pageTitle }) => {
   const title = pageTitle ? `${pageTitle}` : 'Apelie';
   const description = 'Venha fazer parte da maior comunidade de comércio de itens artesanais do Brasil.';
   const image = 'https://blog.lahar.com.br/wp-content/uploads/2018/08/exemplos-de-marketing-digital-650x400.png';
-  const urlBase = `https://apelie-front-end.vercel.app${url}`;
-
+  const router = useRouter();
+  const urlBase = `https://apelie.vercel.app/${router.pathname.includes('store') ? `store/${router.query.slug}` : router.pathname}`;
   return (
     <NextHead>
       <title>{title}</title>
