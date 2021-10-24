@@ -1,6 +1,8 @@
 import React from 'react';
+import _ from 'lodash';
 import { IStore } from '@/types/interfaces/interface-store';
 import StoreScreenStyle from './styles';
+import ApelieStoreBackGround from '@/components/commons/ApelieStoreBackground';
 
 interface IStoreScreen {
     store: IStore;
@@ -12,7 +14,21 @@ const StoreScreen : React.FC<IStoreScreen> = ({
   isUserStore,
 }) => (
   <StoreScreenStyle.Container>
-    {JSON.stringify(isUserStore)}
+    <ApelieStoreBackGround
+      bannerUrl={store?.bannerUrl}
+      logoSize="30"
+      storeMediaSocialArray={
+          _.keys(_.omitBy(_.pick(store, [
+            'facebookAccount',
+            'youtubeAccount',
+            'twitterAccount',
+            'instagramAccount',
+          ]), _.isEmpty))
+        }
+      isLogoPositionBottom
+      isEditable={isUserStore}
+    />
+    <StoreScreenStyle.StoreInfoContainer />
   </StoreScreenStyle.Container>
 );
 

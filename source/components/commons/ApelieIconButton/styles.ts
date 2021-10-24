@@ -10,11 +10,12 @@ const Container = styled.div<IContainer>`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  height: 35px;
-  width: 35px;
+  min-height: 35px;
+  min-width: 35px;
   cursor: pointer;
   user-select: none;
   align-self: center;
+  padding: 10px;
   &:hover {
     filter: brightness(1.5);
   }

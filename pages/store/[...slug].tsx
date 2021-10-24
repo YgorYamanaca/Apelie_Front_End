@@ -10,7 +10,6 @@ const Store: React.FC = () => {
   const router = useRouter();
   const [slug] = router.query.slug || [];
   const { loggedUser } = useContext(UserContext);
-  const [isUserStore, setIsUserStore] = useState(false);
 
   const doGetMyStore = useMutation(getMyStoreById);
   const doGetStoreById = useMutation(getStoreById);
@@ -18,18 +17,19 @@ const Store: React.FC = () => {
   useLayoutEffect(() => {
     if (slug === 'me') {
       loggedUser && doGetMyStore.mutate(loggedUser.userId.toString());
-      setIsUserStore(true);
     } else {
       doGetStoreById.mutate(slug);
     }
-  }, [loggedUser, slug]);
+  }, [slug, loggedUser]);
 
   return (
     <>
-      <StoreScreen
-        store={doGetMyStore.data?.data || doGetStoreById.data?.data}
-        isUserStore={isUserStore}
-      />
+      {slug === 'me' ? (
+        doGetMyStore.isSuccess && <StoreScreen store={doGetMyStore.data?.data[0]} isUserStore />
+      ) : (
+        doGetStoreById.isSuccess && (
+          <StoreScreen store={doGetStoreById.data?.data} />
+        ))}
     </>
   );
 };

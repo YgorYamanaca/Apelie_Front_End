@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import breakpointsMedia from '@/utils/breakpointsMedia';
 
-const Container = styled.div`
+const Container = styled.main`
   display: flex;
   flex-direction: column;
   flex: 1;

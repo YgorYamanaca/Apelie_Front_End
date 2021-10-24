@@ -8,7 +8,7 @@ const Container = styled.div`
   box-shadow: ${({ theme }) => theme.shadow.nivel1};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 200px;
-  height: 250px;
+  height: 275px;
   padding: 10px 5px;
   flex-direction: column;
   cursor: pointer;
@@ -88,11 +88,12 @@ const StoreOverflowContainer = styled.div`
 
 const StoreAndScoreContainer = styled.div`
   display: flex;
-  margin-top: 50px;
+  margin-top: auto;
   flex-direction: column;
 
   & > div :last-child {
     margin-left: auto;
+    margin-right: 7.5px;
   }
 
   ${breakpointsMedia({

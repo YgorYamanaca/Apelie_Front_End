@@ -9,11 +9,19 @@ const Container = styled.div<IApelieStoreBackGroundStylesContainer>`
   display: flex;
   position: relative;
   width: 100%;
-  height: 50%;
+  height: 25%;
   background-image: url(${({ bannerUrl }) => bannerUrl});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  & > #store-edit-icon {
+    position: absolute;
+    top: 10px;
+    z-index: 500;
+    right: 10px;
+    background-color: ${({ theme }) => theme.colors.background.default};
+  }
+
   ${breakpointsMedia({
     md: css`
        height: 200px;
@@ -21,13 +29,27 @@ const Container = styled.div<IApelieStoreBackGroundStylesContainer>`
   })}
 `;
 
-const SocialMediaContainer = styled.div`
+interface ISocialMediaContainer {
+  isLogoPositionBottom: boolean
+}
+
+const SocialMediaContainer = styled.div<ISocialMediaContainer>`
   display: flex;
   align-items: center;
   position: absolute;
-  right: 10px;
-  top: 5px;
   gap: 10px;
+  ${
+  ({ isLogoPositionBottom }) => (isLogoPositionBottom
+    ? css`
+      right: 10px;
+      bottom: 5px;
+      gap: 20px;
+    `
+    : css`
+      right: 10px;
+      top: 5px;
+    `)
+}
 `;
 
 const ApelieStoreBackGroundStyles = {
