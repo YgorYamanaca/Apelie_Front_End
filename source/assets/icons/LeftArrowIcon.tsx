@@ -1,7 +1,8 @@
 import React from 'react';
+import { StyledProps, withTheme } from 'styled-components';
 import { ISimpleIcon } from '@/types/interfaces/interface-apelie-simple-icon';
 
-const LeftArrowIcon: React.FC<ISimpleIcon> = ({ width = '35', height = '35' }) => (
+const LeftArrowIcon: React.FC<StyledProps<ISimpleIcon>> = ({ width = '35', height = '35', theme }) => (
   <svg
     version="1.1"
     id="Layer_1"
@@ -10,6 +11,7 @@ const LeftArrowIcon: React.FC<ISimpleIcon> = ({ width = '35', height = '35' }) =
     y="0px"
     width={`${width}px`}
     height={`${height}px`}
+    fill={theme.colors.primary.main}
     viewBox="0 0 492 492"
     xmlSpace="preserve"
   >
@@ -26,4 +28,4 @@ const LeftArrowIcon: React.FC<ISimpleIcon> = ({ width = '35', height = '35' }) =
   </svg>
 );
 
-export default LeftArrowIcon;
+export default withTheme(LeftArrowIcon);

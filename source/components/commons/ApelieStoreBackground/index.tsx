@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import { StyledProps, withTheme } from 'styled-components';
 import FacebookIcon from '@/assets/icons/FacebookIcon';
 import ApelieStoreBackGroundStyles from './styles';
 import TwitterIcon from '@/assets/icons/TwitterIcon';
@@ -17,26 +16,41 @@ interface IApelieStoreBackGround {
     storeMediaSocialArray: string[]
 }
 
-const ApelieStoreBackGround: React.FC<StyledProps<IApelieStoreBackGround>> = ({
+const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
   isEditable = false,
   bannerUrl,
   logoSize,
   isLogoPositionBottom = false,
   storeMediaSocialArray,
-  theme,
 }) => {
   const socialMediaIcons = {
-    facebookAccount: <FacebookIcon key="facebook" width={logoSize} height={logoSize} />,
-    youtubeAccount: <YoutubeIcon key="youtube" width={logoSize} height={logoSize} />,
-    twitterAccount: <TwitterIcon key="twitter" width={logoSize} height={logoSize} />,
-    instagramAccount: <InstagramIcon key="instagram" width={logoSize} height={logoSize} />,
+    facebookAccount: (
+      <ApelieIconButton id="facebook-icon">
+        <FacebookIcon key="facebook" width={logoSize} height={logoSize} />
+      </ApelieIconButton>
+    ),
+    youtubeAccount: (
+      <ApelieIconButton id="youtube-icon">
+        <YoutubeIcon key="youtube" width={logoSize} height={logoSize} />
+      </ApelieIconButton>
+    ),
+    twitterAccount: (
+      <ApelieIconButton id="twitte-icon">
+        <TwitterIcon key="twitter" width={logoSize} height={logoSize} />
+      </ApelieIconButton>
+    ),
+    instagramAccount: (
+      <ApelieIconButton id="instagram-icon">
+        <InstagramIcon key="instagram" width={logoSize} height={logoSize} />
+      </ApelieIconButton>
+    ),
   };
 
   return (
     <ApelieStoreBackGroundStyles.Container bannerUrl={bannerUrl}>
       {isEditable
       && (
-        <ApelieIconButton id="store-edit-icon" color={theme.colors.text.contrastText}>
+        <ApelieIconButton id="store-edit-icon" isPadding>
           <EditIcon width="20" height="20" />
         </ApelieIconButton>
       )}
@@ -47,4 +61,4 @@ const ApelieStoreBackGround: React.FC<StyledProps<IApelieStoreBackGround>> = ({
   );
 };
 
-export default withTheme(ApelieStoreBackGround);
+export default ApelieStoreBackGround;

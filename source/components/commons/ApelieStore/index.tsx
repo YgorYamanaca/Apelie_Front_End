@@ -67,8 +67,22 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
             {`${store.city}, ${store.state}`}
           </ApelieTextBase>
         </StoreStyles.TextContainer>
-        <div id={`Apelie-store-rating-${store.storeId}`}>
+        <div id="apelie-store-left-content">
           <ApelieRating rating={store.rating ? store.rating : 0} />
+
+          {store.products.length > 0 && (
+            <div id="apelie-store-product">
+              <div>
+                {store.products.map((product, index) => (
+                  <StoreStyles.ProductImageContainer
+                    key={`${product.name}-${index + 1}`}
+                    src={product.images[0].url}
+                    alt={`${product.name}`}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </StoreStyles.StoreAndScoreContainer>
     </StoreStyles.Container>

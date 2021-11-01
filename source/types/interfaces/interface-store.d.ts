@@ -1,3 +1,4 @@
+import { IProduct } from './interdace-products';
 import IOwner from './interface-owner';
 
 export interface IStore {
@@ -23,6 +24,7 @@ export interface IStore {
   rating: number;
   description: string;
   logoUrl: string;
+  products: IProduct[];
 }
 
 export interface IStoreRequest {

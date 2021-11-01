@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 interface IContainer {
   disabled: boolean;
+  isPadding: boolean;
   color?: string;
 }
 
@@ -15,13 +16,12 @@ const Container = styled.div<IContainer>`
   cursor: pointer;
   user-select: none;
   align-self: center;
-  padding: 10px;
+  padding: ${({ isPadding }) => isPadding && '10px'};
   &:hover {
     filter: brightness(1.5);
   }
 
   & > svg {
-    fill: ${({ theme, color }) => color || theme.colors.primary.alternative};
     transition: filter 0.3s ease-in-out;
   }
 

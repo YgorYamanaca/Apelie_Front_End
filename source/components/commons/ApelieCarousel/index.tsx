@@ -14,6 +14,7 @@ interface ICarousel {
   id: string;
   carouselTitle?: string;
   elementsList: ReactNode[];
+  arrowSize?: string;
 }
 
 interface IBreakpoints {
@@ -26,9 +27,10 @@ const ApelieCarousel: React.FC<ICarousel> = ({
   id,
   carouselTitle,
   elementsList,
+  arrowSize = '35',
 }) => {
   const breakPointsArray: IBreakpoints[] = [
-    { width: 0, itemsToShow: 1 },
+    { width: 0, itemsToShow: 2 },
     { width: 450, itemsToShow: 2 },
     { width: 960, itemsToShow: 3 },
     { width: 1280, itemsToShow: 3 },
@@ -58,7 +60,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
   const CustomArrows = ({
     type, onClick, isEdge,
   }: RenderArrowProps) => {
-    const pointer = type === consts.PREV ? <LeftArrowIcon /> : <RightArrowIcon />;
+    const pointer = type === consts.PREV ? <LeftArrowIcon width={arrowSize} height={arrowSize} /> : <RightArrowIcon width={arrowSize} height={arrowSize} />;
 
     return (
       <IconButton onClick={onClick} disabled={isEdge}>

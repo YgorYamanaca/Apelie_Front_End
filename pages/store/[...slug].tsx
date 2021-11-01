@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import apeliePageHOC from 'template/ApeliePageTemplate/HOC';
 import { useRouter } from 'next/router';
 import { useMutation } from 'react-query';
@@ -25,7 +25,7 @@ const Store: React.FC = () => {
   return (
     <>
       {slug === 'me' ? (
-        doGetMyStore.isSuccess && <StoreScreen store={doGetMyStore.data?.data[0]} isUserStore />
+        doGetMyStore.isSuccess && loggedUser && <StoreScreen store={doGetMyStore.data?.data[0]} isUserStore />
       ) : (
         doGetStoreById.isSuccess && (
           <StoreScreen store={doGetStoreById.data?.data} />

@@ -2,12 +2,12 @@ import React from 'react';
 import { withTheme, StyledProps } from 'styled-components';
 import { IIcon } from '@/types/interfaces/interface-apelie-icon';
 
-const EditIcon: React.FC<StyledProps<IIcon>> = ({
+const TrashIcon: React.FC<StyledProps<IIcon>> = ({
   id,
   width = '18',
   height = '18',
   theme,
-  fill = theme.colors.info.main,
+  fill = theme.colors.error.main,
 }) => (
   <svg
     id={id}
@@ -17,8 +17,8 @@ const EditIcon: React.FC<StyledProps<IIcon>> = ({
     fill={fill}
     viewBox="0 0 24 24"
   >
-    <path d="M7.127 22.564l-7.126 1.436 1.438-7.125 5.688 5.689zm-4.274-7.104l5.688 5.689 15.46-15.46-5.689-5.689-15.459 15.46z" />
+    <path d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z" />
   </svg>
 );
 
-export default withTheme(EditIcon);
+export default withTheme(TrashIcon);

@@ -8,6 +8,7 @@ interface IApelieStoreBackGroundStylesContainer {
 const Container = styled.div<IApelieStoreBackGroundStylesContainer>`
   display: flex;
   position: relative;
+  border-radius: 5px;
   width: 100%;
   height: 25%;
   background-image: url(${({ bannerUrl }) => bannerUrl});
@@ -38,11 +39,17 @@ const SocialMediaContainer = styled.div<ISocialMediaContainer>`
   align-items: center;
   position: absolute;
   gap: 10px;
+
+  & > div {
+    background-color: ${({ theme }) => theme.colors.background.default};
+    padding: 7.5px;
+  }
+
   ${
   ({ isLogoPositionBottom }) => (isLogoPositionBottom
     ? css`
-      right: 10px;
-      bottom: 5px;
+      right: 15px;
+      bottom: 10px;
       gap: 20px;
     `
     : css`
