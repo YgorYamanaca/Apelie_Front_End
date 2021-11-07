@@ -1,17 +1,17 @@
 import React from 'react';
-import IApelieTheme from '@/types/interfaces/interface-apelie-theme';
+import themeData from '@/utils/data-test';
 import ApelieTextBase from '../ApelieTextBase';
 import ApelieThemeStyle from './styles';
 
 interface IApelieThemeComponent {
-  theme: IApelieTheme;
+  categoryTitle: string;
 }
 
-const ApelieTheme: React.FC<IApelieThemeComponent> = ({ theme }) => (
-  <ApelieThemeStyle.Container urlOfBackground={theme.themeImage}>
+const ApelieTheme: React.FC<IApelieThemeComponent> = ({ categoryTitle }) => (
+  <ApelieThemeStyle.Container urlOfBackground={themeData.find((theme) => theme.themeTitle === categoryTitle)?.themeImage}>
     <div>
       <ApelieThemeStyle.TextBox>
-        <ApelieTextBase variant="subTitle">{theme.themeTitle}</ApelieTextBase>
+        <ApelieTextBase variant="subTitle">{categoryTitle}</ApelieTextBase>
       </ApelieThemeStyle.TextBox>
     </div>
   </ApelieThemeStyle.Container>

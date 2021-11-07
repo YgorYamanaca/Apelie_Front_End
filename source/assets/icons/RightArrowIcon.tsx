@@ -14,6 +14,7 @@ const RightArrowIcon: React.FC<StyledProps<ISimpleIcon>> = ({ width = '35', heig
     fill={theme.colors.primary.main}
     viewBox="0 0 492 492"
     xmlSpace="preserve"
+    style={{ userSelect: 'none' }}
   >
     <g>
       <g>

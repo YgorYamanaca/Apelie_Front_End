@@ -58,15 +58,6 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       Carrinho
     </ApelieButton>,
     <ApelieButton
-      key="header-config-button"
-      id="header-config-button"
-      textVariant="paragraph1"
-      icon={<GearIcon height="16" width="16" />}
-      ghost
-    >
-      Configurações
-    </ApelieButton>,
-    <ApelieButton
       key="header-store-button"
       id="header-store-button"
       textVariant="paragraph1"
@@ -87,6 +78,15 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       onClick={() => toggleTheme()}
     >
       Trocar de tema
+    </ApelieButton>,
+    <ApelieButton
+      key="header-config-button"
+      id="header-config-button"
+      textVariant="paragraph1"
+      icon={<GearIcon height="16" width="16" />}
+      ghost
+    >
+      Configurações
     </ApelieButton>,
     <ApelieButton
       key="header-logout-button"

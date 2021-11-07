@@ -79,8 +79,7 @@ const RegisterStoreScreen: React.VoidFunctionComponent<StyledProps<VoidFunctionC
     'getStoreCategorys',
     getStoreCategorys,
     {
-      select: (data) => (
-      data?.data as string[])?.map((category) => ({ label: category, value: category }
+      select: (data) => (data?.data as string[])?.map((category) => ({ label: category, value: category }
       )),
     },
   );
@@ -90,8 +89,7 @@ const RegisterStoreScreen: React.VoidFunctionComponent<StyledProps<VoidFunctionC
     getStates,
     {
       enabled: step === 'addressStep',
-      select: (data) => (
-        data?.data as IState[])?.map(
+      select: (data) => (data?.data as IState[])?.map(
         (state) => ({ label: state.nome, value: state.id.toString() }),
       ),
     },

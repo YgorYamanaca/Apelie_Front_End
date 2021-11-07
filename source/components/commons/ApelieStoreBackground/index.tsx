@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import _ from 'lodash';
 import FacebookIcon from '@/assets/icons/FacebookIcon';
 import ApelieStoreBackGroundStyles from './styles';
@@ -7,6 +7,7 @@ import InstagramIcon from '@/assets/icons/InstagramIcon';
 import YoutubeIcon from '@/assets/icons/YoutubeIcon';
 import EditIcon from '@/assets/icons/EditIcon';
 import ApelieIconButton from '../ApelieIconButton';
+import ApelieModal from '../ApelieModal';
 
 interface IApelieStoreBackGround {
     isEditable?: boolean
@@ -23,6 +24,7 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
   isLogoPositionBottom = false,
   storeMediaSocialArray,
 }) => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const socialMediaIcons = {
     facebookAccount: (
       <ApelieIconButton id="facebook-icon">
@@ -48,9 +50,10 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
 
   return (
     <ApelieStoreBackGroundStyles.Container bannerUrl={bannerUrl}>
+      <ApelieModal show={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />
       {isEditable
       && (
-        <ApelieIconButton id="store-edit-icon" isPadding>
+        <ApelieIconButton id="store-edit-icon" isPadding onClick={() => setIsEditModalOpen(true)}>
           <EditIcon width="20" height="20" />
         </ApelieIconButton>
       )}

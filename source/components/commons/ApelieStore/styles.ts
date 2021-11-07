@@ -9,7 +9,7 @@ const Container = styled.div`
   box-shadow: ${({ theme }) => theme.shadow.nivel1};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 200px;
-  height: 275px;
+  height: 285px;
   padding: 10px 5px;
   flex-direction: column;
   cursor: pointer;
@@ -37,7 +37,7 @@ interface IPhotoContainer {
 
 const StorePhotoContainer = styled.div<IPhotoContainer>`
   position: relative;
-  margin-top: 25%;
+  margin-top: 40%;
   width: 125px;
   height: 125px;
   background-image: url(${({ imgUrl }) => imgUrl});

@@ -1,71 +1,48 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
+import CloseIcon from '@/assets/icons/CloseIcon';
+import ApelieIconButton from '../ApelieIconButton';
+import ApelieModalStyle from './styles';
+import useOnClickOutside from '@/theme/useOutSideClick';
 
-const StyledModalBody = styled.div`
-    padding-top: 10px;
-  `;
+interface IApelieModal {
+  show: boolean,
+  onClose: VoidFunction,
+}
 
-const StyledModalHeader = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    font-size: 25px;
-  `;
-
-const StyledModal = styled.div`
-    background: white;
-    width: 500px;
-    height: 600px;
-    border-radius: 15px;
-    padding: 15px;
-  `;
-const StyledModalOverlay = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-  `;
-
-const Modal = ({
-  show, onClose, children, title,
+const ApelieModal: React.FC<IApelieModal> = ({
+  show, onClose, children,
 }) => {
   const [isBrowser, setIsBrowser] = useState(false);
+  const modalDiv = document.getElementById('modal-root');
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside(modalRef, onClose);
 
   useEffect(() => {
     setIsBrowser(true);
   }, []);
 
-  const handleCloseClick = (e) => {
-    e.preventDefault();
-    onClose();
-  };
-
   const modalContent = show ? (
-    <StyledModalOverlay>
-      <StyledModal>
-        <StyledModalHeader>
-          <a href="#" onClick={handleCloseClick}>
-            x
-          </a>
-        </StyledModalHeader>
-        {title && <StyledModalTitle>{title}</StyledModalTitle>}
-        <StyledModalBody>{children}</StyledModalBody>
-      </StyledModal>
-    </StyledModalOverlay>
+    <ApelieModalStyle.ModalOverlay>
+      <ApelieModalStyle.Modal ref={modalRef}>
+        <ApelieModalStyle.ModalHeader>
+          <ApelieIconButton onClick={() => onClose()}>
+            <CloseIcon height="20" width="20" />
+          </ApelieIconButton>
+        </ApelieModalStyle.ModalHeader>
+        {children}
+      </ApelieModalStyle.Modal>
+    </ApelieModalStyle.ModalOverlay>
   ) : null;
 
-  if (isBrowser) {
+  if (isBrowser && modalDiv) {
     return ReactDOM.createPortal(
       modalContent,
-      document.getElementById('modal-root'),
+      modalDiv,
     );
   }
   return null;
 };
 
-export default Modal;
+export default ApelieModal;

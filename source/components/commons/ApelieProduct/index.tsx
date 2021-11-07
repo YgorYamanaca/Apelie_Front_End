@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IProduct } from '@/types/interfaces/interdace-products';
 import ApelieTextBase from '../ApelieTextBase';
 import ApelieProductStyle from './styles';
@@ -7,6 +7,7 @@ import ApelieIconButton from '../ApelieIconButton';
 import EditIcon from '@/assets/icons/EditIcon';
 import TrashIcon from '@/assets/icons/TrashIcon';
 import { isFloat } from '@/utils/validations';
+import ApelieModal from '../ApelieModal';
 
 interface IApelieProduct {
     isEditable?: boolean,
@@ -17,10 +18,13 @@ const ApelieProduct : React.VoidFunctionComponent<IApelieProduct> = ({
   isEditable = false,
   product,
 }) => {
-  const teste = '';
+  const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
+  const [isDeleteProductModalOpen, setIsDeleteProductModalOpen] = useState(false);
+
   return (
     <ApelieProductStyle.Container>
-      {teste}
+      <ApelieModal show={isEditProductModalOpen} onClose={() => setIsEditProductModalOpen(false)} />
+      <ApelieModal show={isDeleteProductModalOpen} onClose={() => setIsDeleteProductModalOpen(false)} />
       <div id="apelie-product-name-and-price">
         <ApelieTextBase variant="subTitle">
           {product.name}
@@ -35,13 +39,13 @@ const ApelieProduct : React.VoidFunctionComponent<IApelieProduct> = ({
           {`Quantidade: ${product.quantity}`}
         </ApelieTextBase>
       </span>
-      {isEditable && (
+      {!isEditable && (
         <div id="apelie-product-edit">
-          <ApelieIconButton>
+          <ApelieIconButton onClick={() => setIsEditProductModalOpen(true)}>
             <EditIcon width="20" height="20" />
           </ApelieIconButton>
 
-          <ApelieIconButton>
+          <ApelieIconButton onClick={() => setIsDeleteProductModalOpen(true)}>
             <TrashIcon width="20" height="20" />
           </ApelieIconButton>
         </div>

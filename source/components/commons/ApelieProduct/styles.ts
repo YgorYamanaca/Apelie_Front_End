@@ -7,7 +7,7 @@ const Container = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.background.default};
   gap: 10px;
-  padding: 20px 15px;
+  padding: 15px;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.colors.divider};
   & > #apelie-product-name-and-price {
