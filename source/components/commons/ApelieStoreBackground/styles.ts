@@ -3,6 +3,7 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 
 interface IApelieStoreBackGroundStylesContainer {
   bannerUrl: string;
+  backgroundHeight: string;
 }
 
 const Container = styled.div<IApelieStoreBackGroundStylesContainer>`
@@ -10,7 +11,7 @@ const Container = styled.div<IApelieStoreBackGroundStylesContainer>`
   position: relative;
   border-radius: 5px;
   width: 100%;
-  height: 30%;
+  height: ${({ backgroundHeight }) => backgroundHeight};
   background-image: url(${({ bannerUrl }) => bannerUrl});
   background-size: cover;
   background-position: center;

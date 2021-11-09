@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
 import { IStore } from '@/types/interfaces/interface-store';
@@ -15,25 +15,12 @@ interface IStoreComponent {
 
 const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
   const router = useRouter();
-  const DEFAULT_USER_PHOTO = '/images/User/default-user-image.png';
   const DEFAULT_STORE_PHOTO = '/images/Store/default-placeholder.png';
-
-  const userPhoto = useMemo(() => (
-    store?.owner?.photoUrl ? store.owner.photoUrl : DEFAULT_USER_PHOTO
-  ), [store]);
-
-  const bannerPhoto = useMemo(() => (
-    store?.bannerUrl ? store.bannerUrl : DEFAULT_STORE_PHOTO
-  ), [store]);
-
-  const logoPhoto = useMemo(() => (
-    store?.logoUrl ? store.logoUrl : DEFAULT_STORE_PHOTO
-  ), [store]);
 
   return (
     <StoreStyles.Container id={`StoreStyles-Container-${store.storeId}`} onClick={() => router.push(`${ApeliePageAlias.Store}/${store.storeId}`)}>
       <ApelieStoreBackGround
-        bannerUrl={bannerPhoto}
+        bannerUrl={store?.bannerUrl}
         storeMediaSocialArray={
           _.keys(_.omitBy(_.pick(store, [
             'facebookAccount',
@@ -45,10 +32,10 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
       />
       <StoreStyles.StoreOverflowContainer>
         <div>
-          <StoreStyles.StorePhotoContainer imgUrl={logoPhoto}>
+          <StoreStyles.StorePhotoContainer imgUrl={store?.logoUrl || DEFAULT_STORE_PHOTO}>
             <StoreStyles.UserPhotoContainer>
               <ApelieUserPhotoComponent
-                userPhotoUrl={userPhoto}
+                userPhotoUrl={store.owner.photoUrl}
                 size={50}
               />
             </StoreStyles.UserPhotoContainer>

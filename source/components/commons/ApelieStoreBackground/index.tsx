@@ -10,6 +10,7 @@ import ApelieIconButton from '../ApelieIconButton';
 import ApelieModal from '../ApelieModal';
 
 interface IApelieStoreBackGround {
+    backgroundHeight?: string;
     isEditable?: boolean
     bannerUrl: string
     isLogoPositionBottom?: boolean
@@ -17,7 +18,10 @@ interface IApelieStoreBackGround {
     storeMediaSocialArray: string[]
 }
 
+const DEFAULT_STORE_PHOTO = '/images/Store/default-placeholder.png';
+
 const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
+  backgroundHeight = '30%',
   isEditable = false,
   bannerUrl,
   logoSize,
@@ -27,29 +31,32 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const socialMediaIcons = {
     facebookAccount: (
-      <ApelieIconButton id="facebook-icon">
-        <FacebookIcon key="facebook" width={logoSize} height={logoSize} />
+      <ApelieIconButton key="facebook-button" id="facebook-icon">
+        <FacebookIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),
     youtubeAccount: (
-      <ApelieIconButton id="youtube-icon">
-        <YoutubeIcon key="youtube" width={logoSize} height={logoSize} />
+      <ApelieIconButton key="youtube-button" id="youtube-icon">
+        <YoutubeIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),
     twitterAccount: (
-      <ApelieIconButton id="twitte-icon">
-        <TwitterIcon key="twitter" width={logoSize} height={logoSize} />
+      <ApelieIconButton key="twitter-button" id="twitter-icon">
+        <TwitterIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),
     instagramAccount: (
-      <ApelieIconButton id="instagram-icon">
-        <InstagramIcon key="instagram" width={logoSize} height={logoSize} />
+      <ApelieIconButton key="instagram-button" id="instagram-icon">
+        <InstagramIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),
   };
 
   return (
-    <ApelieStoreBackGroundStyles.Container bannerUrl={bannerUrl}>
+    <ApelieStoreBackGroundStyles.Container
+      bannerUrl={bannerUrl || DEFAULT_STORE_PHOTO}
+      backgroundHeight={backgroundHeight}
+    >
       <ApelieModal show={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />
       {isEditable
       && (

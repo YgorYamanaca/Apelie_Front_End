@@ -48,3 +48,14 @@ export interface IStoreRequest {
   neighbourhood: string,
   description: string
 }
+
+export interface IStoreRequestWithErrors extends IStoreRequest {
+  cepError?: string,
+  addressNumberError?: string,
+  phoneError?: string,
+}
+
+export interface IStoreForm {
+  registerStoreRequestValue: IStoreRequestWithErrors
+  changeStoreRequestFunction: (value: IStoreRequestWithErrors) => void,
+}

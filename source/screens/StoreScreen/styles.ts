@@ -15,12 +15,43 @@ const Container = styled.main`
 const StoreInfoContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 300px;
   background-color: transparent;
-  margin: 0 15px;
+  margin: 35px 0;
+
+  & > #store-info-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    & > #store-detail-and-rating {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      & > #store-name-and-state {
+        display: flex;
+        flex-direction: column;
+      }
+
+      & > #store-rating {
+        margin-left: auto;
+      }
+    }
+    
+    & > #store-description {
+      padding: 15px 5px;
+      text-indent: 15px;
+    }
+  }
+
   ${breakpointsMedia({
     md: css`
-      width: 50%;
+      width: 25%;
+      margin: 50px 15px;
+      & > #store-info-container {
+      & > #store-description {
+        margin-left: 75px;
+      }
     `,
   })}
 `;

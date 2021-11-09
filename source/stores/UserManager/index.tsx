@@ -56,6 +56,7 @@ const ApelieUserProvider: React.FC = ({ children }) => {
   const doLogout = useCallback(() => {
     setLoggedUser(undefined);
     localStorage.removeItem('userAuth');
+    router.push(ApeliePageAlias.MainPage);
   }, []);
 
   const updateUserToken = useCallback((token: string) => {

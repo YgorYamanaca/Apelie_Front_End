@@ -7,11 +7,13 @@ interface IApelieUserPhotoComponent {
   onMouseOnclickAction?: VoidFunction;
 }
 
+const DEFAULT_USER_PHOTO = '/images/User/default-user-image.png';
+
 const ApelieUserPhotoComponent: React.FunctionComponent<IApelieUserPhotoComponent> = ({
   userPhotoUrl, size, onMouseOnclickAction, children,
 }) => (
   <StyleApelieUserPhoto.Container
-    imgUrl={userPhotoUrl}
+    imgUrl={userPhotoUrl || DEFAULT_USER_PHOTO}
     size={size}
     onClick={() => onMouseOnclickAction && onMouseOnclickAction()}
   >

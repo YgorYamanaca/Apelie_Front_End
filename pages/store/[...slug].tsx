@@ -25,10 +25,10 @@ const Store: React.FC = () => {
   return (
     <>
       {slug === 'me' ? (
-        doGetMyStore.isSuccess && loggedUser && <StoreScreen store={doGetMyStore.data?.data[0]} isUserStore />
+        loggedUser && <StoreScreen store={doGetMyStore.data?.data[0]} isRequestLoading={doGetMyStore.isSuccess} isUserStore />
       ) : (
-        doGetStoreById.isSuccess && (
-          <StoreScreen store={doGetStoreById.data?.data} />
+        (
+          <StoreScreen store={doGetStoreById.data?.data} isRequestLoading={doGetStoreById.isSuccess} />
         ))}
     </>
   );
