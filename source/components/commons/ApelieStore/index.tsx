@@ -21,6 +21,8 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
     <StoreStyles.Container id={`StoreStyles-Container-${store.storeId}`} onClick={() => router.push(`${ApeliePageAlias.Store}/${store.storeId}`)}>
       <ApelieStoreBackGround
         bannerUrl={store?.bannerUrl}
+        primaryColor={store?.primaryColor}
+        secondaryColor={store?.secondaryColor}
         storeMediaSocialArray={
           _.keys(_.omitBy(_.pick(store, [
             'facebookAccount',

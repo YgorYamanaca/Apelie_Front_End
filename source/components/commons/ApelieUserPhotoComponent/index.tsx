@@ -14,6 +14,7 @@ const ApelieUserPhotoComponent: React.FunctionComponent<IApelieUserPhotoComponen
 }) => (
   <StyleApelieUserPhoto.Container
     imgUrl={userPhotoUrl || DEFAULT_USER_PHOTO}
+    cursorType={!!onMouseOnclickAction}
     size={size}
     onClick={() => onMouseOnclickAction && onMouseOnclickAction()}
   >

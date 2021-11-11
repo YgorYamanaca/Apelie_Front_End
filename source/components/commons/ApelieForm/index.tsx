@@ -5,18 +5,24 @@ import ApelieFormStyle from './styles';
 interface IApelieForm {
     id: string,
     backButtonAction?: VoidFunction,
+    backButtonText?: string,
     nextButtonAction: VoidFunction,
+    nextButtonText?: string,
     disabledCondition: boolean,
+    hasBackGround?: boolean,
 }
 
 const ApelieForm : React.FC<IApelieForm> = ({
   id,
   children,
   backButtonAction,
+  backButtonText = 'Voltar',
   nextButtonAction,
+  nextButtonText = 'Proximo',
   disabledCondition,
+  hasBackGround = true,
 }) => (
-  <ApelieFormStyle.Container>
+  <ApelieFormStyle.Container hasBackGround={hasBackGround}>
     <ApelieFormStyle.Content>
       {children}
     </ApelieFormStyle.Content>
@@ -33,7 +39,7 @@ const ApelieForm : React.FC<IApelieForm> = ({
           executeBackButtonAction();
         }}
       >
-        Voltar
+        {backButtonText}
       </ApelieButton>
       )}
       <ApelieButton
@@ -42,7 +48,7 @@ const ApelieForm : React.FC<IApelieForm> = ({
         onClick={() => nextButtonAction()}
         disabled={disabledCondition}
       >
-        Proximo
+        {nextButtonText}
       </ApelieButton>
     </ApelieFormStyle.Footer>
   </ApelieFormStyle.Container>

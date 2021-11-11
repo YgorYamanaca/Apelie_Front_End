@@ -2,19 +2,20 @@ import React, { useCallback } from 'react';
 import ApeliePageTitle from '@/components/commons/ApeliePageTitle';
 import ApelieSelectBox from '@/components/commons/ApelieSelectBox';
 import ApelieUploadPhoto from '@/components/commons/ApelieUploadPhoto';
-import { IStoreForm } from '@/types/interfaces/interface-store';
+import { IDesignRegister, IStoreForm } from '@/types/interfaces/interface-store';
 import DesignRegisterStyle from './styles';
 import colorPallets from '@/utils/colorsPallet';
 
-const DesignRegister: React.VoidFunctionComponent<IStoreForm> = ({
+const DesignRegister: React.VoidFunctionComponent<IStoreForm<IDesignRegister>> = ({
+  formTitle = 'Cadastro de Design da loja',
   registerStoreRequestValue,
   changeStoreRequestFunction,
 }) => {
-  const handleUploadStoreBannerImage = useCallback(
-    (bannerImage: string) => {
+  const handleUploadStorebannerUrl = useCallback(
+    (bannerUrl: string) => {
       changeStoreRequestFunction({
         ...registerStoreRequestValue,
-        bannerImage,
+        bannerUrl,
       });
     },
     [registerStoreRequestValue],
@@ -23,13 +24,14 @@ const DesignRegister: React.VoidFunctionComponent<IStoreForm> = ({
   return (
     <DesignRegisterStyle.Container>
       <ApeliePageTitle>
-        Cadastro de Design da loja
+        {formTitle}
       </ApeliePageTitle>
       <div id="content">
         <div id="store-banner-image-content">
           <ApelieUploadPhoto
-            selectedPhotoKey="bannerImage"
-            onImageSelect={handleUploadStoreBannerImage}
+            selectedPhotoKey="bannerUrl"
+            initialDefaultImage={registerStoreRequestValue.bannerUrl}
+            onImageSelect={handleUploadStorebannerUrl}
             textOfUploadDragArea="Faça o upload do banner da loja"
           />
         </div>
@@ -37,6 +39,7 @@ const DesignRegister: React.VoidFunctionComponent<IStoreForm> = ({
           <ApelieSelectBox
             placeholder="Cor primária de sua loja..."
             type="SINGLE"
+            selectedOption={colorPallets.find((color) => color.value === registerStoreRequestValue.primaryColor)}
             onChange={(selectedValues) => changeStoreRequestFunction({
               ...registerStoreRequestValue,
               primaryColor: selectedValues[0],
@@ -47,6 +50,7 @@ const DesignRegister: React.VoidFunctionComponent<IStoreForm> = ({
           <ApelieSelectBox
             placeholder="Cor secundária de sua loja..."
             type="SINGLE"
+            selectedOption={colorPallets.find((color) => color.value === registerStoreRequestValue.secondaryColor)}
             onChange={(selectedValues) => changeStoreRequestFunction({
               ...registerStoreRequestValue,
               secondaryColor: selectedValues[0],

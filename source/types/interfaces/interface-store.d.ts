@@ -25,37 +25,52 @@ export interface IStore {
   description: string;
   logoUrl: string;
   products: IProduct[];
+  primaryColor: string;
+  secondaryColor: string;
 }
 
-export interface IStoreRequest {
-  twitterAccount: string,
+export interface IFirstRegister {
+  name: string,
+  logoImage: string,
   categories: string[],
-  instagramAccount: string,
-  state: string,
+  description: string,
+}
+
+export interface IDesignRegister {
+  secondaryColor: string;
+  primaryColor: string;
+  bannerUrl: string,
+}
+
+export interface ISocialMediaRegister {
   facebookAccount: string,
   youtubeAccount: string,
-  bannerImage: string,
-  logoImage: string,
-  primaryColor: string,
-  secondaryColor: string,
-  street: string,
-  city: string,
-  zipCode: string,
-  name: string,
-  email: string,
+  twitterAccount: string,
+  instagramAccount: string,
+}
+
+export interface IAddressRegister {
   phone: string,
   addressNumber: string,
   neighbourhood: string,
-  description: string
+  street: string,
+  city: string,
+  zipCode: string,
+  state: string,
+  email: string,
+  zipCodeError?: string,
+  addressNumberError?: string,
+  phoneError?: string,
 }
-
 export interface IStoreRequestWithErrors extends IStoreRequest {
-  cepError?: string,
+  zipCodeError?: string,
   addressNumberError?: string,
   phoneError?: string,
 }
 
-export interface IStoreForm {
-  registerStoreRequestValue: IStoreRequestWithErrors
-  changeStoreRequestFunction: (value: IStoreRequestWithErrors) => void,
+export interface IStoreRequest extends IFirstRegister, IDesignRegister, ISocialMediaRegister, IAddressRegister {}
+export interface IStoreForm<T> {
+  formTitle?: string,
+  registerStoreRequestValue: T,
+  changeStoreRequestFunction: (value: T) => void,
 }

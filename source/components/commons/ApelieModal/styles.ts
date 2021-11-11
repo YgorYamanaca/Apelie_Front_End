@@ -17,8 +17,7 @@ const ModalHeader = styled.div`
 
 const Modal = styled.div`
     background: ${({ theme }) => theme.colors.background.default};
-    width: 75%;
-    height: 600px;
+    width: fit-content;
     border-radius: 15px;
     padding: 15px;
 `;

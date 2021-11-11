@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface IStyleApelieUserPhoto {
   imgUrl: string;
   size: number;
+  cursorType: boolean;
 }
 
 const Container = styled.div<IStyleApelieUserPhoto>`
@@ -12,7 +13,7 @@ const Container = styled.div<IStyleApelieUserPhoto>`
   background-position: center;
   background-size: cover;
   border-radius: 50%;
-  cursor: ${({ imgUrl }) => (imgUrl ? 'pointer' : 'default')};
+  cursor: ${({ imgUrl, cursorType }) => (imgUrl && cursorType ? 'pointer' : 'default')};
 `;
 
 const StyleApelieUserPhoto = {

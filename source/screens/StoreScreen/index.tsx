@@ -9,8 +9,7 @@ import AddIcon from '@/assets/icons/AddIcon';
 import ApelieProduct from '@/components/commons/ApelieProduct';
 import ApelieModal from '@/components/commons/ApelieModal';
 import ApelieLoadingSpinner from '@/components/commons/ApelieLoadingSpinner';
-import ApelieUserPhotoComponent from '@/components/commons/ApelieUserPhotoComponent';
-import ApelieRating from '@/components/commons/ApelieRating';
+import ApelieStoreResume from '@/components/commons/ApelieStoreResume';
 
 interface IStoreScreen {
     store: IStore;
@@ -32,6 +31,8 @@ const StoreScreen : React.FC<IStoreScreen> = ({
           <ApelieStoreBackGround
             backgroundHeight="175px"
             bannerUrl={store?.bannerUrl}
+            primaryColor={store?.primaryColor}
+            secondaryColor={store?.secondaryColor}
             logoSize="30"
             storeMediaSocialArray={
             _.keys(_.omitBy(_.pick(store, [
@@ -45,34 +46,7 @@ const StoreScreen : React.FC<IStoreScreen> = ({
             isEditable={isUserStore}
           />
           <StoreScreenStyle.StoreInfoContainer>
-            <div id="store-info-container">
-              <div id="store-detail-and-rating">
-
-                <div id="store-owner-photo">
-                  <ApelieUserPhotoComponent userPhotoUrl={store.owner.photoUrl} size={65} />
-                </div>
-                <div id="store-name-and-state">
-                  <ApelieTextBase
-                    variant="title"
-                  >
-                    {store.name}
-                  </ApelieTextBase>
-                  <ApelieTextBase
-                    variant="subTitle"
-                  >
-                    {`${store.city} - ${store.state}`}
-                  </ApelieTextBase>
-                </div>
-                <div id="store-rating">
-                  <ApelieRating variant="title" rating={store.rating} />
-                </div>
-              </div>
-              <p id="store-description">
-                <ApelieTextBase variant="paragraph1">
-                  {store.description}
-                </ApelieTextBase>
-              </p>
-            </div>
+            <ApelieStoreResume store={store} isEditable={isUserStore} />
           </StoreScreenStyle.StoreInfoContainer>
           <StoreScreenStyle.ProductContainer>
             <div id="title-wrapper">

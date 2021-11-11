@@ -5,7 +5,9 @@ import { useMutation } from 'react-query';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
 import RegisterStoreScreenStyle from './styles';
-import { IStoreRequest, IStoreRequestWithErrors } from '@/types/interfaces/interface-store';
+import {
+  IAddressRegister, IDesignRegister, IFirstRegister, ISocialMediaRegister, IStoreRequestWithErrors,
+} from '@/types/interfaces/interface-store';
 import { postStore } from '@/services/store';
 import { ToastContext } from '@/stores/ToastStore';
 import { isValidateCepFormat, isValidateTelFormat } from '@/utils/validations';
@@ -30,37 +32,52 @@ interface IRegisterStoreSteps {
   addressStep: IRegister;
 }
 
-const INITIAL_REQUEST: IStoreRequest = {
-  twitterAccount: '',
+const INITIAL_REQUEST_FIRST_REGISTER: IFirstRegister = {
   categories: [],
-  instagramAccount: '',
-  state: '',
-  facebookAccount: '',
-  youtubeAccount: '',
-  bannerImage: '',
+  name: '',
+  description: '',
   logoImage: '',
+};
+
+const INITIAL_REQUEST_DESIGN_REGISTER: IDesignRegister = {
+  bannerUrl: '',
   primaryColor: '',
   secondaryColor: '',
-  street: '',
-  city: '',
-  zipCode: '',
-  name: '',
-  email: '',
-  phone: '',
+};
+
+const INITIAL_REQUEST_SOCIALMEDIA_REGISTER: ISocialMediaRegister = {
+  facebookAccount: '',
+  instagramAccount: '',
+  twitterAccount: '',
+  youtubeAccount: '',
+};
+
+const INITIAL_REQUEST_ADDRESS_REGISTER: IAddressRegister = {
   addressNumber: '',
+  city: '',
+  email: '',
   neighbourhood: '',
-  description: '',
+  phone: '',
+  state: '',
+  street: '',
+  zipCode: '',
+  addressNumberError: '',
+  phoneError: '',
+  zipCodeError: '',
 };
 
 const RegisterStoreScreen: React.VoidFunctionComponent = () => {
   const [step, setStep] = useState<keyof IRegisterStoreSteps>('firstStep');
   const { setToastMessage } = useContext(ToastContext);
-  const [registerStoreRequest, setRegisterStoreRequest] = useState<IStoreRequestWithErrors>(INITIAL_REQUEST);
+  const [firstRegisterValue, setFirstRequestValue] = useState<IFirstRegister>(INITIAL_REQUEST_FIRST_REGISTER);
+  const [designRegisterValue, setDesignRequestValue] = useState<IDesignRegister>(INITIAL_REQUEST_DESIGN_REGISTER);
+  const [socialMediaRegisterValue, setSocialMediaRequestValue] = useState<ISocialMediaRegister>(INITIAL_REQUEST_SOCIALMEDIA_REGISTER);
+  const [addressRegisterValue, setAddressRequestValue] = useState<IAddressRegister>(INITIAL_REQUEST_ADDRESS_REGISTER);
   const router = useRouter();
 
   const doPostStoreRequest = useMutation(postStore, {
     onSuccess: (response) => {
-      if (response.status === 200) {
+      if (response?.status === 200 || response?.status === 201) {
         setToastMessage({
           message: 'Sua loja foi cadastrado com sucesso.',
           type: 'success',
@@ -79,48 +96,45 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
     stateToBeAtt: 'facebookAccount' | 'instagramAccount' | 'twitterAccount' | 'youtubeAccount',
     pageAdreess: string,
   ) {
-    if (registerStoreRequest[stateToBeAtt]?.toLocaleLowerCase().includes(pageAdreess)) {
-      const indexTobeGet = registerStoreRequest[stateToBeAtt].split('/').length
+    if (socialMediaRegisterValue[stateToBeAtt]?.toLocaleLowerCase().includes(pageAdreess)) {
+      const indexTobeGet = socialMediaRegisterValue[stateToBeAtt].split('/').length
         - (stateToBeAtt === 'youtubeAccount' || stateToBeAtt === 'twitterAccount' ? 1 : 2);
-      const userPart = registerStoreRequest[stateToBeAtt].split('/')[indexTobeGet];
-      setRegisterStoreRequest({
-        ...registerStoreRequest,
+      const userPart = socialMediaRegisterValue[stateToBeAtt].split('/')[indexTobeGet];
+      setSocialMediaRequestValue({
+        ...socialMediaRegisterValue,
         [stateToBeAtt]: userPart,
       });
     }
   }
 
+  function getRequestDataToBeSand(): IStoreRequestWithErrors {
+    const newAdressRequestValue = {
+      ...addressRegisterValue,
+      phone: addressRegisterValue.phone.replace('(', '').replace(')', '').replace('-', '').replace(/ /g, ''),
+    };
+
+    return {
+      ...newAdressRequestValue,
+      ...firstRegisterValue,
+      ...socialMediaRegisterValue,
+      ...designRegisterValue,
+    };
+  }
+
   function handleRegisterStoreSubmit() {
-    if (isValidateCepFormat(registerStoreRequest.zipCode)
-      && isValidateTelFormat(registerStoreRequest.phone)
-      && registerStoreRequest.addressNumber.length === 3
-      && _.has(registerStoreRequest, [
-        'categories',
-        'state',
-        'bannerImage',
-        'logoImage',
-        'primaryColor',
-        'secondaryColor',
-        'street',
-        'city',
-        'zipCode',
-        'name',
-        'email',
-        'phone',
-        'addressNumber',
-        'neighbourhood',
-        'description',
-      ])
+    if (isValidateCepFormat(addressRegisterValue.zipCode)
+      && isValidateTelFormat(addressRegisterValue.phone)
+      && addressRegisterValue.addressNumber.length === 3
     ) {
       doPostStoreRequest.mutate(
-        registerStoreRequest,
+        getRequestDataToBeSand(),
       );
-    } else if (!isValidateCepFormat(registerStoreRequest.zipCode) || !isValidateTelFormat(registerStoreRequest.phone) || registerStoreRequest.addressNumber.length !== 3) {
-      setRegisterStoreRequest({
-        ...registerStoreRequest,
-        addressNumberError: registerStoreRequest.addressNumber.length !== 3 ? 'Você precisa completar o número do endereço' : '',
-        phoneError: !isValidateTelFormat(registerStoreRequest.phone) ? 'O seu telefone não é válido' : '',
-        cepError: !isValidateCepFormat(registerStoreRequest.zipCode) ? 'Está faltando número no zipCode' : '',
+    } else if (!isValidateCepFormat(addressRegisterValue.zipCode) || !isValidateTelFormat(addressRegisterValue.phone) || addressRegisterValue.addressNumber.length !== 3) {
+      setAddressRequestValue({
+        ...addressRegisterValue,
+        addressNumberError: addressRegisterValue.addressNumber.length !== 3 ? 'Você precisa completar o número do endereço' : '',
+        phoneError: !isValidateTelFormat(addressRegisterValue.phone) ? 'O seu telefone não é válido' : '',
+        zipCodeError: !isValidateCepFormat(addressRegisterValue.zipCode) ? 'Está faltando número no zipCode' : '',
       });
     } else {
       setToastMessage({
@@ -142,47 +156,49 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
         setStep(stepToBeValidated);
       }
     },
-    [step, registerStoreRequest],
+    [step],
   );
 
   const firstStep: IRegister = {
-    content: <InitialRegister registerStoreRequestValue={registerStoreRequest} changeStoreRequestFunction={setRegisterStoreRequest} />,
+    content: <InitialRegister registerStoreRequestValue={firstRegisterValue} changeStoreRequestFunction={setFirstRequestValue} />,
     nextButtonAction: () => validStep('designStep'),
     disabledCondition:
-    !registerStoreRequest.logoImage
-    || !registerStoreRequest.name
-    || !registerStoreRequest.description
-    || registerStoreRequest.categories.length === 0,
+    !firstRegisterValue.logoImage
+    || !firstRegisterValue.name
+    || !firstRegisterValue.description
+    || firstRegisterValue.categories.length === 0,
   };
 
   const designStep: IRegister = {
-    content: <DesignRegister registerStoreRequestValue={registerStoreRequest} changeStoreRequestFunction={setRegisterStoreRequest} />,
+    content: <DesignRegister registerStoreRequestValue={designRegisterValue} changeStoreRequestFunction={setDesignRequestValue} />,
     backButtonAction: () => setStep('firstStep'),
     nextButtonAction: () => validStep('socialMediaStep'),
     disabledCondition:
-    !registerStoreRequest.primaryColor
-    || !registerStoreRequest.secondaryColor
-    || !registerStoreRequest.bannerImage,
+    !designRegisterValue.primaryColor
+    || !designRegisterValue.secondaryColor
+    || !designRegisterValue.bannerUrl,
   };
 
   const socialMediaStep: IRegister = {
-    content: <SocialMediaRegister registerStoreRequestValue={registerStoreRequest} changeStoreRequestFunction={setRegisterStoreRequest} />,
+    content: <SocialMediaRegister registerStoreRequestValue={socialMediaRegisterValue} changeStoreRequestFunction={setSocialMediaRequestValue} />,
     backButtonAction: () => setStep('designStep'),
     nextButtonAction: () => validStep('addressStep'),
     disabledCondition: false,
   };
 
   const addressStep: IRegister = {
-    content: <AddressRegister registerStoreRequestValue={registerStoreRequest} changeStoreRequestFunction={setRegisterStoreRequest} />,
+    content: <AddressRegister registerStoreRequestValue={addressRegisterValue} changeStoreRequestFunction={setAddressRequestValue} />,
     backButtonAction: () => setStep('socialMediaStep'),
     nextButtonAction: () => handleRegisterStoreSubmit(),
     disabledCondition:
-    !registerStoreRequest.zipCode
-    || !registerStoreRequest.state
-    || !registerStoreRequest.city
-    || !registerStoreRequest.neighbourhood
-    || !registerStoreRequest.street
-    || !registerStoreRequest.addressNumber,
+    !addressRegisterValue.zipCode
+    || !addressRegisterValue.state
+    || !addressRegisterValue.city
+    || !addressRegisterValue.neighbourhood
+    || !addressRegisterValue.street
+    || !addressRegisterValue.addressNumber
+    || !addressRegisterValue.phone
+    || !addressRegisterValue.email,
   };
 
   const registerStoreSteps: IRegisterStoreSteps = {
