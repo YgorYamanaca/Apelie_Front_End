@@ -8,12 +8,14 @@ import ApelieTextBase from '../ApelieTextBase';
 import ApelieButton from '../ApelieButton';
 
 interface IApelieUploadPhoto {
+    initialDefaultImage?: string;
     onImageSelect: (imageURl: string) => void;
     textOfUploadDragArea: string;
     selectedPhotoKey: string;
 }
 
 const ApelieUploadPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
+  initialDefaultImage,
   onImageSelect,
   textOfUploadDragArea,
   selectedPhotoKey,
@@ -58,15 +60,23 @@ const ApelieUploadPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
             >
               {(errors || imageList.length === 0) && (
               <>
-                {!errors && <UploadIcon height="35" width="35" fill={theme.colors.text.primary} />}
+                {!errors && !initialDefaultImage && <UploadIcon height="35" width="35" fill={theme.colors.text.primary} />}
                 <ApelieTextBase variant="title">
-                  {!errors && textOfUploadDragArea}
+                  {!errors && !initialDefaultImage && textOfUploadDragArea}
                   {errors?.maxNumber && `A quantidade de imagem ultrapassa o limite de ${MAX_NUMBER}.`}
                   {errors?.acceptType && 'O arquivo escolhido não é JPG ou JPEG.'}
                   {errors?.maxFileSize && `O tamanho da imagem excede o limite de ${MAX_SIZE / 1000000} MBs`}
                   {errors?.resolution && 'A resolução não é compátivel.'}
                 </ApelieTextBase>
               </>
+              )}
+              {initialDefaultImage && imageList.length === 0 && (
+              <img
+                key="uplodedImage"
+                id="uplodedImage"
+                src={initialDefaultImage}
+                alt="uplodedImageAlt"
+              />
               )}
               {!errors && imageList.map((image, index) => (
                 <>
@@ -79,7 +89,7 @@ const ApelieUploadPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
                 </>
               ))}
             </ApelieUploadPhotoStyle.UploadImageContainer>
-            {imageList.length > 0 && (
+            {(imageList.length > 0 || initialDefaultImage) && (
               <ApelieUploadPhotoStyle.FloatBox key="float-box">
                 <ApelieButton
                   key="apelie-upload-photo"

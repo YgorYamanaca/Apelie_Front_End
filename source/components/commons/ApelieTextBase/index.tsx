@@ -8,7 +8,7 @@ interface ITextBase {
   text?: string;
   href?: string;
   variant?: keyof ITypographyVariants;
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'li' | 'a' | 'span' | 'input' | 'div' | 'textarea';
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'li' | 'a' | 'span' | 'input' | 'div' | 'textarea' | 'label';
   type?: string;
   color?: keyof ITextColor | 'none';
   placeholder?: string;

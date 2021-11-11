@@ -7,11 +7,20 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const ChildrenContainer = styled.div`
+const ChildrenContainer = styled.main`
   display: flex;
   flex: 1;
   padding: 0 15px;
   margin-top: 70px;
+
+  & > main > div#apelie-loading {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    height: 100%;
+  }
+
   ${breakpointsMedia({
     sm: css`
       margin-top: 95px;

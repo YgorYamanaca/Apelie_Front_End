@@ -5,7 +5,7 @@ interface IOwner {
   email: string;
   street: string;
   state: string;
-  cep: string;
+  zipCode: string;
   addressNumber: string;
   neighbourhood: string;
   gender: string;

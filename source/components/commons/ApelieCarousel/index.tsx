@@ -10,31 +10,32 @@ import CarouselStyle from './styles';
 import IconButton from '../ApelieIconButton';
 import ApelieTextBase from '../ApelieTextBase';
 
-interface ICarousel {
-  id: string;
-  carouselTitle?: string;
-  elementsList: ReactNode[];
-}
-
 interface IBreakpoints {
   width: number,
   itemsToShow: number,
   itemsToScroll?: number
 }
+interface ICarousel {
+  id: string;
+  carouselTitle?: string;
+  breakPointsArray?: IBreakpoints[],
+  elementsList: ReactNode[];
+  arrowSize?: string;
+}
 
 const ApelieCarousel: React.FC<ICarousel> = ({
   id,
-  carouselTitle,
-  elementsList,
-}) => {
-  const breakPointsArray: IBreakpoints[] = [
-    { width: 0, itemsToShow: 1 },
+  breakPointsArray = [
+    { width: 0, itemsToShow: 2 },
     { width: 450, itemsToShow: 2 },
     { width: 960, itemsToShow: 3 },
     { width: 1280, itemsToShow: 3 },
     { width: 1920, itemsToShow: 3 },
-  ];
-
+  ],
+  carouselTitle,
+  elementsList,
+  arrowSize = '35',
+}) => {
   const CarouselItem = useMemo(
     () => (
       elementsList.map((storeComponent, index) => (
@@ -58,7 +59,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
   const CustomArrows = ({
     type, onClick, isEdge,
   }: RenderArrowProps) => {
-    const pointer = type === consts.PREV ? <LeftArrowIcon /> : <RightArrowIcon />;
+    const pointer = type === consts.PREV ? <LeftArrowIcon width={arrowSize} height={arrowSize} /> : <RightArrowIcon width={arrowSize} height={arrowSize} />;
 
     return (
       <IconButton onClick={onClick} disabled={isEdge}>

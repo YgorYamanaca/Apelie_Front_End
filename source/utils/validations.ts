@@ -29,7 +29,7 @@ export function isValidateSubscribeDate(date: string): boolean {
   return testDate < toDay && testDate < sixteenYearsAgo;
 }
 
-export function isImageExist(url: string) {
+export function isImageExist(url: string): boolean {
   const request = new XMLHttpRequest();
 
   request.open('HEAD', url, false);
@@ -38,12 +38,16 @@ export function isImageExist(url: string) {
   return request.status !== 404;
 }
 
-export function isValidateCepFormat(cepToBeTest: string) {
+export function isValidateCepFormat(cepToBeTest: string): boolean {
   const regexTest = /[0-9]{5}-[\d]{3}/g;
   return regexTest.test(cepToBeTest);
 }
 
-export function isValidateTelFormat(telToBeTest: string) {
+export function isValidateTelFormat(telToBeTest: string): boolean {
   const regexTest = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})-?(\d{4}))$/g;
   return regexTest.test(telToBeTest);
+}
+
+export function isFloat(value: number): boolean {
+  return Number(value) === value && value % 1 !== 0;
 }

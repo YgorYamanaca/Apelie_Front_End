@@ -51,7 +51,6 @@ const UploadImageContainer = styled.div<IUploadImageContainer>`
       max-width: 500px;
       & > img {
         max-width: 90%;
-        height: 320px;
       }
     `,
   })}

@@ -89,6 +89,16 @@ const spin = keyframes`
   }
 `;
 
+const slide = keyframes`
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-75%);
+  }
+`;
+
 const Animations = {
   fadein,
   fadeOut,
@@ -98,6 +108,7 @@ const Animations = {
   spin,
   outOfScreenRight,
   outOfScreenLeft,
+  slide,
 };
 
 export default Animations;

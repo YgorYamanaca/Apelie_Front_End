@@ -2,24 +2,27 @@ import React, { ReactNode } from 'react';
 import IconButtonStyle from './styles';
 
 type IconButtonType = {
+  id?: string;
   disabled?: boolean;
-  color?: string;
+  isPadding?: boolean;
   className?: string;
   children: ReactNode;
   onClick?: () => void;
 };
 
 const ApelieIconButton: React.FC<IconButtonType> = ({
+  id,
   disabled = false,
-  color,
+  isPadding = false,
   className,
   children,
   onClick,
 }) => (
   <IconButtonStyle.Container
+    id={id}
     disabled={disabled}
     className={className}
-    color={color}
+    isPadding={isPadding}
     onClick={() => onClick && onClick()}
   >
     {children}

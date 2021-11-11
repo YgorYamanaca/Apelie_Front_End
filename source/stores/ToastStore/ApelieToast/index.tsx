@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { StyledProps, withTheme } from 'styled-components';
 import CheckIcon from '@/assets/icons/CheckIcon';
 import CloseIcon from '@/assets/icons/CloseIcon';
 import WarningIcon from '@/assets/icons/WarningIcon';
@@ -15,9 +16,10 @@ interface IToastWithId extends IToastObject {
   id: number
 }
 
-const ApelieToastComponent: React.FC<IApelieToastComponent> = ({
+const ApelieToastComponent: React.FC<StyledProps<IApelieToastComponent>> = ({
   id,
   messageObject,
+  theme,
 }) => {
   const [queue, setQueue] = useState<IToastWithId[]>([]);
   const ToastIcons: { [key in ToastType]: React.ReactNode } = {
@@ -68,7 +70,7 @@ const ApelieToastComponent: React.FC<IApelieToastComponent> = ({
                 <StyleApelieToast.CloseIconBox
                   onClick={() => close(message.id)}
                 >
-                  <CloseIcon />
+                  <CloseIcon fill={theme.colors.text.contrastText} />
                 </StyleApelieToast.CloseIconBox>
               </StyleApelieToast.Container>
             ))
@@ -79,4 +81,4 @@ const ApelieToastComponent: React.FC<IApelieToastComponent> = ({
   );
 };
 
-export default ApelieToastComponent;
+export default withTheme(ApelieToastComponent);

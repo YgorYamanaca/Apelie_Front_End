@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import breakpointsMedia from '@/utils/breakpointsMedia';
+import Animations from '@/utils/animations';
 
 const Container = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ const Container = styled.div`
   box-shadow: ${({ theme }) => theme.shadow.nivel1};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 200px;
-  height: 250px;
+  height: 285px;
   padding: 10px 5px;
   flex-direction: column;
   cursor: pointer;
@@ -36,7 +37,7 @@ interface IPhotoContainer {
 
 const StorePhotoContainer = styled.div<IPhotoContainer>`
   position: relative;
-  margin-top: 25%;
+  margin-top: 40%;
   width: 125px;
   height: 125px;
   background-image: url(${({ imgUrl }) => imgUrl});
@@ -88,11 +89,22 @@ const StoreOverflowContainer = styled.div`
 
 const StoreAndScoreContainer = styled.div`
   display: flex;
-  margin-top: 50px;
+  margin-top: auto;
   flex-direction: column;
 
-  & > div :last-child {
+  & > div#apelie-store-left-content {
+    display: flex;
+    flex-direction: column;
     margin-left: auto;
+    width: 55%;
+    justify-content: space-between;
+    & > :first-child {
+      margin-left: auto;
+      margin-right: 7.5px;
+    }
+    & > div#apelie-store-product {
+      display: none;
+    }
   }
 
   ${breakpointsMedia({
@@ -103,6 +115,19 @@ const StoreAndScoreContainer = styled.div`
       height: 100%;
       margin-left: 125px;
       margin-top: 0px;
+
+      & > div#apelie-store-left-content {
+      & > div#apelie-store-product {
+        display: flex;
+        overflow-x: hidden;
+        gap: 10px;
+        width: 100%;
+        & > div {
+          display: flex;
+          animation: ${Animations.slide} 20s linear infinite;
+        }
+      }
+    }
     `,
   })}
 `;
@@ -130,6 +155,12 @@ const TextContainer = styled.div`
   })}
 `;
 
+const ProductImageContainer = styled.img`
+  min-width: 60px;
+  height: 60px;
+  border: 2px solid ${({ theme }) => theme.colors.divider};
+`;
+
 const StoreStyles = {
   Container,
   StorePhotoContainer,
@@ -137,6 +168,7 @@ const StoreStyles = {
   StoreOverflowContainer,
   StoreAndScoreContainer,
   TextContainer,
+  ProductImageContainer,
 };
 
 export default StoreStyles;

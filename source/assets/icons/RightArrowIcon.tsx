@@ -1,17 +1,20 @@
 import React from 'react';
+import { StyledProps, withTheme } from 'styled-components';
 import { ISimpleIcon } from '@/types/interfaces/interface-apelie-simple-icon';
 
-const RightArrowIcon: React.FC<ISimpleIcon> = ({ width = '35', height = '35' }) => (
+const RightArrowIcon: React.FC<StyledProps<ISimpleIcon>> = ({ width = '35', height = '35', theme }) => (
   <svg
     version="1.1"
     id="Layer_1"
     xmlns="http://www.w3.org/2000/svg"
-    width={`${width}px`}
-    height={`${height}px`}
     x="0px"
     y="0px"
-    viewBox="0 0 492.004 492.004"
+    width={`${width}px`}
+    height={`${height}px`}
+    fill={theme.colors.primary.main}
+    viewBox="0 0 492 492"
     xmlSpace="preserve"
+    style={{ userSelect: 'none' }}
   >
     <g>
       <g>
@@ -26,4 +29,4 @@ const RightArrowIcon: React.FC<ISimpleIcon> = ({ width = '35', height = '35' }) 
   </svg>
 );
 
-export default RightArrowIcon;
+export default withTheme(RightArrowIcon);

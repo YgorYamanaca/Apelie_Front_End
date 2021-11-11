@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import Animations from '@/utils/animations';
 import breakpointsMedia from '@/utils/breakpointsMedia';
 
-const Container = styled.div`
+const Container = styled.main`
   display: flex;
   flex: 1;
   flex-direction: column;

@@ -7,7 +7,7 @@ const YoutubeIcon: React.FC<StyledProps<IIcon>> = ({
   width = '18',
   height = '18',
   theme,
-  fill = theme.colors.text.contrastText,
+  fill = theme.colors.text.primary,
 }) => (
   <svg
     id={id}

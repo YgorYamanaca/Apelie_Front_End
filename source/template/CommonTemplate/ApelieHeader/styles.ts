@@ -72,7 +72,7 @@ const HeaderContentBox = styled.div`
   width: 100%;
 `;
 
-const HeaderExpansiveBox = styled.div<IApelieHeader>`
+const HeaderExpansiveBox = styled.nav<IApelieHeader>`
   display: flex;
   background-color: ${({ theme }) => theme.colors.background.paper};
   flex-direction: column;
@@ -180,7 +180,7 @@ const UserContainer = styled.div<IApelieHeader>`
   })}
 `;
 
-const ExpansiveMenu = styled.div`
+const ExpansiveMenu = styled.nav`
   display: none;
   position: absolute;
   justify-content: center;
@@ -234,7 +234,7 @@ const LoginAndSubscribeTextBox = styled.span`
     color: ${({ theme }) => theme.colors.primary.main};
   }
   order: 1;
-
+  margin-left: 15px;
   ${breakpointsMedia({
     sm: css`
       order: 0;

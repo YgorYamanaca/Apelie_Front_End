@@ -1,36 +1,28 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import _ from 'lodash';
+import { useRouter } from 'next/router';
 import { IStore } from '@/types/interfaces/interface-store';
 import ApelieRating from '../ApelieRating';
 import ApelieTextBase from '../ApelieTextBase';
 import ApelieUserPhotoComponent from '../ApelieUserPhotoComponent';
 import StoreStyles from './styles';
 import ApelieStoreBackGround from '../ApelieStoreBackground';
+import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 
 interface IStoreComponent {
   store: IStore;
 }
 
 const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
-  const DEFAULT_USER_PHOTO = '/images/User/default-user-image.png';
+  const router = useRouter();
   const DEFAULT_STORE_PHOTO = '/images/Store/default-placeholder.png';
 
-  const userPhoto = useMemo(() => (
-    store?.owner?.photoUrl ? store.owner.photoUrl : DEFAULT_USER_PHOTO
-  ), [store]);
-
-  const bannerPhoto = useMemo(() => (
-    store?.bannerUrl ? store.bannerUrl : DEFAULT_STORE_PHOTO
-  ), [store]);
-
-  const logoPhoto = useMemo(() => (
-    store?.logoUrl ? store.logoUrl : DEFAULT_STORE_PHOTO
-  ), [store]);
-
   return (
-    <StoreStyles.Container id={`StoreStyles-Container-${store.storeId}`}>
+    <StoreStyles.Container id={`StoreStyles-Container-${store.storeId}`} onClick={() => router.push(`${ApeliePageAlias.Store}/${store.storeId}`)}>
       <ApelieStoreBackGround
-        bannerUrl={bannerPhoto}
+        bannerUrl={store?.bannerUrl}
+        primaryColor={store?.primaryColor}
+        secondaryColor={store?.secondaryColor}
         storeMediaSocialArray={
           _.keys(_.omitBy(_.pick(store, [
             'facebookAccount',
@@ -42,10 +34,10 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
       />
       <StoreStyles.StoreOverflowContainer>
         <div>
-          <StoreStyles.StorePhotoContainer imgUrl={logoPhoto}>
+          <StoreStyles.StorePhotoContainer imgUrl={store?.logoUrl || DEFAULT_STORE_PHOTO}>
             <StoreStyles.UserPhotoContainer>
               <ApelieUserPhotoComponent
-                userPhotoUrl={userPhoto}
+                userPhotoUrl={store.owner.photoUrl}
                 size={50}
               />
             </StoreStyles.UserPhotoContainer>
@@ -64,8 +56,22 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
             {`${store.city}, ${store.state}`}
           </ApelieTextBase>
         </StoreStyles.TextContainer>
-        <div id={`Apelie-store-rating-${store.storeId}`}>
+        <div id="apelie-store-left-content">
           <ApelieRating rating={store.rating ? store.rating : 0} />
+
+          {store.products.length > 0 && (
+            <div id="apelie-store-product">
+              <div>
+                {store.products.map((product, index) => (
+                  <StoreStyles.ProductImageContainer
+                    key={`${product.name}-${index + 1}`}
+                    src={product.images[0].url}
+                    alt={`${product.name}`}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </StoreStyles.StoreAndScoreContainer>
     </StoreStyles.Container>

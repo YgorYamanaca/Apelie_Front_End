@@ -13,6 +13,7 @@ export interface IOptions {
 
 interface IApelieRating {
     type: 'SINGLE' | 'MULTI';
+    selectedOption?: IOptions | IOptions[];
     options?: IOptions[];
     placeholder: string;
     isLoading?: boolean;
@@ -25,6 +26,7 @@ interface IApelieRating {
 const ApelieSelectBox: React.FC<StyledProps<IApelieRating>> = ({
   type,
   width = '275px',
+  selectedOption,
   options,
   isLoading,
   isDisabled,
@@ -45,6 +47,7 @@ const ApelieSelectBox: React.FC<StyledProps<IApelieRating>> = ({
       <Select
         hideSelectedOptions
         closeMenuOnSelect={type === 'SINGLE'}
+        defaultValue={selectedOption}
         onChange={(selectedValues) => handleOnChange(selectedValues)}
         isMulti={type === 'MULTI'}
         options={options}
@@ -66,6 +69,7 @@ const ApelieSelectBox: React.FC<StyledProps<IApelieRating>> = ({
             neutral70: `${theme.colors.error.main}`,
             neutral80: `${theme.colors.text.primary}`,
             neutral50: `${theme.colors.text.disabled}`,
+            neutral5: `${theme.colors.text.disabled}`,
           },
         })}
       />
