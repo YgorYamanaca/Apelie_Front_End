@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { IAddressRegister, IFirstRegister, IStore } from '@/types/interfaces/interface-store';
 import ApelieTextBase from '../ApelieTextBase';
 import ApelieRating from '../ApelieRating';
-import ApelieUserPhotoComponent from '../ApelieUserPhotoComponent';
 import ApelieStoreResumeStyle from './styles';
 import ApelieIconButton from '../ApelieIconButton';
 import EditIcon from '@/assets/icons/EditIcon';
