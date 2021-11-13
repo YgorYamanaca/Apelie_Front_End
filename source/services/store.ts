@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { IStoreRequest } from '@/types/interfaces/interface-store';
 import ApiRequester from './apiRequester';
+import { IProductRegister } from '@/types/interfaces/interdace-products';
 
 const getStore = async (): Promise<AxiosResponse> => {
   const response = await ApiRequester.apelie
@@ -12,6 +13,13 @@ const getStore = async (): Promise<AxiosResponse> => {
 const postStore = async (Store: IStoreRequest): Promise<AxiosResponse> => {
   const response = await ApiRequester.apelie
     .post('/stores', Store)
+    .catch((err) => err.response);
+  return response;
+};
+
+const postStoreProduct = async (updateData: {storeId: number | string, product: IProductRegister}): Promise<AxiosResponse> => {
+  const response = await ApiRequester.apelie
+    .post(`/stores/${updateData.storeId}/products`, updateData.product)
     .catch((err) => err.response);
   return response;
 };
@@ -49,5 +57,5 @@ const getStoreCategorys = async (): Promise<AxiosResponse> => {
 };
 
 export {
-  getStore, getStoreById, getStoreCategorys, postStore, getMyStoreById, updateStore,
+  getStore, getStoreById, getStoreCategorys, postStore, getMyStoreById, updateStore, postStoreProduct,
 };

@@ -28,3 +28,12 @@ export function cepNumberMask(cepText: string) {
   const ret = cepText.replace(/\D/g, '');
   return ret.replace(/^(\d{5})(\d)/g, '$1-$2');
 }
+
+export function formatReal(moneyInput: string) {
+  let v = moneyInput.replace(/\D/g, '');
+  v = `${(Number(v) / 100).toFixed(2)}`;
+  v = v.replace('.', ',');
+  v = v.replace(/(\d)(\d{3})(\d{3}),/g, '$1.$2.$3,');
+  v = v.replace(/(\d)(\d{3}),/g, '$1.$2,');
+  return v;
+}

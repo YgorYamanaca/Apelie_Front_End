@@ -41,7 +41,7 @@ const INITIAL_REQUEST_FIRST_REGISTER: IFirstRegister = {
 };
 
 const INITIAL_REQUEST_DESIGN_REGISTER: IDesignRegister = {
-  bannerUrl: '',
+  bannerImage: '',
   primaryColor: '',
   secondaryColor: '',
 };
@@ -179,7 +179,7 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
     disabledCondition:
     !designRegisterValue.primaryColor
     || !designRegisterValue.secondaryColor
-    || !designRegisterValue.bannerUrl,
+    || !designRegisterValue.bannerImage,
   };
 
   const socialMediaStep: IRegister = {
@@ -230,12 +230,15 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
           width={350}
         />
       </div>
+
       <ApelieForm
         formTitle={registerStoreSteps[step]?.formTitle}
         id={step}
         nextButtonAction={registerStoreSteps[step]?.nextButtonAction}
         backButtonAction={registerStoreSteps[step]?.backButtonAction}
         disabledCondition={registerStoreSteps[step]?.disabledCondition}
+        hasBackGround
+        hasPadding
       >
         {registerStoreSteps[step].content}
       </ApelieForm>

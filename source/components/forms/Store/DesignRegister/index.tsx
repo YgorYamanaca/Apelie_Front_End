@@ -11,10 +11,10 @@ const DesignRegister: React.VoidFunctionComponent<IForm<IDesignRegister>> = ({
   changeStoreRequestFunction,
 }) => {
   const handleUploadStorebannerUrl = useCallback(
-    (bannerUrl: string) => {
+    (bannerImage: string) => {
       changeStoreRequestFunction({
         ...registerStoreRequestValue,
-        bannerUrl,
+        bannerImage,
       });
     },
     [registerStoreRequestValue],
@@ -26,7 +26,7 @@ const DesignRegister: React.VoidFunctionComponent<IForm<IDesignRegister>> = ({
         <div id="store-banner-image-content">
           <ApelieUploadPhoto
             selectedPhotoKey="bannerUrl"
-            initialDefaultImage={registerStoreRequestValue.bannerUrl}
+            initialDefaultImage={registerStoreRequestValue.bannerImage}
             onImageSelect={handleUploadStorebannerUrl}
             textOfUploadDragArea="Faça o upload do banner da loja"
           />

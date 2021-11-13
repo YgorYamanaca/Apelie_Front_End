@@ -3,6 +3,7 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 
 interface IContainer {
   hasBackGround: boolean
+  hasPadding: boolean
 }
 
 const Container = styled.div<IContainer>`
@@ -13,13 +14,22 @@ const Container = styled.div<IContainer>`
   border: ${({ theme, hasBackGround }) => hasBackGround && `1px solid ${theme.colors.divider}`};
   box-shadow: ${({ theme, hasBackGround }) => hasBackGround && theme.shadow.nivel3};
   background-color: ${({ theme, hasBackGround }) => hasBackGround && theme.colors.background.paper};
+  padding: ${({ hasPadding }) => hasPadding && '5px'};
   z-index: 300;
   ${breakpointsMedia({
     md: css`
-      width: fit-content;
+      width: 100%;
       height: auto;
     `,
   })}
+
+  ${({ hasPadding }) => hasPadding && css`
+    ${breakpointsMedia({
+    md: css`
+        padding: 25px;
+      `,
+  })}
+  `};
 `;
 
 const Content = styled.div`
@@ -27,6 +37,7 @@ const Content = styled.div`
   flex-direction: column;
   gap: 10px;
   overflow-y: auto;
+  align-items: center;
   ${breakpointsMedia({
     md: css`
       padding: 0 50px;

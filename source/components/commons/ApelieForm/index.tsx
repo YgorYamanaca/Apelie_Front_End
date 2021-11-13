@@ -12,6 +12,7 @@ interface IApelieForm {
     nextButtonText?: string,
     disabledCondition: boolean,
     hasBackGround?: boolean,
+    hasPadding?: boolean,
 }
 
 const ApelieForm : React.FC<IApelieForm> = ({
@@ -24,8 +25,9 @@ const ApelieForm : React.FC<IApelieForm> = ({
   nextButtonText = 'Proximo',
   disabledCondition,
   hasBackGround = true,
+  hasPadding = false,
 }) => (
-  <ApelieFormStyle.Container hasBackGround={hasBackGround}>
+  <ApelieFormStyle.Container hasBackGround={hasBackGround} hasPadding={hasPadding}>
     <ApeliePageTitle>
       {formTitle}
     </ApeliePageTitle>

@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import _ from 'lodash';
 import { useMutation } from 'react-query';
-import router from 'next/router';
 import FacebookIcon from '@/assets/icons/FacebookIcon';
 import ApelieStoreBackGroundStyles from './styles';
 import TwitterIcon from '@/assets/icons/TwitterIcon';
@@ -17,7 +16,6 @@ import { updateStore } from '@/services/store';
 import { ToastContext } from '@/stores/ToastStore';
 import SocialMediaRegister from '@/components/forms/Store/SocialMediaRegister';
 import ApelieTextWithDivider from '../ApelieTextWithDivider';
-import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 
 interface IApelieStoreBackGround {
     backgroundHeight?: string
@@ -26,22 +24,23 @@ interface IApelieStoreBackGround {
     logoSize?: string
     storeMediaSocialArray: string[]
     store: IStore
+    whenEdited?: VoidFunction
 }
 
 const DEFAULT_STORE_PHOTO = '/images/Store/default-placeholder.png';
 
 const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
-  backgroundHeight = '30%',
+  backgroundHeight = '85px',
   isEditable = false,
   store,
   logoSize,
   isLogoPositionBottom = false,
   storeMediaSocialArray,
+  whenEdited,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { setToastMessage } = useContext(ToastContext);
   const [designRegisterValue, setDesignRequestValue] = useState<IDesignRegister>({
-    bannerUrl: store.bannerUrl,
     primaryColor: store.primaryColor,
     secondaryColor: store.secondaryColor,
   });
@@ -81,7 +80,8 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
           message: 'As informações que você alterou foram alteradas com sucesso.',
           type: 'success',
         });
-        router.push(ApeliePageAlias.MyStore);
+        setIsEditModalOpen(false);
+        whenEdited && whenEdited();
       } else {
         setToastMessage({
           message: 'Erro ao tentar atualizar as informações que você solicitou.',
@@ -93,14 +93,14 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
 
   return (
     <ApelieStoreBackGroundStyles.Container
-      bannerUrl={designRegisterValue.bannerUrl || DEFAULT_STORE_PHOTO}
+      bannerUrl={store.bannerUrl || DEFAULT_STORE_PHOTO}
       backgroundHeight={backgroundHeight}
     >
       <ApelieModal show={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
         <ApelieForm
           formTitle="Atualização do design da página e das redes sociais"
           id="att-design-info"
-          disabledCondition={designRegisterValue.bannerUrl === '' && designRegisterValue.primaryColor === '' && designRegisterValue.secondaryColor === ''}
+          disabledCondition={designRegisterValue.bannerImage === '' && designRegisterValue.primaryColor === '' && designRegisterValue.secondaryColor === ''}
           backButtonText="Cancelar"
           backButtonAction={() => setIsEditModalOpen(false)}
           nextButtonText="Atualizar"
@@ -109,8 +109,8 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
             categories: store.category,
             city: store.city,
             description: store.description,
-            email: store.description,
-            logoImage: store.logoUrl,
+            email: store.email,
+            logoUrl: store.logoUrl,
             name: store.name,
             neighbourhood: store.neighbourhood,
             phone: store.phone,

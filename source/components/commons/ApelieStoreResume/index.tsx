@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { useMutation } from 'react-query';
-import router from 'next/router';
 import { IAddressRegister, IFirstRegister, IStore } from '@/types/interfaces/interface-store';
 import ApelieTextBase from '../ApelieTextBase';
 import ApelieRating from '../ApelieRating';
@@ -14,23 +13,23 @@ import AddressRegister from '@/components/forms/Store/AddressRegister';
 import ApelieTextWithDivider from '../ApelieTextWithDivider';
 import { ToastContext } from '@/stores/ToastStore';
 import { updateStore } from '@/services/store';
-import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 
 interface IApelieStoreResume {
     store: IStore,
     isEditable?: boolean,
+    whenEdited?: VoidFunction
 }
 
 const ApelieStoreResume: React.VoidFunctionComponent<IApelieStoreResume> = ({
   isEditable = false,
   store,
+  whenEdited,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { setToastMessage } = useContext(ToastContext);
   const [storeMainInfo, setStoreMainInfo] = useState<IFirstRegister>({
     categories: store.category,
     description: store.description,
-    logoImage: store.logoUrl,
     name: store.name,
   });
   const [storeAddressInfo, setStoreAddressInfo] = useState<IAddressRegister>({
@@ -54,7 +53,8 @@ const ApelieStoreResume: React.VoidFunctionComponent<IApelieStoreResume> = ({
           message: 'As informações que você alterou foram alteradas com sucesso.',
           type: 'success',
         });
-        router.push(ApeliePageAlias.MyStore);
+        setIsEditModalOpen(false);
+        whenEdited && whenEdited();
       } else {
         setToastMessage({
           message: 'Erro ao tentar atualizar as informações que você solicitou.',
@@ -77,7 +77,9 @@ const ApelieStoreResume: React.VoidFunctionComponent<IApelieStoreResume> = ({
           nextButtonAction={() => doUpdateStore.mutate({
             ...storeMainInfo,
             ...storeAddressInfo,
+            phone: storeAddressInfo.phone.replace('(', '').replace(')', '').replace('-', '').replace(/ /g, ''),
             bannerUrl: store.bannerUrl,
+            ...!storeMainInfo.logoImage && { logoUrl: store.logoUrl },
             facebookAccount: store.facebookAccount,
             instagramAccount: store.instagramAccount,
             primaryColor: store.primaryColor,

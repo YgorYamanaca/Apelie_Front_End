@@ -16,7 +16,7 @@ const ModalOverlay = styled.div`
 
 const Modal = styled.div`
     background: ${({ theme }) => theme.colors.background.default};
-    width: 95%;
+    width: 98%;
     height: 90%;
     border-radius: 15px;
     position: relative;

@@ -17,10 +17,14 @@ export interface IProduct {
 
 export interface IProductRegister {
     category: string,
-    description: string,
+    description?: string,
     images: string[],
     name: string,
     price: number,
-    productId: number,
     quantity: number,
+}
+
+export interface IProductRegisterWithErrors extends IProductRegister {
+    priceError: string,
+    quantityError: string,
 }

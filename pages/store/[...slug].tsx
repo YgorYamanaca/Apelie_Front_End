@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useCallback, useLayoutEffect } from 'react';
 import apeliePageHOC from 'template/ApeliePageTemplate/HOC';
 import { useRouter } from 'next/router';
 import { useMutation } from 'react-query';
@@ -12,6 +12,17 @@ const Store: React.FC = () => {
 
   const doGetMyStore = useMutation(doGetUserStore);
   const doGetStoreById = useMutation(getStoreById);
+
+  const uploadPage = useCallback(
+    () => {
+      if (slug === 'me') {
+        doGetMyStore.mutate();
+      } else {
+        doGetStoreById.mutate(slug);
+      }
+    },
+    [],
+  );
 
   useLayoutEffect(() => {
     if (slug === 'me') {
@@ -27,6 +38,7 @@ const Store: React.FC = () => {
         store={slug === 'me' ? doGetMyStore.data?.data : doGetStoreById.data?.data}
         isRequestLoading={slug === 'me' ? doGetMyStore.isSuccess : doGetStoreById.isSuccess}
         isUserStore={slug === 'me'}
+        uploadPageFunction={uploadPage}
       />
     </>
   );

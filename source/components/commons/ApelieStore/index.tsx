@@ -42,6 +42,7 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
           </StoreStyles.StorePhotoContainer>
         </div>
       </StoreStyles.StoreOverflowContainer>
+      <div id="invisible-content" />
       <StoreStyles.StoreAndScoreContainer>
         <StoreStyles.TextContainer>
           <ApelieTextBase id="apelie-name" variant="paragraph1">

@@ -8,9 +8,12 @@ const Container = styled.div`
   user-select: none;
   width: 100%;
   position: relative;
+  flex-direction: column;
+  gap: 15px;
   ${breakpointsMedia({
     md: css`
       width: auto;
+      gap: 35px;
     `,
   })}
 `;
@@ -34,42 +37,37 @@ const UploadImageContainer = styled.div<IUploadImageContainer>`
   padding: 10px;
   gap: 15px;
   cursor: pointer;
-  pointer-events: ${({ hasImage }) => hasImage && 'none'};
   & > span {
     text-align: center;
     color: ${({ theme, hasErrors }) => hasErrors && theme.colors.error.main};
   }
   & > img {
-    max-width: 90%;
+    max-width: 100%;
     height: 200px;
   }
-
   ${breakpointsMedia({
     md: css`
+      min-width: 100%;
       padding: 15px 45px;
       height: 300px;
-      max-width: 500px;
       & > img {
-        max-width: 90%;
+        max-width: 100%;
       }
     `,
   })}
 `;
 
-const FloatBox = styled.div`
+const ImagesBox = styled.div`
   display: flex;
-  position: absolute;
-  margin: 15px;
-  gap: 5px;
-  bottom: 0;
-  right: 0;
-  z-index: 5000;
+  max-width: 100%;
+  overflow-x: auto;
+  gap: 15px;
 `;
 
-const ApelieUploadPhotoStyle = {
+const ApelieUploadMultiPhotoStyle = {
   Container,
   UploadImageContainer,
-  FloatBox,
+  ImagesBox,
 };
 
-export default ApelieUploadPhotoStyle;
+export default ApelieUploadMultiPhotoStyle;
