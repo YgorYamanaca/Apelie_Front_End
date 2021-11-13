@@ -1,30 +1,9 @@
-import styled from 'styled-components';
-
-const Container = styled.div`
-    padding-top: 10px;
-`;
-
-const ModalHeader = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    font-size: 25px;
-
-    & > div.close-modal-button {
-        color: ${({ theme }) => theme.colors.text.primary};
-        cursor: pointer;
-    }
-`;
-
-const Modal = styled.div`
-    background: ${({ theme }) => theme.colors.background.default};
-    width: fit-content;
-    border-radius: 15px;
-    padding: 15px;
-`;
+import styled, { css } from 'styled-components';
+import breakpointsMedia from '@/utils/breakpointsMedia';
 
 const ModalOverlay = styled.div`
     position: fixed;
-    top: 0;
+    top:0;
     left: 0;
     width: 100%;
     height: 100%;
@@ -35,9 +14,35 @@ const ModalOverlay = styled.div`
     z-index: 5500;
 `;
 
+const Modal = styled.div`
+    background: ${({ theme }) => theme.colors.background.default};
+    width: 95%;
+    height: 90%;
+    border-radius: 15px;
+    position: relative;
+    
+    padding: 15px 20px;
+    & > div#close-modal-button {
+        display: none;
+    }
+    ${breakpointsMedia({
+    md: css`
+        width: fit-content;
+        padding: 35px;
+        height: fit-content;
+        & > div#close-modal-button {
+            display: block;
+            position: absolute;
+            color: ${({ theme }) => theme.colors.text.primary};
+            cursor: pointer;
+            right: 10px;
+            top: 15px;
+        }
+    `,
+  })}
+`;
+
 const ApelieModalStyle = {
-  Container,
-  ModalHeader,
   Modal,
   ModalOverlay,
 };

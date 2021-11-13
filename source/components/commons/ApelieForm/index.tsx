@@ -1,9 +1,11 @@
 import React from 'react';
 import ApelieButton from '../ApelieButton';
+import ApeliePageTitle from '../ApeliePageTitle';
 import ApelieFormStyle from './styles';
 
 interface IApelieForm {
     id: string,
+    formTitle: string,
     backButtonAction?: VoidFunction,
     backButtonText?: string,
     nextButtonAction: VoidFunction,
@@ -14,6 +16,7 @@ interface IApelieForm {
 
 const ApelieForm : React.FC<IApelieForm> = ({
   id,
+  formTitle,
   children,
   backButtonAction,
   backButtonText = 'Voltar',
@@ -23,6 +26,9 @@ const ApelieForm : React.FC<IApelieForm> = ({
   hasBackGround = true,
 }) => (
   <ApelieFormStyle.Container hasBackGround={hasBackGround}>
+    <ApeliePageTitle>
+      {formTitle}
+    </ApeliePageTitle>
     <ApelieFormStyle.Content>
       {children}
     </ApelieFormStyle.Content>

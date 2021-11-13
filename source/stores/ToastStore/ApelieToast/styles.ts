@@ -9,7 +9,7 @@ const ToastQueueContainer = styled.div`
   width: 100%;
   padding: 5px;
   position: absolute;
-  z-index: 1500;
+  z-index: 10000000000;
   ${breakpointsMedia({
     sm: css`
       top: 25px;

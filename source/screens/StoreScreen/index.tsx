@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { IStore } from '@/types/interfaces/interface-store';
 import StoreScreenStyle from './styles';
@@ -30,9 +30,7 @@ const StoreScreen : React.FC<IStoreScreen> = ({
           <ApelieModal show={isAddPrductModalOpen} onClose={() => setIsAddPrductModalOpen(false)} />
           <ApelieStoreBackGround
             backgroundHeight="175px"
-            bannerUrl={store?.bannerUrl}
-            primaryColor={store?.primaryColor}
-            secondaryColor={store?.secondaryColor}
+            store={store}
             logoSize="30"
             storeMediaSocialArray={
             _.keys(_.omitBy(_.pick(store, [

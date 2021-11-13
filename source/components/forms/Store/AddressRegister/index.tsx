@@ -2,19 +2,18 @@ import React, {
   ChangeEvent, useEffect, useState,
 } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import ApeliePageTitle from '@/components/commons/ApeliePageTitle';
 import ApelieSelectBox, { IOptions } from '@/components/commons/ApelieSelectBox';
-import { IAddressRegister, IStoreForm } from '@/types/interfaces/interface-store';
+import { IAddressRegister } from '@/types/interfaces/interface-store';
 import AddressRegisterStyle from './styles';
 import handleChange from '@/utils/formUtils';
 import { getCity, getStates } from '@/services/locality';
 import { ICity, IState } from '@/types/interfaces/interface-apelie-locality-request';
 import ApelieInputField from '@/components/commons/ApelieInputField';
-import { adressNumberMask, cepNumberMask, phoneMask } from '@/utils/mask';
+import { addressNumberMask, cepNumberMask, phoneMask } from '@/utils/mask';
 import ApelieLoadingSpinner from '@/components/commons/ApelieLoadingSpinner';
+import { IForm } from '@/types/interfaces/interface-apelie-form';
 
-const AddressRegister: React.VoidFunctionComponent<IStoreForm<IAddressRegister>> = ({
-  formTitle = 'Cadastro de endereço',
+const AddressRegister: React.VoidFunctionComponent<IForm<IAddressRegister>> = ({
   registerStoreRequestValue,
   changeStoreRequestFunction,
 }) => {
@@ -49,10 +48,7 @@ const AddressRegister: React.VoidFunctionComponent<IStoreForm<IAddressRegister>>
 
   return (
     <AddressRegisterStyle.Container>
-      <div id="adress-content">
-        <ApeliePageTitle>
-          {formTitle}
-        </ApeliePageTitle>
+      <div id="address-content">
         {stateResult.isSuccess ? (
           <>
             <ApelieInputField
@@ -119,7 +115,7 @@ const AddressRegister: React.VoidFunctionComponent<IStoreForm<IAddressRegister>>
               isError={registerStoreRequestValue.addressNumberError}
               value={registerStoreRequestValue.addressNumber}
               onChange={
-                (event: ChangeEvent<HTMLInputElement>) => handleChange(event, changeStoreRequestFunction, adressNumberMask)
+                (event: ChangeEvent<HTMLInputElement>) => handleChange(event, changeStoreRequestFunction, addressNumberMask)
               }
             />
             <ApelieInputField

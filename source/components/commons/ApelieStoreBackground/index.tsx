@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import _ from 'lodash';
 import { useMutation } from 'react-query';
+import router from 'next/router';
 import FacebookIcon from '@/assets/icons/FacebookIcon';
 import ApelieStoreBackGroundStyles from './styles';
 import TwitterIcon from '@/assets/icons/TwitterIcon';
@@ -10,17 +11,21 @@ import EditIcon from '@/assets/icons/EditIcon';
 import ApelieIconButton from '../ApelieIconButton';
 import ApelieModal from '../ApelieModal';
 import DesignRegister from '@/components/forms/Store/DesignRegister';
-import { IDesignRegister } from '@/types/interfaces/interface-store';
+import { IDesignRegister, ISocialMediaRegister, IStore } from '@/types/interfaces/interface-store';
 import ApelieForm from '../ApelieForm';
-import { updateStoreDesign } from '@/services/store';
+import { updateStore } from '@/services/store';
 import { ToastContext } from '@/stores/ToastStore';
+import SocialMediaRegister from '@/components/forms/Store/SocialMediaRegister';
+import ApelieTextWithDivider from '../ApelieTextWithDivider';
+import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 
-interface IApelieStoreBackGround extends IDesignRegister {
+interface IApelieStoreBackGround {
     backgroundHeight?: string
     isEditable?: boolean
     isLogoPositionBottom?: boolean
     logoSize?: string
     storeMediaSocialArray: string[]
+    store: IStore
 }
 
 const DEFAULT_STORE_PHOTO = '/images/Store/default-placeholder.png';
@@ -28,9 +33,7 @@ const DEFAULT_STORE_PHOTO = '/images/Store/default-placeholder.png';
 const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
   backgroundHeight = '30%',
   isEditable = false,
-  bannerUrl,
-  primaryColor,
-  secondaryColor,
+  store,
   logoSize,
   isLogoPositionBottom = false,
   storeMediaSocialArray,
@@ -38,9 +41,15 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { setToastMessage } = useContext(ToastContext);
   const [designRegisterValue, setDesignRequestValue] = useState<IDesignRegister>({
-    bannerUrl,
-    primaryColor,
-    secondaryColor,
+    bannerUrl: store.bannerUrl,
+    primaryColor: store.primaryColor,
+    secondaryColor: store.secondaryColor,
+  });
+  const [socialMediaValue, setSocialMediaValue] = useState<ISocialMediaRegister>({
+    facebookAccount: store.facebookAccount,
+    instagramAccount: store.instagramAccount,
+    twitterAccount: store.twitterAccount,
+    youtubeAccount: store.youtubeAccount,
   });
   const socialMediaIcons = {
     facebookAccount: (
@@ -65,13 +74,14 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
     ),
   };
 
-  const doUpdateStoreDesign = useMutation(updateStoreDesign, {
+  const doUpdateStore = useMutation(updateStore, {
     onSuccess: (response) => {
       if (response?.status === 204) {
         setToastMessage({
           message: 'As informações que você alterou foram alteradas com sucesso.',
           type: 'success',
         });
+        router.push(ApeliePageAlias.MyStore);
       } else {
         setToastMessage({
           message: 'Erro ao tentar atualizar as informações que você solicitou.',
@@ -83,20 +93,38 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
 
   return (
     <ApelieStoreBackGroundStyles.Container
-      bannerUrl={bannerUrl || DEFAULT_STORE_PHOTO}
+      bannerUrl={designRegisterValue.bannerUrl || DEFAULT_STORE_PHOTO}
       backgroundHeight={backgroundHeight}
     >
       <ApelieModal show={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
         <ApelieForm
+          formTitle="Atualização do design da página e das redes sociais"
           id="att-design-info"
           disabledCondition={designRegisterValue.bannerUrl === '' && designRegisterValue.primaryColor === '' && designRegisterValue.secondaryColor === ''}
           backButtonText="Cancelar"
           backButtonAction={() => setIsEditModalOpen(false)}
           nextButtonText="Atualizar"
-          nextButtonAction={() => doUpdateStoreDesign.mutate(designRegisterValue)}
+          nextButtonAction={() => doUpdateStore.mutate({
+            addressNumber: store.addressNumber,
+            categories: store.category,
+            city: store.city,
+            description: store.description,
+            email: store.description,
+            logoImage: store.logoUrl,
+            name: store.name,
+            neighbourhood: store.neighbourhood,
+            phone: store.phone,
+            state: store.state,
+            street: store.street,
+            zipCode: store.zipCode,
+            ...designRegisterValue,
+            ...socialMediaValue,
+          })}
           hasBackGround={false}
         >
-          <DesignRegister formTitle="Atualização do design da página" registerStoreRequestValue={designRegisterValue} changeStoreRequestFunction={setDesignRequestValue} />
+          <DesignRegister registerStoreRequestValue={designRegisterValue} changeStoreRequestFunction={setDesignRequestValue} />
+          <ApelieTextWithDivider />
+          <SocialMediaRegister registerStoreRequestValue={socialMediaValue} changeStoreRequestFunction={setSocialMediaValue} />
         </ApelieForm>
       </ApelieModal>
       {isEditable

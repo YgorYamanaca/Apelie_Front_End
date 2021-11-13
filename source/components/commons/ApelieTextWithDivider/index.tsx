@@ -3,14 +3,16 @@ import ApelieTextBase from '../ApelieTextBase';
 import TextWithDividerStyle from './styles';
 
 interface ITextWithDivider {
-  text: string;
+  text?: string;
 }
 
 const ApelieTextWithDivider: React.FC<ITextWithDivider> = ({ text }) => (
   <TextWithDividerStyle.Container>
+    { text && (
     <TextWithDividerStyle.TextBox>
       <ApelieTextBase variant="subTitle">{text}</ApelieTextBase>
     </TextWithDividerStyle.TextBox>
+    )}
     <hr />
   </TextWithDividerStyle.Container>
 );

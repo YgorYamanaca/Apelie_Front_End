@@ -5,9 +5,20 @@ export interface IProdutcImage {
 }
 
 export interface IProduct {
+    productId: number,
     category: string,
     description: string,
     images: IProdutcImage[],
+    name: string,
+    price: number,
+    productId: number,
+    quantity: number,
+}
+
+export interface IProductRegister {
+    category: string,
+    description: string,
+    images: string[],
     name: string,
     price: number,
     productId: number,

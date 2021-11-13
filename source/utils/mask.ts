@@ -14,8 +14,8 @@ export function phoneMask(phoneText: string) {
   return ret;
 }
 
-export function adressNumberMask(adressText: string) {
-  let ret = adressText.replace(/\D/g, '');
+export function addressNumberMask(addressText: string) {
+  let ret = addressText.replace(/\D/g, '');
   ret = ret.replace(/^0/, '');
 
   if (ret.length < 3) {

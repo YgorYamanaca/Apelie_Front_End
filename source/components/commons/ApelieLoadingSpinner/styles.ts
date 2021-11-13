@@ -11,7 +11,7 @@ const Container = styled.div<IContainer>`
     width: ${({ size }) => size};
     height: ${({ size }) => size};
     animation: ${Animations.spin} 2s linear infinite;
-    border: 3px solid ${({ theme }) => theme.colors.background.paper};
+    border: 3px solid ${({ theme }) => theme.colors.text.primary};
     border-top: 3px solid ${({ theme }) => theme.colors.divider};
   }
 `;

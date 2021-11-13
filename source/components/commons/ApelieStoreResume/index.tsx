@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useMutation } from 'react-query';
+import router from 'next/router';
 import { IAddressRegister, IFirstRegister, IStore } from '@/types/interfaces/interface-store';
 import ApelieTextBase from '../ApelieTextBase';
 import ApelieRating from '../ApelieRating';
@@ -9,6 +11,10 @@ import ApelieModal from '../ApelieModal';
 import ApelieForm from '../ApelieForm';
 import InitialRegister from '@/components/forms/Store/InitialRegister';
 import AddressRegister from '@/components/forms/Store/AddressRegister';
+import ApelieTextWithDivider from '../ApelieTextWithDivider';
+import { ToastContext } from '@/stores/ToastStore';
+import { updateStore } from '@/services/store';
+import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 
 interface IApelieStoreResume {
     store: IStore,
@@ -20,6 +26,7 @@ const ApelieStoreResume: React.VoidFunctionComponent<IApelieStoreResume> = ({
   store,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const { setToastMessage } = useContext(ToastContext);
   const [storeMainInfo, setStoreMainInfo] = useState<IFirstRegister>({
     categories: store.category,
     description: store.description,
@@ -39,20 +46,50 @@ const ApelieStoreResume: React.VoidFunctionComponent<IApelieStoreResume> = ({
     phoneError: '',
     zipCodeError: '',
   });
+
+  const doUpdateStore = useMutation(updateStore, {
+    onSuccess: (response) => {
+      if (response?.status === 204) {
+        setToastMessage({
+          message: 'As informações que você alterou foram alteradas com sucesso.',
+          type: 'success',
+        });
+        router.push(ApeliePageAlias.MyStore);
+      } else {
+        setToastMessage({
+          message: 'Erro ao tentar atualizar as informações que você solicitou.',
+          type: 'error',
+        });
+      }
+    },
+  });
+
   return (
     <ApelieStoreResumeStyle.Container>
       <ApelieModal show={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
         <ApelieForm
+          formTitle="Atualização das informações da loja"
           id="att-store-info"
           disabledCondition={false}
           backButtonText="Cancelar"
           backButtonAction={() => setIsEditModalOpen(false)}
           nextButtonText="Atualizar"
-          nextButtonAction={() => console.log('')}
+          nextButtonAction={() => doUpdateStore.mutate({
+            ...storeMainInfo,
+            ...storeAddressInfo,
+            bannerUrl: store.bannerUrl,
+            facebookAccount: store.facebookAccount,
+            instagramAccount: store.instagramAccount,
+            primaryColor: store.primaryColor,
+            secondaryColor: store.secondaryColor,
+            twitterAccount: store.twitterAccount,
+            youtubeAccount: store.youtubeAccount,
+          })}
           hasBackGround={false}
         >
-          <InitialRegister formTitle="Atualização do design da página" registerStoreRequestValue={storeMainInfo} changeStoreRequestFunction={setStoreMainInfo} />
-          <AddressRegister formTitle="Atualização do design da página" registerStoreRequestValue={storeAddressInfo} changeStoreRequestFunction={setStoreAddressInfo} />
+          <InitialRegister registerStoreRequestValue={storeMainInfo} changeStoreRequestFunction={setStoreMainInfo} />
+          <ApelieTextWithDivider />
+          <AddressRegister registerStoreRequestValue={storeAddressInfo} changeStoreRequestFunction={setStoreAddressInfo} />
         </ApelieForm>
       </ApelieModal>
       {isEditable

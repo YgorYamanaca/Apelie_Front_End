@@ -25,14 +25,14 @@ const ApelieModal: React.FC<IApelieModal> = ({
 
   const modalContent = show ? (
     <ApelieModalStyle.ModalOverlay>
-      <ApelieModalStyle.Modal ref={modalRef}>
-        <ApelieModalStyle.ModalHeader>
-          <ApelieIconButton onClick={() => onClose()}>
+      {children && (
+        <ApelieModalStyle.Modal ref={modalRef}>
+          <ApelieIconButton id="close-modal-button" onClick={() => onClose()}>
             <CloseIcon height="20" width="20" />
           </ApelieIconButton>
-        </ApelieModalStyle.ModalHeader>
-        {children}
-      </ApelieModalStyle.Modal>
+          {children}
+        </ApelieModalStyle.Modal>
+      )}
     </ApelieModalStyle.ModalOverlay>
   ) : null;
 

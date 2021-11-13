@@ -1,13 +1,12 @@
 import React, { useCallback } from 'react';
-import ApeliePageTitle from '@/components/commons/ApeliePageTitle';
 import ApelieSelectBox from '@/components/commons/ApelieSelectBox';
 import ApelieUploadPhoto from '@/components/commons/ApelieUploadPhoto';
-import { IDesignRegister, IStoreForm } from '@/types/interfaces/interface-store';
+import { IDesignRegister } from '@/types/interfaces/interface-store';
 import DesignRegisterStyle from './styles';
 import colorPallets from '@/utils/colorsPallet';
+import { IForm } from '@/types/interfaces/interface-apelie-form';
 
-const DesignRegister: React.VoidFunctionComponent<IStoreForm<IDesignRegister>> = ({
-  formTitle = 'Cadastro de Design da loja',
+const DesignRegister: React.VoidFunctionComponent<IForm<IDesignRegister>> = ({
   registerStoreRequestValue,
   changeStoreRequestFunction,
 }) => {
@@ -23,9 +22,6 @@ const DesignRegister: React.VoidFunctionComponent<IStoreForm<IDesignRegister>> =
 
   return (
     <DesignRegisterStyle.Container>
-      <ApeliePageTitle>
-        {formTitle}
-      </ApeliePageTitle>
       <div id="content">
         <div id="store-banner-image-content">
           <ApelieUploadPhoto

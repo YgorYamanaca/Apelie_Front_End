@@ -7,7 +7,7 @@ const typography: ITypographyVariants = {
     lineHeight: 1.25,
   },
   titleXS: {
-    fontSize: '22px',
+    fontSize: '21px',
     fontWeight: '700',
     lineHeight: 1.25,
   },

@@ -62,15 +62,10 @@ export interface IAddressRegister {
   addressNumberError?: string,
   phoneError?: string,
 }
+
+export interface IStoreRequest extends IFirstRegister, IDesignRegister, ISocialMediaRegister, IAddressRegister {}
 export interface IStoreRequestWithErrors extends IStoreRequest {
   zipCodeError?: string,
   addressNumberError?: string,
   phoneError?: string,
-}
-
-export interface IStoreRequest extends IFirstRegister, IDesignRegister, ISocialMediaRegister, IAddressRegister {}
-export interface IStoreForm<T> {
-  formTitle?: string,
-  registerStoreRequestValue: T,
-  changeStoreRequestFunction: (value: T) => void,
 }

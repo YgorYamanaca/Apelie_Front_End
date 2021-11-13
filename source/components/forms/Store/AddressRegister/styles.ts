@@ -7,7 +7,7 @@ const Container = styled.div`
   justify-content: flex-start;
   flex-direction: column;
 
-  & > div#adress-content {
+  & > div#address-content {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -22,7 +22,7 @@ const Container = styled.div`
   }
   ${breakpointsMedia({
     sm: css`
-      & > div#adress-content {
+      & > div#address-content {
         gap: 15px;
         & > div {
           width: 350px;
@@ -35,7 +35,7 @@ const Container = styled.div`
       `,
     md: css`
         width: 750px;
-          & > div#adress-content {
+          & > div#address-content {
             display: flex;
             width: 100%;
           }

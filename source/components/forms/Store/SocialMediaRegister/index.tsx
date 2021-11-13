@@ -1,7 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { StyledProps, withTheme } from 'styled-components';
-import ApeliePageTitle from '@/components/commons/ApeliePageTitle';
-import { ISocialMediaRegister, IStoreForm } from '@/types/interfaces/interface-store';
+import { ISocialMediaRegister } from '@/types/interfaces/interface-store';
 import SocialMediaRegisterStyle from './styles';
 import FacebookIcon from '@/assets/icons/FacebookIcon';
 import InstagramIcon from '@/assets/icons/InstagramIcon';
@@ -9,18 +8,14 @@ import handleChange from '@/utils/formUtils';
 import ApelieIconWithInput from '@/components/commons/ApelieIconWithInput';
 import YoutubeIcon from '@/assets/icons/YoutubeIcon';
 import TwitterIcon from '@/assets/icons/TwitterIcon';
+import { IForm } from '@/types/interfaces/interface-apelie-form';
 
-const SocialMediaRegister: React.VoidFunctionComponent<StyledProps<IStoreForm<ISocialMediaRegister>>> = ({
-  formTitle = 'Cadastro das medias sociais',
+const SocialMediaRegister: React.VoidFunctionComponent<StyledProps<IForm<ISocialMediaRegister>>> = ({
   registerStoreRequestValue,
   changeStoreRequestFunction,
   theme,
 }) => (
   <SocialMediaRegisterStyle.Container>
-    <ApeliePageTitle>
-      {formTitle}
-    </ApeliePageTitle>
-
     <ApelieIconWithInput
       icon={<FacebookIcon height="35" width="35" fill={theme.colors.text.primary} />}
       maxLength={50}
