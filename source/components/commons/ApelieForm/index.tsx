@@ -1,19 +1,23 @@
 import React from 'react';
 import ApelieButton from '../ApelieButton';
+import ApeliePageTitle from '../ApeliePageTitle';
 import ApelieFormStyle from './styles';
 
 interface IApelieForm {
     id: string,
+    formTitle: string,
     backButtonAction?: VoidFunction,
     backButtonText?: string,
     nextButtonAction: VoidFunction,
     nextButtonText?: string,
     disabledCondition: boolean,
     hasBackGround?: boolean,
+    hasPadding?: boolean,
 }
 
 const ApelieForm : React.FC<IApelieForm> = ({
   id,
+  formTitle,
   children,
   backButtonAction,
   backButtonText = 'Voltar',
@@ -21,8 +25,12 @@ const ApelieForm : React.FC<IApelieForm> = ({
   nextButtonText = 'Proximo',
   disabledCondition,
   hasBackGround = true,
+  hasPadding = false,
 }) => (
-  <ApelieFormStyle.Container hasBackGround={hasBackGround}>
+  <ApelieFormStyle.Container hasBackGround={hasBackGround} hasPadding={hasPadding}>
+    <ApeliePageTitle>
+      {formTitle}
+    </ApeliePageTitle>
     <ApelieFormStyle.Content>
       {children}
     </ApelieFormStyle.Content>

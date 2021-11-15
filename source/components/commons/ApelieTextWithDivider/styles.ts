@@ -12,7 +12,6 @@ const Container = styled.div`
     position: absolute;
     color: ${({ theme }) => theme.colors.divider};
     width: 100%;
-    z-index: 1;
   }
 `;
 

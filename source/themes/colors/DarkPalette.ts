@@ -39,6 +39,7 @@ const darkPalette: IColors = {
     contrastText: 'rgba(255, 255, 255, 1)',
     appPrimary: 'rgba(0, 133, 229, 1)',
     appSecondary: 'rgba(253, 190, 1, 1)',
+    appRed: 'rgba(244, 67, 54, 1)',
   },
 };
 

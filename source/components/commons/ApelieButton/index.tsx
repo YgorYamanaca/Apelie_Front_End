@@ -33,7 +33,7 @@ const ApelieButton: React.FC<IButton> = ({
   children,
   icon,
   height = '35px',
-  isLoading,
+  isLoading = false,
 }) => (
   <ButtonStyle.Container
     id={id}

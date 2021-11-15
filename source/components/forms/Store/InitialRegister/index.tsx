@@ -1,17 +1,16 @@
 import React, { ChangeEvent, useCallback } from 'react';
 import { useQuery } from 'react-query';
 import ApelieInputField from '@/components/commons/ApelieInputField';
-import ApeliePageTitle from '@/components/commons/ApeliePageTitle';
 import ApelieSelectBox from '@/components/commons/ApelieSelectBox';
 import ApelieUploadPhoto from '@/components/commons/ApelieUploadPhoto';
 import { getStoreCategorys } from '@/services/store';
-import { IFirstRegister, IStoreForm } from '@/types/interfaces/interface-store';
+import { IFirstRegister } from '@/types/interfaces/interface-store';
 import handleChange from '@/utils/formUtils';
 import InitialRegisterStyle from './styles';
 import ApelieLoadingSpinner from '@/components/commons/ApelieLoadingSpinner';
+import { IForm } from '@/types/interfaces/interface-apelie-form';
 
-const InitialRegister: React.VoidFunctionComponent<IStoreForm<IFirstRegister>> = ({
-  formTitle = 'Cadastro Inicial da Loja',
+const InitialRegister: React.VoidFunctionComponent<IForm<IFirstRegister>> = ({
   registerStoreRequestValue,
   changeStoreRequestFunction,
 }) => {
@@ -36,9 +35,6 @@ const InitialRegister: React.VoidFunctionComponent<IStoreForm<IFirstRegister>> =
 
   return (
     <InitialRegisterStyle.Container>
-      <ApeliePageTitle>
-        {formTitle}
-      </ApeliePageTitle>
       <div id="content">
         {categoryResult.isSuccess ? (
           <>

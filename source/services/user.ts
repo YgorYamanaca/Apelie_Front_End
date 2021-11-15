@@ -33,4 +33,13 @@ const doGetUser = async (): Promise<AxiosResponse> => {
   return response;
 };
 
-export { doRegister, doLogin, doGetUser };
+const doGetUserStore = async (): Promise<AxiosResponse> => {
+  const response = await ApiRequester.apelie
+    .get('users/me/store')
+    .catch((err) => err.response);
+  return response;
+};
+
+export {
+  doRegister, doLogin, doGetUser, doGetUserStore,
+};

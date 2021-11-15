@@ -20,9 +20,7 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
   return (
     <StoreStyles.Container id={`StoreStyles-Container-${store.storeId}`} onClick={() => router.push(`${ApeliePageAlias.Store}/${store.storeId}`)}>
       <ApelieStoreBackGround
-        bannerUrl={store?.bannerUrl}
-        primaryColor={store?.primaryColor}
-        secondaryColor={store?.secondaryColor}
+        store={store}
         storeMediaSocialArray={
           _.keys(_.omitBy(_.pick(store, [
             'facebookAccount',
@@ -31,6 +29,7 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
             'instagramAccount',
           ]), _.isEmpty))
         }
+        isSocialMediaButtonDisabled
       />
       <StoreStyles.StoreOverflowContainer>
         <div>
@@ -44,6 +43,7 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
           </StoreStyles.StorePhotoContainer>
         </div>
       </StoreStyles.StoreOverflowContainer>
+      <div id="invisible-content" />
       <StoreStyles.StoreAndScoreContainer>
         <StoreStyles.TextContainer>
           <ApelieTextBase id="apelie-name" variant="paragraph1">

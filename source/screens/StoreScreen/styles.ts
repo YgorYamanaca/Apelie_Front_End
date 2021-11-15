@@ -16,11 +16,12 @@ const StoreInfoContainer = styled.div`
   display: flex;
   width: 100%;
   margin: 35px 0;
-
+  justify-content: center;
   ${breakpointsMedia({
     md: css`
       width: 50%;
       margin: 50px 0;
+      justify-content: flex-start;
     `,
   })}
 `;

@@ -3,41 +3,52 @@ import breakpointsMedia from '@/utils/breakpointsMedia';
 
 interface IContainer {
   hasBackGround: boolean
+  hasPadding: boolean
 }
 
 const Container = styled.div<IContainer>`
   display: flex;
   flex-direction: column;
   width: 98%;
-  max-height: 750px;
-  height: auto;
-  padding: 15px;
+  height: 100%;
   border: ${({ theme, hasBackGround }) => hasBackGround && `1px solid ${theme.colors.divider}`};
   box-shadow: ${({ theme, hasBackGround }) => hasBackGround && theme.shadow.nivel3};
   background-color: ${({ theme, hasBackGround }) => hasBackGround && theme.colors.background.paper};
+  padding: ${({ hasPadding }) => hasPadding && '5px'};
   z-index: 300;
   ${breakpointsMedia({
     md: css`
-      width: fit-content;
-      padding: 20px 55px;
+      width: 100%;
+      height: auto;
     `,
   })}
+
+  ${({ hasPadding }) => hasPadding && css`
+    ${breakpointsMedia({
+    md: css`
+        padding: 25px;
+      `,
+  })}
+  `};
 `;
 
 const Content = styled.div`
   display: flex;
-  align-content: center;
-  justify-content: flex-start;
   flex-direction: column;
-  padding: 15px;
-  gap: 50px;
+  gap: 10px;
   overflow-y: auto;
+  align-items: center;
+  ${breakpointsMedia({
+    md: css`
+      padding: 0 50px;
+      gap: 25px;
+    `,
+  })}
 `;
 
-const Footer = styled.div`
+const Footer = styled.footer`
   display: flex;
   width: 100%;
-  margin-top: 35px;
   align-self: center;
   gap: 10px;
 

@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import breakpointsMedia from '@/utils/breakpointsMedia';
 
 const Container = styled.header`
   display: flex;
@@ -6,13 +7,19 @@ const Container = styled.header`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-align: center;
   & > hr {
     margin-top: 5px;
     color: ${({ theme }) => theme.colors.divider};
     width: 100%;
   }
+
+  ${breakpointsMedia({
+    md: css`
+      margin-bottom: 20px;
+    `,
+  })}
 `;
 
 const ApeliePageTitleStyle = {

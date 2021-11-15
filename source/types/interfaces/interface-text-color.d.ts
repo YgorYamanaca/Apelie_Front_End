@@ -5,6 +5,7 @@ interface ITextColor {
   contrastText: string;
   appPrimary: string;
   appSecondary: string;
+  appRed: string;
 }
 
 export default ITextColor;

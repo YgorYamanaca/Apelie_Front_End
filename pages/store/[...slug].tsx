@@ -1,35 +1,45 @@
-import React, { useContext, useLayoutEffect } from 'react';
+import React, { useCallback, useLayoutEffect } from 'react';
 import apeliePageHOC from 'template/ApeliePageTemplate/HOC';
 import { useRouter } from 'next/router';
 import { useMutation } from 'react-query';
-import { getMyStoreById, getStoreById } from '@/services/store';
+import { getStoreById } from '@/services/store';
 import StoreScreen from '@/screens/StoreScreen';
-import { UserContext } from '@/stores/UserManager';
+import { doGetUserStore } from '@/services/user';
 
 const Store: React.FC = () => {
   const router = useRouter();
   const [slug] = router.query.slug || [];
-  const { loggedUser } = useContext(UserContext);
 
-  const doGetMyStore = useMutation(getMyStoreById);
+  const doGetMyStore = useMutation(doGetUserStore);
   const doGetStoreById = useMutation(getStoreById);
+
+  const uploadPage = useCallback(
+    () => {
+      if (slug === 'me') {
+        doGetMyStore.mutate();
+      } else {
+        doGetStoreById.mutate(slug);
+      }
+    },
+    [],
+  );
 
   useLayoutEffect(() => {
     if (slug === 'me') {
-      loggedUser && doGetMyStore.mutate(loggedUser.userId.toString());
+      doGetMyStore.mutate();
     } else {
       doGetStoreById.mutate(slug);
     }
-  }, [slug, loggedUser]);
+  }, [slug]);
 
   return (
     <>
-      {slug === 'me' ? (
-        loggedUser && <StoreScreen store={doGetMyStore.data?.data[0]} isRequestLoading={doGetMyStore.isSuccess} isUserStore />
-      ) : (
-        (
-          <StoreScreen store={doGetStoreById.data?.data} isRequestLoading={doGetStoreById.isSuccess} />
-        ))}
+      <StoreScreen
+        store={slug === 'me' ? doGetMyStore.data?.data : doGetStoreById.data?.data}
+        isRequestLoading={slug === 'me' ? doGetMyStore.isSuccess : doGetStoreById.isSuccess}
+        isUserStore={slug === 'me'}
+        uploadPageFunction={uploadPage}
+      />
     </>
   );
 };

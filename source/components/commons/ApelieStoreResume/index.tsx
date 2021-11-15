@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useMutation } from 'react-query';
 import { IAddressRegister, IFirstRegister, IStore } from '@/types/interfaces/interface-store';
 import ApelieTextBase from '../ApelieTextBase';
 import ApelieRating from '../ApelieRating';
@@ -9,21 +10,27 @@ import ApelieModal from '../ApelieModal';
 import ApelieForm from '../ApelieForm';
 import InitialRegister from '@/components/forms/Store/InitialRegister';
 import AddressRegister from '@/components/forms/Store/AddressRegister';
+import ApelieTextWithDivider from '../ApelieTextWithDivider';
+import { ToastContext } from '@/stores/ToastStore';
+import { updateStore } from '@/services/store';
+import { toWritePhoneFormat } from '@/utils/format';
 
 interface IApelieStoreResume {
     store: IStore,
     isEditable?: boolean,
+    whenEdited?: VoidFunction
 }
 
 const ApelieStoreResume: React.VoidFunctionComponent<IApelieStoreResume> = ({
   isEditable = false,
   store,
+  whenEdited,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const { setToastMessage } = useContext(ToastContext);
   const [storeMainInfo, setStoreMainInfo] = useState<IFirstRegister>({
     categories: store.category,
     description: store.description,
-    logoImage: store.logoUrl,
     name: store.name,
   });
   const [storeAddressInfo, setStoreAddressInfo] = useState<IAddressRegister>({
@@ -39,20 +46,53 @@ const ApelieStoreResume: React.VoidFunctionComponent<IApelieStoreResume> = ({
     phoneError: '',
     zipCodeError: '',
   });
+
+  const doUpdateStore = useMutation(updateStore, {
+    onSuccess: (response) => {
+      if (response?.status === 204) {
+        setToastMessage({
+          message: 'As informações que você alterou foram alteradas com sucesso.',
+          type: 'success',
+        });
+        setIsEditModalOpen(false);
+        whenEdited && whenEdited();
+      } else {
+        setToastMessage({
+          message: 'Erro ao tentar atualizar as informações que você solicitou.',
+          type: 'error',
+        });
+      }
+    },
+  });
+
   return (
     <ApelieStoreResumeStyle.Container>
       <ApelieModal show={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
         <ApelieForm
+          formTitle="Atualização das informações da loja"
           id="att-store-info"
           disabledCondition={false}
           backButtonText="Cancelar"
           backButtonAction={() => setIsEditModalOpen(false)}
           nextButtonText="Atualizar"
-          nextButtonAction={() => console.log('')}
+          nextButtonAction={() => doUpdateStore.mutate({
+            ...storeMainInfo,
+            ...storeAddressInfo,
+            phone: storeAddressInfo.phone.replace('(', '').replace(')', '').replace('-', '').replace(/ /g, ''),
+            bannerUrl: store.bannerUrl,
+            ...!storeMainInfo.logoImage && { logoUrl: store.logoUrl },
+            facebookAccount: store.facebookAccount,
+            instagramAccount: store.instagramAccount,
+            primaryColor: store.primaryColor,
+            secondaryColor: store.secondaryColor,
+            twitterAccount: store.twitterAccount,
+            youtubeAccount: store.youtubeAccount,
+          })}
           hasBackGround={false}
         >
-          <InitialRegister formTitle="Atualização do design da página" registerStoreRequestValue={storeMainInfo} changeStoreRequestFunction={setStoreMainInfo} />
-          <AddressRegister formTitle="Atualização do design da página" registerStoreRequestValue={storeAddressInfo} changeStoreRequestFunction={setStoreAddressInfo} />
+          <InitialRegister registerStoreRequestValue={storeMainInfo} changeStoreRequestFunction={setStoreMainInfo} />
+          <ApelieTextWithDivider />
+          <AddressRegister registerStoreRequestValue={storeAddressInfo} changeStoreRequestFunction={setStoreAddressInfo} />
         </ApelieForm>
       </ApelieModal>
       {isEditable
@@ -80,7 +120,7 @@ const ApelieStoreResume: React.VoidFunctionComponent<IApelieStoreResume> = ({
           </ApelieTextBase>
           <ApelieTextBase tag="label" variant="paragraph2">
             Telefone:
-            <ApelieTextBase variant="paragraph2">{store.phone}</ApelieTextBase>
+            <ApelieTextBase variant="paragraph2">{toWritePhoneFormat(store.phone)}</ApelieTextBase>
           </ApelieTextBase>
         </div>
         <div id="store-description">

@@ -14,8 +14,8 @@ export function phoneMask(phoneText: string) {
   return ret;
 }
 
-export function adressNumberMask(adressText: string) {
-  let ret = adressText.replace(/\D/g, '');
+export function addressNumberMask(addressText: string) {
+  let ret = addressText.replace(/\D/g, '');
   ret = ret.replace(/^0/, '');
 
   if (ret.length < 3) {
@@ -27,4 +27,13 @@ export function adressNumberMask(adressText: string) {
 export function cepNumberMask(cepText: string) {
   const ret = cepText.replace(/\D/g, '');
   return ret.replace(/^(\d{5})(\d)/g, '$1-$2');
+}
+
+export function formatReal(moneyInput: string) {
+  let v = moneyInput.replace(/\D/g, '');
+  v = `${(Number(v) / 100).toFixed(2)}`;
+  v = v.replace('.', ',');
+  v = v.replace(/(\d)(\d{3})(\d{3}),/g, '$1.$2.$3,');
+  v = v.replace(/(\d)(\d{3}),/g, '$1.$2,');
+  return v;
 }

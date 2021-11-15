@@ -9,7 +9,7 @@ const Container = styled.div`
   box-shadow: ${({ theme }) => theme.shadow.nivel1};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 200px;
-  height: 285px;
+  height: fit-content;
   padding: 10px 5px;
   flex-direction: column;
   cursor: pointer;
@@ -19,6 +19,10 @@ const Container = styled.div`
     transform: scale(1.03);
     box-shadow: ${({ theme }) => theme.shadow.nivel3};
   }
+  & > div#invisible-content {
+    height: 100px;
+    width: 100%;
+  }
 
   ${breakpointsMedia({
     md: css`
@@ -27,6 +31,9 @@ const Container = styled.div`
       padding: 5px;
       width: 425px;
       height: 215px;
+      & > div#invisible-content {
+        display: none;
+      }
     `,
   })}
 `;
@@ -91,7 +98,7 @@ const StoreAndScoreContainer = styled.div`
   display: flex;
   margin-top: auto;
   flex-direction: column;
-
+  overflow-wrap: break-word;
   & > div#apelie-store-left-content {
     display: flex;
     flex-direction: column;

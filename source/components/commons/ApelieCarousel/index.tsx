@@ -21,6 +21,7 @@ interface ICarousel {
   breakPointsArray?: IBreakpoints[],
   elementsList: ReactNode[];
   arrowSize?: string;
+  hasArrow?: boolean;
 }
 
 const ApelieCarousel: React.FC<ICarousel> = ({
@@ -35,6 +36,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
   carouselTitle,
   elementsList,
   arrowSize = '35',
+  hasArrow = true,
 }) => {
   const CarouselItem = useMemo(
     () => (
@@ -81,6 +83,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
         ? (
           <CarouselStyle.CarouselContainer>
             <Carousel
+              showArrows={hasArrow}
               easing="ease"
               transitionMs={500}
               pagination={false}
@@ -89,6 +92,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
               renderArrow={CustomArrows}
               itemPadding={[10, 20]}
               breakPoints={breakPointsArray}
+              disableArrowsOnEnd
             >
               {CarouselItem}
             </Carousel>

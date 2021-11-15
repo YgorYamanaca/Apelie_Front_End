@@ -19,6 +19,7 @@ import AddressRegister from '@/components/forms/Store/AddressRegister';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
 
 interface IRegister {
+  formTitle: string;
   content: React.ReactNode;
   backButtonAction?: VoidFunction;
   nextButtonAction: VoidFunction;
@@ -40,7 +41,7 @@ const INITIAL_REQUEST_FIRST_REGISTER: IFirstRegister = {
 };
 
 const INITIAL_REQUEST_DESIGN_REGISTER: IDesignRegister = {
-  bannerUrl: '',
+  bannerImage: '',
   primaryColor: '',
   secondaryColor: '',
 };
@@ -108,13 +109,13 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
   }
 
   function getRequestDataToBeSand(): IStoreRequestWithErrors {
-    const newAdressRequestValue = {
+    const newaddressRequestValue = {
       ...addressRegisterValue,
       phone: addressRegisterValue.phone.replace('(', '').replace(')', '').replace('-', '').replace(/ /g, ''),
     };
 
     return {
-      ...newAdressRequestValue,
+      ...newaddressRequestValue,
       ...firstRegisterValue,
       ...socialMediaRegisterValue,
       ...designRegisterValue,
@@ -160,6 +161,7 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
   );
 
   const firstStep: IRegister = {
+    formTitle: 'Cadastro Inicial da Loja',
     content: <InitialRegister registerStoreRequestValue={firstRegisterValue} changeStoreRequestFunction={setFirstRequestValue} />,
     nextButtonAction: () => validStep('designStep'),
     disabledCondition:
@@ -170,16 +172,18 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
   };
 
   const designStep: IRegister = {
+    formTitle: 'Cadastro de Design da loja',
     content: <DesignRegister registerStoreRequestValue={designRegisterValue} changeStoreRequestFunction={setDesignRequestValue} />,
     backButtonAction: () => setStep('firstStep'),
     nextButtonAction: () => validStep('socialMediaStep'),
     disabledCondition:
     !designRegisterValue.primaryColor
     || !designRegisterValue.secondaryColor
-    || !designRegisterValue.bannerUrl,
+    || !designRegisterValue.bannerImage,
   };
 
   const socialMediaStep: IRegister = {
+    formTitle: 'Cadastro das medias sociais',
     content: <SocialMediaRegister registerStoreRequestValue={socialMediaRegisterValue} changeStoreRequestFunction={setSocialMediaRequestValue} />,
     backButtonAction: () => setStep('designStep'),
     nextButtonAction: () => validStep('addressStep'),
@@ -187,6 +191,7 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
   };
 
   const addressStep: IRegister = {
+    formTitle: 'Cadastro de endereço',
     content: <AddressRegister registerStoreRequestValue={addressRegisterValue} changeStoreRequestFunction={setAddressRequestValue} />,
     backButtonAction: () => setStep('socialMediaStep'),
     nextButtonAction: () => handleRegisterStoreSubmit(),
@@ -225,11 +230,15 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
           width={350}
         />
       </div>
+
       <ApelieForm
+        formTitle={registerStoreSteps[step]?.formTitle}
         id={step}
         nextButtonAction={registerStoreSteps[step]?.nextButtonAction}
         backButtonAction={registerStoreSteps[step]?.backButtonAction}
         disabledCondition={registerStoreSteps[step]?.disabledCondition}
+        hasBackGround
+        hasPadding
       >
         {registerStoreSteps[step].content}
       </ApelieForm>

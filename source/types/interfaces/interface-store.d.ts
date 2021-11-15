@@ -31,7 +31,7 @@ export interface IStore {
 
 export interface IFirstRegister {
   name: string,
-  logoImage: string,
+  logoImage?: string,
   categories: string[],
   description: string,
 }
@@ -39,7 +39,7 @@ export interface IFirstRegister {
 export interface IDesignRegister {
   secondaryColor: string;
   primaryColor: string;
-  bannerUrl: string,
+  bannerImage?: string,
 }
 
 export interface ISocialMediaRegister {
@@ -62,15 +62,15 @@ export interface IAddressRegister {
   addressNumberError?: string,
   phoneError?: string,
 }
+
+export interface ITeste {
+  bannerUrl?: string;
+  logoUrl?: string;
+}
+
+export interface IStoreRequest extends IFirstRegister, IDesignRegister, ISocialMediaRegister, IAddressRegister, ITeste {}
 export interface IStoreRequestWithErrors extends IStoreRequest {
   zipCodeError?: string,
   addressNumberError?: string,
   phoneError?: string,
-}
-
-export interface IStoreRequest extends IFirstRegister, IDesignRegister, ISocialMediaRegister, IAddressRegister {}
-export interface IStoreForm<T> {
-  formTitle?: string,
-  registerStoreRequestValue: T,
-  changeStoreRequestFunction: (value: T) => void,
 }

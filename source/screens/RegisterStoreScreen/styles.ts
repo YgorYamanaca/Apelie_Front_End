@@ -27,8 +27,18 @@ const Container = styled.main`
   })}
 `;
 
+const FormContentContainer = styled.div`
+  padding: 15px;
+  ${breakpointsMedia({
+    md: css`
+      padding: 25px;
+    `,
+  })}
+`;
+
 const RegisterStoreScreenStyle = {
   Container,
+  FormContentContainer,
 };
 
 export default RegisterStoreScreenStyle;
