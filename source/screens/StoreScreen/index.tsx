@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import _ from 'lodash';
 import { useMutation } from 'react-query';
 import { IStore } from '@/types/interfaces/interface-store';
@@ -87,6 +87,7 @@ const StoreScreen : React.FC<IStoreScreen> = ({
           isEditable={isUserStore}
           product={selectedProduct}
           isOpen={!!selectedProduct}
+          uploadPageFunction={() => uploadPageFunction()}
           onCloseButtonAction={() => setSelectedProduct(undefined)}
         />
       )}

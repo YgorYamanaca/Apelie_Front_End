@@ -27,7 +27,7 @@ const ProductRegister: React.VoidFunctionComponent<IForm<IProductRegisterWithErr
   useEffect(() => {
     changeStoreRequestFunction({
       ...productRegister,
-      price: parseFloat(productRegister.price.toString()),
+      price: parseFloat(productRegister.price.toString().replaceAll('.', '').replaceAll(',', '.')),
       quantity: parseInt(productRegister.quantity.toString(), 10),
     });
   }, [productRegister]);

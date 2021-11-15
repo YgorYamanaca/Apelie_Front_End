@@ -25,6 +25,6 @@ export interface IProductRegister {
 }
 
 export interface IProductRegisterWithErrors extends IProductRegister {
-    priceError: string,
-    quantityError: string,
+    priceError?: string,
+    quantityError?: string,
 }

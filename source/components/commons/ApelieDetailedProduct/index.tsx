@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from 'react';
-import { IProduct } from '@/types/interfaces/interdace-products';
+import React, { useContext, useState } from 'react';
+import { useMutation } from 'react-query';
+import { IProduct, IProductRegisterWithErrors } from '@/types/interfaces/interdace-products';
 import ApelieDetailedProductStyles from './styles';
 import ApelieCarousel from '../ApelieCarousel';
 import ApeliePageTitle from '../ApeliePageTitle';
@@ -10,11 +11,17 @@ import { isFloat } from '@/utils/validations';
 import ApelieIconButton from '../ApelieIconButton';
 import EditIcon from '@/assets/icons/EditIcon';
 import TrashIcon from '@/assets/icons/TrashIcon';
+import ApelieDeleteModal from '../ApelieDeleteModal';
+import { ToastContext } from '@/stores/ToastStore';
+import { deleteProduct, deleteProductImage } from '@/services/product';
+import ProductRegister from '@/components/forms/Store/ProductRegister';
+import ApelieForm from '../ApelieForm';
 
 interface ApelieProductModalContent {
     product: IProduct,
     isOpen: boolean,
     onCloseButtonAction: VoidFunction,
+    uploadPageFunction: VoidFunction,
     isEditable?: boolean,
   }
 
@@ -22,19 +29,92 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
   product,
   isOpen = false,
   onCloseButtonAction,
+  uploadPageFunction,
   isEditable = false,
 }) => {
   const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
   const [isDeleteProductModalOpen, setIsDeleteProductModalOpen] = useState(false);
+  const [isDeleteImageModalOpen, setIsDeleteImageModalOpen] = useState<number | string>();
+  const [produtctRegister, setProductRegister] = useState<IProductRegisterWithErrors>({
+    name: product.name,
+    price: product.price,
+    quantity: product.quantity,
+    category: product.category,
+    images: [],
+    description: product.description,
+  });
+  const { setToastMessage } = useContext(ToastContext);
+
+  const DeleteProductRequest = useMutation(deleteProduct, {
+    onSuccess: (response) => {
+      if (response?.status === 204) {
+        setToastMessage({
+          message: 'O produto selecionado foi deletado com sucesso.',
+          type: 'success',
+        });
+        uploadPageFunction();
+      } else {
+        setToastMessage({
+          message: 'Erro ao tentar deletar o produto.',
+          type: 'error',
+        });
+      }
+    },
+  });
+
+  const DeleteImageRequest = useMutation(deleteProductImage, {
+    onSuccess: (response) => {
+      if (response?.status === 204) {
+        setToastMessage({
+          message: 'A imagem selecionado foi deletado com sucesso.',
+          type: 'success',
+        });
+        uploadPageFunction();
+      } else {
+        setToastMessage({
+          message: 'Erro ao tentar deletar a imagem.',
+          type: 'error',
+        });
+      }
+    },
+  });
+
   return (
     <ApelieModal hasCloseButton={false} show={isOpen}>
       <ApelieDetailedProductStyles.Container>
         <ApelieModal show={isEditProductModalOpen} onClose={() => setIsEditProductModalOpen(false)}>
-          <div>
-            aaaa
-          </div>
+          <ApelieForm
+            id="att-product-info"
+            formTitle="Atualização da informação do produto"
+            backButtonText="Voltar"
+            nextButtonText="Atualizar"
+            hasBackGround={false}
+            disabledCondition={
+              !!produtctRegister.category
+              && !!produtctRegister.name
+              && !!produtctRegister.price
+              && !!produtctRegister.quantity
+            }
+            nextButtonAction={() => console.log('atualizar')}
+            backButtonAction={() => setIsEditProductModalOpen(false)}
+          >
+            <ProductRegister registerStoreRequestValue={produtctRegister} changeStoreRequestFunction={setProductRegister} />
+          </ApelieForm>
         </ApelieModal>
-        <ApelieModal show={isDeleteProductModalOpen} onClose={() => setIsDeleteProductModalOpen(false)} />
+        <ApelieModal hasCloseButton={false} show={isDeleteProductModalOpen}>
+          <ApelieDeleteModal
+            text="Deseja deletar esse produto?"
+            onCancel={() => setIsDeleteProductModalOpen(false)}
+            onDelete={() => DeleteProductRequest.mutate(product.productId)}
+          />
+        </ApelieModal>
+        <ApelieModal hasCloseButton={false} show={!!isDeleteImageModalOpen}>
+          <ApelieDeleteModal
+            text="Deseja deletar essa imagem?"
+            onCancel={() => setIsDeleteImageModalOpen(undefined)}
+            onDelete={() => isDeleteImageModalOpen && DeleteImageRequest.mutate({ productId: product.productId, imageId: isDeleteImageModalOpen })}
+          />
+        </ApelieModal>
         {isEditable && (
           <div id="apelie-product-edit">
             <ApelieIconButton onClick={() => setIsEditProductModalOpen(true)}>
@@ -62,12 +142,19 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
                 { width: 1920, itemsToShow: 1 },
               ]}
               elementsList={product.images.map((image, index) => (
-                <ApelieDetailedProductStyles.ImageContainer
-                  id={`product-image-${index + 1}`}
-                  key={image.product_image_id}
-                  src={image.url}
-                  alt={product.name}
-                />
+                <ApelieDetailedProductStyles.ImageContainer>
+                  <ApelieDetailedProductStyles.Image
+                    id={`product-image-${index + 1}`}
+                    key={image.product_image_id}
+                    src={image.url}
+                    alt={product.name}
+                  />
+                  {isEditable && product.images.length >= 1 && (
+                    <ApelieIconButton id="delete-image-button" isPadding onClick={() => setIsDeleteImageModalOpen(image.product_image_id)}>
+                      <TrashIcon width="20" height="20" />
+                    </ApelieIconButton>
+                  )}
+                </ApelieDetailedProductStyles.ImageContainer>
               ))}
             />
           </ApelieDetailedProductStyles.ImagesContainer>
@@ -95,10 +182,7 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
             buttonColor="primary"
             textColor="appPrimary"
             buttonType="secondary"
-            onClick={() => {
-              console.log('oieeeee', onCloseButtonAction);
-              onCloseButtonAction();
-            }}
+            onClick={() => onCloseButtonAction()}
           >
             Voltar
           </ApelieButton>

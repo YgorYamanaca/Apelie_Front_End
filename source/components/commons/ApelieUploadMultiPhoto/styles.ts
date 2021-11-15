@@ -64,10 +64,22 @@ const ImagesBox = styled.div`
   gap: 15px;
 `;
 
+const ImageContainer = styled.div`
+    display: flex;
+    position: relative;
+    & > #delete-image-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 10;
+    }
+`;
+
 const ApelieUploadMultiPhotoStyle = {
   Container,
   UploadImageContainer,
   ImagesBox,
+  ImageContainer,
 };
 
 export default ApelieUploadMultiPhotoStyle;

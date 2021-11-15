@@ -46,7 +46,18 @@ const ImagesContainer = styled.div`
     border: 3px solid ${({ theme }) => theme.colors.background.paper};
 `;
 
-const ImageContainer = styled.img`
+const ImageContainer = styled.div`
+    display: flex;
+    position: relative;
+    & > #delete-image-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 10;
+    }
+`;
+
+const Image = styled.img`
     width: 175px;
     height: fit-content;
     border: 2px solid ${({ theme }) => theme.colors.divider};
@@ -98,6 +109,7 @@ const ApelieDetailedProductStyles = {
   ImagesContainer,
   InfoContainer,
   ImageContainer,
+  Image,
   Footer,
 };
 

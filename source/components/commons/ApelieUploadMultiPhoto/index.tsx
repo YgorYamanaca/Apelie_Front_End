@@ -5,6 +5,8 @@ import _ from 'lodash';
 import UploadIcon from '@/assets/icons/UploadIcon';
 import ApelieUploadMultiPhotoStyle from './styles';
 import ApelieTextBase from '../ApelieTextBase';
+import ApelieIconButton from '../ApelieIconButton';
+import TrashIcon from '@/assets/icons/TrashIcon';
 
 interface IApelieUploadPhoto {
     onImageSelect: (imageURl: string[]) => void;
@@ -42,6 +44,7 @@ const ApelieUploadMultiPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
         {({
           imageList,
           onImageUpload,
+          onImageRemove,
           isDragging,
           dragProps,
           errors,
@@ -65,14 +68,19 @@ const ApelieUploadMultiPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
             </ApelieUploadMultiPhotoStyle.UploadImageContainer>
             <ApelieUploadMultiPhotoStyle.ImagesBox>
               {imageList.map((image, index) => (
-                <img
-                  key={`uplodedImage-${index + 1}`}
-                  id="uplodedImage"
-                  src={image[selectedPhotoKey]}
-                  alt="uplodedImageAlt"
-                  width="75px"
-                  height="75px"
-                />
+                <ApelieUploadMultiPhotoStyle.ImageContainer>
+                  <img
+                    key={`uplodedImage-${index + 1}`}
+                    id="uplodedImage"
+                    src={image[selectedPhotoKey]}
+                    alt="uplodedImageAlt"
+                    width="75px"
+                    height="75px"
+                  />
+                  <ApelieIconButton id="delete-image-button" onClick={() => onImageRemove(index)}>
+                    <TrashIcon width="20" height="20" />
+                  </ApelieIconButton>
+                </ApelieUploadMultiPhotoStyle.ImageContainer>
               ))}
             </ApelieUploadMultiPhotoStyle.ImagesBox>
           </>
