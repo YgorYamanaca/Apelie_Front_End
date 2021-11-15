@@ -29,6 +29,7 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
             'instagramAccount',
           ]), _.isEmpty))
         }
+        isSocialMediaButtonDisabled
       />
       <StoreStyles.StoreOverflowContainer>
         <div>

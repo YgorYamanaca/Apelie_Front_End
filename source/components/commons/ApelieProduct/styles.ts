@@ -6,13 +6,31 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.background.default};
-  gap: 10px;
-  padding: 15px;
+  gap: 5px;
+  padding: 15px 25px;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.colors.divider};
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  user-select: none;
+  :hover {
+    transform: scale(1.03);
+    box-shadow: ${({ theme }) => theme.shadow.nivel3};
+  }
   & > #apelie-product-name-and-price {
     display: flex;
     flex-direction: column;
+  }
+  
+  & > #product-category {
+    & > label {
+      font-weight: bold;
+    }
+  }
+  & > #product-quantity {
+    & > label {
+      font-weight: bold;
+    }
   }
 
   & > #apelie-product-edit {
@@ -23,6 +41,13 @@ const Container = styled.div`
   & > div#apelie-product-wrapper > div#apelie-product-list {
     display: flex;
     justify-content: space-around;
+    gap: 5px;
+      ${breakpointsMedia({
+    md: css`
+          gap: 15px;
+        }
+      `,
+  })}
   }
 
   ${breakpointsMedia({
@@ -39,12 +64,13 @@ const Container = styled.div`
 `;
 
 const ProductImageContainer = styled.img`
-  width: 50px;
-  height: 50px;
+  width: auto;
+  height: 100px;
+  border: 3px solid ${({ theme }) => theme.colors.divider};
   ${breakpointsMedia({
     sm: css`
-      width: 100px;
-      height: 100px;
+      width: auto;
+      height: 125px;
     `,
   })}
 `;

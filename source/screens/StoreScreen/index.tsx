@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import _ from 'lodash';
 import { useMutation } from 'react-query';
 import { IStore } from '@/types/interfaces/interface-store';
@@ -13,9 +13,10 @@ import ApelieLoadingSpinner from '@/components/commons/ApelieLoadingSpinner';
 import ApelieStoreResume from '@/components/commons/ApelieStoreResume';
 import ApelieForm from '@/components/commons/ApelieForm';
 import ProductRegister from '@/components/forms/Store/ProductRegister';
-import { IProductRegisterWithErrors } from '@/types/interfaces/interdace-products';
+import { IProduct, IProductRegisterWithErrors } from '@/types/interfaces/interdace-products';
 import { postStoreProduct } from '@/services/store';
 import { ToastContext } from '@/stores/ToastStore';
+import ApelieDetailedProduct from '@/components/commons/ApelieDetailedProduct';
 
 interface IStoreScreen {
     store: IStore;
@@ -41,6 +42,7 @@ const StoreScreen : React.FC<IStoreScreen> = ({
   isRequestLoading = true,
   uploadPageFunction,
 }) => {
+  const [selectedProduct, setSelectedProduct] = useState<IProduct>();
   const [isAddPrductModalOpen, setIsAddPrductModalOpen] = useState(false);
   const [productRegister, setProductRegister] = useState<IProductRegisterWithErrors>(INITAL_PRODUCT_REGISTER_VALUE);
   const { setToastMessage } = useContext(ToastContext);
@@ -80,6 +82,14 @@ const StoreScreen : React.FC<IStoreScreen> = ({
 
   return (
     <StoreScreenStyle.Container>
+      {selectedProduct && (
+        <ApelieDetailedProduct
+          isEditable={isUserStore}
+          product={selectedProduct}
+          isOpen={!!selectedProduct}
+          onCloseButtonAction={() => setSelectedProduct(undefined)}
+        />
+      )}
       {isRequestLoading ? (
         <>
           <ApelieModal show={isAddPrductModalOpen} onClose={() => setIsAddPrductModalOpen(false)}>
@@ -137,7 +147,9 @@ const StoreScreen : React.FC<IStoreScreen> = ({
 
             <div id="product-items-container">
               {store?.products.map((product, index) => (
-                <ApelieProduct key={`${product.name + index}`} isEditable={isUserStore} product={product} />
+                <>
+                  <ApelieProduct key={`${product.name} - ${index + 1}`} product={product} onModalClick={() => setSelectedProduct(product)} />
+                </>
               ))}
             </div>
           </StoreScreenStyle.ProductContainer>

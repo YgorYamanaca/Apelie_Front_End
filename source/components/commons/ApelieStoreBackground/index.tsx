@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import _ from 'lodash';
 import { useMutation } from 'react-query';
+import router from 'next/router';
 import FacebookIcon from '@/assets/icons/FacebookIcon';
 import ApelieStoreBackGroundStyles from './styles';
 import TwitterIcon from '@/assets/icons/TwitterIcon';
@@ -21,6 +22,7 @@ interface IApelieStoreBackGround {
     backgroundHeight?: string
     isEditable?: boolean
     isLogoPositionBottom?: boolean
+    isSocialMediaButtonDisabled?: boolean
     logoSize?: string
     storeMediaSocialArray: string[]
     store: IStore
@@ -32,6 +34,7 @@ const DEFAULT_STORE_PHOTO = '/images/Store/default-placeholder.png';
 const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
   backgroundHeight = '85px',
   isEditable = false,
+  isSocialMediaButtonDisabled = false,
   store,
   logoSize,
   isLogoPositionBottom = false,
@@ -52,22 +55,22 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
   });
   const socialMediaIcons = {
     facebookAccount: (
-      <ApelieIconButton key="facebook-button" id="facebook-icon">
+      <ApelieIconButton key="facebook-button" id="facebook-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(store.facebookAccount)}>
         <FacebookIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),
     youtubeAccount: (
-      <ApelieIconButton key="youtube-button" id="youtube-icon">
+      <ApelieIconButton key="youtube-button" id="youtube-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(store.youtubeAccount)}>
         <YoutubeIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),
     twitterAccount: (
-      <ApelieIconButton key="twitter-button" id="twitter-icon">
+      <ApelieIconButton key="twitter-button" id="twitter-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(store.twitterAccount)}>
         <TwitterIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),
     instagramAccount: (
-      <ApelieIconButton key="instagram-button" id="instagram-icon">
+      <ApelieIconButton key="instagram-button" id="instagram-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(store.instagramAccount)}>
         <InstagramIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),

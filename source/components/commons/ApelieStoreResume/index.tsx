@@ -13,6 +13,7 @@ import AddressRegister from '@/components/forms/Store/AddressRegister';
 import ApelieTextWithDivider from '../ApelieTextWithDivider';
 import { ToastContext } from '@/stores/ToastStore';
 import { updateStore } from '@/services/store';
+import { toWritePhoneFormat } from '@/utils/format';
 
 interface IApelieStoreResume {
     store: IStore,
@@ -119,7 +120,7 @@ const ApelieStoreResume: React.VoidFunctionComponent<IApelieStoreResume> = ({
           </ApelieTextBase>
           <ApelieTextBase tag="label" variant="paragraph2">
             Telefone:
-            <ApelieTextBase variant="paragraph2">{store.phone}</ApelieTextBase>
+            <ApelieTextBase variant="paragraph2">{toWritePhoneFormat(store.phone)}</ApelieTextBase>
           </ApelieTextBase>
         </div>
         <div id="store-description">

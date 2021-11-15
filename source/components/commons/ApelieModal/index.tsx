@@ -1,23 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import CloseIcon from '@/assets/icons/CloseIcon';
 import ApelieIconButton from '../ApelieIconButton';
 import ApelieModalStyle from './styles';
-import useOnClickOutside from '@/theme/useOutSideClick';
 
 interface IApelieModal {
   show: boolean,
-  onClose: VoidFunction,
+  hasCloseButton?: boolean,
+  onClose?: VoidFunction,
 }
 
 const ApelieModal: React.FC<IApelieModal> = ({
-  show, onClose, children,
+  show, onClose, children, hasCloseButton = true,
 }) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const modalDiv = document.getElementById('modal-root');
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  useOnClickOutside(modalRef, onClose);
 
   useEffect(() => {
     setIsBrowser(true);
@@ -26,10 +23,12 @@ const ApelieModal: React.FC<IApelieModal> = ({
   const modalContent = show ? (
     <ApelieModalStyle.ModalOverlay>
       {children && (
-        <ApelieModalStyle.Modal ref={modalRef}>
-          <ApelieIconButton id="close-modal-button" onClick={() => onClose()}>
-            <CloseIcon height="20" width="20" />
-          </ApelieIconButton>
+        <ApelieModalStyle.Modal>
+          {hasCloseButton && (
+            <ApelieIconButton id="close-modal-button" onClick={() => onClose && onClose()}>
+              <CloseIcon height="20" width="20" />
+            </ApelieIconButton>
+          )}
           {children}
         </ApelieModalStyle.Modal>
       )}
