@@ -65,7 +65,7 @@ const ApelieStore: React.FC<IStoreComponent> = ({ store }) => {
                 {store.products.map((product, index) => (
                   <StoreStyles.ProductImageContainer
                     key={`${product.name}-${index + 1}`}
-                    src={product.images[0].url}
+                    src={product.images[0]?.url || DEFAULT_STORE_PHOTO}
                     alt={`${product.name}`}
                   />
                 ))}

@@ -1,3 +1,5 @@
+import { IStore } from '@/types/interfaces/interface-store';
+
 export function isValidateEmail(email: string): boolean {
   const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g;
   return emailRegExp.test(String(email).toLowerCase());
@@ -50,4 +52,15 @@ export function isValidateTelFormat(telToBeTest: string): boolean {
 
 export function isFloat(value: number): boolean {
   return Number(value) === value && value % 1 !== 0;
+}
+
+export function isValidateStore(store: IStore): boolean {
+  if (store.logoUrl && store.bannerUrl) {
+    const imageList = store.products.map((product) => product.images.map((image) => image.url === null || image.url === undefined)).flat();
+    if (imageList.includes(true)) {
+      return false;
+    }
+    return true;
+  }
+  return false;
 }
