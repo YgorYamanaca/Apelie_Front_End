@@ -48,7 +48,7 @@ const InitialRegister: React.VoidFunctionComponent<IForm<IFirstRegister>> = ({
             </div>
             <div id="store-detail-content">
               <ApelieInputField
-                maxLength={35}
+                maxLength={30}
                 placeholder="Nome da Loja"
                 name="name"
                 value={registerStoreRequestValue.name}

@@ -37,7 +37,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       icon={<CarryBagIcon height="16" width="16" />}
       ghost
     >
-      Pedidos
+      Meus Pedidos
     </ApelieButton>,
     <ApelieButton
       id="header-chat-button"
@@ -67,6 +67,18 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
     >
       {loggedUser?.hasStore ? 'Minha Loja' : 'Cadastrar Loja'}
     </ApelieButton>,
+    loggedUser?.hasStore ? (
+      <ApelieButton
+        key="header-store-button"
+        id="header-store-button"
+        textVariant="paragraph1"
+        icon={<CarryBagIcon height="16" width="16" />}
+        ghost
+        onClick={() => router.push(ApeliePageAlias.MyStoreOrders)}
+      >
+        Pedidos da loja
+      </ApelieButton>
+    ) : [],
     <ApelieButton
       key="header-change-theme-button"
       id="header-change-theme-button"
@@ -170,7 +182,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
             {isUserPhotoMenuOpen && loggedUser && (
             <ApelieHeaderStyle.ExpansiveMenu>
               {HeaderContent.slice(
-                HeaderContent.length - 4,
+                HeaderContent.length - (HeaderContent.length - 3),
                 HeaderContent.length,
               ).map((headerContent) => headerContent)}
             </ApelieHeaderStyle.ExpansiveMenu>

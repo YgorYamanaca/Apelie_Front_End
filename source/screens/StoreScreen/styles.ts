@@ -39,7 +39,7 @@ const ProductContainer = styled.div`
     justify-content: center;
     align-content: center;
     flex-wrap: wrap;
-    padding: 25px;
+    padding: 5px;
     gap: 35px 45px;
   }
 

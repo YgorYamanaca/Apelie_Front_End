@@ -5,6 +5,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 100%;
   background-color: ${({ theme }) => theme.colors.background.default};
   gap: 5px;
   padding: 15px 25px;
@@ -20,6 +21,14 @@ const Container = styled.div`
   & > #apelie-product-name-and-price {
     display: flex;
     flex-direction: column;
+    gap: 5px;
+    & > :first-child {
+      word-break: break-all;
+    }
+
+    & > :last-child {
+      min-width: fit-content;
+    }
   }
   
   & > #product-category {
@@ -57,7 +66,7 @@ const Container = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
       }
     `,
   })}

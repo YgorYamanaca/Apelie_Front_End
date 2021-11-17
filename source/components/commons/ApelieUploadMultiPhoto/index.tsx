@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
 import { StyledProps, withTheme } from 'styled-components';
 import _ from 'lodash';
@@ -10,19 +10,21 @@ import TrashIcon from '@/assets/icons/TrashIcon';
 
 interface IApelieUploadPhoto {
     onImageSelect: (imageURl: string[]) => void;
+    defaultImagesList: string[],
     textOfUploadDragArea: string;
     selectedPhotoKey: string;
 }
 
 const ApelieUploadMultiPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
   onImageSelect,
+  defaultImagesList,
   textOfUploadDragArea,
   selectedPhotoKey,
   theme,
 }) => {
   const [images, setImages] = React.useState<ImageListType>([]);
-  const MAX_NUMBER = 5;
-  const MAX_SIZE = 3000000;
+  const MAX_NUMBER = useMemo(() => 5 - defaultImagesList.length, []);
+  const MAX_SIZE = 5000000;
 
   const onChange = (imageList: ImageListType) => {
     onImageSelect(imageList.map((image) => image[selectedPhotoKey]));
@@ -67,21 +69,23 @@ const ApelieUploadMultiPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
               </ApelieTextBase>
             </ApelieUploadMultiPhotoStyle.UploadImageContainer>
             <ApelieUploadMultiPhotoStyle.ImagesBox>
-              {imageList.map((image, index) => (
-                <ApelieUploadMultiPhotoStyle.ImageContainer>
-                  <img
-                    key={`uplodedImage-${index + 1}`}
-                    id="uplodedImage"
-                    src={image[selectedPhotoKey]}
-                    alt="uplodedImageAlt"
-                    width="75px"
-                    height="75px"
-                  />
-                  <ApelieIconButton id="delete-image-button" onClick={() => onImageRemove(index)}>
-                    <TrashIcon width="20" height="20" />
-                  </ApelieIconButton>
-                </ApelieUploadMultiPhotoStyle.ImageContainer>
-              ))}
+              {
+                imageList.map((image, index) => (
+                  <ApelieUploadMultiPhotoStyle.ImageContainer>
+                    <img
+                      key={`uplodedImage-${index + 1}`}
+                      id="uplodedImage"
+                      src={image[selectedPhotoKey]}
+                      alt="uplodedImageAlt"
+                      width="75px"
+                      height="75px"
+                    />
+                    <ApelieIconButton id="delete-image-button" onClick={() => onImageRemove(index)}>
+                      <TrashIcon width="20" height="20" />
+                    </ApelieIconButton>
+                  </ApelieUploadMultiPhotoStyle.ImageContainer>
+                ))
+              }
             </ApelieUploadMultiPhotoStyle.ImagesBox>
           </>
         )}

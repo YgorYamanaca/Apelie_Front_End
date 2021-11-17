@@ -34,6 +34,9 @@ export interface IFirstRegister {
   logoImage?: string,
   categories: string[],
   description: string,
+
+  nameError?: string,
+  descriptionError?: string,
 }
 
 export interface IDesignRegister {
@@ -61,6 +64,9 @@ export interface IAddressRegister {
   zipCodeError?: string,
   addressNumberError?: string,
   phoneError?: string,
+  neighbourhoodError?: string,
+  streetError?: string,
+  emailError?: string,
 }
 
 export interface ITeste {
@@ -69,8 +75,3 @@ export interface ITeste {
 }
 
 export interface IStoreRequest extends IFirstRegister, IDesignRegister, ISocialMediaRegister, IAddressRegister, ITeste {}
-export interface IStoreRequestWithErrors extends IStoreRequest {
-  zipCodeError?: string,
-  addressNumberError?: string,
-  phoneError?: string,
-}

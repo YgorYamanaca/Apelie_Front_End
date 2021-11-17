@@ -23,7 +23,7 @@ const ApelieUploadPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
 }) => {
   const [images, setImages] = React.useState<ImageListType>([]);
   const MAX_NUMBER = 1;
-  const MAX_SIZE = 3000000;
+  const MAX_SIZE = 5000000;
 
   const onChange = (imageList: ImageListType) => {
     onImageSelect(imageList[0][selectedPhotoKey] || '');

@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { useRouter } from 'next/router';
 import RegisterStoreScreenStyle from './styles';
 import {
-  IAddressRegister, IDesignRegister, IFirstRegister, ISocialMediaRegister, IStoreRequestWithErrors,
+  IAddressRegister, IDesignRegister, IFirstRegister, ISocialMediaRegister, IStoreRequest,
 } from '@/types/interfaces/interface-store';
 import { postStore } from '@/services/store';
 import { ToastContext } from '@/stores/ToastStore';
@@ -108,7 +108,7 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
     }
   }
 
-  function getRequestDataToBeSand(): IStoreRequestWithErrors {
+  function getRequestDataToBeSand(): IStoreRequest {
     const newaddressRequestValue = {
       ...addressRegisterValue,
       phone: addressRegisterValue.phone.replace('(', '').replace(')', '').replace('-', '').replace(/ /g, ''),
@@ -128,7 +128,7 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
       && addressRegisterValue.addressNumber.length === 3
     ) {
       doPostStoreRequest.mutate(
-        getRequestDataToBeSand(),
+        _.omit(getRequestDataToBeSand(), ['nameError', 'descriptionError', 'zipCodeError', 'addressNumberError', 'phoneError', 'neighbourhoodError', 'streetError', 'emailError']),
       );
     } else if (!isValidateCepFormat(addressRegisterValue.zipCode) || !isValidateTelFormat(addressRegisterValue.phone) || addressRegisterValue.addressNumber.length !== 3) {
       setAddressRequestValue({

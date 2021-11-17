@@ -36,6 +36,7 @@ const ProductRegister: React.VoidFunctionComponent<IForm<IProductRegisterWithErr
     <ProductRegisterStyle.Container>
       <ProductRegisterStyle.ImageUploaderContainer>
         <ApelieUploadMultiPhoto
+          defaultImagesList={productRegister.images}
           onImageSelect={handleUploadStorebannerUrl}
           selectedPhotoKey="productImages"
           textOfUploadDragArea="Insira as imagens do produto"
@@ -43,7 +44,7 @@ const ProductRegister: React.VoidFunctionComponent<IForm<IProductRegisterWithErr
       </ProductRegisterStyle.ImageUploaderContainer>
       <ProductRegisterStyle.ProductRegister>
         <ApelieInputField
-          maxLength={50}
+          maxLength={30}
           placeholder="Insira o nome do produto"
           name="name"
           value={productRegister.name}
