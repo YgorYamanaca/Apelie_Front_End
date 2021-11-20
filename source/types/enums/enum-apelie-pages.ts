@@ -7,7 +7,7 @@ enum ApeliePageAlias {
   RegisterStorePage = '/register-store',
   Store = '/store',
   MyStore = '/store/me',
-  MyStoreOrders = '/store/me/orders'
+  MyStoreOrders = '/store-orders'
 }
 
 export default ApeliePageAlias;

@@ -69,7 +69,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
     </ApelieButton>,
     loggedUser?.hasStore ? (
       <ApelieButton
-        key="header-store-button"
+        key="header-store-review-button"
         id="header-store-button"
         textVariant="paragraph1"
         icon={<CarryBagIcon height="16" width="16" />}

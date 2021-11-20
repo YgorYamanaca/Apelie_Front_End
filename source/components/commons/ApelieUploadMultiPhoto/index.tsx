@@ -15,6 +15,8 @@ interface IApelieUploadPhoto {
     selectedPhotoKey: string;
 }
 
+const DEFAULT_PRODUCT_PHOTO = '/images/User/default-user-image.png';
+
 const ApelieUploadMultiPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
   onImageSelect,
   defaultImagesList,
@@ -75,7 +77,7 @@ const ApelieUploadMultiPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
                     <img
                       key={`uplodedImage-${index + 1}`}
                       id="uplodedImage"
-                      src={image[selectedPhotoKey]}
+                      src={image[selectedPhotoKey] || DEFAULT_PRODUCT_PHOTO}
                       alt="uplodedImageAlt"
                       width="75px"
                       height="75px"

@@ -84,7 +84,7 @@ const HomeScreen: React.FC = () => {
                 [
                   { width: 0, itemsToShow: 1 },
                   { width: 450, itemsToShow: 2 },
-                  { width: 960, itemsToShow: 3 },
+                  { width: 960, itemsToShow: 2 },
                   { width: 1280, itemsToShow: 3 },
                   { width: 1920, itemsToShow: 3 },
                 ]

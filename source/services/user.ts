@@ -42,7 +42,7 @@ const doGetUserStore = async (): Promise<AxiosResponse> => {
 
 const doGetUserStoreOrders = async (storeId: string | number): Promise<AxiosResponse> => {
   const response = await ApiRequester.apelie
-    .get(`store/${storeId}/orders`)
+    .get(`stores/${storeId}/orders`)
     .catch((err) => err.response);
   return response;
 };

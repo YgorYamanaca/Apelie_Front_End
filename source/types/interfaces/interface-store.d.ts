@@ -1,4 +1,5 @@
 import { IProduct } from './interdace-products';
+import ILoggedUser from './interface-logged-user';
 import IOwner from './interface-owner';
 
 export interface IStore {
@@ -27,6 +28,12 @@ export interface IStore {
   products: IProduct[];
   primaryColor: string;
   secondaryColor: string;
+}
+
+export interface IStoreReview {
+  user: ILoggedUser,
+  description: string,
+  rating: number,
 }
 
 export interface IFirstRegister {
