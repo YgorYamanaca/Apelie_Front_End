@@ -1,4 +1,7 @@
+import { StoreOrdersStatus } from '../enums/enum-store-orders-status';
+import { StorePaymentMethod } from '../enums/enum-store-payment-method';
 import { IProduct } from './interdace-products';
+import { IAddress } from './interface-address';
 import ILoggedUser from './interface-logged-user';
 import IOwner from './interface-owner';
 
@@ -34,6 +37,26 @@ export interface IStoreReview {
   user: ILoggedUser,
   description: string,
   rating: number,
+}
+
+export interface IOrdersItemList {
+  product: IProduct,
+  description: string,
+  quantity: number
+}
+
+export interface IStoreOrders {
+  orderId: number,
+  trackingCode: string,
+  status: StoreOrdersStatus,
+  paymentMethod: StorePaymentMethod,
+  createdAt: string,
+  totalValue: number,
+  user: ILoggedUser,
+  store: IStore,
+  itemList: IOrdersItemList[],
+  review: IStoreReview,
+  address: IAddress
 }
 
 export interface IFirstRegister {

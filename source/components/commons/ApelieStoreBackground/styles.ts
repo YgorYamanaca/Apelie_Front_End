@@ -16,6 +16,7 @@ const Container = styled.div<IApelieStoreBackGroundStylesContainer>`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  box-shadow: ${({ theme }) => theme.shadow.nivel1};
   & > #store-edit-icon {
     position: absolute;
     top: 10px;

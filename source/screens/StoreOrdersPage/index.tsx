@@ -2,6 +2,9 @@ import React, { useLayoutEffect } from 'react';
 import { useMutation } from 'react-query';
 import { doGetUserStoreOrders } from '@/services/user';
 import ApelieLoadingSpinner from '@/components/commons/ApelieLoadingSpinner';
+import StoreOrdersScreenStyles from './styles';
+import ApeliePageTitle from '@/components/commons/ApeliePageTitle';
+import ApelieStoreOrder from '@/components/commons/ApelieStoreOrder';
 
 interface IStoreOrdersScreen {
     storeId: string,
@@ -20,9 +23,18 @@ const StoreOrdersScreen: React.FC<IStoreOrdersScreen> = ({
   }, [isRequestSuccess]);
 
   return (
-    <div>
-      {isRequestSuccess ? JSON.stringify(doGetMyStoreOrders.data) : <ApelieLoadingSpinner size="35px" />}
-    </div>
+    <StoreOrdersScreenStyles.Container>
+      {isRequestSuccess ? (
+        <>
+          <ApeliePageTitle text="Seus Pedidos" textVariant="title" />
+          <StoreOrdersScreenStyles.OrdersContainer>
+            {doGetMyStoreOrders.data?.data.map((storeOrder) => (
+              <ApelieStoreOrder key={`apelie-store-order-${storeOrder.orderId}`} storeId={storeId} order={storeOrder} />
+            ))}
+          </StoreOrdersScreenStyles.OrdersContainer>
+        </>
+      ) : <ApelieLoadingSpinner size="35px" />}
+    </StoreOrdersScreenStyles.Container>
   );
 };
 

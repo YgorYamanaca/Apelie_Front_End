@@ -14,6 +14,7 @@ const Container = styled.div`
   cursor: pointer;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   user-select: none;
+  box-shadow: ${({ theme }) => theme.shadow.nivel1};
   :hover {
     transform: scale(1.03);
     box-shadow: ${({ theme }) => theme.shadow.nivel3};

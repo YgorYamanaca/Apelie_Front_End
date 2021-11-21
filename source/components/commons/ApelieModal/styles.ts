@@ -14,10 +14,14 @@ const ModalOverlay = styled.div`
     z-index: 5500;
 `;
 
-const Modal = styled.div`
+interface IModal {
+    modalHeight: string;
+}
+
+const Modal = styled.div<IModal>`
     background: ${({ theme }) => theme.colors.background.default};
     width: 98%;
-    height: 90%;
+    height: ${({ modalHeight }) => modalHeight};
     border-radius: 15px;
     position: relative;
     
