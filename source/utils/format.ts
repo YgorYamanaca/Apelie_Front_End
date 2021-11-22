@@ -14,7 +14,7 @@ export function toWritePhoneFormat(phone: string): string {
   return `(${phone.slice(0, 2)}) ${phone.slice(2, phone.length)}`;
 }
 
-function getBase64Image(img: HTMLImageElement) {
+export function getBase64Image(img: HTMLImageElement) {
   const canvas = document.createElement('canvas');
   canvas.width = img.width;
   canvas.height = img.height;
