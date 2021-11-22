@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import _ from 'lodash';
-import { useMutation } from 'react-query';
-import { IStore } from '@/types/interfaces/interface-store';
+import { useMutation, useQuery } from 'react-query';
+import { IStore, IStoreReview } from '@/types/interfaces/interface-store';
 import StoreScreenStyle from './styles';
 import ApelieStoreBackGround from '@/components/commons/ApelieStoreBackground';
 import ApelieTextBase from '@/components/commons/ApelieTextBase';
@@ -14,9 +14,10 @@ import ApelieStoreResume from '@/components/commons/ApelieStoreResume';
 import ApelieForm from '@/components/commons/ApelieForm';
 import ProductRegister from '@/components/forms/Store/ProductRegister';
 import { IProduct, IProductRegisterWithErrors } from '@/types/interfaces/interdace-products';
-import { postStoreProduct } from '@/services/store';
+import { getStoreReviews, postStoreProduct } from '@/services/store';
 import { ToastContext } from '@/stores/ToastStore';
 import ApelieDetailedProduct from '@/components/commons/ApelieDetailedProduct';
+import ApelieReview from '@/components/commons/ApelieReview';
 
 interface IStoreScreen {
     store: IStore;
@@ -46,6 +47,16 @@ const StoreScreen : React.FC<IStoreScreen> = ({
   const [isAddPrductModalOpen, setIsAddPrductModalOpen] = useState(false);
   const [productRegister, setProductRegister] = useState<IProductRegisterWithErrors>(INITAL_PRODUCT_REGISTER_VALUE);
   const { setToastMessage } = useContext(ToastContext);
+  const storesReview = useQuery(
+    ['storeID', store?.storeId],
+    () => store && getStoreReviews(store?.storeId.toString()),
+    {
+      enabled: store !== undefined,
+      select: (data) => (data?.data as IStoreReview[]).map((storeReview) => (
+        <ApelieReview key={storeReview.user.userId} review={storeReview} />
+      )),
+    },
+  );
 
   const doRegisterProduct = useMutation(postStoreProduct, {
     onSuccess: (response) => {
@@ -154,6 +165,20 @@ const StoreScreen : React.FC<IStoreScreen> = ({
               ))}
             </div>
           </StoreScreenStyle.ProductContainer>
+          {storesReview && storesReview.data && storesReview.data.length > 0 && (
+            <StoreScreenStyle.StoreReviewContainer>
+              <div id="title-wrapper">
+                <ApelieTextBase
+                  variant="title"
+                >
+                  {`Avaliações de ${store.name}`}
+                </ApelieTextBase>
+              </div>
+              <div id="store-review-container">
+                {storesReview.data.map((storeReview) => storeReview)}
+              </div>
+            </StoreScreenStyle.StoreReviewContainer>
+          )}
         </>
       ) : <ApelieLoadingSpinner size="35px" />}
     </StoreScreenStyle.Container>

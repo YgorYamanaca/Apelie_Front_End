@@ -10,6 +10,8 @@ interface IApelieProduct {
     onModalClick: VoidFunction,
 }
 
+const DEFAULT_PRODUCT_PHOTO = '/images/Store/default-placeholder.png';
+
 const ApelieProduct : React.VoidFunctionComponent<IApelieProduct> = ({
   onModalClick,
   product,
@@ -35,7 +37,7 @@ const ApelieProduct : React.VoidFunctionComponent<IApelieProduct> = ({
       <ApelieTextBase variant="paragraph2">{product.category}</ApelieTextBase>
     </div>
     <div id="apelie-product-wrapper">
-      {product.images.length > 2
+      {product.images.length > 1
         ? (
           <ApelieCarousel
             id="product-carrousel"
@@ -51,7 +53,7 @@ const ApelieProduct : React.VoidFunctionComponent<IApelieProduct> = ({
             elementsList={product.images.map((image) => (
               <ApelieProductStyle.ProductImageContainer
                 key={image.product_image_id}
-                src={image.url}
+                src={image?.url || DEFAULT_PRODUCT_PHOTO}
                 alt={product.name}
               />
             ))}
@@ -59,15 +61,11 @@ const ApelieProduct : React.VoidFunctionComponent<IApelieProduct> = ({
         )
         : (
           <div id="apelie-product-list">
-            {
-                product.images.map((image) => (
-                  <ApelieProductStyle.ProductImageContainer
-                    key={image.product_image_id}
-                    src={image.url}
-                    alt={product.name}
-                  />
-                ))
-              }
+            <ApelieProductStyle.ProductImageContainer
+              key={product.images[0]?.product_image_id}
+              src={product.images[0]?.url || DEFAULT_PRODUCT_PHOTO}
+              alt={product.name}
+            />
           </div>
         )}
     </div>

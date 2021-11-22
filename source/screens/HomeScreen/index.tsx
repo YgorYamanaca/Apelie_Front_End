@@ -74,14 +74,24 @@ const HomeScreen: React.FC = () => {
           />
         </HomeBox.ImageBoxContent>
       </HomeBox.ImageBox>
-      {stores.isSuccess ? (
-        <HomeBox.StoresBox>
-          <ApelieCarousel
-            id="Spot-Home-Page"
-            elementsList={stores.data}
-          />
-        </HomeBox.StoresBox>
-      ) : <ApelieLoadingSpinner size="35px" />}
+      <HomeBox.StoresBox>
+        {stores.isSuccess
+          ? (
+            <ApelieCarousel
+              id="Spot-Home-Page"
+              elementsList={stores.data}
+              breakPointsArray={
+                [
+                  { width: 0, itemsToShow: 1 },
+                  { width: 450, itemsToShow: 2 },
+                  { width: 960, itemsToShow: 2 },
+                  { width: 1280, itemsToShow: 3 },
+                  { width: 1920, itemsToShow: 3 },
+                ]
+              }
+            />
+          ) : <ApelieLoadingSpinner size="35px" />}
+      </HomeBox.StoresBox>
     </HomeBox.Container>
   );
 };

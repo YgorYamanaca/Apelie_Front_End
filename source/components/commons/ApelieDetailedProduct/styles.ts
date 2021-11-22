@@ -39,11 +39,17 @@ const ProductInfoContainer = styled.div`
 
 const ImagesContainer = styled.div`
     flex:1;
-    margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 3px solid ${({ theme }) => theme.colors.background.paper};
+    ${breakpointsMedia({
+    md: css`
+            margin: auto;
+            flex-direction: row;
+            gap: 25px;
+        `,
+  })}
 `;
 
 const ImageContainer = styled.div`
@@ -83,6 +89,7 @@ const InfoContainer = styled.div`
     & > #product-description {
         display: flex;
         flex-direction: column;
+        word-break: break-all;
         & > :last-child {
             text-indent: 10px;
         }

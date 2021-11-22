@@ -20,6 +20,7 @@ interface ICarousel {
   carouselTitle?: string;
   breakPointsArray?: IBreakpoints[],
   elementsList: ReactNode[];
+  empetyComponent?: ReactNode;
   arrowSize?: string;
   hasArrow?: boolean;
 }
@@ -33,6 +34,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
     { width: 1280, itemsToShow: 3 },
     { width: 1920, itemsToShow: 3 },
   ],
+  empetyComponent,
   carouselTitle,
   elementsList,
   arrowSize = '35',
@@ -98,7 +100,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
             </Carousel>
           </CarouselStyle.CarouselContainer>
         )
-        : EmpetyItems}
+        : empetyComponent || EmpetyItems}
     </CarouselStyle.Container>
   );
 };

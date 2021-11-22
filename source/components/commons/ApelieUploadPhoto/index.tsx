@@ -14,6 +14,8 @@ interface IApelieUploadPhoto {
     selectedPhotoKey: string;
 }
 
+const DEFAULT_PRODUCT_PHOTO = '/images/User/default-user-image.png';
+
 const ApelieUploadPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
   initialDefaultImage,
   onImageSelect,
@@ -23,7 +25,7 @@ const ApelieUploadPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
 }) => {
   const [images, setImages] = React.useState<ImageListType>([]);
   const MAX_NUMBER = 1;
-  const MAX_SIZE = 3000000;
+  const MAX_SIZE = 5000000;
 
   const onChange = (imageList: ImageListType) => {
     onImageSelect(imageList[0][selectedPhotoKey] || '');
@@ -83,7 +85,7 @@ const ApelieUploadPhoto: React.FC<StyledProps<IApelieUploadPhoto>> = ({
                   <img
                     key={`uplodedImage-${index + 1}`}
                     id="uplodedImage"
-                    src={image?.[selectedPhotoKey]}
+                    src={image?.[selectedPhotoKey] || DEFAULT_PRODUCT_PHOTO}
                     alt="uplodedImageAlt"
                   />
                 </>

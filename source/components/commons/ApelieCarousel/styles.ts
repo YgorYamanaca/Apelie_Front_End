@@ -16,13 +16,7 @@ const CarouselContainer = styled.div`
 `;
 
 const TextContainer = styled.div`
-  padding: 0 5px;
-  ${breakpointsMedia({
-    md: css`
-      padding-top: 10px;
-      padding: 0 35px;
-    `,
-  })}
+
 `;
 interface IBaseContainer {
   baseSize: number;

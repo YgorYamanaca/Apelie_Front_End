@@ -1,4 +1,8 @@
+import { StoreOrdersStatus } from '../enums/enum-store-orders-status';
+import { StorePaymentMethod } from '../enums/enum-store-payment-method';
 import { IProduct } from './interdace-products';
+import { IAddress } from './interface-address';
+import ILoggedUser from './interface-logged-user';
 import IOwner from './interface-owner';
 
 export interface IStore {
@@ -29,11 +33,40 @@ export interface IStore {
   secondaryColor: string;
 }
 
+export interface IStoreReview {
+  user: ILoggedUser,
+  description: string,
+  rating: number,
+}
+
+export interface IOrdersItemList {
+  product: IProduct,
+  description: string,
+  quantity: number
+}
+
+export interface IStoreOrders {
+  orderId: number,
+  trackingCode: string,
+  status: StoreOrdersStatus,
+  paymentMethod: StorePaymentMethod,
+  createdAt: string,
+  totalValue: number,
+  user: ILoggedUser,
+  store: IStore,
+  itemList: IOrdersItemList[],
+  review: IStoreReview,
+  address: IAddress
+}
+
 export interface IFirstRegister {
   name: string,
   logoImage?: string,
   categories: string[],
   description: string,
+
+  nameError?: string,
+  descriptionError?: string,
 }
 
 export interface IDesignRegister {
@@ -61,6 +94,9 @@ export interface IAddressRegister {
   zipCodeError?: string,
   addressNumberError?: string,
   phoneError?: string,
+  neighbourhoodError?: string,
+  streetError?: string,
+  emailError?: string,
 }
 
 export interface ITeste {
@@ -69,8 +105,3 @@ export interface ITeste {
 }
 
 export interface IStoreRequest extends IFirstRegister, IDesignRegister, ISocialMediaRegister, IAddressRegister, ITeste {}
-export interface IStoreRequestWithErrors extends IStoreRequest {
-  zipCodeError?: string,
-  addressNumberError?: string,
-  phoneError?: string,
-}

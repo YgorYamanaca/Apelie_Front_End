@@ -13,7 +13,7 @@ import EditIcon from '@/assets/icons/EditIcon';
 import TrashIcon from '@/assets/icons/TrashIcon';
 import ApelieDeleteModal from '../ApelieDeleteModal';
 import { ToastContext } from '@/stores/ToastStore';
-import { deleteProduct, deleteProductImage } from '@/services/product';
+import { deleteProduct, deleteProductImage, updateProduct } from '@/services/product';
 import ProductRegister from '@/components/forms/Store/ProductRegister';
 import ApelieForm from '../ApelieForm';
 
@@ -40,7 +40,7 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
     price: product.price,
     quantity: product.quantity,
     category: product.category,
-    images: [],
+    images: product.images.map((image) => image.url),
     description: product.description,
   });
   const { setToastMessage } = useContext(ToastContext);
@@ -53,6 +53,8 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
           type: 'success',
         });
         uploadPageFunction();
+        setIsDeleteProductModalOpen(false);
+        onCloseButtonAction();
       } else {
         setToastMessage({
           message: 'Erro ao tentar deletar o produto.',
@@ -70,9 +72,30 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
           type: 'success',
         });
         uploadPageFunction();
+        setIsDeleteImageModalOpen(undefined);
+        onCloseButtonAction();
       } else {
         setToastMessage({
           message: 'Erro ao tentar deletar a imagem.',
+          type: 'error',
+        });
+      }
+    },
+  });
+
+  const UploadProductRequest = useMutation(updateProduct, {
+    onSuccess: (response) => {
+      if (response?.status === 200) {
+        setToastMessage({
+          message: 'O seu produto foi atualizado com sucesso',
+          type: 'success',
+        });
+        uploadPageFunction();
+        setIsEditProductModalOpen(false);
+        onCloseButtonAction();
+      } else {
+        setToastMessage({
+          message: 'Erro ao tentar atualizar o produto.',
           type: 'error',
         });
       }
@@ -90,12 +113,18 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
             nextButtonText="Atualizar"
             hasBackGround={false}
             disabledCondition={
-              !!produtctRegister.category
-              && !!produtctRegister.name
-              && !!produtctRegister.price
-              && !!produtctRegister.quantity
+              produtctRegister.category === ''
+              && produtctRegister.name === ''
+              && produtctRegister.price === 0
+              && produtctRegister.quantity === 0
             }
-            nextButtonAction={() => console.log('atualizar')}
+            nextButtonAction={() => UploadProductRequest.mutate({
+              productId: product.productId,
+              product: {
+                ...produtctRegister,
+                images: product.images.map((image) => produtctRegister.images.includes(image.url)).every((isEqual) => isEqual === true) ? [] : produtctRegister.images,
+              },
+            })}
             backButtonAction={() => setIsEditProductModalOpen(false)}
           >
             <ProductRegister registerStoreRequestValue={produtctRegister} changeStoreRequestFunction={setProductRegister} />

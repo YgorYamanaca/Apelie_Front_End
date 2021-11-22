@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { IProductRegisterWithErrors } from '@/types/interfaces/interdace-products';
 import ApiRequester from './apiRequester';
 
 const deleteProduct = async (ProductId: number | string): Promise<AxiosResponse> => {
@@ -15,7 +16,15 @@ const deleteProductImage = async (deleteParms: {productId: number | string, imag
   return response;
 };
 
+const updateProduct = async (deleteParms: {productId: number | string, product: IProductRegisterWithErrors}): Promise<AxiosResponse> => {
+  const response = await ApiRequester.apelie
+    .put(`/products/${deleteParms.productId}`, deleteParms.product)
+    .catch((err) => err.response);
+  return response;
+};
+
 export {
   deleteProduct,
   deleteProductImage,
+  updateProduct,
 };

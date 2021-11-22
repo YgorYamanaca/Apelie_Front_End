@@ -10,6 +10,7 @@ const Container = styled.div`
     background-color: ${({ theme }) => theme.colors.background.default};
     border-radius: ${({ theme }) => theme.borderRadius};
     border: 1px solid ${({ theme }) => theme.colors.divider};
+    box-shadow: ${({ theme }) => theme.shadow.nivel1};
     & > #store-info-edit-icon {
         display: flex;
         height: fit-content;

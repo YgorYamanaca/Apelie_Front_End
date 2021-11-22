@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import ILoginInfo from '@/types/interfaces/interface-login-data';
 import ISubscribeRequest from '@/types/interfaces/interface-subscribe-request';
 import ApiRequester from './apiRequester';
+import { IStoreOrders } from '@/types/interfaces/interface-store';
 
 const doLogin = async (LoginInfo: ILoginInfo): Promise<AxiosResponse> => {
   const response = await ApiRequester.apelie
@@ -40,6 +41,13 @@ const doGetUserStore = async (): Promise<AxiosResponse> => {
   return response;
 };
 
+const doGetUserStoreOrders = async (storeId: string | number): Promise<AxiosResponse<IStoreOrders[]>> => {
+  const response = await ApiRequester.apelie
+    .get(`stores/${storeId}/orders`)
+    .catch((err) => err.response);
+  return response;
+};
+
 export {
-  doRegister, doLogin, doGetUser, doGetUserStore,
+  doRegister, doLogin, doGetUser, doGetUserStore, doGetUserStoreOrders,
 };

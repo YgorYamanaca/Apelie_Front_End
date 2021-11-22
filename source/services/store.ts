@@ -56,6 +56,22 @@ const getStoreCategorys = async (): Promise<AxiosResponse> => {
   return response;
 };
 
+const getStoreReviews = async (productId: string): Promise<AxiosResponse> => {
+  const response = await ApiRequester.apelie
+    .get(`/stores/${productId}/reviews`)
+    .catch((err) => err.response);
+  return response;
+};
+
+const insertOrderTrackingCode = async (
+  { storeId, orderId, trackingCode }: { storeId: string, orderId: string, trackingCode: string },
+): Promise<AxiosResponse> => {
+  const response = await ApiRequester.apelie
+    .patch(`/stores/${storeId}/orders/${orderId}/tracking-code/${trackingCode}`)
+    .catch((err) => err.response);
+  return response;
+};
+
 export {
-  getStore, getStoreById, getStoreCategorys, postStore, getMyStoreById, updateStore, postStoreProduct,
+  getStore, getStoreById, getStoreCategorys, postStore, getMyStoreById, updateStore, postStoreProduct, getStoreReviews, insertOrderTrackingCode,
 };

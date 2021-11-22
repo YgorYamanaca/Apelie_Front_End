@@ -115,6 +115,8 @@ const ImageBoxCenterContent = styled.div`
 const StoresBox = styled.div`
   display: flex;
   flex: 1;
+  justify-content: center;
+  align-items: center;
 `;
 
 const HomeBox = {
