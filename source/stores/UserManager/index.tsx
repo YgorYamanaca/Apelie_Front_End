@@ -24,7 +24,7 @@ interface IUserContext {
 
 export const UserContext = createContext<IUserContext>({
   loggedUser: undefined,
-  updateUserInfo: (newLoggedUserInfo: ILoggedUser) => '',
+  updateUserInfo: () => '',
   doLogout: () => '',
   updateUserToken: () => '',
 });
