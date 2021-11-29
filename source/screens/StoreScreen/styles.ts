@@ -86,11 +86,23 @@ const StoreReviewContainer = styled.div`
   })}
 `;
 
+const EmptyProduct = styled.div`
+  display: flex;
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.background.default};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ theme }) => theme.shadow.nivel1};
+  height: 145px;
+  justify-content: center;
+  align-items: center;
+`;
+
 const StoreScreenStyle = {
   Container,
   StoreInfoContainer,
   ProductContainer,
   StoreReviewContainer,
+  EmptyProduct,
 };
 
 export default StoreScreenStyle;

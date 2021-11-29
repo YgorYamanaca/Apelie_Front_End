@@ -17,6 +17,7 @@ interface IBreakpoints {
 }
 interface ICarousel {
   id: string;
+  textPosition?: 'left' | 'center',
   carouselTitle?: string;
   breakPointsArray?: IBreakpoints[],
   elementsList: ReactNode[];
@@ -27,6 +28,7 @@ interface ICarousel {
 
 const ApelieCarousel: React.FC<ICarousel> = ({
   id,
+  textPosition = 'left',
   breakPointsArray = [
     { width: 0, itemsToShow: 2 },
     { width: 450, itemsToShow: 2 },
@@ -74,7 +76,7 @@ const ApelieCarousel: React.FC<ICarousel> = ({
 
   return (
     <CarouselStyle.Container id={`${id}-Carousel`}>
-      <CarouselStyle.TextContainer>
+      <CarouselStyle.TextContainer textPosition={textPosition}>
         {carouselTitle && (
           <ApelieTextBase variant="title" tag="h1">
             {carouselTitle}

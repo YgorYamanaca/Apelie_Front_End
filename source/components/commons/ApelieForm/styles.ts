@@ -20,6 +20,8 @@ const Container = styled.div<IContainer>`
     md: css`
       width: 100%;
       height: auto;
+      max-width: 850px;
+      /* min-height: 600px; */
     `,
   })}
 
@@ -42,6 +44,8 @@ const Content = styled.div`
     md: css`
       padding: 0 50px;
       gap: 25px;
+      height: 100%;
+      overflow-y: visible;
     `,
   })}
 `;

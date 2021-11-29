@@ -21,7 +21,8 @@ import { insertOrderTrackingCode } from '@/services/store';
 
 interface IApelieStoreOrder {
   storeId: string,
-  order: IStoreOrders
+  order: IStoreOrders,
+  updateOrderFunction: VoidFunction
 }
 
 const DEFAULT_PRODUCT_PHOTO = '/images/Store/default-placeholder.png';
@@ -29,6 +30,7 @@ const DEFAULT_PRODUCT_PHOTO = '/images/Store/default-placeholder.png';
 const ApelieStoreOrder: React.FC<IApelieStoreOrder> = ({
   storeId,
   order,
+  updateOrderFunction,
 }) => {
   const { setToastMessage } = useContext(ToastContext);
   const [trackingCode, setTrackingCode] = useState('');
@@ -41,6 +43,8 @@ const ApelieStoreOrder: React.FC<IApelieStoreOrder> = ({
           message: `O código de rastreio foi ${trackingCode ? 'atualizado' : 'cadastrado'} com sucesso.`,
           type: 'success',
         });
+        setIsInsertTrackingCodeOpen(false);
+        updateOrderFunction();
       } else {
         setToastMessage({
           message: `Erro ao tentar ${trackingCode ? 'atualizar' : 'cadastrar'} o código de rastreio.`,
@@ -135,7 +139,7 @@ const ApelieStoreOrder: React.FC<IApelieStoreOrder> = ({
           <ApelieTextBase variant="subTitle" tag="label">
             Situação:&nbsp;
           </ApelieTextBase>
-          <ApelieTextBase variant="paragraph1">
+          <ApelieTextBase id={`${order.status}`} variant="paragraph1">
             {orderStatusObject[order.status]}
           </ApelieTextBase>
         </div>
@@ -198,12 +202,18 @@ const ApelieStoreOrder: React.FC<IApelieStoreOrder> = ({
         {order.itemList.map((item) => (
           <ApelieStoreOrderStyles.ItemWrapper>
             <ApelieStoreOrderStyles.OrderProductWrapper>
-              <ApelieTextBase variant="subTitle">
+              <ApelieTextBase variant="subTitle" tag="label">
                 {item.product.name}
               </ApelieTextBase>
-              <ApelieTextBase id="quantity-text" variant="subTitle">
+              <ApelieTextBase id="quantity-text" variant="subTitle" tag="label">
                 {`Quantidade: ${item.quantity}`}
               </ApelieTextBase>
+              {item.description && (
+                <span id="product-description">
+                  <ApelieTextBase tag="label" variant="subTitle">Mensagem do comprador:</ApelieTextBase>
+                  <ApelieTextBase variant="subTitle">{item.description}</ApelieTextBase>
+                </span>
+              )}
               <ApelieCarousel
                 id="product-carousel"
                 elementsList={item.product.images.map((image) => (

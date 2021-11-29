@@ -178,7 +178,7 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
                     src={image.url}
                     alt={product.name}
                   />
-                  {isEditable && product.images.length >= 1 && (
+                  {isEditable && product.images.length > 1 && (
                     <ApelieIconButton id="delete-image-button" isPadding onClick={() => setIsDeleteImageModalOpen(image.product_image_id)}>
                       <TrashIcon width="20" height="20" />
                     </ApelieIconButton>
@@ -192,9 +192,13 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
               <ApelieTextBase tag="label" variant="subTitle">Preço: </ApelieTextBase>
               <ApelieTextBase variant="subTitle">{`R$: ${isFloat(product.price) ? product.price : `${product.price},00`}`}</ApelieTextBase>
             </span>
-            <span>
+            <span id="product-quantity">
               <ApelieTextBase tag="label" variant="subTitle">Quantidade: </ApelieTextBase>
-              <ApelieTextBase variant="subTitle">{`${product.quantity} ${product.quantity > 1 ? 'unidades' : 'unidade'}`}</ApelieTextBase>
+              <ApelieTextBase id={`${product.quantity >= 1 ? 'disponible' : 'indisponible'}`} variant="subTitle">
+                {product.quantity !== 0
+                  ? `${product.quantity} ${product.quantity > 1 ? 'unidades' : 'unidade'}`
+                  : 'Indisponível'}
+              </ApelieTextBase>
             </span>
             {product.description && (
             <span id="product-description">

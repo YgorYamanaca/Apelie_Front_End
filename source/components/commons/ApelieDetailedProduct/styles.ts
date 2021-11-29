@@ -86,6 +86,10 @@ const InfoContainer = styled.div`
         font-weight: bold;
     }
 
+    & > span#product-quantity > span#indisponible {
+        color: ${({ theme }) => theme.colors.error.main};
+    }
+
     & > #product-description {
         display: flex;
         flex-direction: column;

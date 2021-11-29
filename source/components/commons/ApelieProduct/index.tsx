@@ -28,8 +28,10 @@ const ApelieProduct : React.VoidFunctionComponent<IApelieProduct> = ({
     </div>
     <span id="product-quantity">
       <ApelieTextBase variant="paragraph2" tag="label">Quantidade: </ApelieTextBase>
-      <ApelieTextBase variant="paragraph2">
-        {`${product.quantity} ${product.quantity > 1 ? 'unidades' : 'unidade'}`}
+      <ApelieTextBase id={`${product.quantity >= 1 ? 'disponible' : 'indisponible'}`} variant="paragraph2">
+        {product.quantity !== 0
+          ? `${product.quantity} ${product.quantity > 1 ? 'unidades' : 'unidade'}`
+          : 'Indisponível'}
       </ApelieTextBase>
     </span>
     <div id="product-category">

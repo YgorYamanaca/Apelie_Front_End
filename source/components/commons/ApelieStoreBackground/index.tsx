@@ -55,26 +55,39 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
   });
   const socialMediaIcons = {
     facebookAccount: (
-      <ApelieIconButton key="facebook-button" id="facebook-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(store.facebookAccount)}>
+      <ApelieIconButton key="facebook-button" id="facebook-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(`https://www.facebook.com/${store.facebookAccount}`)}>
         <FacebookIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),
     youtubeAccount: (
-      <ApelieIconButton key="youtube-button" id="youtube-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(store.youtubeAccount)}>
+      <ApelieIconButton key="youtube-button" id="youtube-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(`https://www.youtube.com/c/${store.youtubeAccount}`)}>
         <YoutubeIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),
     twitterAccount: (
-      <ApelieIconButton key="twitter-button" id="twitter-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(store.twitterAccount)}>
+      <ApelieIconButton key="twitter-button" id="twitter-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(`https://www.twitter.com/${store.twitterAccount}`)}>
         <TwitterIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),
     instagramAccount: (
-      <ApelieIconButton key="instagram-button" id="instagram-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(store.instagramAccount)}>
+      <ApelieIconButton key="instagram-button" id="instagram-icon" onClick={() => !isSocialMediaButtonDisabled && router.push(`https://www.instagram.com/${store.instagramAccount}`)}>
         <InstagramIcon width={logoSize} height={logoSize} />
       </ApelieIconButton>
     ),
   };
+
+  function attSocialMedia(
+    stateToBeAtt: 'facebookAccount' | 'instagramAccount' | 'twitterAccount' | 'youtubeAccount',
+    pageAdreess: string,
+  ) {
+    if (socialMediaValue[stateToBeAtt]?.toLocaleLowerCase().includes(pageAdreess)) {
+      const indexTobeGet = socialMediaValue[stateToBeAtt].split('/').length
+        - (stateToBeAtt === 'youtubeAccount' || stateToBeAtt === 'twitterAccount' ? 1 : 2);
+      const userPart = socialMediaValue[stateToBeAtt].split('/')[indexTobeGet];
+      return userPart;
+    }
+    return socialMediaValue[stateToBeAtt];
+  }
 
   const doUpdateStore = useMutation(updateStore, {
     onSuccess: (response) => {
@@ -120,8 +133,11 @@ const ApelieStoreBackGround: React.FC<IApelieStoreBackGround> = ({
             state: store.state,
             street: store.street,
             zipCode: store.zipCode,
+            facebookAccount: attSocialMedia('facebookAccount', 'facebook.com'),
+            instagramAccount: attSocialMedia('instagramAccount', 'instagram.com'),
+            twitterAccount: attSocialMedia('twitterAccount', 'twitter.com'),
+            youtubeAccount: attSocialMedia('youtubeAccount', 'youtube.com'),
             ...designRegisterValue,
-            ...socialMediaValue,
           })}
           hasBackGround={false}
         >

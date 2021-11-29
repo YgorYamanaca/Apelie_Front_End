@@ -1,10 +1,11 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useCallback, useLayoutEffect } from 'react';
 import { useMutation } from 'react-query';
 import { doGetUserStoreOrders } from '@/services/user';
 import ApelieLoadingSpinner from '@/components/commons/ApelieLoadingSpinner';
 import StoreOrdersScreenStyles from './styles';
 import ApeliePageTitle from '@/components/commons/ApeliePageTitle';
 import ApelieStoreOrder from '@/components/commons/ApelieStoreOrder';
+import ApelieTextBase from '@/components/commons/ApelieTextBase';
 
 interface IStoreOrdersScreen {
     storeId: string,
@@ -16,6 +17,9 @@ const StoreOrdersScreen: React.FC<IStoreOrdersScreen> = ({
   isRequestSuccess,
 }) => {
   const doGetMyStoreOrders = useMutation(doGetUserStoreOrders);
+
+  const updateStoreOrdersFunction = useCallback(() => doGetMyStoreOrders.mutate(storeId), [storeId]);
+
   useLayoutEffect(() => {
     if (isRequestSuccess) {
       doGetMyStoreOrders.mutate(storeId);
@@ -24,13 +28,21 @@ const StoreOrdersScreen: React.FC<IStoreOrdersScreen> = ({
 
   return (
     <StoreOrdersScreenStyles.Container>
-      {isRequestSuccess ? (
+      {isRequestSuccess && !doGetMyStoreOrders.isLoading ? (
         <>
           <ApeliePageTitle text="Seus Pedidos" textVariant="title" />
           <StoreOrdersScreenStyles.OrdersContainer>
-            {doGetMyStoreOrders.data?.data.map((storeOrder) => (
-              <ApelieStoreOrder key={`apelie-store-order-${storeOrder.orderId}`} storeId={storeId} order={storeOrder} />
-            ))}
+            {doGetMyStoreOrders.data?.data.length && doGetMyStoreOrders.data?.data.length >= 1
+              ? doGetMyStoreOrders.data?.data.map((storeOrder) => (
+                <ApelieStoreOrder updateOrderFunction={updateStoreOrdersFunction} key={`apelie-store-order-${storeOrder.orderId}`} storeId={storeId} order={storeOrder} />
+              ))
+              : (
+                <StoreOrdersScreenStyles.EmptyOrder>
+                  <ApelieTextBase variant="subTitle">
+                    Não há nenhum pedido para a sua loja.
+                  </ApelieTextBase>
+                </StoreOrdersScreenStyles.EmptyOrder>
+              )}
           </StoreOrdersScreenStyles.OrdersContainer>
         </>
       ) : <ApelieLoadingSpinner size="35px" />}

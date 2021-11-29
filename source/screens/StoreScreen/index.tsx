@@ -65,6 +65,7 @@ const StoreScreen : React.FC<IStoreScreen> = ({
           message: 'Seu produto foi cadastrado com sucesso',
           type: 'success',
         });
+        setProductRegister(INITAL_PRODUCT_REGISTER_VALUE);
         setIsAddPrductModalOpen(false);
         uploadPageFunction();
       } else {
@@ -110,10 +111,10 @@ const StoreScreen : React.FC<IStoreScreen> = ({
               formTitle="Cadastro de produto"
               disabledCondition={
                 productRegister.name === ''
-                && productRegister.price.toString() === '0'
-                && productRegister.quantity.toString() === '0'
-                && productRegister.category === ''
-                && productRegister.images.length === 0
+                || productRegister.price === 0
+                || productRegister.quantity === 0
+                || productRegister.category === ''
+                || productRegister.images.length === 0
               }
               backButtonText="Cancelar"
               nextButtonText="Cadastrar"
@@ -158,11 +159,19 @@ const StoreScreen : React.FC<IStoreScreen> = ({
             </div>
 
             <div id="product-items-container">
-              {store?.products.map((product, index) => (
-                <>
-                  <ApelieProduct key={`${product.name} - ${index + 1}`} product={product} onModalClick={() => setSelectedProduct(product)} />
-                </>
-              ))}
+              { store?.products && store?.products.length >= 1
+                ? store?.products.map((product, index) => (
+                  <>
+                    <ApelieProduct key={`${product.name} - ${index + 1}`} product={product} onModalClick={() => setSelectedProduct(product)} />
+                  </>
+                ))
+                : (
+                  <StoreScreenStyle.EmptyProduct>
+                    <ApelieTextBase variant="subTitle">
+                      Não há nenhum produto na sua loja.
+                    </ApelieTextBase>
+                  </StoreScreenStyle.EmptyProduct>
+                )}
             </div>
           </StoreScreenStyle.ProductContainer>
           {storesReview && storesReview.data && storesReview.data.length > 0 && (
