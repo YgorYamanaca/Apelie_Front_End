@@ -5,7 +5,7 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    & > #text-wrapper {
+    & > div#text-wrapper {
         color: ${({ theme }) => theme.colors.text.primary};
         margin: 25px;
     }
@@ -17,6 +17,10 @@ const ButtonWrapper = styled.div`
     gap: 15px;
     & > #delete-button {
         background-color: ${({ theme }) => theme.colors.error.main};
+    }
+
+    & > #back-button > span {
+        color: ${({ theme }) => theme.colors.text.appPrimary};
     }
 `;
 const ApelieDeleteModalStyle = {

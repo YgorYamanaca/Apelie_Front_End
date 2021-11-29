@@ -17,12 +17,14 @@ import { ToastContext } from '../ToastStore';
 
 interface IUserContext {
   loggedUser: ILoggedUser | undefined;
+  updateUserInfo: (newLoggedUserInfo: ILoggedUser) => void,
   doLogout: () => void;
   updateUserToken: (token: string) => void;
 }
 
 export const UserContext = createContext<IUserContext>({
   loggedUser: undefined,
+  updateUserInfo: () => '',
   doLogout: () => '',
   updateUserToken: () => '',
 });
@@ -52,6 +54,15 @@ const ApelieUserProvider: React.FC = ({ children }) => {
       }
     },
   });
+
+  const updateUserInfo = useCallback(
+    (newLoggedUser: ILoggedUser) => {
+      setLoggedUser({
+        ...newLoggedUser,
+      });
+    },
+    [loggedUser],
+  );
 
   const doLogout = useCallback(() => {
     setLoggedUser(undefined);
@@ -83,7 +94,10 @@ const ApelieUserProvider: React.FC = ({ children }) => {
   }, [loggedUser]);
 
   return (
-    <UserContext.Provider value={{ loggedUser, updateUserToken, doLogout }}>
+    <UserContext.Provider value={{
+      loggedUser, updateUserToken, doLogout, updateUserInfo,
+    }}
+    >
       {userToken ? !getLoggedUser.isIdle && children : children}
     </UserContext.Provider>
   );

@@ -6,6 +6,12 @@ const Container = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 100%;
+  ${breakpointsMedia({
+    sm: css`
+        min-width: 100%;
+      `,
+  })}
 `;
 
 const CarouselContainer = styled.div`
@@ -15,8 +21,13 @@ const CarouselContainer = styled.div`
   justify-content: space-between;
 `;
 
-const TextContainer = styled.div`
+interface ITextContainer {
+  textPosition: 'left' | 'center'
+}
 
+const TextContainer = styled.div<ITextContainer>`
+  display: flex;
+  justify-content: center;
 `;
 interface IBaseContainer {
   baseSize: number;

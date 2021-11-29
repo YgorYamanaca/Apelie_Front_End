@@ -41,6 +41,10 @@ const Container = styled.div`
     & > label {
       font-weight: bold;
     }
+
+    & > span#indisponible {
+      color: ${({ theme }) => theme.colors.error.main};
+    }
   }
 
   & > #apelie-product-edit {

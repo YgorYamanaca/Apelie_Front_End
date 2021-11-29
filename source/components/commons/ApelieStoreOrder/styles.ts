@@ -17,7 +17,7 @@ const Container = styled.div`
   & > #add-tracking-button {
     display: flex;
     position: absolute;
-    top: 15px;
+    bottom: 15px;
     right: 15px;
   }
 
@@ -36,6 +36,10 @@ const Container = styled.div`
       flex-direction: row;
       & > #split {
         display: flex;
+      }
+      
+      & > #add-tracking-button {
+        top: 15px;
       }
     `,
   })}
@@ -71,6 +75,15 @@ const OrderResume = styled.div`
 
   & > div#order_status {
     grid-area: 'order_status';
+    & > span#Finished {
+      color: ${({ theme }) => theme.colors.success.main};
+    }
+    & > span#CANCELED {
+      color: ${({ theme }) => theme.colors.error.main};
+    }
+    & > span {
+      color: ${({ theme }) => theme.colors.info.main};
+    }
   }
 
   & > div#payment_method {
@@ -122,10 +135,13 @@ const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  width: 100%;
   ${breakpointsMedia({
     md: css`
       flex-direction: row;
       gap: 15px;
+      width: 75%;
+      max-width: 750px;
     `,
   })}
 `;
@@ -150,6 +166,7 @@ const AddressToSendProductWrapper = styled.div`
 
 const OrderProductWrapper = styled.div`
   display: flex;
+  flex: 1;
   padding: 10px;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.background.default};
@@ -159,7 +176,17 @@ const OrderProductWrapper = styled.div`
   align-items: center;
   box-shadow: ${({ theme }) => theme.shadow.nivel1};
   gap: 10px;
-  & > span#quantity-text {
+  & > #product-description {
+      display: flex;
+      flex-direction: column;
+      word-break: break-all;
+      & > :last-child {
+          text-indent: 10px;
+      }
+    }
+
+  & > span > label {
+    font-weight: 600;
   }
 
   ${breakpointsMedia({

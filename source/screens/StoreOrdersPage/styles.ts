@@ -21,9 +21,21 @@ const OrdersContainer = styled.div`
   gap: 15px;
 `;
 
+const EmptyOrder = styled.div`
+  display: flex;
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.background.default};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ theme }) => theme.shadow.nivel1};
+  height: 145px;
+  justify-content: center;
+  align-items: center;
+`;
+
 const StoreOrdersScreenStyles = {
   Container,
   OrdersContainer,
+  EmptyOrder,
 };
 
 export default StoreOrdersScreenStyles;

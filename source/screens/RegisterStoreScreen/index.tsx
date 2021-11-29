@@ -17,6 +17,7 @@ import DesignRegister from '@/components/forms/Store/DesignRegister';
 import SocialMediaRegister from '@/components/forms/Store/SocialMediaRegister';
 import AddressRegister from '@/components/forms/Store/AddressRegister';
 import ApeliePageAlias from '@/types/enums/enum-apelie-pages';
+import { UserContext } from '@/stores/UserManager';
 
 interface IRegister {
   formTitle: string;
@@ -70,6 +71,7 @@ const INITIAL_REQUEST_ADDRESS_REGISTER: IAddressRegister = {
 const RegisterStoreScreen: React.VoidFunctionComponent = () => {
   const [step, setStep] = useState<keyof IRegisterStoreSteps>('firstStep');
   const { setToastMessage } = useContext(ToastContext);
+  const { loggedUser, updateUserInfo } = useContext(UserContext);
   const [firstRegisterValue, setFirstRequestValue] = useState<IFirstRegister>(INITIAL_REQUEST_FIRST_REGISTER);
   const [designRegisterValue, setDesignRequestValue] = useState<IDesignRegister>(INITIAL_REQUEST_DESIGN_REGISTER);
   const [socialMediaRegisterValue, setSocialMediaRequestValue] = useState<ISocialMediaRegister>(INITIAL_REQUEST_SOCIALMEDIA_REGISTER);
@@ -83,6 +85,12 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
           message: 'Sua loja foi cadastrado com sucesso.',
           type: 'success',
         });
+        if (loggedUser) {
+          updateUserInfo({
+            ...loggedUser,
+            hasStore: true,
+          });
+        }
         router.push(ApeliePageAlias.MyStore);
       } else {
         setToastMessage({
@@ -125,12 +133,15 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
   function handleRegisterStoreSubmit() {
     if (isValidateCepFormat(addressRegisterValue.zipCode)
       && isValidateTelFormat(addressRegisterValue.phone)
-      && addressRegisterValue.addressNumber.length === 3
+      && addressRegisterValue.addressNumber.length === 5
     ) {
       doPostStoreRequest.mutate(
         _.omit(getRequestDataToBeSand(), ['nameError', 'descriptionError', 'zipCodeError', 'addressNumberError', 'phoneError', 'neighbourhoodError', 'streetError', 'emailError']),
       );
-    } else if (!isValidateCepFormat(addressRegisterValue.zipCode) || !isValidateTelFormat(addressRegisterValue.phone) || addressRegisterValue.addressNumber.length !== 3) {
+    } else if (
+      !isValidateCepFormat(addressRegisterValue.zipCode)
+        || !isValidateTelFormat(addressRegisterValue.phone)
+        || addressRegisterValue.addressNumber.length !== 3) {
       setAddressRequestValue({
         ...addressRegisterValue,
         addressNumberError: addressRegisterValue.addressNumber.length !== 3 ? 'Você precisa completar o número do endereço' : '',
