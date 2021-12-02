@@ -126,7 +126,8 @@ const ItemsListWrapper = styled.div<IItemsListWrapper>`
   ${breakpointsMedia({
     md: css`
       flex-direction: row;
-      gap: 0px;
+      gap: 5px;
+      flex-flow: wrap;
     `,
   })}
 `;

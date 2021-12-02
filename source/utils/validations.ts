@@ -6,7 +6,7 @@ export function isValidateEmail(email: string): boolean {
 }
 
 export function isValidateName(name: string): boolean {
-  const nameRegExp = /^[^\s]([a-zA-Z ])+[^\s]$/g;
+  const nameRegExp = /^[^\s]([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ])+[^\s]$/g;
   return nameRegExp.test(String(name).toLowerCase());
 }
 
