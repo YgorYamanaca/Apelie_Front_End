@@ -133,7 +133,7 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
   function handleRegisterStoreSubmit() {
     if (isValidateCepFormat(addressRegisterValue.zipCode)
       && isValidateTelFormat(addressRegisterValue.phone)
-      && addressRegisterValue.addressNumber.length === 5
+      && addressRegisterValue.addressNumber.length >= 2 && addressRegisterValue.addressNumber.length <= 5
     ) {
       doPostStoreRequest.mutate(
         _.omit(getRequestDataToBeSand(), ['nameError', 'descriptionError', 'zipCodeError', 'addressNumberError', 'phoneError', 'neighbourhoodError', 'streetError', 'emailError']),
@@ -141,10 +141,10 @@ const RegisterStoreScreen: React.VoidFunctionComponent = () => {
     } else if (
       !isValidateCepFormat(addressRegisterValue.zipCode)
         || !isValidateTelFormat(addressRegisterValue.phone)
-        || addressRegisterValue.addressNumber.length !== 3) {
+        || addressRegisterValue.addressNumber.length !== 5) {
       setAddressRequestValue({
         ...addressRegisterValue,
-        addressNumberError: addressRegisterValue.addressNumber.length !== 3 ? 'Você precisa completar o número do endereço' : '',
+        addressNumberError: addressRegisterValue.addressNumber.length !== 5 ? 'Você precisa completar o número do endereço' : '',
         phoneError: !isValidateTelFormat(addressRegisterValue.phone) ? 'O seu telefone não é válido' : '',
         zipCodeError: !isValidateCepFormat(addressRegisterValue.zipCode) ? 'Está faltando número no zipCode' : '',
       });
