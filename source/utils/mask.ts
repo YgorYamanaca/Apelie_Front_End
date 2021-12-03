@@ -18,10 +18,10 @@ export function addressNumberMask(addressText: string) {
   let ret = addressText.replace(/\D/g, '');
   ret = ret.replace(/^0/, '');
 
-  if (ret.length < 3) {
+  if (ret.length <= 5) {
     return ret;
   }
-  return ret.slice(0, 3);
+  return ret.slice(0, 5);
 }
 
 export function cepNumberMask(cepText: string) {
