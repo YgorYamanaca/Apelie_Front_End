@@ -27,7 +27,7 @@ const ProductRegister: React.VoidFunctionComponent<IForm<IProductRegisterWithErr
   useEffect(() => {
     changeStoreRequestFunction({
       ...productRegister,
-      price: parseFloat(productRegister.price.toString().replaceAll('.', '').replaceAll(',', '.')),
+      price: productRegister.price,
       quantity: parseInt(productRegister.quantity.toString(), 10),
     });
   }, [productRegister]);
@@ -65,7 +65,8 @@ const ProductRegister: React.VoidFunctionComponent<IForm<IProductRegisterWithErr
         <ApelieInputField
           placeholder="Insira o preço do produto"
           name="price"
-          value={productRegister.price === 0 ? '' : productRegister.price.toString()}
+          // eslint-disable-next-line no-nested-ternary
+          value={productRegister.price === 0 ? '' : String(productRegister.price).split('.')[1]?.length === 1 ? `${String(productRegister.price).replace('.', ',')}0` : String(productRegister.price).replace('.', ',')}
           onChange={
                 (event: ChangeEvent<HTMLInputElement>) => handleChange(event, setProductRegister, formatReal)
               }

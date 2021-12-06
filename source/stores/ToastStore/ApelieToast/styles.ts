@@ -45,7 +45,7 @@ const Container = styled.div<IContainer>`
 const TextBox = styled.div`
   display: flex;
   align-items: center;
-  word-break: break-all;
+  word-break: break-word;
   & > :last-child {
     margin: 0 15px;
     text-align: center;

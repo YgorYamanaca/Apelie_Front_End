@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { IProduct } from '@/types/interfaces/interdace-products';
 import ApelieTextBase from '../ApelieTextBase';
@@ -23,7 +24,7 @@ const ApelieProduct : React.VoidFunctionComponent<IApelieProduct> = ({
       </ApelieTextBase>
 
       <ApelieTextBase variant="paragraph1">
-        {`R$: ${isFloat(product.price) ? product.price : `${product.price},00`}`}
+        {`R$: ${isFloat(product.price) ? String(product.price).split('.')[1]?.length === 1 ? `${String(product.price).replace('.', ',')}0` : String(product.price).replace('.', ',') : `${product.price},00`}`}
       </ApelieTextBase>
     </div>
     <span id="product-quantity">
@@ -52,9 +53,9 @@ const ApelieProduct : React.VoidFunctionComponent<IApelieProduct> = ({
               { width: 1280, itemsToShow: 1 },
               { width: 1920, itemsToShow: 1 },
             ]}
-            elementsList={product.images.map((image) => (
+            elementsList={product.images.map((image, index) => (
               <ApelieProductStyle.ProductImageContainer
-                key={image.product_image_id}
+                key={`${image.product_image_id}-${index + 1}`}
                 src={image?.url || DEFAULT_PRODUCT_PHOTO}
                 alt={product.name}
               />

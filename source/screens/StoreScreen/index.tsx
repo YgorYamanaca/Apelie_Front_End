@@ -52,8 +52,8 @@ const StoreScreen : React.FC<IStoreScreen> = ({
     () => store && getStoreReviews(store?.storeId.toString()),
     {
       enabled: store !== undefined,
-      select: (data) => (data?.data as IStoreReview[]).map((storeReview) => (
-        <ApelieReview key={storeReview.user.userId} review={storeReview} />
+      select: (data) => (data?.data as IStoreReview[]).map((storeReview, index) => (
+        <ApelieReview key={`review-${storeReview.user.userId}-${index + 1}`} review={storeReview} />
       )),
     },
   );
@@ -152,18 +152,17 @@ const StoreScreen : React.FC<IStoreScreen> = ({
                 Catálogo
               </ApelieTextBase>
               {isUserStore && (
-              <ApelieIconButton onClick={() => setIsAddPrductModalOpen(true)}>
-                <AddIcon width="20" height="20" />
-              </ApelieIconButton>
+                <ApelieIconButton onClick={() => setIsAddPrductModalOpen(true)}>
+                  <AddIcon width="20" height="20" />
+                </ApelieIconButton>
               )}
             </div>
-
             <div id="product-items-container">
               { store?.products && store?.products.length >= 1
                 ? store?.products.map((product, index) => (
-                  <>
-                    <ApelieProduct key={`${product.name} - ${index + 1}`} product={product} onModalClick={() => setSelectedProduct(product)} />
-                  </>
+                  <React.Fragment key={`${product.name}-${index + 1}`}>
+                    <ApelieProduct key={`${product.name}-${index + 1}`} product={product} onModalClick={() => setSelectedProduct(product)} />
+                  </React.Fragment>
                 ))
                 : (
                   <StoreScreenStyle.EmptyProduct>

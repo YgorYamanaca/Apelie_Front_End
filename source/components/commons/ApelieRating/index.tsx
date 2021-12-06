@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import _ from 'lodash';
+import _, { toNumber } from 'lodash';
 import StarFillIcon from '@/assets/icons/StarFillIcon';
 import ApelieTextBase from '../ApelieTextBase';
 import StyleApelieRating from './styles';
@@ -27,7 +27,7 @@ const ApelieRating: React.FunctionComponent<IApelieRating> = ({ rating, variant 
     <StyleApelieRating.Container>
       <StarFillIcon width={`${startScale[variant]}px`} height={`${startScale[variant]}px`} />
       <ApelieTextBase tag="span" variant={variant}>
-        { _.isInteger(rating) || rating === null ? `${rating || 0}.0` : rating}
+        { _.isInteger(rating) || rating === null ? `${rating || 0}.0` : toNumber(rating).toFixed(1)}
       </ApelieTextBase>
     </StyleApelieRating.Container>
   );

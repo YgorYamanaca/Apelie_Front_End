@@ -93,7 +93,7 @@ const InfoContainer = styled.div`
     & > #product-description {
         display: flex;
         flex-direction: column;
-        word-break: break-all;
+        word-break: break-word;
         & > :last-child {
             text-indent: 10px;
         }

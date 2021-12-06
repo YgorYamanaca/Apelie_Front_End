@@ -33,8 +33,13 @@ const StoreOrdersScreen: React.FC<IStoreOrdersScreen> = ({
           <ApeliePageTitle text="Seus Pedidos" textVariant="title" />
           <StoreOrdersScreenStyles.OrdersContainer>
             {doGetMyStoreOrders.data?.data.length && doGetMyStoreOrders.data?.data.length >= 1
-              ? doGetMyStoreOrders.data?.data.map((storeOrder) => (
-                <ApelieStoreOrder updateOrderFunction={updateStoreOrdersFunction} key={`apelie-store-order-${storeOrder.orderId}`} storeId={storeId} order={storeOrder} />
+              ? doGetMyStoreOrders.data?.data.map((storeOrder, index) => (
+                <ApelieStoreOrder
+                  updateOrderFunction={updateStoreOrdersFunction}
+                  key={`apelie-store-order-${storeOrder.orderId}-${index + 1}`}
+                  storeId={storeId}
+                  order={storeOrder}
+                />
               ))
               : (
                 <StoreOrdersScreenStyles.EmptyOrder>

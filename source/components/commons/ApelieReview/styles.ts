@@ -36,7 +36,7 @@ const UserInfoContainer = styled.div`
     border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
 
     & > span {
-      word-break: break-all;
+      word-break: break-word;
     }
   }
 
@@ -61,7 +61,7 @@ const UserReviewContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 15px;
-  word-break: break-all;
+  word-break: break-word;
 
   & > p {
     text-indent: 10px;
