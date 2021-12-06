@@ -18,8 +18,12 @@ const postStore = async (Store: IStoreRequest): Promise<AxiosResponse> => {
 };
 
 const postStoreProduct = async (updateData: {storeId: number | string, product: IProductRegister}): Promise<AxiosResponse> => {
+  const newProduct = {
+    ...updateData.product,
+    price: parseFloat(updateData.product.price.toString().replaceAll(',', '.')),
+  };
   const response = await ApiRequester.apelie
-    .post(`/stores/${updateData.storeId}/products`, updateData.product)
+    .post(`/stores/${updateData.storeId}/products`, newProduct)
     .catch((err) => err.response);
   return response;
 };
