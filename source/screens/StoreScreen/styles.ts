@@ -79,7 +79,6 @@ const StoreReviewContainer = styled.div`
   ${breakpointsMedia({
     md: css`
       & > div#store-review-container {
-        justify-content: flex-start;
         padding: 25px;
       }
     `,

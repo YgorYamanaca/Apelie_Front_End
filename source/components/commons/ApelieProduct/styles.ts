@@ -24,7 +24,7 @@ const Container = styled.div`
     flex-direction: column;
     gap: 5px;
     & > :first-child {
-      word-break: break-all;
+      word-break: break-word;
     }
 
     & > :last-child {

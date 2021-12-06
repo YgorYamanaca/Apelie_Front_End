@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, {
   ChangeEvent, useCallback, useContext, useState,
 } from 'react';
@@ -36,9 +37,10 @@ const ApelieStoreOrder: React.FC<IApelieStoreOrder> = ({
   const [trackingCode, setTrackingCode] = useState('');
   const [isInsertTrackingCodeOpen, setIsInsertTrackingCodeOpen] = useState(false);
   const [hasMoreInfo, setHasMoreInfo] = useState(false);
+
   const doInsertStoreTrackingCode = useMutation(insertOrderTrackingCode, {
     onSuccess: (response) => {
-      if (response.status === 200) {
+      if (response.status === 204) {
         setToastMessage({
           message: `O código de rastreio foi ${trackingCode ? 'atualizado' : 'cadastrado'} com sucesso.`,
           type: 'success',
@@ -48,7 +50,7 @@ const ApelieStoreOrder: React.FC<IApelieStoreOrder> = ({
       } else {
         setToastMessage({
           message: `Erro ao tentar ${trackingCode ? 'atualizar' : 'cadastrar'} o código de rastreio.`,
-          type: 'success',
+          type: 'error',
         });
       }
     },
@@ -70,7 +72,7 @@ const ApelieStoreOrder: React.FC<IApelieStoreOrder> = ({
 
   const getPriceValue = useCallback((item) => {
     const priceTotal = item.product.price * item.quantity;
-    return `R$: ${isFloat(priceTotal) ? priceTotal : `${priceTotal},00`}`;
+    return `R$: ${isFloat(priceTotal) ? String(priceTotal).split('.')[1]?.length === 1 ? `${String(priceTotal).replace('.', ',')}0` : String(priceTotal).replace('.', ',') : `${priceTotal},00`}`;
   }, [order]);
 
   return (
@@ -156,7 +158,7 @@ const ApelieStoreOrder: React.FC<IApelieStoreOrder> = ({
             Total:&nbsp;
           </ApelieTextBase>
           <ApelieTextBase variant="paragraph1">
-            {`R$: ${isFloat(order.totalValue) ? order.totalValue : `${order.totalValue},00`}`}
+            {`R$: ${isFloat(order.totalValue) ? String(order.totalValue).split('.')[1]?.length === 1 ? `${String(order.totalValue).replace('.', ',')}0` : String(order.totalValue).replace('.', ',') : `${order.totalValue},00`}`}
           </ApelieTextBase>
         </div>
       </ApelieStoreOrderStyles.OrderResume>
@@ -199,8 +201,8 @@ const ApelieStoreOrder: React.FC<IApelieStoreOrder> = ({
         </ApelieIconButton>
       </div>
       <ApelieStoreOrderStyles.ItemsListWrapper hasMoreInfo={hasMoreInfo}>
-        {order.itemList.map((item) => (
-          <ApelieStoreOrderStyles.ItemWrapper>
+        {order.itemList.map((item, index) => (
+          <ApelieStoreOrderStyles.ItemWrapper key={`${item.product}-${index + 1}`}>
             <ApelieStoreOrderStyles.OrderProductWrapper>
               <ApelieTextBase variant="subTitle" tag="label">
                 {item.product.name}

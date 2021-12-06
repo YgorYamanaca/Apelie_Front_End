@@ -17,8 +17,12 @@ const deleteProductImage = async (deleteParms: {productId: number | string, imag
 };
 
 const updateProduct = async (deleteParms: {productId: number | string, product: IProductRegisterWithErrors}): Promise<AxiosResponse> => {
+  const newProduct = {
+    ...deleteParms.product,
+    price: parseFloat(deleteParms.product.price.toString().replaceAll('.', '').replaceAll(',', '.')),
+  };
   const response = await ApiRequester.apelie
-    .put(`/products/${deleteParms.productId}`, deleteParms.product)
+    .put(`/products/${deleteParms.productId}`, newProduct)
     .catch((err) => err.response);
   return response;
 };

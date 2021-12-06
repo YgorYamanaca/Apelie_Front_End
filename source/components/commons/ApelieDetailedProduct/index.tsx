@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useContext, useState } from 'react';
 import { useMutation } from 'react-query';
 import { IProduct, IProductRegisterWithErrors } from '@/types/interfaces/interdace-products';
@@ -40,7 +41,7 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
     price: product.price,
     quantity: product.quantity,
     category: product.category,
-    images: product.images.map((image) => image.url),
+    images: [],
     description: product.description,
   });
   const { setToastMessage } = useContext(ToastContext);
@@ -122,7 +123,7 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
               productId: product.productId,
               product: {
                 ...produtctRegister,
-                images: product.images.map((image) => produtctRegister.images.includes(image.url)).every((isEqual) => isEqual === true) ? [] : produtctRegister.images,
+                images: produtctRegister.images,
               },
             })}
             backButtonAction={() => setIsEditProductModalOpen(false)}
@@ -174,7 +175,7 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
                 <ApelieDetailedProductStyles.ImageContainer>
                   <ApelieDetailedProductStyles.Image
                     id={`product-image-${index + 1}`}
-                    key={image.product_image_id}
+                    key={`product-image-${image.product_image_id}`}
                     src={image.url}
                     alt={product.name}
                   />
@@ -190,7 +191,11 @@ const ApelieDetailedProduct: React.FC<ApelieProductModalContent> = ({
           <ApelieDetailedProductStyles.InfoContainer>
             <span>
               <ApelieTextBase tag="label" variant="subTitle">Preço: </ApelieTextBase>
-              <ApelieTextBase variant="subTitle">{`R$: ${isFloat(product.price) ? product.price : `${product.price},00`}`}</ApelieTextBase>
+              <ApelieTextBase variant="subTitle">
+                {`R$: ${isFloat(product.price)
+                  ? String(product.price).split('.')[1]?.length === 1 ? `${String(product.price).replace('.', ',')}0` : String(product.price).replace('.', ',')
+                  : `${product.price},00`}`}
+              </ApelieTextBase>
             </span>
             <span id="product-quantity">
               <ApelieTextBase tag="label" variant="subTitle">Quantidade: </ApelieTextBase>

@@ -34,6 +34,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       id="header-carry-bag-button"
       key="header-carry-bag-button"
       textVariant="paragraph1"
+      disabled
       icon={<CarryBagIcon height="16" width="16" />}
       ghost
     >
@@ -44,6 +45,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       key="header-chat-button"
       textVariant="paragraph1"
       icon={<ChatIcon height="16" width="16" />}
+      disabled
       ghost
     >
       Chat
@@ -53,6 +55,7 @@ const ApelieHeader: React.FC<StyledProps<unknown>> = ({ theme }) => {
       id="header-cart-button"
       textVariant="paragraph1"
       icon={<ShoppingCart height="16" width="16" />}
+      disabled
       ghost
     >
       Carrinho
