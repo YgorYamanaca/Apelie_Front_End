@@ -5,7 +5,7 @@ export function toISOSimpleDate(date: Date): string {
 }
 
 export function toCorrectDateFormat(date: Date): string {
-  return `${date.getDate()} / 
+  return `${date.getDate() - 1} / 
   ${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1} / 
   ${date.getFullYear()}`;
 }
