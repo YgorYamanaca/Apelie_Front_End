@@ -53,7 +53,7 @@ const AddressRegister: React.VoidFunctionComponent<IForm<IAddressRegister>> = ({
           <>
             <ApelieInputField
               maxLength={9}
-              placeholder="Insira o zipCode ..."
+              placeholder="Insira o cep ..."
               name="zipCode"
               isError={registerStoreRequestValue.zipCodeError}
               value={registerStoreRequestValue.zipCode}
